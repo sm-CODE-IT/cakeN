@@ -1,0 +1,48 @@
+:root {
+  --color-success: #23d160;
+  --color-error: #f14668;
+  --color-red: #ff4949;
+  --color-orange: #ff5216;
+  --color-yellow: #ffc82c;
+  --color-green: #13ce66;
+  --color-blue: #1fb6ff;
+  --color-purple: #7e5bef;
+  --color-pink: #ff49db;
+}
+
+form {
+  --light: #CCC;
+  --dark: #111;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+button {
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+button.light {
+  color: var(--dark);
+  background: var(--light);
+}
+
+button.dark {
+  color: var(--light);
+  background: var(--dark);
+}
+
+button.success {
+  background: var(--color-success);
+}
+
+button.error {
+  background: var(--color-error);
+}
