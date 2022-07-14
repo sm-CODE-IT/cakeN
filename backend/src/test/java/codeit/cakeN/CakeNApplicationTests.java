@@ -1,3 +1,4 @@
+/*
 package codeit.cakeN;
 
 import codeit.cakeN.domain.user.User;
@@ -33,3 +34,4 @@ class CakeNApplicationTests {
 	}
 
 }
+*/
