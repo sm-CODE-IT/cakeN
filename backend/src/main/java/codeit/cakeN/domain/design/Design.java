@@ -9,8 +9,8 @@ import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter  @Setter
+@Table(name = "DESIGN")
 public class Design extends BaseTimeEntity {
 
     @Id
@@ -35,9 +35,9 @@ public class Design extends BaseTimeEntity {
     @Column
     private String letterColor;  // 레터링 색상
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
-    @JoinColumn(name = "user_id", updatable = false)
-    private User user_id;
+//    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
+//    @JoinColumn(name = "user_id", updatable = false)
+//    private User user_id;
 
     @Column
     private String likeLetter;

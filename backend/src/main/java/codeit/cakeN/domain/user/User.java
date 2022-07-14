@@ -11,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter @Setter
+@Table(name = "USER")
 public class User extends Timestamped {
 
     @Id
@@ -24,7 +25,7 @@ public class User extends Timestamped {
     @Column(length = 100, nullable = false)
     private String pw;
 
-    @Column(columnDefinition = "TEXT", nullable = true)
+    @Column
     private String intro;
 
     @Column(nullable = true)
@@ -35,7 +36,9 @@ public class User extends Timestamped {
     private String nickname;
 
 
-    @Builder
+
+
+    // @Builder
     public User(String email, String pw, String intro, String image, String nickname) {
         this.email = email;
         this.pw = pw;
