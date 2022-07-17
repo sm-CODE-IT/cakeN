@@ -1,4 +1,4 @@
-package codeit.cakeN.domain.user;
+package codeit.cakeN.web.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

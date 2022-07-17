@@ -15,7 +15,7 @@ public class Design extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long designId;
 
     @Column
     private String file;   // 내보내기
