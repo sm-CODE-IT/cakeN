@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 //@Controller
 @RequiredArgsConstructor
@@ -26,28 +27,48 @@ public class UserController {
     }
 
     // Create
-    @PostMapping("/api/users")
-    public User createUser(@RequestBody UserRequestDto requestDto) {
-        User user = new User(requestDto);
-        return userRepository.save(user);
+
+    @GetMapping("/users/new")
+    public String createUserForm() {
+        return "user/createUserForm";
     }
 
-    // Read
-    @GetMapping("/api/users/{userId}")
-    public List<User> getUsers() {
+    /*@PostMapping("/users/new")
+    public String createUser(UserForm form) {
+        User user = new User();
+        user.setEmail(form.getEmail());
+        userService.save(user);
+
+        return "redirect:/";
+    }*/
+
+    /*public User createUser(@RequestBody UserRequestDto requestDto) {
+        User user = new User(requestDto);
+        return userRepository.save(user);
+    }*/
+
+    // Read (전체)
+    @GetMapping("/api/users")
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    // Update
+    // Read (개별)
+    @GetMapping("/api/users/{userId}")
+    public Optional<User> getUser(@PathVariable Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    // Update -> Patch / Put
     @PutMapping("/api/users/{userId}")
-    public Long updateUser(@PathVariable Long id, @RequestBody UserRequestDto requestDto) {
-        return userService.update(id, requestDto);
+    public Long updateUser(@PathVariable Long userId, @RequestBody UserRequestDto requestDto) {
+        return userService.update(userId, requestDto);
     }
 
     // Delete
     @DeleteMapping("/api/users/{userId}")
-    public Long deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
-        return id;
+    public Long deleteUser(@PathVariable Long userId) {
+        userRepository.deleteById(userId);
+        return userId;
     }
 }

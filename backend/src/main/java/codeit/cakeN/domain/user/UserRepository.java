@@ -21,11 +21,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();   // 모든 유저 목록 조회
     */
 
-    static final String UPDATE_MEMBER_LAST_LOGIN = "UPDATE Member SET LAST_LOGIN_TIME = :lastLoginTime WHERE EMAIL = :emil";
+    /*static final String UPDATE_MEMBER_LAST_LOGIN = "UPDATE Member SET LAST_LOGIN_TIME = :lastLoginTime WHERE EMAIL = :emil";
 
     @Transactional
     @Modifying
     @Query(value = UPDATE_MEMBER_LAST_LOGIN, nativeQuery = true)
     public int updateUserLastLogin(@Param("email") String email, @Param("lastLoginTime") LocalDateTime lastLoginTime);
-    public User findByEmail(String email);
+    */public User findByEmail(String email);
 }

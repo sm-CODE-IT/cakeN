@@ -13,9 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class UserService implements UserDetailsService {
+public class UserService  {
 
     private final UserRepository userRepository;
+
 
     @Transactional
     public Long save(UserSaveRequestDto requestDto) {
@@ -33,7 +34,7 @@ public class UserService implements UserDetailsService {
         return user1.getUserId();
     }
 
-    @Override
+    /*@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);   // 이메일로 사용자 찾기
 
@@ -41,5 +42,5 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Not Found account.");
 
         return user;
-    }
+    }*/
 }

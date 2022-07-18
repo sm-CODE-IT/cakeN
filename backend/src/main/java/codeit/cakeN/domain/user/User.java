@@ -33,7 +33,7 @@ public class User extends Timestamped implements UserDetails {
     private String intro;
 
     @Column(nullable = true)
-    private String image;
+    private String image;  // 2개의 기본 이미지 중 택1
 
     @Column(length = 20, nullable = false)
     private String nickname;

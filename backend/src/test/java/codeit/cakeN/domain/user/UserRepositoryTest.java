@@ -54,17 +54,17 @@ public class UserRepositoryTest {
 
         for (int i=0; i<userList.size(); i++) {
             User user1 = userList.get(i);
-            System.out.println("ID = " + user1.getId());
+            System.out.println("ID = " + user1.getUserId());
             System.out.println("이름 = " + user1.getNickname());
             System.out.println("이메일 = " + user1.getEmail());
         }
 
         // ============== 데이터 1개 조회 ================
-        User u = userRepository.findById(userList.get(0).getId()).orElseThrow(
+        User u = userRepository.findById(userList.get(0).getUserId()).orElseThrow(
                 () -> new NullPointerException("아이디가 존재하지 않습니다.")
         );
 
-        System.out.println("ID = " + u.getId());
+        System.out.println("ID = " + u.getUserId());
         System.out.println("이름 = " + u.getNickname());
         System.out.println("이메일 = " + u.getEmail());
 
