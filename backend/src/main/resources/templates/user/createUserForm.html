@@ -32,25 +32,25 @@
 
     <div>
       <label for="email">로그인 ID</label>
-      <input type="text" id="email" th:field="*{email}" class="form-control"
+      <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
              th:errorclass="field-error">
       <div class="field-error" th:errors="*{email}" />
     </div>
     <div>
       <label for="pw">비밀번호</label>
-      <input type="password" id="pw" th:field="*{pw}" class="form-control"
+      <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
              th:errorclass="field-error">
       <div class="field-error" th:errors="*{pw}" />
     </div>
     <div>
       <label for="nickname">닉네임</label>
-      <input type="text" id="nickname" th:field="*{nickname}" class="form-control"
+      <input type="text" id="nickname" name="nickname" th:field="*{nickname}" class="form-control"
              th:errorclass="field-error">
       <div class="field-error" th:errors="*{nickname}" />
     </div>
     <div>
       <label for="intro">자기소개</label>
-      <input type="text" id="intro" th:field="*{intro}" class="form-control"
+      <input type="text" id="intro" name="intro" th:field="*{intro}" class="form-control"
              th:errorclass="field-error">
       <div class="field-error" th:errors="*{intro}" />
     </div>

@@ -1,11 +1,12 @@
 spring:
   # DB 연결
   datasource:
-    # 설치된 H2 DB와 연결 url
-    url: jdbc:h2:tcp://localhost/~/cakeN;MODE=MySQL;DATABASE_TO_LOWER=TRUE
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
+    driver-class-name=
+#    # 설치된 H2 DB와 연결 url
+#    url: jdbc:h2:tcp://localhost/~/cakeN;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+#    username: sa
+#    password:
+#    driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
 
 
   jpa:
@@ -28,4 +29,4 @@ spring:
 logging:
   level:
     org.hibernate.type: trace
-    root: debug
+#    root: debug
