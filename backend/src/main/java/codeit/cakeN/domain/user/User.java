@@ -38,14 +38,19 @@ public class User extends Timestamped implements UserDetails {
     @Column(length = 20, nullable = false)
     private String nickname;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
 
     @Builder
-    public User(String email, String pw, String intro, String image, String nickname) {
+    public User(String email, String pw, String intro, String image, String nickname, Role role) {
         this.email = email;
         this.pw = pw;
         this.intro = intro;
         this.image = image;
         this.nickname = nickname;
+        this.role = role;
     }
 
     // API 응답 시 사용
@@ -55,6 +60,7 @@ public class User extends Timestamped implements UserDetails {
         this.intro = requestDto.getIntro();
         this.image = requestDto.getImage();
         this.nickname = requestDto.getNickname();
+        this.role = requestDto.getRole();;
     }
 
 
@@ -65,6 +71,11 @@ public class User extends Timestamped implements UserDetails {
         this.intro = requestDto.getIntro();
         this.image = requestDto.getImage();
         this.nickname = requestDto.getNickname();
+    }
+
+    // 사용자의 권한 판단
+    public String getRoleKey() {
+        return this.role.getKey();
     }
 
     // 계정이 가진 권한 목록 리턴

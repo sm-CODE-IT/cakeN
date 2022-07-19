@@ -1,5 +1,6 @@
 package codeit.cakeN.web.dto;
 
+import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
@@ -29,13 +30,16 @@ public class UserRequestDto {
     @NotBlank
     private String nickname;
 
+    private Role role;
+
     @Builder
-    public UserRequestDto(String email, String pw, String intro, String image, String nickname) {
+    public UserRequestDto(String email, String pw, String intro, String image, String nickname, Role role) {
         this.email = email;
         this.pw = pw;
         this.intro = intro;
         this.image = image;
         this.nickname = nickname;
+        this.role = role;
     }
 
     public User toEntity() {
