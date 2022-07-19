@@ -1,5 +1,8 @@
 package codeit.cakeN.web.dto;
 
+import codeit.cakeN.domain.user.User;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +13,7 @@ import javax.validation.constraints.Pattern;
 // 데이터 수정 전 User 객체를 임시 저장
 @Getter
 @NoArgsConstructor
+@Data
 public class UserRequestDto {
 
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
@@ -25,11 +29,22 @@ public class UserRequestDto {
     @NotBlank
     private String nickname;
 
+    @Builder
     public UserRequestDto(String email, String pw, String intro, String image, String nickname) {
         this.email = email;
         this.pw = pw;
         this.intro = intro;
         this.image = image;
         this.nickname = nickname;
+    }
+
+    public User toEntity() {
+        return User.builder()
+                .email(email)
+                .pw(pw)
+                .intro(intro)
+                .image(image)
+                .nickname(nickname)
+                .build();
     }
 }

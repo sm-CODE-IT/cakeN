@@ -1,13 +1,8 @@
 package codeit.cakeN.service.user;
 
-import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.web.dto.UserRequestDto;
-import codeit.cakeN.web.dto.UserSaveRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +14,7 @@ public class UserService  {
 
 
     @Transactional
-    public Long save(UserSaveRequestDto requestDto) {
+    public Long save(UserRequestDto requestDto) {
         return userRepository.save(requestDto.toEntity()).getUserId();
     }
 

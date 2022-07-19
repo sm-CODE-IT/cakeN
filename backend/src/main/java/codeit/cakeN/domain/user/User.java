@@ -57,6 +57,7 @@ public class User extends Timestamped implements UserDetails {
         this.nickname = requestDto.getNickname();
     }
 
+
     // 유저 정보 수정 시
     public void update(UserRequestDto requestDto) {
         this.email = requestDto.getEmail();

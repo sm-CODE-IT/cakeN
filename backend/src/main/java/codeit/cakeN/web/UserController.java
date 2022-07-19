@@ -30,30 +30,37 @@ public class UserController {
 
     ///////// 회원가입 ///////////
     @GetMapping("/new")
-    public String createUserForm(@ModelAttribute("user") User user) {
+    public String createUserForm(Model model) {
+        model.addAttribute("userRequestDto", new UserRequestDto());
         return "user/createUserForm";
     }
 
     @PostMapping("/new")
-    public String createUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "user/createUserForm";
         }
 
-        userRepository.save(user);
+        try {
+            userRepository.save(userRequestDto.toEntity());
+        } catch (IllegalStateException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "user/createUserForm";
+        }
+
         return "redirect:/";
     }
 
     /////// 로그인 ////////
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute("UserLoginRequestDto") UserLoginRequestDto loginUser) {
+    public String loginForm(Model model) {
+        model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
         return "user/login";
     }
 
     @PostMapping("/login")
-    public String loginForm(@Valid @ModelAttribute UserLoginRequestDto loginUser, BindingResult bindingResult, Model model) {
-        /*UserLoginRequestDto login = userService.login(loginUser);
-        return new ResponseEntity(new BaseResult)*/
+    public String loginForm(@Valid UserLoginRequestDto loginUser, BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
             return "user/login";
         }
