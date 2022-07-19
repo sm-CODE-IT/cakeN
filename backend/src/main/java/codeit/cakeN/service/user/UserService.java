@@ -23,7 +23,7 @@ public class UserService  {
         return userRepository.save(requestDto.toEntity()).getUserId();
     }
 
-    @Transactional
+    /*@Transactional
     public Long update(Long id, UserRequestDto requestDto) {
         User user1 = userRepository.findById(id).orElseThrow(
                 () -> new IllegalArgumentException("해당 유저가 존재하지 않습니다.")
@@ -32,7 +32,7 @@ public class UserService  {
         user1.update(requestDto);
 
         return user1.getUserId();
-    }
+    }*/
 
     /*@Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

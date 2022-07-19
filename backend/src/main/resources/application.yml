@@ -28,3 +28,4 @@ spring:
 logging:
   level:
     org.hibernate.type: trace
+    root: debug
