@@ -42,6 +42,10 @@ public class User extends Timestamped implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+    
+    // Spring Security 사용자 인증 필드
+    private boolean emailVerified;    // 이메일 인증 여부
+    private boolean locked;    // 계정 잠김 여부
 
 
     @Builder
@@ -79,7 +83,7 @@ public class User extends Timestamped implements UserDetails {
         return this.role.getKey();
     }
 
-    // 계정이 가진 권한 목록 리턴
+    // 계정(해당 유저)이 가진 권한 목록 리턴
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collectors = new ArrayList<>();
@@ -90,33 +94,59 @@ public class User extends Timestamped implements UserDetails {
         return collectors;
     }
 
+    // 비밀번호 가져오기
     @Override
     public String getPassword() {
         return this.pw;
     }
 
+    // pk 값 가져오기
     @Override
     public String getUsername() {
         return this.email;
     }
 
+    /**
+     * 계정 만료 여부
+     * true : 만료 X
+     * false : 만료 O
+     * @return
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * 계정 잠김 여부
+     * true : 잠기지 않음
+     * false : 잠김
+     * @return
+     */
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return locked;
     }
 
+    /**
+     * 비밀번호 만료 여부
+     * true : 만료 안됨
+     * false : 만료
+     * @return
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     * 사용자 활성화 여부
+     * true : 활성화
+     * false :
+     * @return
+     */
     @Override
     public boolean isEnabled() {
-        return true;
+        return (emailVerified && !locked);
     }
 }

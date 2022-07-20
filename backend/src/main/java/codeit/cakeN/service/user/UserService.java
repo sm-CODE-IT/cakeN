@@ -1,16 +1,24 @@
 package codeit.cakeN.service.user;
 
+import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
+@Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserService  {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -41,13 +49,15 @@ public class UserService  {
         return user1.getUserId();
     }*/
 
-    /*@Override
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);   // 이메일로 사용자 찾기
+        Optional<User> findUser = userRepository.findByEmail(email);// 이메일로 사용자 찾기
 
-        if (user == null)
-            throw new UsernameNotFoundException("Not Found account.");
+        if (!findUser.isPresent())
+            throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
 
-        return user;
-    }*/
+        log.info("Success find user {}", findUser);
+
+        return new SecurityUser(findUser.get());
+    }
 }

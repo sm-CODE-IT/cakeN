@@ -1,5 +1,6 @@
 package codeit.cakeN.web.dto;
 
+import codeit.cakeN.domain.user.Role;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -16,4 +17,6 @@ public class UserLoginRequestDto {
 
     @NotEmpty(message = "비밀번호를 입력하세요.")
     private String password;
+
+    private Role role = Role.USER;
 }
