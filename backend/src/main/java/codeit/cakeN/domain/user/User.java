@@ -1,5 +1,6 @@
 package codeit.cakeN.domain.user;
 
+import codeit.cakeN.service.user.UserService;
 import codeit.cakeN.web.dto.UserRequestDto;
 import lombok.Builder;
 import lombok.Getter;

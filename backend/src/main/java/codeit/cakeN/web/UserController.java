@@ -42,7 +42,7 @@ public class UserController {
         }
 
         try {
-            userRepository.save(userRequestDto.toEntity());
+            userService.save(userRequestDto);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "user/createUserForm";
