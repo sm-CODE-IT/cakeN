@@ -2,6 +2,9 @@ package codeit.cakeN.domain.user;
 
 import codeit.cakeN.service.user.UserService;
 import codeit.cakeN.web.dto.UserRequestDto;
+import io.jsonwebtoken.Header;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +13,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -81,6 +86,20 @@ public class User extends Timestamped implements UserDetails {
     // 사용자의 권한 판단
     public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public String makeJwtToken() {
+        Date now = new Date();
+
+        return Jwts.builder()
+                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
+                .setIssuer("fresh")
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime()+ Duration.ofMinutes(30).toMillis()))
+                .claim("id", "아이디")
+                .claim("email", this.email)
+                .signWith(SignatureAlgorithm.HS256, "secret")
+                .compact();
     }
 
     // 계정(해당 유저)이 가진 권한 목록 리턴

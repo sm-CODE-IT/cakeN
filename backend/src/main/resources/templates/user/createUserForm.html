@@ -69,6 +69,13 @@
       </div>
     </div>
 
+    <div class="mb-3">
+      <div th:each="r : ${roles}" class="form-check form-check-inline">
+        <input type="radio" th:field="*{role}" th:value="${r.value}" class="form-check-input">
+        <label th:for="${#ids.prev('role')}" th:text="${r.key}" class="form-check-label"></label>
+      </div>
+    </div>
+
   </form>
 
 </div> <!-- /container -->

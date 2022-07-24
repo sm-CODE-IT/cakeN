@@ -49,7 +49,7 @@ public class UserRequestDto {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
-                .role(Role.USER)
+                .role(Role.GUEST)
                 .build();
     }
 }
