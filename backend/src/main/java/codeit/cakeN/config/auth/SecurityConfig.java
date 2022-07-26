@@ -3,7 +3,9 @@ package codeit.cakeN.config.auth;
 import codeit.cakeN.domain.user.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,7 +14,20 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers(
+                        "/h2-console/**"
+                        ,"/favicon.ico"
+                        ,"/error"
+                );
+    }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -25,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()    // 페이지 권한 설정
                 .authorizeRequests()  // url 별 권한 관리 설정 by antMatcher()
-                .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
+                .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
                 .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/users/mypage/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())   // 해당 주소는 USER 권한을 가진 사람만 열람 가능
                 .anyRequest().authenticated();   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
