@@ -19,4 +19,5 @@ public class UserLoginRequestDto {
     private String password;
 
     private Role role = Role.USER;
+
 }

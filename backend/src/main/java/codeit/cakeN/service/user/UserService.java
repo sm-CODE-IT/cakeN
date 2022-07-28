@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void save(UserRequestDto requestDto) {
-        requestDto.setRole(requestDto.getRole());
+        requestDto.setRole(Role.USER);
         String enPw = passwordEncoder.encode(requestDto.toEntity().getPassword());
         requestDto.setPw(enPw);
         userRepository.save(requestDto.toEntity());

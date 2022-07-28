@@ -39,11 +39,11 @@ public class OAuthAttributes {
             return ofGoogle(userNameAttributeName, attributes);
         }*/
 
-        return ofNaver(registrationId, attributes);
+        return ofGoogle(userNameAttributeName, attributes);
     }
 
     // Google
-    private static OAuthAttributes ofGoogle(String userNameAttributes, Map<String, Object> attributes) {
+    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
 
         return OAuthAttributes.builder()
                 .email((String)attributes.get("email"))
@@ -51,11 +51,13 @@ public class OAuthAttributes {
                 .intro((String)attributes.get("intro"))
                 .image((String)attributes.get("image"))
                 .nickname((String)attributes.get("nickname"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
                 .build();
     }
 
     // Naver
-    private static OAuthAttributes ofNaver(String userNameAttributes, Map<String, Object> attributes) {
+    private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
         return OAuthAttributes.builder()
@@ -64,6 +66,8 @@ public class OAuthAttributes {
                 .intro((String)attributes.get("intro"))
                 .image((String)attributes.get("image"))
                 .nickname((String)attributes.get("nickname"))
+                .attributes(response)
+                .nameAttributeKey(userNameAttributeName)
                 .build();
     }
 
@@ -74,6 +78,7 @@ public class OAuthAttributes {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
+                .role(Role.GUEST)
                 .build();
     }
 }
