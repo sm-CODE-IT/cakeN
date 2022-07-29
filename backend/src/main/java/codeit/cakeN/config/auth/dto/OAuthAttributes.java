@@ -78,7 +78,7 @@ public class OAuthAttributes {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
-                .role(Role.GUEST)
+                .role(Role.GUEST)   // 가입 시 기본 권한 - GUEST
                 .build();
     }
 }

@@ -70,6 +70,6 @@ public class LoginService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(Role.USER.getKey()));
             user.setRole(Role.USER);
         }
-        return new SecurityUser(user);
+        return (UserDetails) new SecurityUser(user);
     }
 }

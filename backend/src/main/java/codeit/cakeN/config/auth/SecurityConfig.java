@@ -1,6 +1,8 @@
 package codeit.cakeN.config.auth;
 
 import codeit.cakeN.domain.user.Role;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,9 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
 
     @Override
@@ -43,23 +49,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
                 .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/users/mypage/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())   // 해당 주소는 USER 권한을 가진 사람만 열람 가능
-                .anyRequest().authenticated();   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
+                .anyRequest().authenticated()   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
 
-/*                .and()    // 로그인 설정
+                .and()    // 로그아웃 설정
+                .logout().logoutSuccessUrl("/")
+
+                .and()
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
+
+
+
+        /*.and()    // 로그인 설정
                 .formLogin()
                 .loginPage("/users/login")
                 .defaultSuccessUrl("/users/login/result")
                 .permitAll()
 
 
-
-                .and()    // 로그아웃 설정
+                .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))    // 로그아웃 url
                 .logoutSuccessUrl("/users/login")   // 로그아웃 성공 시 진입점 지정
                 .invalidateHttpSession(true)    // 인증정보를 지우고 세션 무효화
                 .deleteCookies("JSESSIONID")   // JSESSIONID 쿠키 삭제
-                .permitAll();*/
+                .permitAll()*/
+
+
+
 
         // TODO 소셜 로그인 구현 시 oauth2Login 설정
         // TODO 예외처리 핸들링 (404 페이지)

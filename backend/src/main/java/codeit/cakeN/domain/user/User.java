@@ -28,10 +28,10 @@ public class User extends Timestamped implements UserDetails {
     @Column(name = "user_id", unique = true, nullable = false)
     private Long userId;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 50)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String pw;
 
     @Column
@@ -40,7 +40,7 @@ public class User extends Timestamped implements UserDetails {
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 20)
     private String nickname;
 
     @Enumerated(EnumType.STRING)
@@ -89,6 +89,14 @@ public class User extends Timestamped implements UserDetails {
         this.image = requestDto.getImage();
         this.nickname = requestDto.getNickname();
     }
+
+    public User update(String image, String nickname) {
+        this.image = image;
+        this.nickname = nickname;
+
+        return this;
+    }
+
 
     // 사용자의 권한 판단
     public String getRoleKey() {
@@ -175,4 +183,5 @@ public class User extends Timestamped implements UserDetails {
     public boolean isEnabled() {
         return (emailVerified && !locked);
     }
+
 }
