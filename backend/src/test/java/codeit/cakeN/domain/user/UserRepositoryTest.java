@@ -32,7 +32,8 @@ public class UserRepositoryTest {
                 "****",
                 "안녕",
                 "11.jpg",
-                "jun"
+                "jun",
+                Role.GUEST
         );
 
         /*userRepository.save(User.builder()

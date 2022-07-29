@@ -6,10 +6,10 @@
 </head>
 <body>
     <div class="layout">
-        <form action="/contest/update" method="post">
+        <form action="#" th:action="@{/contest/update}" method="post">
             <input type="text" name="post_image">     <!-- 이미지 파일 -->
             <textarea name="post_des"></textarea>
-            <button type="submit">자랑하기</button> <!-- 데이터를 어디로 넘길까 -->
+            <a type="button" th:href="@{/contest/update}">자랑하기</a> <!-- 데이터를 어디로 넘길까 -->
         </form>
     </div>
 </body>

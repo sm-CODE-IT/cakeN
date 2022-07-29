@@ -24,7 +24,7 @@
 
   <h4 class="mb-3">회원 정보 입력</h4>
 
-  <form action="" th:action th:object="${user}" method="post">
+  <form action="" th:action th:object="${userRequestDto}" method="post">
 
     <div th:if="${#fields.hasGlobalErrors()}">
       <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
@@ -34,25 +34,25 @@
       <label for="email">로그인 ID</label>
       <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
              th:errorclass="field-error">
-      <div class="field-error" th:errors="*{email}" />
+      <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Incorrect data</p>
     </div>
     <div>
       <label for="pw">비밀번호</label>
       <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
              th:errorclass="field-error">
-      <div class="field-error" th:errors="*{pw}" />
+      <p class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></p>
     </div>
     <div>
       <label for="nickname">닉네임</label>
       <input type="text" id="nickname" name="nickname" th:field="*{nickname}" class="form-control"
              th:errorclass="field-error">
-      <div class="field-error" th:errors="*{nickname}" />
+      <p class="field-error"  th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" ></p>
     </div>
     <div>
       <label for="intro">자기소개</label>
       <input type="text" id="intro" name="intro" th:field="*{intro}" class="form-control"
              th:errorclass="field-error">
-      <div class="field-error" th:errors="*{intro}" />
+      <p class="field-error"  th:if="${#fields.hasErrors('intro')}"  th:errors="*{intro}" ></p>
     </div>
 
 
