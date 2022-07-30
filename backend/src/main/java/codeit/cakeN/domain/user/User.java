@@ -28,10 +28,10 @@ public class User extends Timestamped implements UserDetails {
     @Column(name = "user_id", unique = true, nullable = false)
     private Long userId;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String email;
 
-    @Column(length = 100)
+    @Column(length = 100, nullable = false)
     private String pw;
 
     @Column
@@ -40,7 +40,7 @@ public class User extends Timestamped implements UserDetails {
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
 
-    @Column(length = 20)
+    @Column(length = 20, nullable = false)
     private String nickname;
 
     @Enumerated(EnumType.STRING)

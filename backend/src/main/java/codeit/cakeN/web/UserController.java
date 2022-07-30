@@ -1,5 +1,7 @@
 package codeit.cakeN.web;
 
+import codeit.cakeN.config.auth.LoginUser;
+import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
@@ -67,6 +69,9 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
+        /*if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }*/
         return "user/login";
     }
 

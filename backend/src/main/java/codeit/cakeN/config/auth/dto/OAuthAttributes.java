@@ -17,18 +17,18 @@ public class OAuthAttributes {
     private String email;
     private String pw;
     private String intro;
-    private String image;
-    private String nickname;
+    private String picture;
+    private String name;
 
     @Builder
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String email, String pw, String intro, String image, String nickname) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.email = email;
-        this.pw = pw;
+        this.pw = pw;   // 10자리의 임시 비밀번호로 지정
         this.intro = intro;
-        this.image = image;
-        this.nickname = nickname;
+        this.picture = image;
+        this.name = nickname;
     }
 
     ///////// 소셜 로그인 구현 ////////////
@@ -45,12 +45,13 @@ public class OAuthAttributes {
     // Google
     private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
 
+
         return OAuthAttributes.builder()
                 .email((String)attributes.get("email"))
-                .pw((String)attributes.get("pw"))
-                .intro((String)attributes.get("intro"))
-                .image((String)attributes.get("image"))
-                .nickname((String)attributes.get("nickname"))
+                .pw(getRandomPw(10))
+                .intro("나만의 자기소개를 입력하세요!")
+                .image((String)attributes.get("picture"))
+                .nickname((String)attributes.get("name"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -60,12 +61,14 @@ public class OAuthAttributes {
     private static OAuthAttributes ofNaver(String userNameAttributeName, Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
 
+        System.out.println("Naver email = " + response.get("email"));
+
         return OAuthAttributes.builder()
-                .email((String)attributes.get("email"))
-                .pw((String)attributes.get("pw"))
-                .intro((String)attributes.get("intro"))
-                .image((String)attributes.get("image"))
-                .nickname((String)attributes.get("nickname"))
+                .email((String) response.get("email"))
+                .pw(getRandomPw(10))
+                .intro("나만의 자기소개를 입력하세요!")
+                .image((String) response.get("profile_image"))
+                .nickname((String) response.get("name"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -76,9 +79,30 @@ public class OAuthAttributes {
                 .email(email)
                 .pw(pw)
                 .intro(intro)
-                .image(image)
-                .nickname(nickname)
-                .role(Role.GUEST)   // 가입 시 기본 권한 - GUEST
+                .image(picture)
+                .nickname(name)
+                .role(Role.USER)   // 가입 시 기본 권한 - GUEST
                 .build();
+    }
+
+
+    // 랜덤으로 임시 비밀번호 지정 (소셜 로그인 시)
+    public static String getRandomPw(int size) {
+        char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+                'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+                'X', 'Y', 'Z'
+        };
+
+        int idx = 0;
+        StringBuffer sb = new StringBuffer();
+        for (int i=0; i<size; i++)
+        {
+            idx = (int) (charSet.length * Math.random());
+            sb.append(charSet[idx]);
+        }
+
+        return sb.toString();
     }
 }
