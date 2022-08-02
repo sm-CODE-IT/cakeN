@@ -2,6 +2,7 @@ package codeit.cakeN.web;
 
 import codeit.cakeN.config.auth.LoginUser;
 import codeit.cakeN.config.auth.dto.SecurityUser;
+import codeit.cakeN.domain.user.CustomUserDetails;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
@@ -10,13 +11,17 @@ import codeit.cakeN.web.dto.UserLoginRequestDto;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,7 +34,6 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
     private final UserService userService;
     private final LoginService loginService;
 
@@ -46,7 +50,16 @@ public class UserController {
             return "user/createUserForm";
         }
 
+
         try {
+            if (!(userRequestDto.getPw().equals(userRequestDto.getPwConfirm()))) {
+                bindingResult.rejectValue("pwConfirm", "pwConfirm", "패스워드가 일치하지 않습니다.");
+                return "user/createUserForm";
+            }
+            if (userService.emailCheck(userRequestDto.getEmail())) {
+                bindingResult.rejectValue("email", "emailDuplicate", "이미 존재하는 회원입니다.");
+                return "user/createUserForm";
+            }
             userService.save(userRequestDto);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -56,14 +69,20 @@ public class UserController {
         return "redirect:/";
     }
 
-    @ModelAttribute("roles")
-    public Map<String, Role> roles() {
-        Map<String, Role> map = new LinkedHashMap<>();
-        map.put("관리자", Role.ADMIN);
-        map.put("사용자", Role.USER);
-        map.put("손님", Role.GUEST);
-        return map;
+    /////// 회원 탈퇴 ////////
+    @GetMapping("/delete")
+    public String delete() {
+        return "user/deleteForm";
     }
+
+    @PostMapping("/delete")
+    public void deleteUser(@RequestBody CustomUserDetails user, HttpSession session) throws Exception {
+        if (user.getPassword().equals(session)) {
+            session.removeAttribute("login");
+            session.invalidate();
+        }
+    }
+
 
     /////// 로그인 ////////
     @GetMapping("/login")
@@ -91,14 +110,6 @@ public class UserController {
     }
 
 
-    /*@GetMapping("/")
-    public String loginSuccess(Model model, @LoginUser SecurityUser user) {
-        if (user != null) {
-            model.addAttribute("userName", user.getName());
-        }
-        return "hello";
-    }
-*/
     /*
      * rest API
      */

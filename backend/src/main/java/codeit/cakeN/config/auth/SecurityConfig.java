@@ -54,13 +54,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()    // 로그아웃 설정
                 .logout()
+                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/")
 
                 .and()    // 로그인 설정
                 .formLogin()
                 .loginPage("/users/login")
-                .usernameParameter("username")
+                .usernameParameter("email")
+                .passwordParameter("pw")
                 .loginProcessingUrl("/users/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/users/login")

@@ -1,41 +1,84 @@
 package codeit.cakeN.service.user;
 
+import codeit.cakeN.config.auth.SecurityUtil;
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.web.dto.UserRequestDto;
+import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
 
+    // 회원 가입
     @Transactional
     public void save(UserRequestDto requestDto) {
         requestDto.setRole(Role.USER);
-        String enPw = passwordEncoder.encode(requestDto.toEntity().getPassword());
+        String enPw = passwordEncoder.encode(requestDto.getPw());
         requestDto.setPw(enPw);
         userRepository.save(requestDto.toEntity());
+    }
+
+    // 회원 탈퇴
+    public void deleteUser(String checkPw) throws Exception {
+        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+                () -> new UsernameNotFoundException("존재하지 않는 사용자입니다.")
+        );
+        if (!user.matchPw(passwordEncoder, checkPw)) {
+            throw new Exception("비밀번호가 일치하지 않습니다.");
+        }
+        userRepository.delete(user);
+    }
+
+    // 회원 정보 수정
+    @Transactional
+    public void update(UserUpdateDto userUpdateDto) throws Exception {
+        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+        );
+
+        userUpdateDto.nickname().ifPresent(user::updateNickname);
+        userUpdateDto.intro().ifPresent(user::updateIntro);
+        userUpdateDto.image().ifPresent(user::updateImage);
+    }
+
+    // 이메일 중복 체크(소셜 로그인-기본 로그인 충돌)
+    public boolean emailCheck(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    // 회원 정보 수정 - 이메일은 따로 분리
+    public void updatePw(String checkPw, String newPw) throws Exception {
+        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+        );
+
+        if (!user.matchPw(passwordEncoder, checkPw)) {
+            throw new Exception("비밀번호가 일치하지 않습니다.");
+        }
+        user.updatePw(passwordEncoder, newPw);
+    }
+
+    // 마이페이지 개인 정보 조회
+    UserRequestDto getMyInfo() throws Exception {
+        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+        );
+        return new UserRequestDto(user);
     }
 
     /*@Transactional
@@ -56,32 +99,6 @@ public class UserService implements UserDetailsService {
         return user1.getUserId();
     }*/
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> findUser = userRepository.findByEmail(email);// 이메일로 사용자 찾기
-
-        if (!findUser.isPresent())
-            throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
-
-        User user = findUser.orElse(null);
-
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRoleKey()));
-
-        log.info("Success find user {}", findUser);
-
-        // 특정 관리자 계정에만 ADMIN Role 부여
-        if ("admin@admin.com".equals(email)) {
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getKey()));
-            user.setRole(Role.ADMIN);
-        } else {
-            // 그 외는 모두 USER Role 부여
-            authorities.add(new SimpleGrantedAuthority(Role.USER.getKey()));
-            user.setRole(Role.USER);
-        }
-        return (UserDetails) new SecurityUser(user);
-
-    }
 
 /*    private List<SimpleGrantedAuthority> getRoles(List<Role> roles) {
         return roles.stream()
