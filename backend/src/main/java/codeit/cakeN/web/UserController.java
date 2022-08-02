@@ -69,9 +69,7 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
-        /*if (user != null) {
-            model.addAttribute("userName", user.getName());
-        }*/
+
         return "user/login";
     }
 
@@ -92,6 +90,15 @@ public class UserController {
         return "redirect:/";
     }
 
+
+    /*@GetMapping("/")
+    public String loginSuccess(Model model, @LoginUser SecurityUser user) {
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
+        return "hello";
+    }
+*/
     /*
      * rest API
      */

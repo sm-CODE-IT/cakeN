@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
@@ -22,11 +22,11 @@
         <h2>로그인</h2>
     </div>
 
-    <div class="container" style="border: 1px solid black;" th:if="${userName}">
-        <p th:text="'현재 접속: ' + ${userName}"></p>
+    <div class="container" style="border: 1px solid black;" th:object="${userName}">
+        <p th:text="'현재 접속: ' + ${userName} + ${#authentication.name}"></p>
     </div>
 
-    <form action="" th:action th:object="${userLoginRequestDto}" method="post">
+    <form action="" th:action="@{/users/login}" th:object="${userLoginRequestDto}" method="post">
 
         <div th:if="${#fields.hasGlobalErrors()}">
             <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>

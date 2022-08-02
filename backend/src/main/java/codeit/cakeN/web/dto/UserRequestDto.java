@@ -49,7 +49,7 @@ public class UserRequestDto {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
-                .role(Role.GUEST)
+                .role(Role.USER)   // 회원가입 시 USER로 권한 부여
                 .build();
     }
 }

@@ -1,17 +1,15 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="container" style="max-width: 600px" >
+<div class="container" sec:authorize="!isAuthenticated()" style="max-width: 600px" >
     <div class="py-5 text-center">
         <h2>홈 화면</h2>
     </div>
-
     <div class="row">
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg" type="button"
@@ -31,5 +29,12 @@
 
 </div> <!-- /container -->
 
+<div>
+    <form class="form-inline my-2" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+        <span class="mx-2" sec:authentication="name">사용자</span>
+        <span class="mx-2" sec:authentication="principal.authorities">권한</span>
+        <button class="btn btn-secondary my-2" type="submit">로그아웃</button>
+    </form>
+</div>
 </body>
 </html>
