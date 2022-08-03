@@ -1,0 +1,14 @@
+/* NaviHeader */
+header {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  
+
+  display: flex;
+  align-items: center;
+  border-bottom: 3px solid #e2e2e2;
+}
+
+header a {
+  margin: 20px;
+}
