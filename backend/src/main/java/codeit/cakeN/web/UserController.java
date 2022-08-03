@@ -26,7 +26,6 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
-    private final LoginService loginService;
 
     /**
      * 회원가입 페이지
@@ -105,6 +104,14 @@ public class UserController {
         return "user/login";
     }
 
+
+    /**
+     * 마이페이지 (개인정보 조회)
+     */
+    @GetMapping("/mypage")
+    public String myPage(Model model) {
+        return "user/mypage";
+    }
 
     /*@PostMapping("/login")
     public String loginForm(@Valid UserLoginRequestDto loginUser, BindingResult bindingResult, Model model) {

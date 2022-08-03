@@ -1,7 +1,6 @@
 package codeit.cakeN.service.user;
 
 import codeit.cakeN.config.auth.SecurityUtil;
-import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
@@ -11,7 +10,7 @@ import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,7 +54,7 @@ public class UserService {
      * @param username
      * @throws Exception
      */
-    public void deleteUser(String checkPw, String username) throws Exception {
+    public void deleteUser(String checkPw, String username) throws UserException {
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
@@ -75,7 +74,7 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public void update(UserUpdateDto userUpdateDto) throws Exception {
+    public void update(UserUpdateDto userUpdateDto) throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
@@ -103,7 +102,7 @@ public class UserService {
      * @param newPw
      * @throws Exception
      */
-    public void updatePw(String checkPw, String newPw) throws Exception {
+    public void updatePw(String checkPw, String newPw) throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
@@ -120,7 +119,7 @@ public class UserService {
      * @return
      * @throws Exception
      */
-    UserRequestDto getMyInfo() throws Exception {
+    UserRequestDto getMyInfo() throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
