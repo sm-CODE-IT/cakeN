@@ -57,6 +57,10 @@ public class LoginService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(findUser.getRoleKey()));
 
-        return new CustomUserDetails(findUser);
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(findUser.getEmail())
+                .password(findUser.getPw())
+                .roles(findUser.getRoleKey())
+                .build();
     }
 }
