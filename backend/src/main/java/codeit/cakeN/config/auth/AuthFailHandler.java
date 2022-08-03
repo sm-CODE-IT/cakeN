@@ -17,7 +17,8 @@ public class AuthFailHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         System.out.println("Login 실패(AuthFailHandler 호출)");
+        System.out.println("exception : " + exception.getMessage());
         response.setStatus(HttpServletResponse.SC_OK);    // 보안을 위해 200 에러 반환
-        response.getWriter().write("fail");
+        response.sendRedirect("/users/login");
     }
 }

@@ -60,7 +60,7 @@ public class LoginService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(findUser.getEmail())
                 .password(findUser.getPw())
-                .roles(findUser.getRoleKey())
+                .roles(findUser.getRole().name())
                 .build();
     }
 }

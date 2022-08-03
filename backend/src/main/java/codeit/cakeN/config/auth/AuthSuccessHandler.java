@@ -17,9 +17,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.out.println("Login 성공 : " + authentication.getName() + "(AuthSuccessHandler 호출)");
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        response.getWriter().write("success");
+        response.sendRedirect("/");
     }
 }
 

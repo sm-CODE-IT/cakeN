@@ -43,6 +43,7 @@ class LoginServiceTest {
 
         //then -> 로그인 시 Role: GUSET -> USER로 변환
         System.out.println(findUser.getRole());
+        System.out.println(findUser.getRole().name());
         System.out.println(findUser.getRoleKey());
 //        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
