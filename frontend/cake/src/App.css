@@ -1,14 +1,55 @@
+/* body */
+
+
 /* NaviHeader */
-header {
-  padding-top: 20px;
-  padding-bottom: 10px;
+.NaviHeader {
+  overflow: hidden;
   
+  background-color: pink;
+  padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+  transition: 0.4s; /* 패딩 줄어들 때 지연 */
+  position: fixed; /* sticky/fixed */
+  width: 100%;
+  top: 0; /* At the top */
+  z-index: 99;
 
+  text-align: center;
   display: flex;
-  align-items: center;
-  border-bottom: 3px solid #e2e2e2;
+  justify-content: space-between;
+ 
 }
 
-header a {
-  margin: 20px;
+/* 로고 속성 */
+#logo {
+  color: black;
+  font-size: 45px;
+  font-weight: bold;
+  text-decoration: none;
 }
+
+/* Navbar 링크 속성 지정 */
+.NaviHeader .menu {
+  color: black;
+  text-decoration: none;
+  padding: 12px;
+  
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+
+  transition: 0.5s;
+}
+
+
+/* 링크에 hover  */
+.NaviHeader .menu:hover {
+  background-color: cornsilk;
+}
+
+.NaviHeader .menu.active:hover {
+  background-color: cornsilk;
+}
+
+
+
+

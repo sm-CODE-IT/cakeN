@@ -1,6 +1,6 @@
 const Home = () => {
     return(
-        <h2>홈페이지</h2>
+        <h2>홈페이지dnkdmndskjsdkjdskldlksghs<br/>skskksksk<br/>skskksksk<br/>skskksksk</h2>
     );
 };
 
