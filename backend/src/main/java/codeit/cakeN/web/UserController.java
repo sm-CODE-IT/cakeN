@@ -1,32 +1,23 @@
 package codeit.cakeN.web;
 
-import codeit.cakeN.config.auth.LoginUser;
-import codeit.cakeN.config.auth.dto.SecurityUser;
-import codeit.cakeN.domain.user.CustomUserDetails;
-import codeit.cakeN.domain.user.Role;
-import codeit.cakeN.domain.user.User;
-import codeit.cakeN.domain.user.UserRepository;
+
+import codeit.cakeN.config.auth.SecurityUtil;
+
 import codeit.cakeN.service.user.LoginService;
+import codeit.cakeN.web.dto.UserDeleteDto;
 import codeit.cakeN.web.dto.UserLoginRequestDto;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.service.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.method.support.ModelAndViewContainer;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 //@RestController
 @Controller
@@ -37,13 +28,24 @@ public class UserController {
     private final UserService userService;
     private final LoginService loginService;
 
-    ///////// 회원가입 ///////////
+    /**
+     * 회원가입 페이지
+     * @param model
+     * @return
+     */
     @GetMapping("/new")
     public String createUserForm(Model model) {
         model.addAttribute("userRequestDto", new UserRequestDto());
         return "user/createUserForm";
     }
 
+    /**
+     * 회원가입 로직
+     * @param userRequestDto
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/new")
     public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -69,30 +71,42 @@ public class UserController {
         return "redirect:/";
     }
 
-    /////// 회원 탈퇴 ////////
+
+    /**
+     * 회원탈퇴 페이지
+     * @return
+     */
     @GetMapping("/delete")
     public String delete() {
         return "user/deleteForm";
     }
 
-    @PostMapping("/delete")
-    public void deleteUser(@RequestBody CustomUserDetails user, HttpSession session) throws Exception {
-        if (user.getPassword().equals(session)) {
-            session.removeAttribute("login");
-            session.invalidate();
-        }
+    /**
+     * 회원탈퇴 로직
+     * @param userDeleteDto
+     * @throws Exception
+     */
+    @DeleteMapping("/deleteUser")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUser(@Valid @RequestBody UserDeleteDto userDeleteDto) throws Exception {
+        userService.deleteUser(userDeleteDto.checkPw(), SecurityUtil.getLoginUser());
     }
 
 
-    /////// 로그인 ////////
+    /**
+     * 로그인 페이지
+     * @param model
+     * @return
+     */
     @GetMapping("/login")
     public String loginForm(Model model) {
         model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
 
         return "user/login";
     }
-/*
-    @PostMapping("/login")
+
+
+    /*@PostMapping("/login")
     public String loginForm(@Valid UserLoginRequestDto loginUser, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
@@ -100,13 +114,6 @@ public class UserController {
         }
         bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
 
-*//*
-        User isLogin = loginService.login(loginUser.getLoginId(), loginUser.getPassword());
-
-        if (isLogin == null) {
-            return "user/login";
-        }
-*//*
 
 
         return "redirect:/";

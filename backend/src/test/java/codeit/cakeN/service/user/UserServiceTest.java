@@ -47,7 +47,7 @@ class UserServiceTest {
         em.clear();
     }
 
-    public UserRequestDto createUserDto() {
+    /*public UserRequestDto createUserDto() {
         return new UserRequestDto(new User(
                 "jun020216@naver.com",
                 "****",
@@ -77,7 +77,7 @@ class UserServiceTest {
         SecurityContextHolder.setContext(emptyContext);
         return userRequestDto;
 
-    }
+    }*/
 
     @AfterEach
     public void deleteUser() {
@@ -90,7 +90,14 @@ class UserServiceTest {
     @Test
     public void 회원가입_성공() throws Exception {
         //given
-        UserRequestDto userRequestDto = createUserDto();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
 
         //when
         userService.save(userRequestDto);
@@ -114,7 +121,14 @@ class UserServiceTest {
     @Test
     public void 회원정보_비밀번호_수정() throws Exception {
         //given
-        UserRequestDto userRequestDto = setUser();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
         
         
         //when
@@ -133,7 +147,14 @@ class UserServiceTest {
     @Test
     public void 회원정보_일부_수정() throws Exception {
         //given
-        UserRequestDto userRequestDto = setUser();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
 
         //when
         String updateNickname = "변경내용";
@@ -157,10 +178,17 @@ class UserServiceTest {
     @Test
     public void 회원탈퇴() throws Exception {
         //given
-        UserRequestDto userRequestDto = setUser();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
 
         //when
-        userService.deleteUser(PASSWORD);
+        userService.deleteUser(PASSWORD, userRequestDto.getEmail());
 
         //then
         assertThat(assertThrows(Exception.class, () -> userRepository.findByEmail(userRequestDto.getEmail())
@@ -171,10 +199,17 @@ class UserServiceTest {
     @Test
     public void 회원탈퇴_실패() throws Exception {
         //given
-        UserRequestDto userRequestDto = setUser();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
 
         //when, then
-        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!"))
+        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!", userRequestDto.getEmail()))
                 .getMessage()).isEqualTo("비밀번호가 일치하지 않습니다.");
 
     }
@@ -185,7 +220,14 @@ class UserServiceTest {
     @Test
     public void 내정보조회() throws Exception {
         //given
-        UserRequestDto userRequestDto = setUser();
+        UserRequestDto userRequestDto = new UserRequestDto(new User(
+                "jun020216@naver.com",
+                "****",
+                "안녕",
+                "11.jpg",
+                "jun",
+                Role.USER
+        ));
 
         //when
         UserRequestDto myInfo = userService.getMyInfo();

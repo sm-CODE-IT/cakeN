@@ -6,8 +6,19 @@
 </head>
 <body>
   <p>
-  회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
-  회원 탈퇴를 진행하시겠습니까?
+      회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
+      회원 탈퇴를 진행하시겠습니까?
   </p>
+<div class="row">
+  <div class="col">
+      <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/users/deleteUser}'|">회원탈퇴</button>
+  </div>
+  <div class="col">
+      <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='hello.html'"
+              th:onclick="|location.href='@{/}'|"
+              type="button">취소
+      </button>
+  </div>
+</div>
 </body>
 </html>
