@@ -2,10 +2,9 @@ package codeit.cakeN.web.dto;
 
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import codeit.cakeN.service.user.UserService;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -42,6 +41,7 @@ public class UserRequestDto {
         this.role = role;
     }
 
+
     public User toEntity() {
         return User.builder()
                 .email(email)
@@ -49,6 +49,7 @@ public class UserRequestDto {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
+                .role(Role.GUEST)
                 .build();
     }
 }

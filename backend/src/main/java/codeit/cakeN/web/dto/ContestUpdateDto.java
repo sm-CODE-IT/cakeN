@@ -1,6 +1,6 @@
 package codeit.cakeN.web.dto;
 
-import codeit.cakeN.domain.entity.Contest;
+import codeit.cakeN.domain.entity.contest.Contest;
 import lombok.Builder;
 import lombok.Data;
 

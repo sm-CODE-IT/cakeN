@@ -70,7 +70,7 @@ public class UserRepositoryTest {
         System.out.println("이메일 = " + u.getEmail());
 
 
-        assertThat(u.getNickname()).isEqualTo("jun");
+        assertThat(u.getNickname()).isEqualTo("JUN");
     }
     /*	@Bean
 	public CommandLineRunner demo(UserRepository userRepository, UserService userService) {

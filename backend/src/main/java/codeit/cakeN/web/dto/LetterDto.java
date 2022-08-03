@@ -1,6 +1,6 @@
-package codeit.cakeN.dto;
+package codeit.cakeN.web.dto;
 
-import codeit.cakeN.domain.entity.Letter;
+import codeit.cakeN.domain.entity.letter.Letter;
 import lombok.*;
 
 import java.time.LocalDateTime;

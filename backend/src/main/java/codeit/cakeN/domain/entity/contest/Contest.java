@@ -1,4 +1,4 @@
-package codeit.cakeN.domain.entity;
+package codeit.cakeN.domain.entity.contest;
 
 import lombok.Builder;
 import lombok.Data;

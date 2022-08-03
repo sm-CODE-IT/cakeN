@@ -1,7 +1,7 @@
-package codeit.cakeN.controller;
+package codeit.cakeN.web.controller;
 
-import codeit.cakeN.dto.LetterDto;
-import codeit.cakeN.service.LetterService;
+import codeit.cakeN.web.dto.LetterDto;
+import codeit.cakeN.service.letter.LetterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

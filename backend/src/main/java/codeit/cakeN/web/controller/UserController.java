@@ -1,5 +1,6 @@
-package codeit.cakeN.web;
+package codeit.cakeN.web.controller;
 
+import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.service.user.LoginService;
@@ -15,7 +16,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 //@RestController
@@ -42,13 +45,22 @@ public class UserController {
         }
 
         try {
-            userRepository.save(userRequestDto.toEntity());
+            userService.save(userRequestDto);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "user/createUserForm";
         }
 
         return "redirect:/";
+    }
+
+    @ModelAttribute("roles")
+    public Map<String, Role> roles() {
+        Map<String, Role> map = new LinkedHashMap<>();
+        map.put("관리자", Role.ADMIN);
+        map.put("사용자", Role.USER);
+        map.put("손님", Role.GUEST);
+        return map;
     }
 
     /////// 로그인 ////////
@@ -74,11 +86,6 @@ public class UserController {
 
         return "redirect:/";
     }
-
-
-
-
-
 
     /*
      * rest API

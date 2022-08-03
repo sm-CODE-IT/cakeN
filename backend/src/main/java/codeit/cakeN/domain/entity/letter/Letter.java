@@ -1,4 +1,4 @@
-package codeit.cakeN.domain.entity;
+package codeit.cakeN.domain.entity.letter;
 
 import lombok.AccessLevel;
 import lombok.Builder;

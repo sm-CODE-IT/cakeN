@@ -1,7 +1,7 @@
-package codeit.cakeN.service;
+package codeit.cakeN.service.letter;
 
-import codeit.cakeN.domain.repository.LetterRepository;
-import codeit.cakeN.dto.LetterDto;
+import codeit.cakeN.domain.repository.letter.LetterRepository;
+import codeit.cakeN.web.dto.LetterDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

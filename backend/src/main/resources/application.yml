@@ -2,9 +2,10 @@ spring:
   # DB 연결
   datasource:
 
+
   url: jdbc:mysql://localhost:3306/caken?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
   username: root
-  password: codeit    # 내 비밀번호로 해야하는 건가?
+  password: biukzozn1926    # 내 비밀번호로 해야하는 건가?
   driver-class-name: com.mysql.cj.jdbc.Driver
 
 #    # 설치된 H2 DB와 연결 url
@@ -12,6 +13,7 @@ spring:
 #    username: sa
 #    password:
 #    driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
+
 
 
   jpa:
@@ -36,3 +38,9 @@ logging:
   level:
     org.hibernate.type: trace
 #    root: debug
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
