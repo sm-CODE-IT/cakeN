@@ -13,9 +13,10 @@
   top: 0; /* At the top */
   z-index: 99;
 
-  text-align: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 }
 
 /* 로고 속성 */
@@ -48,6 +49,25 @@
 .NaviHeader .menu.active:hover {
   background-color: cornsilk;
 }
+
+/* ContentHeader */
+.ContentHeader {
+  padding-left: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.ContentHeader dt {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.ContentHeader dd {
+  font-size: 15px;
+  color: gray;
+  margin-left: 10px;
+}
+
 
 /* LETTERING */
 .Lettering .lettering_type {
@@ -104,5 +124,37 @@ pre {
   transition: 0.15s ease-in-out;
 }
 
+/* Login SignUp */
+.Login {
+  margin-top: 100px;
 
+}
 
+/* SignUp */
+.SignUp {
+  margin-top: 100px;
+}
+
+.SignUp table {
+  border: 1px solid pink;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding: 15px;
+}
+
+.SignUp th {
+  width: 30%;
+  font-weight: initial;
+  text-align: start;
+}
+
+.SignUp td {
+  width: 100%;
+}
+
+.SignUp .signBtn {
+  width: 40%;
+
+}
