@@ -3,9 +3,8 @@ import heart from "../components/heart.png";
 const Lettering = () => {
   return (
     <div className="Lettering">
-      <button classname="heart">
-        <img className="heartimg" src={heart} />
-      </button>
+      <img className="heartimg" src={heart} />
+
       <div className="lettering_type">
         <a href="#birthday">#생일</a>
         <a href="#birthday2">#생신</a>
