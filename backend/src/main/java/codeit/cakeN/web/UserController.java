@@ -3,7 +3,8 @@ package codeit.cakeN.web;
 
 import codeit.cakeN.config.auth.SecurityUtil;
 
-import codeit.cakeN.service.user.LoginService;
+import codeit.cakeN.config.auth.dto.SecurityUser;
+import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.web.dto.UserDeleteDto;
 import codeit.cakeN.web.dto.UserLoginRequestDto;
 import codeit.cakeN.web.dto.UserRequestDto;
@@ -11,12 +12,16 @@ import codeit.cakeN.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Optional;
 
 
 //@RestController
@@ -26,6 +31,8 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final UserRepository userRepository;
+    private final HttpSession httpSession;
 
     /**
      * 회원가입 페이지
@@ -98,9 +105,12 @@ public class UserController {
      * @return
      */
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String loginForm(@RequestParam(value = "error", required = false)String error, @RequestParam(value = "exception", required = false)String exception, Model model) {
         model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
-
+        
+        // 로그인 실패 시 에러 메시지 출력
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
         return "user/login";
     }
 
@@ -109,7 +119,35 @@ public class UserController {
      * 마이페이지 (개인정보 조회)
      */
     @GetMapping("/mypage")
-    public String myPage(Model model) {
+    public String myPage(Model model, @AuthenticationPrincipal User formUser) {
+//        UserRequestDto info = userService.getMyInfo();
+//        model.addAttribute("userName" , info.getNickname());
+//        model.addAttribute("userEmail", info.getEmail());
+//        model.addAttribute("userPw", info.getPw());
+//        model.addAttribute("userIntro", info.getIntro());
+//        model.addAttribute("userImage", info.getImage());
+
+        SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
+
+        if (oauthUser != null) {
+            Optional<codeit.cakeN.domain.user.User> findUser = userRepository.findByEmail(oauthUser.getEmail());
+            codeit.cakeN.domain.user.User user = findUser.get();
+            model.addAttribute("userNickname", user.getNickname());
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userIntro", user.getIntro());
+        }
+
+        if (formUser != null) {
+            Optional<codeit.cakeN.domain.user.User> findUser = userRepository.findByEmail(formUser.getUsername());
+            codeit.cakeN.domain.user.User user = findUser.get();
+            model.addAttribute("userNickname", user.getNickname());
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userIntro", user.getIntro());
+        }
+
+
+
+
         return "user/mypage";
     }
 

@@ -119,7 +119,7 @@ public class UserService {
      * @return
      * @throws Exception
      */
-    UserRequestDto getMyInfo() throws UserException {
+    public UserRequestDto getMyInfo() throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );

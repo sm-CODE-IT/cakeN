@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 
@@ -56,8 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/users/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/users/login")
-                .failureHandler(new AuthFailHandler())
-                .successHandler(new AuthSuccessHandler())
+                .failureHandler(failureHandler())
+                .successHandler(successHandler())
                 .permitAll()
 
                 .and()    // 로그아웃 설정
@@ -100,5 +101,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         return new AuthSuccessHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new AuthFailHandler();
     }
 }

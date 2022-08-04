@@ -28,9 +28,6 @@
 
     <form action="" th:action="@{/users/login}" th:object="${userLoginRequestDto}" method="post">
 
-        <div th:if="${#fields.hasGlobalErrors()}">
-            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
-        </div>
 
         <div>
             <label for="username">로그인 ID</label>
@@ -44,6 +41,10 @@
                    th:errorclass="field-error">
             <div class="field-error" th:errors="*{password}" ></div>
         </div>
+
+        <span th:if="${error != null}" class="mb-2">
+            <p class="alert alert-danger" th:text="${exception}"></p>
+        </span>
 
         <hr class="my-4">
 

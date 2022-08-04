@@ -8,6 +8,19 @@
 </head>
 <body>
 <body>
-마이페이지입니다.
+<div class="user_detail container">
+    <h1 class="py-3 text-center">마이페이지</h1>
+
+    <div class="col">
+        <span th:text="'닉네임 : ' + ${userNickname}"></span>
+        <span th:text="'ID : ' + ${userEmail}"></span>
+        <span th:text="'PW : ' + ${userPw}"></span>
+        <span th:text="'자기소개 : ' + ${userIntro}"></span>
+    </div>
+
+    <button class="btn btn-primary">개인정보 수정</button>
+    <button class="btn btn-secondary">회원 탈퇴</button>
+<!--    <span th:text="'프로필 사진' + '${userImage}'"></span>-->
+</div>
 </body>
 </html>
