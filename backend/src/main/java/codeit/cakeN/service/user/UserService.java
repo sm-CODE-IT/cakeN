@@ -9,14 +9,13 @@ import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -52,8 +51,9 @@ public class UserService {
      * 회원 탈퇴
      * @param checkPw
      * @param username
-     * @throws Exception
+     * @throws UserException
      */
+    @Transactional
     public void deleteUser(String checkPw, String username) throws UserException {
         User user = userRepository.findByEmail(username).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
@@ -102,6 +102,7 @@ public class UserService {
      * @param newPw
      * @throws Exception
      */
+    @Transactional
     public void updatePw(String checkPw, String newPw) throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)

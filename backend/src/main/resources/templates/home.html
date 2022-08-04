@@ -31,14 +31,10 @@
 
 <div>
     <form class="form-inline my-2" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
-        <span class="mx-2" th:text="${userName}"></span>
+        <span class="mx-2" th:text="${userName} + ' 님 반갑습니다!'"></span>
         <span class="mx-2" sec:authentication="principal.authorities">권한</span>
         <button class="btn btn-secondary my-2" type="submit">로그아웃</button>
 
-        <button class="btn btn-primary" type="button"
-                th:onclick="|location.href='@{/users/delete}'|" >
-            회원탈퇴
-        </button>
 
         <button class="btn btn-success" type="button"
                 th:onclick="|location.href='@{/users/mypage}'|" >

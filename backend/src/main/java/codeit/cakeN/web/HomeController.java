@@ -28,7 +28,7 @@ public class HomeController {
     private final UserRepository userRepository;
 
     @GetMapping("/")
-    public String home(Model model, @AuthenticationPrincipal User formUser) throws UserException {
+    public String home(Model model, @AuthenticationPrincipal User formUser) throws Exception {
 
         // userName에는 유저의 닉네임이 매핑된다.
 
@@ -46,9 +46,13 @@ public class HomeController {
          * Form Login으로 접근한 유저
          */
 
-        if(formUser != null) {
-            model.addAttribute("userName", formUser.getUsername());
+        if (formUser != null) {
+            System.out.println(formUser);
+            codeit.cakeN.domain.user.User findUser = userRepository.findByEmail(formUser.getUsername()).get();
+            System.out.println(findUser);
+            model.addAttribute("userName", findUser.getNickname());
         }
+
 
         return "home";
     }

@@ -5,6 +5,7 @@ import codeit.cakeN.config.auth.SecurityUtil;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.UserRepository;
+import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.web.dto.UserDeleteDto;
 import codeit.cakeN.web.dto.UserLoginRequestDto;
 import codeit.cakeN.web.dto.UserRequestDto;
@@ -83,19 +84,44 @@ public class UserController {
      * @return
      */
     @GetMapping("/delete")
-    public String delete() {
+    public String delete(Model model) {
+        model.addAttribute("userDeleteDto", new UserDeleteDto());
         return "user/deleteForm";
     }
 
     /**
      * 회원탈퇴 로직
      * @param userDeleteDto
+     * @param model
+     * @return
      * @throws Exception
      */
-    @DeleteMapping("/deleteUser")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteUser(@Valid @RequestBody UserDeleteDto userDeleteDto) throws Exception {
-        userService.deleteUser(userDeleteDto.checkPw(), SecurityUtil.getLoginUser());
+    @PostMapping("/delete")
+    public String deleteUser(@Valid UserDeleteDto userDeleteDto, @AuthenticationPrincipal User formUser, Model model) throws Exception {
+
+        SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
+        String findUser = null;
+
+        if (oauthUser != null) {
+            findUser = oauthUser.getEmail();
+        } else if (formUser != null) {
+            findUser = formUser.getUsername();
+        }
+
+        try {
+            userService.deleteUser(userDeleteDto.getPwConfirm(), findUser);
+//            userService.deleteUser(userDeleteDto.getPw(), userDeleteDto.getEmail());
+        } catch (UserException e) {
+            model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
+            return "user/deleteForm";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "user/deleteForm";
+
+        }
+
+        return "redirect:/";
     }
 
 
@@ -120,35 +146,29 @@ public class UserController {
      */
     @GetMapping("/mypage")
     public String myPage(Model model, @AuthenticationPrincipal User formUser) {
-//        UserRequestDto info = userService.getMyInfo();
-//        model.addAttribute("userName" , info.getNickname());
-//        model.addAttribute("userEmail", info.getEmail());
-//        model.addAttribute("userPw", info.getPw());
-//        model.addAttribute("userIntro", info.getIntro());
-//        model.addAttribute("userImage", info.getImage());
 
         SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
+        codeit.cakeN.domain.user.User user = null;
 
         if (oauthUser != null) {
-            Optional<codeit.cakeN.domain.user.User> findUser = userRepository.findByEmail(oauthUser.getEmail());
-            codeit.cakeN.domain.user.User user = findUser.get();
-            model.addAttribute("userNickname", user.getNickname());
-            model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("userIntro", user.getIntro());
+            user = userRepository.findByEmail(oauthUser.getEmail()).get();
         }
 
         if (formUser != null) {
-            Optional<codeit.cakeN.domain.user.User> findUser = userRepository.findByEmail(formUser.getUsername());
-            codeit.cakeN.domain.user.User user = findUser.get();
-            model.addAttribute("userNickname", user.getNickname());
-            model.addAttribute("userEmail", user.getEmail());
-            model.addAttribute("userIntro", user.getIntro());
+            user = userRepository.findByEmail(formUser.getUsername()).get();
         }
 
-
-
+        model.addAttribute("userNickname", user.getNickname());
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("userIntro", user.getIntro());
 
         return "user/mypage";
+    }
+
+
+    @GetMapping("/update")
+    public String updateInfo(Model model) {
+        return "user/update";
     }
 
     /*@PostMapping("/login")
