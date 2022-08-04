@@ -5,8 +5,10 @@ import codeit.cakeN.web.dto.UserRequestDto;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter @Setter
 @Table(name = "USER")
-public class User extends Timestamped implements UserDetails {
+public class User extends Timestamped implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,6 +89,14 @@ public class User extends Timestamped implements UserDetails {
         this.nickname = requestDto.getNickname();
     }
 
+    public User update(String image, String nickname) {
+        this.image = image;
+        this.nickname = nickname;
+
+        return this;
+    }
+
+
     // 사용자의 권한 판단
     public String getRoleKey() {
         return this.role.getKey();
@@ -94,70 +104,27 @@ public class User extends Timestamped implements UserDetails {
 
 
 
-    // 계정(해당 유저)이 가진 권한 목록 리턴
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collectors = new ArrayList<>();
-        collectors.add(() -> {
-            return "계정별 등록 권한";
-        });
-
-        return collectors;
+    // 개인정보 수정
+    public void updatePw(PasswordEncoder passwordEncoder, String pw) {
+        this.pw = passwordEncoder.encode(pw);
     }
 
-    // 비밀번호 가져오기
-    @Override
-    public String getPassword() {
-        return this.pw;
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    // pk 값 가져오기
-    @Override
-    public String getUsername() {
-        return this.email;
+    public void updateIntro(String intro) {
+        this.intro = intro;
     }
 
-    /**
-     * 계정 만료 여부
-     * true : 만료 X
-     * false : 만료 O
-     * @return
-     */
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void updateImage(String image) {
+        this.image = image;
     }
 
-    /**
-     * 계정 잠김 여부
-     * true : 잠기지 않음
-     * false : 잠김
-     * @return
-     */
-    @Override
-    public boolean isAccountNonLocked() {
-        return locked;
+    // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
+    public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
+        return passwordEncoder.matches(checkPassword, getPw());
     }
 
-    /**
-     * 비밀번호 만료 여부
-     * true : 만료 안됨
-     * false : 만료
-     * @return
-     */
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
 
-    /**
-     * 사용자 활성화 여부
-     * true : 활성화
-     * false :
-     * @return
-     */
-    @Override
-    public boolean isEnabled() {
-        return (emailVerified && !locked);
-    }
 }

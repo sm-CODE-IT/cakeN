@@ -1,6 +1,7 @@
 package codeit.cakeN.service.user;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
+import codeit.cakeN.domain.user.CustomUserDetails;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class LoginService implements UserDetailsService {
@@ -39,7 +39,7 @@ public class LoginService implements UserDetailsService {
 
         Optional<User> findUser = userRepository.findByEmail(loginId);
         User user = findUser.get();   // Optional로 감싼 형태에서 꺼내기
-        if (passwordEncoder.matches(password, user.getPassword())) {
+        if (passwordEncoder.matches(password, user.getPw())) {
             user.setRole(Role.USER);
             return user;
         } else {
@@ -49,27 +49,18 @@ public class LoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> findUser = userRepository.findByEmail(email);// 이메일로 사용자 찾기
+        User findUser = userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("존재하지 않는 사용자입니다.")
+        );// 이메일로 사용자 찾기
 
-        if (!findUser.isPresent())
-            throw new UsernameNotFoundException("존재하지 않는 사용자입니다.");
-
-        User user = findUser.get();
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRoleKey()));
+        authorities.add(new SimpleGrantedAuthority(findUser.getRoleKey()));
 
-        log.info("Success find user {}", findUser);
-
-        // 특정 관리자 계정에만 ADMIN Role 부여
-        if ("admin@admin.com".equals(email)) {
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getKey()));
-            user.setRole(Role.ADMIN);
-        } else {
-            // 그 외는 모두 USER Role 부여
-            authorities.add(new SimpleGrantedAuthority(Role.USER.getKey()));
-            user.setRole(Role.USER);
-        }
-        return new SecurityUser(user);
+        return org.springframework.security.core.userdetails.User.builder()
+                .username(findUser.getEmail())
+                .password(findUser.getPw())
+                .roles(findUser.getRole().name())
+                .build();
     }
 }

@@ -23,6 +23,8 @@ public class UserRequestDto {
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
     @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String pw;
+    @NotBlank(message = "비밀번호 확인은 필수 입력 값입니다.")
+    private String pwConfirm;
     private String intro;
     private String image;
 
@@ -32,13 +34,13 @@ public class UserRequestDto {
     private Role role;
 
     @Builder
-    public UserRequestDto(String email, String pw, String intro, String image, String nickname, Role role) {
-        this.email = email;
-        this.pw = pw;
-        this.intro = intro;
-        this.image = image;
-        this.nickname = nickname;
-        this.role = role;
+    public UserRequestDto(User user) {
+        this.email = user.getEmail();
+        this.pw = user.getPw();
+        this.intro = user.getIntro();
+        this.image = user.getIntro();
+        this.nickname = user.getNickname();
+        this.role = user.getRole();
     }
 
 
@@ -49,7 +51,7 @@ public class UserRequestDto {
                 .intro(intro)
                 .image(image)
                 .nickname(nickname)
-                .role(Role.GUEST)
+                .role(Role.USER)   // 회원가입 시 USER로 권한 부여
                 .build();
     }
 }

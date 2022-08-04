@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -42,7 +43,9 @@ class LoginServiceTest {
 
         //then -> 로그인 시 Role: GUSET -> USER로 변환
         System.out.println(findUser.getRole());
+        System.out.println(findUser.getRole().name());
         System.out.println(findUser.getRoleKey());
+//        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
 
     }
 

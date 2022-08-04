@@ -1,12 +1,15 @@
 package codeit.cakeN.domain.entity.contest;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Data
 public class Contest {
 
@@ -32,10 +35,10 @@ public class Contest {
 
     @Builder
     public Contest(String post_image, String post_name, String post_des) {
-
+        this.post_image = post_image;
+        this.post_name = post_name;
+        this.post_des = post_des;
     }
 
-    public Contest() {
 
-    }
 }

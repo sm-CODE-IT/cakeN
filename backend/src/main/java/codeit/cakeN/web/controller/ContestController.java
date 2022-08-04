@@ -18,7 +18,7 @@ public class ContestController {
     public String contestUpdate(Contest contest) {
         System.out.println("content : " + contest.getPost_image());
         System.out.println("content : " + contest.getPost_des());     // 왜
-        return "test";
+        return "contest/test";
     }
 
 
