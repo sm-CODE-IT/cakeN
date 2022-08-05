@@ -133,7 +133,7 @@ class UserServiceTest {
         
         //when
         String newPw = "1234567890!";
-        userService.updatePw(PASSWORD, newPw);
+        userService.updatePw(PASSWORD, newPw, userRequestDto.getId());
         clear();
 
         //then
@@ -188,7 +188,7 @@ class UserServiceTest {
         ));
 
         //when
-        userService.deleteUser(PASSWORD, userRequestDto.getEmail());
+        userService.deleteUser(PASSWORD, userRequestDto.getId());
 
         //then
         assertThat(assertThrows(Exception.class, () -> userRepository.findByEmail(userRequestDto.getEmail())
@@ -209,7 +209,7 @@ class UserServiceTest {
         ));
 
         //when, then
-        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!", userRequestDto.getEmail()))
+        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!", userRequestDto.getId()))
                 .getMessage()).isEqualTo("비밀번호가 일치하지 않습니다.");
 
     }

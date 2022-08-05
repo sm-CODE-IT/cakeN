@@ -19,7 +19,7 @@
             <span th:text="'ID : ' + ${userEmail}"></span>
         </div>
         <div class="my-2">
-            <span th:text="'PW : ' + ${userPw}"></span>
+            <span><a th:href="@{'/users/update-pw/'+${userId}}">비밀번호 변경하기</a></span>
         </div>
         <div class="my-2">
             <span th:text="'자기소개 : ' + ${userIntro}"></span>
@@ -30,10 +30,10 @@
             th:href="@{'/users/update/'+ ${userId}}">
         개인정보 수정
     </a>
-    <button class="btn btn-secondary" type="button"
-            th:onclick="|location.href='@{/users/delete}'|" >
+    <a class="btn btn-secondary" type="button"
+            th:href="@{'/users/delete/'+ ${userId}}" >
         회원 탈퇴
-    </button>
+    </a>
 <!--    <span th:text="'프로필 사진' + '${userImage}'"></span>-->
 </div>
 </body>

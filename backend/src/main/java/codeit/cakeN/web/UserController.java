@@ -1,19 +1,14 @@
 package codeit.cakeN.web;
 
 
-import codeit.cakeN.config.auth.SecurityUtil;
-
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
-import codeit.cakeN.web.dto.UserDeleteDto;
-import codeit.cakeN.web.dto.UserLoginRequestDto;
-import codeit.cakeN.web.dto.UserRequestDto;
+import codeit.cakeN.web.dto.*;
 import codeit.cakeN.service.user.UserService;
-import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Optional;
 
 
 //@RestController
@@ -84,7 +78,7 @@ public class UserController {
      * 회원탈퇴 페이지
      * @return
      */
-    @GetMapping("/delete")
+    @GetMapping("/delete/{id}")
     public String delete(Model model) {
         model.addAttribute("userDeleteDto", new UserDeleteDto());
         return "user/deleteForm";
@@ -93,24 +87,20 @@ public class UserController {
     /**
      * 회원탈퇴 로직
      * @param userDeleteDto
+     * @param bindingResult
+     * @param id
      * @param model
      * @return
      * @throws Exception
      */
-    @PostMapping("/delete")
-    public String deleteUser(@Valid UserDeleteDto userDeleteDto, @AuthenticationPrincipal User formUser, Model model) throws Exception {
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@Valid UserDeleteDto userDeleteDto, BindingResult bindingResult, @PathVariable("id") Long id, Model model) throws Exception {
 
-        SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
-        String findUser = null;
-
-        if (oauthUser != null) {
-            findUser = oauthUser.getEmail();
-        } else if (formUser != null) {
-            findUser = formUser.getUsername();
-        }
+        if (bindingResult.hasErrors())
+            return "user/deleteForm";
 
         try {
-            userService.deleteUser(userDeleteDto.getPwConfirm(), findUser);
+            userService.deleteUser(userDeleteDto.getPwConfirm(), id);
         } catch (UserException e) {
             model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
             return "user/deleteForm";
@@ -121,7 +111,7 @@ public class UserController {
 
         }
 
-        return "redirect:/logout";    //TODO 리다이렉트 방식으로 변경
+        return "redirect:/users/login";    //TODO 리다이렉트 방식으로 변경
     }
 
 
@@ -170,36 +160,74 @@ public class UserController {
     /**
      * 개인정보 수정 페이지
      * @param model
+     * @param id
      * @return
      */
     @GetMapping("/update/{id}")
-    public String updateInfo(Model model, @PathVariable("id") Long id, UserRequestDto userRequestDto) {
-        userRequestDto = userService.getMyInfo(id);
+    public String updateInfo(Model model, @PathVariable("id") Long id) {
+        UserRequestDto userRequestDto = userService.getMyInfo(id);
         model.addAttribute("userRequestDto", userRequestDto);
         return "user/updateUserForm.html";
     }
 
+    /**
+     * 개인정보 수정 로직
+     * @param userRequestDto
+     * @param bindingResult
+     * @return
+     */
     @PostMapping("/update/{id}")
-    public String updateInfo(UserUpdateDto userRequestDto) {
+    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "user/updateUserForm.html";
+        }
 
-//        codeit.cakeN.domain.user.User findUser = userRepository.findById(id).get();
         userService.update(userRequestDto);
 
         return "redirect:/users/mypage";
     }
 
-    /*@PostMapping("/login")
-    public String loginForm(@Valid UserLoginRequestDto loginUser, BindingResult bindingResult, Model model) {
 
-        if (bindingResult.hasErrors()) {
-            return "user/login";
+    //TODO 개인정보 수정 페이지 내에 iframe 형태로 삽입 or 다른 방식으로 같은 페이지 내에서 처리되도록
+    /**
+     * 개인정보 수정 - 비밀번호 변경 페이지
+     * @param model
+     * @return
+     */
+    @GetMapping("/update-pw/{id}")
+    public String updatePw(Model model) {
+        model.addAttribute("userUpdatePwDto", new UserUpdatePwDto());
+        return "user/updatePwForm";
+    }
+
+
+    /**
+     * 개인정보 수정 - 비밀번호 변경 로직
+     * @param userUpdatePwDto
+     * @param id
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/update-pw/{id}")
+    public String updatePw(@Valid UserUpdatePwDto userUpdatePwDto, @PathVariable("id") Long id, BindingResult bindingResult, Model model) throws Exception {
+
+        if (bindingResult.hasErrors())
+            return "user/updatePwForm";
+
+        try {
+            userService.updatePw(userUpdatePwDto.getPw(), userUpdatePwDto.getNewPwConfirm(), id);
+        } catch (UserException e) {
+            model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
+            return "user/updatePwForm";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "user/updatePwForm";
+
         }
-        bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
 
-
-
-        return "redirect:/";
-    }*/
+        return "redirect:/users/mypage";
+    }
 
 
     /*

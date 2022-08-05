@@ -41,7 +41,7 @@ public class UserRequestDto {
         this.email = user.getEmail();
         this.pw = user.getPw();
         this.intro = user.getIntro();
-        this.image = user.getIntro();
+        this.image = user.getImage();
         this.nickname = user.getNickname();
         this.role = user.getRole();
     }
