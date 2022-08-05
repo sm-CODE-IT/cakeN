@@ -26,10 +26,10 @@
         </div>
     </div>
 
-    <button class="btn btn-primary" type="button"
-            th:onclick="|location.href='@{/users/update}'|">
+    <a class="btn btn-primary" type="button"
+            th:href="@{'/users/update/'+ ${userId}}">
         개인정보 수정
-    </button>
+    </a>
     <button class="btn btn-secondary" type="button"
             th:onclick="|location.href='@{/users/delete}'|" >
         회원 탈퇴

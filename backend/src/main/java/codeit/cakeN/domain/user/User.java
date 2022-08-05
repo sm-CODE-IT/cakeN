@@ -2,6 +2,7 @@ package codeit.cakeN.domain.user;
 
 import codeit.cakeN.service.user.UserService;
 import codeit.cakeN.web.dto.UserRequestDto;
+import codeit.cakeN.web.dto.UserUpdateDto;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -78,9 +79,8 @@ public class User extends Timestamped implements Serializable {
 
 
     // 유저 정보 수정 시
-    public void update(UserRequestDto requestDto) {
-        this.email = requestDto.getEmail();
-        this.pw = requestDto.getPw();
+    public void update(UserUpdateDto requestDto) {
+//        this.pw = requestDto.getPw();
         this.intro = requestDto.getIntro();
         this.image = requestDto.getImage();
         this.nickname = requestDto.getNickname();

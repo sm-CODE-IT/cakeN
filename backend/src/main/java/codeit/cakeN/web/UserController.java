@@ -10,6 +10,7 @@ import codeit.cakeN.web.dto.UserDeleteDto;
 import codeit.cakeN.web.dto.UserLoginRequestDto;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.service.user.UserService;
+import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -110,7 +111,6 @@ public class UserController {
 
         try {
             userService.deleteUser(userDeleteDto.getPwConfirm(), findUser);
-//            userService.deleteUser(userDeleteDto.getPw(), userDeleteDto.getEmail());
         } catch (UserException e) {
             model.addAttribute("errorMsg", "비밀번호가 일치하지 않습니다.");
             return "user/deleteForm";
@@ -121,7 +121,7 @@ public class UserController {
 
         }
 
-        return "redirect:/";
+        return "redirect:/logout";    //TODO 리다이렉트 방식으로 변경
     }
 
 
@@ -158,6 +158,7 @@ public class UserController {
             user = userRepository.findByEmail(formUser.getUsername()).get();
         }
 
+        model.addAttribute("userId", user.getUserId());
         model.addAttribute("userNickname", user.getNickname());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("userIntro", user.getIntro());
@@ -166,9 +167,25 @@ public class UserController {
     }
 
 
-    @GetMapping("/update")
-    public String updateInfo(Model model) {
-        return "user/update";
+    /**
+     * 개인정보 수정 페이지
+     * @param model
+     * @return
+     */
+    @GetMapping("/update/{id}")
+    public String updateInfo(Model model, @PathVariable("id") Long id, UserRequestDto userRequestDto) {
+        userRequestDto = userService.getMyInfo(id);
+        model.addAttribute("userRequestDto", userRequestDto);
+        return "user/updateUserForm.html";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateInfo(UserUpdateDto userRequestDto) {
+
+//        codeit.cakeN.domain.user.User findUser = userRepository.findById(id).get();
+        userService.update(userRequestDto);
+
+        return "redirect:/users/mypage";
     }
 
     /*@PostMapping("/login")

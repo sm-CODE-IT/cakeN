@@ -16,6 +16,8 @@ import javax.validation.constraints.Pattern;
 @Data
 public class UserRequestDto {
 
+    private Long id;
+
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     @Email(message = "올바른 이메일 형식을 입력하세요.")
     private String email;
@@ -35,6 +37,7 @@ public class UserRequestDto {
 
     @Builder
     public UserRequestDto(User user) {
+        this.id = user.getUserId();
         this.email = user.getEmail();
         this.pw = user.getPw();
         this.intro = user.getIntro();

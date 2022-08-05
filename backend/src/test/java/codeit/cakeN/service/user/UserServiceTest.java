@@ -159,7 +159,7 @@ class UserServiceTest {
         //when
         String updateNickname = "변경내용";
         String updateIntro = "안녕안녕";
-        userService.update(new UserUpdateDto(Optional.of(updateNickname), Optional.of(updateIntro), Optional.empty()));
+//        userService.update(new UserUpdateDto(Optional.of(updateNickname), Optional.of(updateIntro), Optional.empty()));
         clear();
 
         //then
@@ -230,7 +230,7 @@ class UserServiceTest {
         ));
 
         //when
-        UserRequestDto myInfo = userService.getMyInfo();
+        UserRequestDto myInfo = userService.getMyInfo(userRequestDto.toEntity().getUserId());
 
         //then
         assertThat(myInfo.getEmail()).isEqualTo(userRequestDto.getEmail());
