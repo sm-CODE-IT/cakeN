@@ -6,43 +6,79 @@ const SignUp = () => {
     return (
         <div className="SignUp">
             <ContentHeader title={title} content={content} />
-            <div>
-                <p>*은 필수 입력사항입니다.</p>
-                <form>
-                    <table border>
-                        <tbody>
-                            <tr>
-                                <th>이메일*</th>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <th>비밀번호*</th>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <th>비밀번호 재확인*</th>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <th>닉네임*</th>
-                                <td><input /></td>
-                            </tr>
-                            <tr>
-                                <th>프로필 선택</th>
-                                <td><button>선택</button></td>
-                            </tr>
-                            <tr>
-                                <th>자기소개</th>
-                                <td><textarea /></td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colSpan={2}><button className="signBtn">가입하기</button></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </form>
+            <div className="SignUpAll">
+                <div className="text">*은 필수 입력사항입니다.</div>
+                <div className="table">
+                    <form>
+                        <div className="tr">
+                            <div className="tableData">
+                                <div className="th">이메일*</div>
+                                <div className="td">
+                                    <div className="inLine">
+                                        <input className="content"/>
+                                        <button type="button" className="okButton">중복확인</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tableText">사용가능한 이메일입니다.</div>
+                        </div>
+
+                        <div className="tr">
+                            <div className="tableData">
+                                <div className="th">비밀번호*</div>
+                                <div className="td">
+                                    <div className="inLine">
+                                        <input className="content"/> 
+                                    </div>   
+                                </div>
+                            </div>
+                            <div className="tableText">영숫자 섞어서 어쩌구</div>
+
+                            <div className="tableData">
+                                <div className="th">비밀번호 재확인*</div>
+                                <div className="td">
+                                    <input className="content"/>
+                                </div>
+                            </div>
+                            <div className="tableText">일치하지 않습니다.</div>
+                        </div>
+
+                        <div className="tr">
+                            <div className="tableData">
+                                <div className="th">닉네임*</div>
+                                <div className="td">
+                                    <div className="inLine">
+                                        <input className="content"/>
+                                        <button type="button" className="okButton">중복확인</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tableText">사용가능한 닉네임</div>
+                        </div>
+                        
+                        <div className="tr">
+                            <div className="tableData">
+                                <div className="th">프로필 선택</div>
+                                <div className="td">
+                                    <button type="button" className="content">선택</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="tr">
+                            <div className="tableData">
+                                <div className="th">자기소개</div>
+                                <div className="td">
+                                    <textarea className="content"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="tr">
+                            <button  className="signButton">가입하기</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     );

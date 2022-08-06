@@ -9,6 +9,8 @@ import Contest from './pages/Contest';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Lettering from './pages/Lettering';
+import MyPage from './pages/MyPage';
+import MyCake from './pages/MyCake';
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signUp' element={<SignUp />} />
           <Route path='/letter' element={<Lettering />} />
+          <Route path='/myPage' element={<MyPage />} />
+          <Route path='/myCake' element={<MyCake />} />
         </Routes>
       </BrowserRouter>
     </div>

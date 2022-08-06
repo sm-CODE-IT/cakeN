@@ -1,7 +1,7 @@
 const NaviHeader = () => {
 
     return (
-      <header className="NaviHeader" id="navbar">
+        <header className="NaviHeader" id="navbar">
             <div className="left">
                 <a href={"/"} id="logo">cakeN</a>
             </div>
@@ -12,10 +12,12 @@ const NaviHeader = () => {
                 <a href="/letter" className="menu">레터링 선택</a>
             </div>
             <div className="right">
-                <a href={"/login"} className="menu">로그인</a>
-                <a href={"/signUp"} className="menu">회원가입</a>
+                    <a href={"/login"} className="menu" >로그인</a>
+                    <a href={"/signUp"} className="menu" >회원가입</a>
+                    <a href={"/myPage"} className="menu" >마이페이지</a>
+                    <a href={"/myCake"} className="menu" >마이케이크</a>
             </div>
-      </header>
+        </header>
     );
   };
   

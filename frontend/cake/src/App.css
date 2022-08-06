@@ -50,15 +50,16 @@
   background-color: cornsilk;
 }
 
+
 /* ContentHeader */
 .ContentHeader {
-  padding-left: 20px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
 }
 .ContentHeader dt {
-  font-size: 20px;
+  margin-left: 7%;
+  font-size: 25px;
   font-weight: bold;
 }
 
@@ -66,6 +67,7 @@
   font-size: 15px;
   color: gray;
   margin-left: 10px;
+  font-weight: normal;
 }
 
 
@@ -124,7 +126,7 @@ pre {
   transition: 0.15s ease-in-out;
 }
 
-/* Login SignUp */
+/* Login */
 .Login {
   margin-top: 100px;
 
@@ -135,26 +137,77 @@ pre {
   margin-top: 100px;
 }
 
-.SignUp table {
-  border: 1px solid pink;
-  width: 90%;
+.SignUp .SignUpAll {
+  width: 80%;
   margin-left: auto;
   margin-right: auto;
-
-  padding: 15px;
 }
 
-.SignUp th {
+
+.SignUp .text {
+  color: pink;
+  font-size: 13px;
+  padding: 3px;
+}
+
+.SignUp .table{
+  font-size: 15px;
+  border: 2px solid pink;
+  
+  padding: 6% 4% 6% 4%;
+}
+
+.SignUp .tr {
+  
+}
+
+.SignUp .tableData {
+  display: flex;
+  
+  align-items: center;
+}
+
+.SignUp .tableText{
+  font-size: 13px;
+  color: pink;
+}
+
+.SignUp .th {
   width: 30%;
-  font-weight: initial;
-  text-align: start;
+  justify-content: center;
 }
 
-.SignUp td {
-  width: 100%;
+.SignUp .td {
+  width: auto;
 }
 
-.SignUp .signBtn {
-  width: 40%;
+.SignUp .inLine {
+ display: flex;
+}
+
+.SignUp .content {
+  width: fit-content;
+}
+
+.SignUp button {
+  
+}
+
+.SignUp .okButton {
+}
+
+.SignUp .signButton {
+  
+}
+
+/* MyPage */
+.MyPage {
+  margin-top: 100px;
+
+}
+
+/* MyCake */
+.MyCake {
+  margin-top: 100px;
 
 }
