@@ -50,6 +50,9 @@ public class User extends Timestamped implements Serializable {
     @Column(nullable = false)
     private Role role;
 
+    @Column(length = 1000)
+    private String refreshToken;
+
 
     // Spring Security 사용자 인증 필드
     // TODO 이메일 인증, 계정 잠김 여부 (일정 기간 이후)
@@ -99,6 +102,41 @@ public class User extends Timestamped implements Serializable {
         return this.role.getKey();
     }
 
+
+
+    // 개인정보 수정
+    public void updatePw(PasswordEncoder passwordEncoder, String pw) {
+        this.pw = passwordEncoder.encode(pw);
+    }
+
+
+    // jwt 토큰 관련
+    public void updateRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
+    }
+
+    public void destroyRefreshToken() {
+        this.refreshToken = null;
+    }
+
+/*    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void updateIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public void updateImage(String image) {
+        this.image = image;
+    }*/
+
+    // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
+    public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
+        return passwordEncoder.matches(checkPassword, getPw());
+    }
+
+    //TODO JWT 토큰 인증 방식
     public String makeJwtToken() {
         Date now = new Date();
 
@@ -112,28 +150,5 @@ public class User extends Timestamped implements Serializable {
                 .signWith(SignatureAlgorithm.HS256, "secret")
                 .compact();
     }
-
-    // 개인정보 수정
-    public void updatePw(PasswordEncoder passwordEncoder, String pw) {
-        this.pw = passwordEncoder.encode(pw);
-    }
-
-    public void updateNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public void updateIntro(String intro) {
-        this.intro = intro;
-    }
-
-    public void updateImage(String image) {
-        this.image = image;
-    }
-
-    // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
-    public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
-        return passwordEncoder.matches(checkPassword, getPw());
-    }
-
 
 }

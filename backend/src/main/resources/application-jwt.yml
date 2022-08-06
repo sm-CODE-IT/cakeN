@@ -1,0 +1,15 @@
+jwt:
+  secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
+
+#HS512 알고리즘을 사용 => 512bit(64byte) 이상의 secret key를 사용해야 한다.
+#  echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+
+  access:
+    expiration: 80   # 80초로 설정 -> 이후 변경
+    header: Authorization
+
+  refresh:
+    expiration: 90   # 90초로 설정 -> 이후 변경
+    header: Authorization-refresh
+
+#  token-validity-in-seconds: 86400

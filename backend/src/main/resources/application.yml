@@ -28,7 +28,7 @@ spring:
 
 
   profiles:
-    include: oauth
+    include: oauth, jwt
 
   session:
     store-type: jdbc
@@ -46,10 +46,3 @@ logging:
     org.springframework: debug
 #    root: debug
 
-
-jwt:
-  header: Authorization
-  #HS512 알고리즘을 사용 => 512bit(64byte) 이상의 secret key를 사용해야 한다.
-  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
-  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  token-validity-in-seconds: 86400
