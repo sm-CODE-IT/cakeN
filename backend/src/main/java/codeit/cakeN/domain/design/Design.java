@@ -1,6 +1,7 @@
 package codeit.cakeN.domain.design;
 
 import codeit.cakeN.domain.user.User;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
