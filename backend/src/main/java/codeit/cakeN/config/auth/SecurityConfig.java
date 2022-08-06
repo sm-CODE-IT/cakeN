@@ -1,7 +1,10 @@
 package codeit.cakeN.config.auth;
 
+import codeit.cakeN.config.auth.jwt.JwtAuthenticationFilter;
 import codeit.cakeN.config.auth.jwt.JwtService;
+import codeit.cakeN.config.auth.jwt.LoginSuccessJWTProvideHandler;
 import codeit.cakeN.domain.user.Role;
+import codeit.cakeN.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,11 +13,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.filter.CorsFilter;
 
 
 @Configuration
@@ -26,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final JwtService jwtService;
+    private final UserRepository userRepository;
+    private final CorsConfig corsConfig;
 
     @Override
     public void configure(WebSecurity web) {
@@ -42,8 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);   // 서버 실행 시 사용자 인증 과정 생략
         http
+                .addFilter(corsConfig.corsFilter())   // cors filter 적용
                 .csrf().disable()   // csrf 비활성화
-                .cors().disable()   // cors 비활성화
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+//                .cors().disable()   // cors 비활성화
                 .formLogin().disable()   // 기본 로그인 페이지 생략
                 .headers().frameOptions().disable()
 
@@ -75,7 +86,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
 
-        http.addFilterBefore(jwtAuthenticationProcessingFilter(), jsonUsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(jwtAuthenticationProcessingFilter(), jsonUsernamePasswordAuthenticationFilter.class);
 
 
 
@@ -96,18 +107,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
     
+    // 비밀번호 DB 저장 시 암호화
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // 로그인 성공 핸들러 - JWT 토큰 발급
     @Bean
     public AuthenticationSuccessHandler successHandler() {
-        return new AuthSuccessHandler();
+        return new LoginSuccessJWTProvideHandler(jwtService, userRepository);
     }
 
+    // 로그인 실패 핸들러
     @Bean
     public AuthenticationFailureHandler failureHandler() {
         return new AuthFailHandler();
+    }
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationProcessingFilter() {
+        JwtAuthenticationFilter jsonUsernamePasswordLoginFilter = new JwtAuthenticationFilter(jwtService, userRepository);
+
+        return jsonUsernamePasswordLoginFilter;
     }
 }
