@@ -1,23 +1,17 @@
 package codeit.cakeN.domain.user;
 
-import codeit.cakeN.service.user.UserService;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.web.dto.UserUpdateDto;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -99,19 +93,6 @@ public class User extends Timestamped implements Serializable {
         return this.role.getKey();
     }
 
-    public String makeJwtToken() {
-        Date now = new Date();
-
-        return Jwts.builder()
-                .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
-                .setIssuer("fresh")
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime()+ Duration.ofMinutes(30).toMillis()))
-                .claim("id", "아이디")
-                .claim("email", this.email)
-                .signWith(SignatureAlgorithm.HS256, "secret")
-                .compact();
-    }
 
     // 개인정보 수정
     public void updatePw(PasswordEncoder passwordEncoder, String pw) {

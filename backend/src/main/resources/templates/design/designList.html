@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-3">
+    <a class="btn btn-primary" th:href="@{/design/}">디자인 등록</a>
+
+    <div class="flex-col my-4" th:each="design : ${designs}">
+        <div class="flex-row my-3">
+            <a th:href="@{'/design/detail/'+${design.designId}}"><span th:text="${design.designId}"></span></a>
+            <span th:text="${design.cakeShape}"></span>
+            <span th:text="${design.cakeColor}"></span>
+            <span th:text="${design.image}"></span>
+            <span th:text="${design.letter}"></span>
+            <span th:text="${design.letterColor}"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
