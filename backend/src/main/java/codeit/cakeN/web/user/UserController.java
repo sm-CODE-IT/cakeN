@@ -4,7 +4,9 @@ package codeit.cakeN.web.user;
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
+import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
+import codeit.cakeN.web.design.DesignController;
 import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
 
@@ -137,16 +139,7 @@ public class UserController {
     @GetMapping("/mypage")
     public String myPage(Model model, @AuthenticationPrincipal User formUser) {
 
-        SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
-        codeit.cakeN.domain.user.User user = null;
-
-        if (oauthUser != null) {
-            user = userRepository.findByEmail(oauthUser.getEmail()).get();
-        }
-
-        if (formUser != null) {
-            user = userRepository.findByEmail(formUser.getUsername()).get();
-        }
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
 
         model.addAttribute("userId", user.getUserId());
         model.addAttribute("userNickname", user.getNickname());
@@ -154,6 +147,25 @@ public class UserController {
         model.addAttribute("userIntro", user.getIntro());
 
         return "user/mypage";
+    }
+
+    public static codeit.cakeN.domain.user.User findSessionUser(@AuthenticationPrincipal User formUser, HttpSession httpSession, UserRepository userRepository) throws UserException {
+        SecurityUser oauthUser = (SecurityUser) httpSession.getAttribute("user");
+        codeit.cakeN.domain.user.User user = null;
+
+        try {
+            if (oauthUser != null) {
+                user = userRepository.findByEmail(oauthUser.getEmail()).get();
+            }
+
+            if (formUser != null) {
+                user = userRepository.findByEmail(formUser.getUsername()).get();
+            }
+        } catch (UserException e) {
+            System.out.println(UserExceptionType.NOT_FOUND_USER.getErrorMessage());
+        }
+
+        return user;
     }
 
 

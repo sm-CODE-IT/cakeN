@@ -19,6 +19,7 @@ import static javax.persistence.CascadeType.ALL;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@Builder
 @Table(name = "USER")
 public class User extends Timestamped implements Serializable {
 
@@ -82,6 +83,7 @@ public class User extends Timestamped implements Serializable {
         this.nickname = requestDto.getNickname();
     }
 
+    // 소셜로그인 용 업데이트
     public User update(String image, String nickname) {
         this.image = image;
         this.nickname = nickname;
@@ -101,17 +103,7 @@ public class User extends Timestamped implements Serializable {
         this.pw = passwordEncoder.encode(pw);
     }
 
-    public void updateNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
-    public void updateIntro(String intro) {
-        this.intro = intro;
-    }
-
-    public void updateImage(String image) {
-        this.image = image;
-    }
 
     // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
     public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {

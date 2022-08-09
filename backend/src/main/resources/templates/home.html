@@ -27,6 +27,7 @@
 
     <hr class="my-4">
 
+
 </div> <!-- /container -->
 
 <div>
@@ -40,9 +41,15 @@
                 th:onclick="|location.href='@{/users/mypage}'|" >
             마이페이지
         </button>
+
     </form>
 
+    <hr class="my-4">
 
+    <div>
+        <a th:href="@{/design/}">케이크 디자인 등록</a>
+        <a th:href="@{/design/list}">내가 제작한 디자인 보러가기</a>
+    </div>
 </div>
 </body>
 </html>

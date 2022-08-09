@@ -2,6 +2,7 @@ package codeit.cakeN.domain.design;
 
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.web.design.dto.DesignRequestDto;
+import codeit.cakeN.web.design.dto.DesignUpdateDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -77,5 +78,16 @@ public class Design extends BaseTimeEntity {
         this.image = requestDto.getImage();
         this.letter = requestDto.getLetter();
         this.letterColor = requestDto.getLetterColor();
+    }
+
+    public Design update(DesignUpdateDto requestDto) {
+        this.file = requestDto.getFile();
+        this.cakeShape = requestDto.getCakeShape();
+        this.cakeColor = requestDto.getCakeColor();
+        this.image = requestDto.getImage();
+        this.letter = requestDto.getLetter();
+        this.letterColor = requestDto.getLetterColor();
+
+        return this;
     }
 }

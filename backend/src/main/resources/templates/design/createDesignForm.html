@@ -17,30 +17,41 @@
 </head>
 <body>
 <div class="container mx-3">
-    <form method="post" th:object="${designRequestDto}" >
+    <form method="post" th:action th:object="${designRequestDto}" >
+
         <div>
             <label for="cakeShape">케이크 모양</label>
-            <input type="text" id="cakeShape" name="cakeShape" class="form-control" />
+            <input type="text" id="cakeShape" name="cakeShape" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakeShape')}" th:errors="*{cakeShape}" >Incorrect data</p>
+
         </div>
 
         <div>
             <label for="cakeColor">케이크 색상</label>
-            <input type="color" id="cakeColor" name="cakeColor" class="form-control" th:field="${cakeColor}" />
+            <input type="color" id="cakeColor" name="cakeColor" class="form-control" th:field="*{cakeColor}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakeColor')}" th:errors="*{cakeColor}" >Incorrect data</p>
+
         </div>
 
         <div>
             <label for="image">이미지</label>
-            <input type="image" id="image" name="image" class="form-control" th:field="${image}"/>
+            <input type="text" id="image" name="image" class="form-control" th:field="*{image}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}" >Incorrect data</p>
+
         </div>
 
         <div>
             <label for="letter">레터링 문구</label>
-            <input type="text" id="letter" name="letter" class="form-control" th:field="${letter}"/>
+            <input type="text" id="letter" name="letter" class="form-control" th:field="*{letter}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letter')}" th:errors="*{letter}" >Incorrect data</p>
+
         </div>
 
         <div>
             <label for="letterColor">레터링 색상</label>
-            <input type="text" id="letterColor" name="letterColor" class="form-control" th:field="${letterColor}"/>
+            <input type="text" id="letterColor" name="letterColor" class="form-control" th:field="*{letterColor}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterColor')}" th:errors="*{letterColor}" >Incorrect data</p>
+
         </div>
 
         <hr class="my-4">

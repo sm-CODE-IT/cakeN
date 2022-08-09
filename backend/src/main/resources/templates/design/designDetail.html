@@ -17,14 +17,14 @@
 </head>
 <body>
 <div class="flex-row my-3 container mx-4">
-    <span th:text="${design.designId}"></span>
+    <span th:text="${design.id}"></span>
     <span th:text="${design.cakeShape}"></span>
     <span th:text="${design.cakeColor}"></span>
     <span th:text="${design.image}"></span>
     <span th:text="${design.letter}"></span>
     <span th:text="${design.letterColor}"></span>
 </div>
-<a class="btn btn-success" th:href="@{'/design/update/' + ${design.designId}}">수정</a>
-<a class="btn btn-danger" th:href="@{'/design/delete/' + ${design.designId}}">삭제</a>
+<a class="btn btn-success" th:href="@{'/design/update/' + ${design.id}}">수정</a>
+<a class="btn btn-danger" th:href="@{'/design/delete/' + ${design.id}}">삭제</a>
 </body>
 </html>

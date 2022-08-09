@@ -5,6 +5,7 @@ import codeit.cakeN.domain.design.DesignRepository;
 import codeit.cakeN.exception.design.DesignException;
 import codeit.cakeN.exception.design.DesignExceptionType;
 import codeit.cakeN.web.design.dto.DesignRequestDto;
+import codeit.cakeN.web.design.dto.DesignUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,6 @@ public class DesignService {
      */
     @Transactional
     public void save(DesignRequestDto requestDto) throws DesignException {
-        if (designRepository.findById(requestDto.getId()).isPresent()) {
-            throw new DesignException(DesignExceptionType.NOT_FOUND_DESIGN);
-        }
-        
         // DB에 저장
         designRepository.save(requestDto.toEntity());
     }
@@ -59,11 +56,11 @@ public class DesignService {
      * 케이크 제작 정보 수정
      * @param requestDto
      */
-    public void update(DesignRequestDto requestDto) throws DesignException {
+    public void update(DesignUpdateDto requestDto) throws DesignException {
         Design design = designRepository.findById(requestDto.getId()).orElseThrow(
                 () -> new DesignException(DesignExceptionType.NOT_FOUND_DESIGN)
         );
-        designRepository.save(design);
+        design.update(requestDto);
     }
 
     /**

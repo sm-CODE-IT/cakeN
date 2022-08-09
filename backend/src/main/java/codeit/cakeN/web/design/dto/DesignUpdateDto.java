@@ -2,24 +2,24 @@ package codeit.cakeN.web.design.dto;
 
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.user.User;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-
 
 @Getter
 @NoArgsConstructor
 @Data
-public class DesignRequestDto {
+public class DesignUpdateDto {
 
     private Long id;
 
     private String file;
 
-    @NotBlank(message = "케이크 모양 선택은 필수입니다.")
     private String cakeShape;
 
-    @NotBlank(message = "기본 색상을 하얀색입니다.")
     private String cakeColor;
 
     private String image;
@@ -28,10 +28,8 @@ public class DesignRequestDto {
 
     private String letterColor;
 
-    private User user;
-
     @Builder
-    public DesignRequestDto(Design design) {
+    public DesignUpdateDto(Design design) {
         this.id = design.getDesignId();
         this.file = design.getFile();
         this.cakeShape = design.getCakeShape();
@@ -39,18 +37,5 @@ public class DesignRequestDto {
         this.image = design.getImage();
         this.letter = design.getLetter();
         this.letterColor = design.getLetterColor();
-        this.user = design.getUser();
-    }
-
-    public Design toEntity() {
-        return Design.builder()
-                .file(file)
-                .cakeShape(cakeShape)
-                .cakeColor(cakeColor)
-                .image(image)
-                .letter(letter)
-                .letterColor(letterColor)
-                .user(user)
-                .build();
     }
 }
