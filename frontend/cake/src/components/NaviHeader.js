@@ -5,6 +5,8 @@ const NaviHeader = () => {
         <a href={"/"} id="logo">
           cakeN
         </a>
+      </div>
+      <div className="center">
         <a href="/intro" className="menu">
           사이트 소개
         </a>

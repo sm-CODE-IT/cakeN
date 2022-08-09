@@ -6,7 +6,6 @@
 /* NaviHeader */
 .NaviHeader {
   overflow: hidden;
-
   background-color: pink;
   padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
   transition: 0.4s; /* 패딩 줄어들 때 지연 */
@@ -15,9 +14,10 @@
   top: 0; /* At the top */
   z-index: 99;
 
-  text-align: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 }
 
 /* 로고 속성 */
@@ -84,6 +84,7 @@
   display: inline-block;
   font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
+  color: black;
   background: #fff;
   border-radius: 5px;
   padding: 9px 17px;
@@ -95,20 +96,20 @@
   cursor: pointer; /*update*/
 }
 
-.Lettering pre:hover {
+/* .Lettering pre:hover {
   color: pink;
   transition: 0.15s ease-in-out;
   background: rgba(255, 255, 255);
   box-shadow: 0 0 8px #ddd;
   transform: scale(1.5);
-}
+} */
+
 pre {
   cursor: pointer;
   transition: 0.15s ease-in-out;
 }
 
 /* 찜목록 버튼 */
-
 .Lettering .heartimg {
   position: fixed;
   right: 50px;
@@ -117,4 +118,11 @@ pre {
   outline: none;
   width: 50px;
   cursor: pointer;
+}
+
+/* like 문구 스타일 변경 */
+.Lettering .liked {
+  background-color: pink;
+  color: white;
+  font-weight: bold;
 }

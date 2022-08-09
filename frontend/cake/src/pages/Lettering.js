@@ -1,41 +1,119 @@
 import heart from "../components/heart.png";
+import React, { useState } from "react";
+
+//백에서 넘어올 때 dummyList처럼 객체 배열로 넘어온다고 생각
+//dummyList에는 생일 태그가, dummyList2에는 생신 태그가 모아져 있다고 가정(변경 가능)
+
+const dummyList = [
+  {
+    id: "1",
+    message: "HBD",
+    isToggle: false,
+  },
+  {
+    id: "2",
+    message: "Happy Birthday Changmin",
+    isToggle: false,
+  },
+  {
+    id: "3",
+    message: "Happy 36th Birthday!",
+    isToggle: false,
+  },
+  {
+    id: "4",
+    message: "창민아! 생일 축하한다!",
+  },
+  {
+    id: "5",
+    message: 'System.out.println("생축");',
+    isToggle: false,
+  },
+  {
+    id: "6",
+    message: 'printf("생축");',
+    isToggle: false,
+  },
+];
+
+const dummyList2 = [
+  {
+    id: "1",
+    message: "사랑하는 엄마 생신 축하합니다",
+    isToggle: false,
+  },
+  {
+    id: "2",
+    message: "생신 축하드려요~",
+    isToggle: false,
+  },
+  {
+    id: "3",
+    message: "반백살 축하드립니다!",
+    isToggle: false,
+  },
+  {
+    id: "4",
+    message: "인생은 70부터",
+  },
+  {
+    id: "5",
+    message: "우리가 제일 좋아하는 빵은 아빵",
+    isToggle: false,
+  },
+  {
+    id: "6",
+    message: "엄마 사랑해요",
+    isToggle: false,
+  },
+];
+
+const Button = ({ id, message, isToggle }) => {
+  const [toggle, setToggle] = useState(isToggle);
+  const like = toggle ? "liked" : "disliked";
+
+  const onChangeColor = () => {
+    setToggle(!toggle);
+  };
+  return (
+    <pre id={id} className={like} onClick={onChangeColor}>
+      {message}
+    </pre>
+  );
+};
 
 const Lettering = () => {
+  const [data, setData] = useState(dummyList);
+
   return (
     <div className="Lettering">
       <img className="heartimg" src={heart} />
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="lettering_type">
         <a href="#birthday">#생일</a>
         <a href="#birthday2">#생신</a>
+        <a href="#parentsday">#어버이날</a>
       </div>
       <br />
       <br />
       <br />
       <br />
-
       <div className="box" id="birthday">
         <h2>#생일</h2>
         <br />
-        <pre>HBD</pre>
-        <pre>Happy Birthday Changmin</pre>
-        <pre>Happy 36th Birthday!</pre>
-        <pre>창민아! 생일 축하한다!</pre>
-        <pre>System.out.println("생축");</pre>
-        <pre>printf("생축");</pre>
-        <pre>눈부신 계절에 태어나줘서 고마워</pre>
-        <pre>Birthday Girl!</pre>
-        <pre>Happy Changmin Day</pre>
-        <pre>꽃가루를 날려~ 폭죽을 더 크게 터뜨려~</pre>
-        <pre>창민씨. 생일 축하를 받아야겠군.</pre>
-        <pre>축하해. 생일을.</pre>
-        <pre>미치겠다. 생일 축하받고 싶어요?</pre>
-        <pre>엄마의 자랑스러운 딸이 돼줘서 고마워</pre>
-        <pre>88년생 중에서 가장 예쁜 심창민 생일 축하해</pre>
-        <pre>곧 반오십..</pre>
-        <pre>반오십 축하해!</pre>
-        <pre>ㅊㅋ</pre>
-        <pre>사랑하는 내 친구 창민아 생일 축하해</pre>
+        {dummyList.map((it) => (
+          <Button
+            key={it.id}
+            {...it}
+            id={it.id}
+            name={it.message}
+            isToggle={it.isToggle}
+          />
+        ))}
         <br />
         <br />
         <br />
@@ -44,27 +122,21 @@ const Lettering = () => {
       <div className="box" id="birthday2">
         <h2>#생신</h2>
         <br />
-        <pre>사랑하는 엄마 생신 축하합니다</pre>
-        <pre>생신 축하드려요~</pre>
-        <pre>반백살 축하드립니다!</pre>
-        <pre>인생은 70부터</pre>
-        <pre>우리가 제일 좋아하는 빵은 아빵</pre>
-        <br />
-        <pre>엄마 사랑해요</pre>
-        <pre>꽃길만 걷게 해 드릴게요</pre>
-        <pre>생일 축하해~ 역시 딸밖에 없지?</pre>
-        <pre>우주에서 가장 소중한 우리 엄마 생일 축하해</pre>
-        <pre>어마마마의 생신을 감축드리옵니다</pre>
-        <pre>세상에서 가장 멋진 우리 여사님 생일 축하드립니다</pre>
-        <pre>존경하는 우리 아빠 생신 축하드려요</pre>
-        <pre>환갑 축하드려요 늘 건강하세요</pre>
-        <pre>울엄마 탄신일 추카추카</pre>
-        <pre>50번째 생신 축하드려요~</pre>
+        {dummyList2.map((it) => (
+          <Button
+            key={it.id}
+            {...it}
+            id={it.id}
+            name={it.message}
+            isToggle={it.isToggle}
+          />
+        ))}
         <br />
         <br />
         <br />
         <br />
       </div>
+
       <div className="box" id="parentsday">
         <h2>#어버이날</h2>
       </div>
