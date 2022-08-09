@@ -1,21 +1,21 @@
 package codeit.cakeN.service.user;
 
 import codeit.cakeN.config.auth.SecurityUtil;
-import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
+import codeit.cakeN.exception.user.UserException;
+import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.web.dto.UserRequestDto;
 import codeit.cakeN.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -24,31 +24,59 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
-    // 회원 가입
+    /**
+     * 회원가입
+     * @param requestDto
+     */
     @Transactional
     public void save(UserRequestDto requestDto) {
+        
+        // USER 권한 부여 
         requestDto.setRole(Role.USER);
+        
+        // 회원 가입 시 입력받은 비밀번호 암호화
         String enPw = passwordEncoder.encode(requestDto.getPw());
         requestDto.setPw(enPw);
+        
+        // 이미 존재하는 아이디로 가입 시도 시 예외 발생
+        if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
+            throw new UserException(UserExceptionType.ALREADY_EXIST_USERNAME);
+        }
+        
+        // 회원 가입 완료
         userRepository.save(requestDto.toEntity());
     }
 
-    // 회원 탈퇴
-    public void deleteUser(String checkPw) throws Exception {
-        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
-                () -> new UsernameNotFoundException("존재하지 않는 사용자입니다.")
+    /**
+     * 회원 탈퇴
+     * @param checkPw
+     * @param username
+     * @throws UserException
+     */
+    @Transactional
+    public void deleteUser(String checkPw, String username) throws UserException {
+        User user = userRepository.findByEmail(username).orElseThrow(
+                () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
+        
+        // 비밀번호가 일치하지 않으면 탈퇴 실패
         if (!user.matchPw(passwordEncoder, checkPw)) {
-            throw new Exception("비밀번호가 일치하지 않습니다.");
+            throw new UserException(UserExceptionType.WRONG_PASSWORD);
         }
+
         userRepository.delete(user);
     }
 
-    // 회원 정보 수정
+
+    /**
+     * 회원정보 수정
+     * @param userUpdateDto
+     * @throws Exception
+     */
     @Transactional
-    public void update(UserUpdateDto userUpdateDto) throws Exception {
+    public void update(UserUpdateDto userUpdateDto) throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
-                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+                () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
         userUpdateDto.nickname().ifPresent(user::updateNickname);
@@ -56,55 +84,47 @@ public class UserService {
         userUpdateDto.image().ifPresent(user::updateImage);
     }
 
-    // 이메일 중복 체크(소셜 로그인-기본 로그인 충돌)
+
+
+    /**
+     * 이메일 중복 체크 (소셜 로그인-기본 로그인 충돌)
+     * @param email
+     * @return
+     */
     public boolean emailCheck(String email) {
         return userRepository.existsByEmail(email);
     }
 
-    // 회원 정보 수정 - 이메일은 따로 분리
-    public void updatePw(String checkPw, String newPw) throws Exception {
+
+    /**
+     * 회원 정보 수정 -> 비밀번호 변경 시 일치 여부 체크
+     * @param checkPw
+     * @param newPw
+     * @throws Exception
+     */
+    @Transactional
+    public void updatePw(String checkPw, String newPw) throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
-                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+                () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
         if (!user.matchPw(passwordEncoder, checkPw)) {
-            throw new Exception("비밀번호가 일치하지 않습니다.");
+            throw new UserException(UserExceptionType.WRONG_PASSWORD);
         }
-        user.updatePw(passwordEncoder, newPw);
+        user.updatePw(passwordEncoder, newPw);   // 새로운 비밀번호를 암호화하여 저장
     }
 
-    // 마이페이지 개인 정보 조회
-    UserRequestDto getMyInfo() throws Exception {
+
+    /**
+     * 개인정보 조회 => 마이페이지, 상단바에서 사용
+     * @return
+     * @throws Exception
+     */
+    public UserRequestDto getMyInfo() throws UserException {
         User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
-                () -> new IllegalArgumentException("회원이 존재하지 않습니다.")
+                () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
         return new UserRequestDto(user);
     }
 
-    /*@Transactional
-    public void encryptPassword(String userPw) {
-        User user = new User();
-        String enPw = passwordEncoder.encode(userPw);
-        user.setPw(enPw);
-    }*/
-
-
-    /*@Transactional
-    public Long update(Long id, UserRequestDto requestDto) {
-        User user1 = userRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 유저가 존재하지 않습니다.")
-        );
-
-        user1.update(requestDto);
-
-        return user1.getUserId();
-    }*/
-
-
-/*    private List<SimpleGrantedAuthority> getRoles(List<Role> roles) {
-        return roles.stream()
-                .map(Role::getKey)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-    }*/
 }

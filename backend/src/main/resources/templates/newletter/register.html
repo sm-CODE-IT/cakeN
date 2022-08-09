@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="main">
+        <form method="post">
+            <!-- 작성자 일단 보류 -->
+            <label for="writer">작성자 :</label>
+            <input type="text" name="writer" id="writer">
+            <label for="letter">내용 :</label>
+            <textarea name="letter" id="letter" th:text="${newletter.letter}"></textarea>
+            <button type="submit">수정</button>
+        </form>
+    </div>
+</body>
+</html>

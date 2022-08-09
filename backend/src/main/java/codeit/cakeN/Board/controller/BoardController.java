@@ -24,14 +24,12 @@ public class BoardController {
 
     @GetMapping("/list")
     public String list(Model model) {
-
         model.addAttribute("board", boardService.list());
         return "board/list";
     }
 
     @GetMapping("/detail/{idx}")
     public String detail(@PathVariable int idx, Model model) {
-
         model.addAttribute("board", boardService.detail(idx));
         return "board/detail";
     }

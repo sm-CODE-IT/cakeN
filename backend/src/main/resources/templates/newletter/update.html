@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="main">
+        <form method="post" th:action="@{/newletter/update}">
+            <input type="hidden" name="letter_id" id="letter_id" th:value="${/newletter/update}">
+            <label for="writer">작성자 :</label>
+            <input type="text" name="writer" id="writer">
+            <label for="letter">내용 :</label>
+            <textarea name="letter" id="letter"></textarea>
+            <button type="submit">등록</button>
+        </form>
+    </div>
+</body>
+</html>

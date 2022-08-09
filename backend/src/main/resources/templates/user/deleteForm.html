@@ -1,13 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
-  <p>
-  회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
-  회원 탈퇴를 진행하시겠습니까?
-  </p>
+
+<div class="container">
+    <form th:action th:object="${userDeleteDto}" method="post">
+        <p>
+            회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
+            회원 탈퇴를 진행하시겠습니까?
+        </p>
+
+        <div>
+            <label for="pw">비밀번호</label>
+            <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
+                   th:errorclass="field-error">
+            <p class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></p>
+        </div>
+        <div>
+            <label for="pw">비밀번호 재확인</label>
+            <input type="password" id="pwConfirm" name="pwConfirm" th:field="*{pwConfirm}" class="form-control"
+                   th:errorclass="field-error">
+            <p class="field-error"  th:if="${#fields.hasErrors('pwConfirm')}" th:errors="*{pwConfirm}" ></p>
+        </div>
+
+        <span th:if="${errorMsg}" class="my-2">
+            <p class="alert alert-danger" th:text="${errorMsg}"></p>
+        </span>
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"  type="submit">회원탈퇴</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='hello.html'"
+                        th:onclick="|location.href='@{/}'|"
+                        type="button">취소
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

@@ -18,7 +18,7 @@
             </button>
         </div>
         <div class="col">
-            <button class="w-100 btn btn-dark btn-lg" onclick="location.href='items.html'"
+            <button class="w-100 btn btn-dark btn-lg"
                     th:onclick="|location.href='@{/users/login}'|" type="button">
                 로그인
             </button>
@@ -31,10 +31,18 @@
 
 <div>
     <form class="form-inline my-2" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
-        <span class="mx-2" sec:authentication="name">사용자</span>
+        <span class="mx-2" th:text="${userName} + ' 님 반갑습니다!'"></span>
         <span class="mx-2" sec:authentication="principal.authorities">권한</span>
         <button class="btn btn-secondary my-2" type="submit">로그아웃</button>
+
+
+        <button class="btn btn-success" type="button"
+                th:onclick="|location.href='@{/users/mypage}'|" >
+            마이페이지
+        </button>
     </form>
+
+
 </div>
 </body>
 </html>

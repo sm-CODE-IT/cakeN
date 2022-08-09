@@ -46,13 +46,7 @@ public class User extends Timestamped implements Serializable {
     @Column(nullable = false)
     private Role role;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_authority",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-    private Set<Authority> authorities;
-    
+
     // Spring Security 사용자 인증 필드
     // TODO 이메일 인증, 계정 잠김 여부 (일정 기간 이후)
     private boolean emailVerified;    // 이메일 인증 여부

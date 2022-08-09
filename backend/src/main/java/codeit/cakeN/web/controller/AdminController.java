@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     /////// 관리자 페이지 /////// -> 예시
-    @GetMapping("/admin/")
+    @GetMapping("/")
     public String adminUser(Model model) {
         model.addAttribute("user", new User());
         return "user/admin";

@@ -2,7 +2,6 @@ package codeit.cakeN.config.auth;
 
 import codeit.cakeN.domain.user.Role;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,9 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 @Configuration
 @RequiredArgsConstructor
@@ -50,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
                 .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/users/mypage/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())   // 해당 주소는 USER 권한을 가진 사람만 열람 가능
-                .anyRequest().permitAll()   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
+                .anyRequest().authenticated()   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
 
                 .and()    // 로그인 설정
                 .formLogin()
@@ -58,8 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/users/login")
                 .defaultSuccessUrl("/", true)
                 .failureUrl("/users/login")
-                .failureHandler(new AuthFailHandler())
-                .successHandler(new AuthSuccessHandler())
+                .failureHandler(failureHandler())
+                .successHandler(successHandler())
                 .permitAll()
 
                 .and()    // 로그아웃 설정
@@ -102,5 +101,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public AuthenticationSuccessHandler successHandler() {
         return new AuthSuccessHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new AuthFailHandler();
     }
 }
