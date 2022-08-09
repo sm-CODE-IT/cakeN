@@ -5,8 +5,8 @@ import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
-import codeit.cakeN.web.dto.UserRequestDto;
-import codeit.cakeN.web.dto.UserUpdateDto;
+import codeit.cakeN.web.user.dto.UserRequestDto;
+import codeit.cakeN.web.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
 

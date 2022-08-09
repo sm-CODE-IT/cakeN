@@ -2,9 +2,13 @@ package codeit.cakeN.service.design;
 
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.design.DesignRepository;
+import codeit.cakeN.exception.design.DesignException;
+import codeit.cakeN.exception.design.DesignExceptionType;
+import codeit.cakeN.web.design.dto.DesignRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,23 +18,62 @@ public class DesignService {
 
     private final DesignRepository designRepository;
 
-    public void save(Design design) {
-        designRepository.save(design);
+    /**
+     * 케이크 디자인 등록(제작)
+     * @param requestDto
+     */
+    @Transactional
+    public void save(DesignRequestDto requestDto) throws DesignException {
+        if (designRepository.findById(requestDto.getId()).isPresent()) {
+            throw new DesignException(DesignExceptionType.NOT_FOUND_DESIGN);
+        }
+        
+        // DB에 저장
+        designRepository.save(requestDto.toEntity());
     }
 
+    /**
+     * 케이크 디자인 리스트
+     * TODO 현재 접속한 사용자가 만든 것만 보이도록
+     * @return
+     */
     public List<Design> showAllDesign() {
         return designRepository.findAll(Sort.by(Sort.Direction.DESC, "designId"));
     }
 
-    public Design showInfo(Long id) {
-        return designRepository.findById(id).orElse(null);
+    /**
+     * 제작한 케이크 정보 조회
+     * @param id
+     * @return
+     * @throws DesignException
+     */
+    public DesignRequestDto showInfo(Long id) throws DesignException {
+        Design design = designRepository.findById(id).orElseThrow(
+                () -> new DesignException(DesignExceptionType.NOT_FOUND_DESIGN)
+        );
+
+        return new DesignRequestDto(design);
     }
 
-    public void update(Design design) {
+    /**
+     * 케이크 제작 정보 수정
+     * @param requestDto
+     */
+    public void update(DesignRequestDto requestDto) throws DesignException {
+        Design design = designRepository.findById(requestDto.getId()).orElseThrow(
+                () -> new DesignException(DesignExceptionType.NOT_FOUND_DESIGN)
+        );
         designRepository.save(design);
     }
 
-    public void delete(Long id) {
+    /**
+     * 제작한 케이크 삭제
+     * @param id
+     */
+    public void delete(Long id) throws DesignException {
+        Design design = designRepository.findById(id).orElseThrow(
+                () -> new DesignException(DesignExceptionType.NOT_FOUND_DESIGN)
+        );
         designRepository.deleteById(id);
     }
 }

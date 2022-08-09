@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="container mx-3">
-    <form method="post" >
+    <form method="post" th:object="${designRequestDto}" >
         <div>
             <label for="cakeShape">케이크 모양</label>
             <input type="text" id="cakeShape" name="cakeShape" class="form-control" />
@@ -25,22 +25,22 @@
 
         <div>
             <label for="cakeColor">케이크 색상</label>
-            <input type="color" id="cakeColor" name="cakeColor" class="form-control" />
+            <input type="color" id="cakeColor" name="cakeColor" class="form-control" th:field="${cakeColor}" />
         </div>
 
         <div>
             <label for="image">이미지</label>
-            <input type="image" id="image" name="image" class="form-control" />
+            <input type="image" id="image" name="image" class="form-control" th:field="${image}"/>
         </div>
 
         <div>
             <label for="letter">레터링 문구</label>
-            <input type="text" id="letter" name="letter" class="form-control" />
+            <input type="text" id="letter" name="letter" class="form-control" th:field="${letter}"/>
         </div>
 
         <div>
             <label for="letterColor">레터링 색상</label>
-            <input type="text" id="letterColor" name="letterColor" class="form-control" />
+            <input type="text" id="letterColor" name="letterColor" class="form-control" th:field="${letterColor}"/>
         </div>
 
         <hr class="my-4">

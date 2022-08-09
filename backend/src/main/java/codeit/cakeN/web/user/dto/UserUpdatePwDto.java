@@ -1,4 +1,4 @@
-package codeit.cakeN.web.dto;
+package codeit.cakeN.web.user.dto;
 
 import codeit.cakeN.domain.user.User;
 import lombok.Builder;

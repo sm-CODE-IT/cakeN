@@ -1,17 +1,19 @@
 package codeit.cakeN.domain.user;
 
-import codeit.cakeN.web.dto.UserRequestDto;
-import codeit.cakeN.web.dto.UserUpdateDto;
+import codeit.cakeN.domain.design.Design;
+import codeit.cakeN.web.user.dto.UserRequestDto;
+import codeit.cakeN.web.user.dto.UserUpdateDto;
 
 import lombok.*;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jose.jws.SignatureAlgorithm;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Duration;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @NoArgsConstructor
@@ -114,6 +116,17 @@ public class User extends Timestamped implements Serializable {
     // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
     public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
         return passwordEncoder.matches(checkPassword, getPw());
+    }
+
+    // 연관관계 메서드
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    private List<Design> designList = new ArrayList<>();
+
+
+    public void addDesign(Design design) {
+        // cake design의 작성자는 Design Entity에서 지정
+        designList.add(design);
     }
 
 

@@ -1,11 +1,11 @@
-package codeit.cakeN.web;
+package codeit.cakeN.web.user;
 
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
-import codeit.cakeN.web.dto.*;
 import codeit.cakeN.service.user.UserService;
+import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
 
 

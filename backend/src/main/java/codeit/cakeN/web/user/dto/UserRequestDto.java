@@ -1,10 +1,8 @@
-package codeit.cakeN.web.dto;
+package codeit.cakeN.web.user.dto;
 
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
-import codeit.cakeN.service.user.UserService;
 import lombok.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

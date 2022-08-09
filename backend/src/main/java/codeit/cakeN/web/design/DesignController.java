@@ -2,6 +2,7 @@ package codeit.cakeN.web.design;
 
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.service.design.DesignService;
+import codeit.cakeN.web.design.dto.DesignRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,21 +20,23 @@ public class DesignController {
 
     /**
      * 케이크 디자인 생성 페이지
+     * @param model
      * @return
      */
     @GetMapping("/")
-    public String saveDesign() {
+    public String saveDesign(Model model) {
+        model.addAttribute("designRequestDto", new DesignRequestDto());
         return "design/createDesignForm";
     }
 
     /**
      * 케이크 디자인 생성 처리
-     * @param design
+     * @param designRequestDto
      * @return
      */
     @PostMapping("/")
-    public String saveDesign(Design design) {
-        designService.save(design);
+    public String saveDesign(DesignRequestDto designRequestDto) {
+        designService.save(designRequestDto);
 
         return "redirect:/design/list";
     }
@@ -70,18 +73,18 @@ public class DesignController {
      */
     @GetMapping("/update/{id}")
     public String updateDesign(@PathVariable Long id, Model model) {
-        model.addAttribute("design", designService.showInfo(id));
+        model.addAttribute("designRequestDto", new DesignRequestDto());
         return "design/updateDesignForm";
     }
 
     /**
      * 케이크 디자인 정보 수정 로직
-     * @param design
+     * @param designRequestDto
      * @return
      */
     @PostMapping("/update/{id}")
-    public String updateDesign(Design design) {
-        designService.update(design);
+    public String updateDesign(DesignRequestDto designRequestDto) {
+        designService.update(designRequestDto);
         return "redirect:/design/list";
     }
 
