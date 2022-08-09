@@ -23,6 +23,7 @@
     <span th:text="${design.image}"></span>
     <span th:text="${design.letter}"></span>
     <span th:text="${design.letterColor}"></span>
+    <span th:text="'작성자: ' + ${userName}"></span>
 </div>
 <a class="btn btn-success" th:href="@{'/design/update/' + ${design.id}}">수정</a>
 <a class="btn btn-danger" th:href="@{'/design/delete/' + ${design.id}}">삭제</a>

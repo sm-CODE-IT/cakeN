@@ -27,9 +27,23 @@
         </div>
 
         <div>
+            <label for="cakePattern">케이크 패턴</label>
+            <input type="text" id="cakePattern" name="cakePattern" class="form-control" th:field="*{cakePattern}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakePattern')}" th:errors="*{cakePattern}" >Incorrect data</p>
+
+        </div>
+
+        <div>
             <label for="cakeColor">케이크 색상</label>
             <input type="color" id="cakeColor" name="cakeColor" class="form-control" th:field="*{cakeColor}" th:errorclass="field-error"/>
             <p class="field-error" th:if="${#fields.hasErrors('cakeColor')}" th:errors="*{cakeColor}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="cakeColor2">케이크 색상2</label>
+            <input type="color" id="cakeColor2" name="cakeColor2" class="form-control" th:field="*{cakeColor2}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakeColor2')}" th:errors="*{cakeColor2}" >Incorrect data</p>
 
         </div>
 
@@ -51,6 +65,20 @@
             <label for="letterColor">레터링 색상</label>
             <input type="text" id="letterColor" name="letterColor" class="form-control" th:field="*{letterColor}" th:errorclass="field-error"/>
             <p class="field-error" th:if="${#fields.hasErrors('letterColor')}" th:errors="*{letterColor}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="letterLocation">레터링 위치</label>
+            <input type="text" id="letterLocation" name="letterLocation" class="form-control" th:field="*{letterLocation}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterLocation')}" th:errors="*{letterLocation}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="letterSize">레터링 크기</label>
+            <input type="text" id="letterSize" name="letterSize" class="form-control" th:field="*{letterSize}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterSize')}" th:errors="*{letterSize}" >Incorrect data</p>
 
         </div>
 

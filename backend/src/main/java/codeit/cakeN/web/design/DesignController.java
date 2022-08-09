@@ -73,6 +73,7 @@ public class DesignController {
     @GetMapping("/list")
     public String designList(Model model) {
         model.addAttribute("designs", designService.showAllDesign());
+
         return "design/designList";
     }
 
@@ -87,9 +88,9 @@ public class DesignController {
         model.addAttribute("design", designService.showInfo(id));
 
         // 작성자 닉네임 가져오기
-        Optional<codeit.cakeN.domain.user.User> user = userRepository.findById(designService.showInfo(id).getUser().getUserId());
-        model.addAttribute("userName", user.get().getNickname());
-        System.out.println(user.get().getNickName());
+        codeit.cakeN.domain.user.User user = userRepository.findById(designService.showInfo(id).getUser().getUserId()).get();
+        model.addAttribute("userName", user.getNickname());
+
         return "design/designDetail";
     }
 

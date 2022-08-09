@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -24,16 +25,27 @@ public class Design extends BaseTimeEntity {
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user;    // 작성자
 
     @Column
     private String file;   // 내보내기
 
-    @Column
-    private String cakeShape;    // 케이크 모양
+    @Column(nullable = false)
+    @ColumnDefault("circle")
+    @Enumerated(EnumType.STRING)
+    private CakeShape cakeShape;    // 케이크 모양
+
+    @Column(nullable = false)
+    @ColumnDefault("basic")
+    @Enumerated(EnumType.STRING)
+    private CakePattern cakePattern;    // 케이크 패턴
 
     @Column
+    @ColumnDefault("#000000")
     private String cakeColor;    // 케이크 색상
+    
+    @Column(nullable = true)
+    private String cakeColor2;   // 케이크 패턴에 따른 추가 색상
     
     @Column
     private String image;   // 이미지
@@ -41,15 +53,21 @@ public class Design extends BaseTimeEntity {
     @Column
     private String letter;   // 레터링 문구
     
+
     @Column
     private String letterColor;  // 레터링 색상
 
-//    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
-//    @JoinColumn(name = "user_id", updatable = false)
-//    private User user_id;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private LetterLocation letterLocation;   // 레터링 위치
 
     @Column
-    private String likeLetter;
+    @Enumerated(EnumType.STRING)
+    private LetterSize letterSize;    // 레터링 사이즈
+
+    // TODO Letter 엔티티 매핑 -> 내가 스크랩한 문구 가져오기
+    @Column
+    private String scrapLetter;    // 내가 스크랩한 문구
 
 
     // 연관관계 메서드
@@ -58,15 +76,22 @@ public class Design extends BaseTimeEntity {
         user.addDesign(this);
     }
 
+
     @Builder
-    public Design(User user, String file, String cakeShape, String cakeColor, String image, String letter, String letterColor) {
+    public Design(Long designId, User user, String file, CakeShape cakeShape, CakePattern cakePattern, String cakeColor, String cakeColor2, String image, String letter, String letterColor, LetterLocation letterLocation, LetterSize letterSize, String scrapLetter) {
+        this.designId = designId;
         this.user = user;
         this.file = file;
         this.cakeShape = cakeShape;
+        this.cakePattern = cakePattern;
         this.cakeColor = cakeColor;
+        this.cakeColor2 = cakeColor2;
         this.image = image;
         this.letter = letter;
         this.letterColor = letterColor;
+        this.letterLocation = letterLocation;
+        this.letterSize = letterSize;
+        this.scrapLetter = scrapLetter;
     }
 
     // API 응답 시 사용
@@ -74,19 +99,27 @@ public class Design extends BaseTimeEntity {
         this.user = requestDto.getUser();
         this.file = requestDto.getFile();
         this.cakeShape = requestDto.getCakeShape();
+        this.cakePattern = requestDto.getCakePattern();
         this.cakeColor = requestDto.getCakeColor();
+        this.cakeColor2 = requestDto.getCakeColor2();
         this.image = requestDto.getImage();
         this.letter = requestDto.getLetter();
         this.letterColor = requestDto.getLetterColor();
+        this.letterLocation = requestDto.getLetterLocation();
+        this.letterSize = requestDto.getLetterSize();
     }
 
     public Design update(DesignUpdateDto requestDto) {
         this.file = requestDto.getFile();
         this.cakeShape = requestDto.getCakeShape();
+        this.cakePattern = requestDto.getCakePattern();
         this.cakeColor = requestDto.getCakeColor();
+        this.cakeColor2 = requestDto.getCakeColor2();
         this.image = requestDto.getImage();
         this.letter = requestDto.getLetter();
         this.letterColor = requestDto.getLetterColor();
+        this.letterLocation = requestDto.getLetterLocation();
+        this.letterSize = requestDto.getLetterSize();
 
         return this;
     }

@@ -1,6 +1,6 @@
 package codeit.cakeN.web.design.dto;
 
-import codeit.cakeN.domain.design.Design;
+import codeit.cakeN.domain.design.*;
 import codeit.cakeN.domain.user.User;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +18,13 @@ public class DesignUpdateDto {
 
     private String file;
 
-    private String cakeShape;
+    private CakeShape cakeShape;
+
+    private CakePattern cakePattern;
 
     private String cakeColor;
+
+    private String cakeColor2;
 
     private String image;
 
@@ -28,14 +32,22 @@ public class DesignUpdateDto {
 
     private String letterColor;
 
+    private LetterLocation letterLocation;
+
+    private LetterSize letterSize;
+
     @Builder
     public DesignUpdateDto(Design design) {
         this.id = design.getDesignId();
         this.file = design.getFile();
         this.cakeShape = design.getCakeShape();
+        this.cakePattern = design.getCakePattern();
         this.cakeColor = design.getCakeColor();
+        this.cakeColor2 = design.getCakeColor2();
         this.image = design.getImage();
         this.letter = design.getLetter();
         this.letterColor = design.getLetterColor();
+        this.letterLocation = design.getLetterLocation();
+        this.letterSize = design.getLetterSize();
     }
 }
