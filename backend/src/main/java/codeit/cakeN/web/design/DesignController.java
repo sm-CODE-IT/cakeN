@@ -71,8 +71,15 @@ public class DesignController {
      */
     //TODO 현재 접속한 사용자의 케이크 디자인만 리스트업
     @GetMapping("/list")
-    public String designList(Model model) {
-        model.addAttribute("designs", designService.showAllDesign());
+    public String designList(Model model, @AuthenticationPrincipal User formUser) {
+        // 작성자 닉네임 가져오기
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+        System.out.println(user.getDesignList());
+        System.out.println(user);
+        /*if (user == designService.showAllDesign().get().getUser()) {
+            model.addAttribute("designs", user.getDesignList());
+        }*/
+        model.addAttribute("designs", user.getDesignList());
 
         return "design/designList";
     }
