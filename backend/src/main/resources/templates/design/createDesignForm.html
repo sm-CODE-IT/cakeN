@@ -20,17 +20,24 @@
     <form method="post" th:action th:object="${designRequestDto}" >
 
         <div>
-            <label for="cakeShape">케이크 모양</label>
-            <input type="text" id="cakeShape" name="cakeShape" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
-            <p class="field-error" th:if="${#fields.hasErrors('cakeShape')}" th:errors="*{cakeShape}" >Incorrect data</p>
-
+            <select id="cakeShape" th:field="*{cakeShape}">
+                <option value="CIRCLE">원형</option>
+                <option value="RECTANGLE">사각형</option>
+                <option value="HEART">하트</option>
+            </select>
         </div>
 
         <div>
             <label for="cakePattern">케이크 패턴</label>
-            <input type="text" id="cakePattern" name="cakePattern" class="form-control" th:field="*{cakePattern}" th:errorclass="field-error"/>
+            <!--<input type="text" id="cakePattern" name="cakePattern" class="form-control" th:field="*{cakePattern}" th:errorclass="field-error"/>
             <p class="field-error" th:if="${#fields.hasErrors('cakePattern')}" th:errors="*{cakePattern}" >Incorrect data</p>
-
+-->
+            <select id="cakePattern" th:field="*{cakePattern}">
+                <option value="BASIC">패턴없음</option>
+                <option value="GRADATION">그라데이션</option>
+                <option value="ZIGZAG">지그재그</option>
+                <option value="HALF">하프</option>
+            </select>
         </div>
 
         <div>
@@ -70,16 +77,25 @@
 
         <div>
             <label for="letterLocation">레터링 위치</label>
-            <input type="text" id="letterLocation" name="letterLocation" class="form-control" th:field="*{letterLocation}" th:errorclass="field-error"/>
+            <!--<input type="text" id="letterLocation" name="letterLocation" class="form-control" th:field="*{letterLocation}" th:errorclass="field-error"/>
             <p class="field-error" th:if="${#fields.hasErrors('letterLocation')}" th:errors="*{letterLocation}" >Incorrect data</p>
-
+-->
+            <select id="letterLocation" th:field="*{letterLocation}">
+                <option value="SIDE">사이드</option>
+                <option value="CENTER">중앙</option>
+            </select>
         </div>
 
         <div>
             <label for="letterSize">레터링 크기</label>
-            <input type="text" id="letterSize" name="letterSize" class="form-control" th:field="*{letterSize}" th:errorclass="field-error"/>
+            <!--<input type="text" id="letterSize" name="letterSize" class="form-control" th:field="*{letterSize}" th:errorclass="field-error"/>
             <p class="field-error" th:if="${#fields.hasErrors('letterSize')}" th:errors="*{letterSize}" >Incorrect data</p>
-
+-->
+            <select id="letterSize" th:field="*{letterSize}">
+                <option value="SMALL">작게</option>
+                <option value="MIDDLE">보통</option>
+                <option value="LARGE">크게</option>
+            </select>
         </div>
 
         <hr class="my-4">

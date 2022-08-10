@@ -5,6 +5,7 @@ import codeit.cakeN.domain.user.User;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -16,10 +17,10 @@ public class DesignRequestDto {
 
     private String file;
 
-    @NotBlank(message = "케이크 모양 선택은 필수입니다.")
+//    @NotBlank(message = "케이크 모양 선택은 필수입니다.")
     private CakeShape cakeShape;
 
-    @NotBlank(message = "케이크 패턴 선택은 필수입니다.")
+    @NotNull(message = "케이크 패턴 선택은 필수입니다.")
     private CakePattern cakePattern;
 
     @NotBlank(message = "기본 색상을 하얀색입니다.")

@@ -3,10 +3,7 @@ package codeit.cakeN.domain.design;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.web.design.dto.DesignRequestDto;
 import codeit.cakeN.web.design.dto.DesignUpdateDto;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
@@ -15,7 +12,9 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter  @Setter
+@Builder
 @Table(name = "DESIGN")
 public class Design extends BaseTimeEntity {
 
@@ -30,18 +29,15 @@ public class Design extends BaseTimeEntity {
     @Column
     private String file;   // 내보내기
 
-    @Column(nullable = false)
-    @ColumnDefault("circle")
+    @Column
     @Enumerated(EnumType.STRING)
     private CakeShape cakeShape;    // 케이크 모양
 
-    @Column(nullable = false)
-    @ColumnDefault("basic")
+    @Column
     @Enumerated(EnumType.STRING)
     private CakePattern cakePattern;    // 케이크 패턴
 
     @Column
-    @ColumnDefault("#000000")
     private String cakeColor;    // 케이크 색상
     
     @Column(nullable = true)
@@ -78,8 +74,7 @@ public class Design extends BaseTimeEntity {
 
 
     @Builder
-    public Design(Long designId, User user, String file, CakeShape cakeShape, CakePattern cakePattern, String cakeColor, String cakeColor2, String image, String letter, String letterColor, LetterLocation letterLocation, LetterSize letterSize, String scrapLetter) {
-        this.designId = designId;
+    public Design(User user, String file, CakeShape cakeShape, CakePattern cakePattern, String cakeColor, String cakeColor2, String image, String letter, String letterColor, LetterLocation letterLocation, LetterSize letterSize, String scrapLetter) {
         this.user = user;
         this.file = file;
         this.cakeShape = cakeShape;
