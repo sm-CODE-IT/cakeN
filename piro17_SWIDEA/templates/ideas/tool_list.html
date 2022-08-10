@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} DevTool list {% endblock %}
+
+{% block boxtitle %}DevTool List{% endblock %}
+{% block message %}개발툴 목록 페이지 입니다. 자신이 사용가능한 개발들의 목록을 확인해 보세요.{% endblock %}
+
+{% block content %}
+    <ul id="toolBox" class="toolBox mt-5 d-grid justify-items-center align-items-center">
+        {% for tool in tools %}
+            <li class="toolBoxOne mx-5 py-3">
+                <div class="toolBox_name ms-5 me-4"><a href="{% url 'ideas:tool_detail' tool.pk %}">{{ tool.name }}</a></div>
+                <div class="toolBox_kind mx-4">{{ tool.kind }}</div>
+                <div class="toolBox_content mx-3">{{ tool.content }}</div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination_box pagination_tool d-flex justify-content-center mb-2">
+        <ul class="d-flex align-items-center">
+            {% if tools.has_previous %}
+                <li class="me-4"><a class="page__link" href="?page={{tools.previous_page_number}}"><</a></li>
+            {% else %}
+                <li class="me-4"><a class="page__link" href="#"><</a></li>
+            {% endif %}
+
+            {% for p in tools.paginator.page_range %}
+                <li class="page__item mx-2"><a class="page__link" href="?page={{p}}" class="mx-1">{{p}}</a></li>
+            {% endfor %}
+                    
+            {% if tools.has_next %}
+                <li class="ms-4"><a class="page__link" href="?page={{tools.next_page_number}}">></a></li>
+            {% else %}
+                <li class="ms-4"><a class="page__link" href="#">></a></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}

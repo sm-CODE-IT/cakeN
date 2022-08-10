@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} SW-IDEA {% endblock %}
+
+{% block boxtitle %}Idea List{% endblock %}
+{% block message %}나의 아이디어를 잊지 말고 기록해보세요{% endblock %}
+
+{% block content %}
+
+    <form method="get" action="" class="idea_sort d-flex justify-content-end">
+        <select id="sort_select"  onChange="location=this.value; getSelectValue(this.form);">
+            <option class="sort-star" value="/" >--정렬기준--</option>
+            <option id="star" class="sort-star" value="?sort=star">찜하기순</option>
+            <option id="create" class="sort-create" value="?sort=create">등록순</option>
+            <option id="recent" class="sort-recent" value="?sort=recent">최신순</option>
+            <option id="title" class="sort-title" value="?sort=title">이름순</option>
+        </select>
+    </form>
+
+    <div id="listBox" class="listBox listContainer d-grid align-items-center justify-items-center justify-content-center">
+        
+        {% for idea, is_star in ideas_star_dict.items %}
+
+            <div class="listBoxOne idea-id-{{idea.id}} d-flex flex-column">
+                <div class="idea_img d-grid p-3">
+                    {% if idea.image %}
+                    <img src="{{idea.image.url}}" height="200" width="200">
+                    {% else %}
+                    <img class="random-img" src="https://picsum.photos/seed/{{ideas.id}}/200/200">
+                    {% endif %}
+
+                    <div class="idea__star_group">
+                        <span class="star list_star idea__star idea__star--{{ idea.id }}" id="idea-star-{{ idea.id }}">
+                            {% if is_star %}
+                            <i class="fa-solid fa-star fa-lg"></i>                        
+                            {% else %}
+                            <i class="fa-regular fa-star fa-lg"></i>                        
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <h3 class="title ms-3"><a href="{% url 'ideas:idea_detail' idea.pk %}">{{ idea.title }}</a></h3>
+                <hr class="mx-3" id="idea_hr"/>
+                <div class="d-flex flex-row">
+                    <div class="simple_info d-flex flex-column ms-2">
+                        <div><h5 class="mb-2">예상 개발 툴 : {{ idea.devtool }}</h5></div>
+                        <div class="d-flex flex-row" id="interest_updown">
+                            <h5 class="mt-2" style="display: inline;">아이디어 관심도 :</h5> 
+                            <div class="interest_updown">
+                                <button class="btn idea__plus" id="plus_btn" onclick="onClickUp({{ idea.id }}, 'plus');" >+</button>
+                                <span id="interest_cnt-{{ idea.id }}">{{ idea.interest }}</span>
+                                <button class="btn idea__minus" id="minus_btn" onclick="onClickUp({{ idea.id}}, 'minus');" >-</button>
+                            </div>
+                        </div> 
+                    </div>
+                    
+                </div>
+            </div>
+        {% endfor %}
+
+    
+    </div>
+
+    <div class="pagination_box d-flex justify-content-center mb-2">
+        <ul class="d-flex align-items-center">
+            {% if ideas.has_previous %}
+                <li class="me-4"><a class="page__link" href="?page={{ideas.previous_page_number}}"><</a></li>
+            {% else %}
+                <li class="me-4"><a class="page__link" href="#"><</a></li>
+            {% endif %}
+
+            {% for p in ideas.paginator.page_range %}
+                <li class="page__item mx-2"><a class="page__link" href="?page={{p}}" class="mx-1">{{p}}</a></li>
+            {% endfor %}
+                    
+            {% if ideas.has_next %}
+                <li class="ms-4"><a class="page__link" href="?page={{ideas.next_page_number}}">></a></li>
+            {% else %}
+                <li class="ms-4"><a class="page__link" href="#">></a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endblock %}
+
+{% block extra %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script> 
+{% endblock %}

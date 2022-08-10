@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} DevTool Information {% endblock %}
+
+{% block boxtitle %}DevTool Detail{% endblock %}
+{% block message %}개발툴 세부내용 페이지 입니다. 자신이 다룰 수 있는 개발툴에 대한 상세내용을 확인해 보아요.{% endblock %}
+
+{% block content %}
+    <div class="detail_box detail_info border border-radius p-4">
+        <h1>{{ tools.name }}</h1>
+        <blockquote class="p-2 my-4">
+            <h5>{{ tools.kind }}</h5>
+            <h5 class="mt-2">{{ tools.content }}</h5>
+        </blockquote>
+        <hr class="tool_line"/>
+        <h4 id="tool_swlist"> > 만들 수 있는 SW 목록 </h4>
+        <p class="tool_swlist d-flex flex-column">
+            {% if ideas %}
+                {% for idea in ideas %}
+                    <a href="{% url 'ideas:idea_detail' idea.pk %}" class="my-1">{{ idea.title }}</a>
+                {% endfor %}
+            {% else %}
+                <a>해당 개발툴의 아이디어 없음</a>
+            {% endif %}
+        </p>
+    </div>
+    <div class="button_set text-center pb-3 mb-3">
+        <a href="{% url 'ideas:tool_delete' tools.pk %}" class="delete_btn">삭제</a>
+        <a href="{% url 'ideas:tool_list' %}" class="list_btn">목록</a>
+        <a href="{% url 'ideas:tool_update' tools.pk %}" class="update_btn">수정</a>
+    </div>
+{% endblock %}

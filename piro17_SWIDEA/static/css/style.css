@@ -1,0 +1,291 @@
+@import "./reset.css";
+@import "./variable.css";
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Jua&family=Nanum+Gothic:wght@700&display=swap');
+
+
+body {
+    width: 100%;
+    /* background-image: url("/SWIDEA_SITE/picture/background.jpg"); */
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/167/781/136/languages-programming-wallpaper-preview.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: var(--basic-black);
+    width: max-content;
+}
+
+a:hover {
+    color:var(--hover-gray) !important;
+}
+
+hr {
+    color: var(--basic-white);
+    border:0;
+}
+
+header {
+    height: 10vh;
+}
+
+main {
+    color: var(--basic-white);
+    background-color: var(--background);
+    height: 80%;
+}
+
+.container {
+    margin-top: 35px;
+    margin-bottom: 35px;
+    padding: 20px 0 10px;
+    height: 80vh;
+}
+
+.header_title {
+    font-family: 'Gugi', cursive;
+}
+
+.header_title h3 a span {
+    font-weight: 600;
+    font-size: large;
+    color: var(--point-yellow);
+}
+
+.header_title h3 a, .header_title h5 a {
+    color: var(--basic-white);
+    font-weight: 500;
+}
+
+.listBox {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    place-content: center;
+}
+
+.listBoxOne {
+    margin: 30px 10px;
+    background-color: var(--box-background);
+    border-radius: 5px;
+    height: 54vh;
+    width: 35vh;
+}
+
+.box_title h2 {
+    color: var(--point-yellow2);
+    font-size: 20pt;
+    text-shadow: 0.5px 0.5px 0 ;
+}
+
+.box_title p {
+    font-size: 10pt;
+    text-shadow: 0.5px 0.5px 0 var(--shadow-gray);
+}
+
+.simple_info {
+    color:var(--detail-gray);
+    margin: 10px !important;
+}
+
+#idea_hr, #toolbox_hr {
+    color: var(--point-blue);
+    height: 5px;
+}
+
+#plus_btn, #minus_btn {
+    width: 25px;
+    height: 21px;
+    margin: 0 3px;
+    padding: 0 !important;
+}
+
+.interest_updown {
+    display: flex;
+    align-items: flex-end;
+}
+
+.button_set a {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 30px 30px;
+}
+
+.delete_btn {
+    background-color: var(--btn-red);
+    color: var(--basic-white);
+}
+
+.list_btn {
+    background-color: var(--btn-white);
+    color: var(--basic-black2);
+}
+
+.update_btn {
+    background-color: var(--btn-blue);
+    color: var(--basic-white);
+}
+
+.detail_box {
+    margin: 30px 45px 60px;
+}
+
+.detail_info {
+    justify-content: space-evenly;
+}
+
+.detail_info h1, #tool_info a, #tool_swlist {
+    color:var(--basic-white);
+    text-shadow: 1px 1px 0 var(--point-yellow2);
+}
+
+#tool_info a:hover {
+    color:var(--hover-gray) !important;
+}
+
+.detail_info h1 {
+    font-size: 25pt;
+}
+
+.detail_info h5, .detail_info h4, .detail_info p {
+    margin-top: 9px;
+    text-shadow: 0.5px 0.5px 0 var(--shadow-gray);
+}
+
+.tool_line {
+    height: 1.5px !important;
+}
+
+.tool_swlist a {
+    color: var(--basic-white);
+}
+
+.tool_swlist a:hover {
+    color: var(--hover-gray);
+}
+
+blockquote {
+    border-left: 3px solid var(--basic-white);
+}
+
+blockquote p {
+    line-height: 150%;
+    color: var(--detail-gray);
+}
+
+.new_idea {
+    place-content: center;
+}
+
+table tr {
+    display:flex;
+    flex-direction: column;
+    color: var(--basic-white);
+    text-shadow: 0.5px 0.5px 0 var(--shadow-gray);
+    margin: 10px 0;
+}
+
+table tr th:first-child {
+    margin-bottom: 3px;
+}
+
+textarea, input {
+    border-radius: 5px;
+}
+
+.submit_btn input {
+    background: none;
+    color: var(--basic-white);
+    border-color: var(--basic-white);
+    border-radius: 15px;
+    padding: 4px 33px;
+}
+
+#toolBox, #listBox {
+    justify-items: center !important;
+    z-index: 99;
+}
+
+.toolBoxOne {
+    /* background-color: var(--box-background);
+    border-radius: 5px;
+    height: 34vh;
+    width: 30vh; */
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px var(--line-gray);
+    width: 150vh;
+}
+
+.toolBox li:first-child {
+    border-top: solid 1px var(--line-gray);
+}
+
+.toolBoxOne a {
+    font-size: 15pt;
+}
+
+.toolBox_name {
+    width: 58px;
+}
+
+.toolBox_kind {
+    color: var(--basic-white);
+    text-shadow: 0.5px 0.5px 0 var(--shadow-gray);
+    width: 200px;
+}
+
+.toolBox_content {
+    font-size: 10pt;
+    width: 680px;
+    color: var(--detail-gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.idea_img {
+    place-content: center !important;
+}
+
+.idea__star_group {
+    position: absolute;
+    margin-left: 180px;
+    margin-top: 23px;
+}
+
+.fa-star {
+    color: rgb(239, 210, 114);
+}
+
+.idea_sort {
+    margin-right: 100px;
+}
+
+#sort_select {
+    height: 4vh;
+    border-radius: 8px;
+    background-color: #e8eaecc2;
+}
+
+.page__link {
+    color: var(--basic-white);
+}
+
+.page__item {
+    border: 1px solid white;
+    border-radius: 100%;
+    padding: 1px 4px;
+}
+
+.page__item:hover {
+    background-color: var(--basic-white);
+    color: var(--line-gray);
+}
+
+.pagination_tool {
+    position: absolute;
+    bottom: 47px;
+    left: 704px;
+}

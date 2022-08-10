@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} IDEA information {% endblock %}
+
+{% block boxtitle %}Idea Detail{% endblock %}
+{% block message %}아이디어 세부내용 페이지 입니다. 당신이 구현하려 한 아이디어들을 자세히 살펴보세요.{% endblock %}
+
+{% block content %}
+    <div class="detail_box border d-flex flex-row">
+        <div class="detail_img p-3"> 
+            {% if ideas.image %}
+            <img src="{{ideas.image.url}}" height="300" width="400">
+            {% else %}
+            <img class="random-img" src="https://picsum.photos/seed/{{ideas.id}}/400/300">
+            {% endif %}
+        </div>
+        <div class="detail_info d-flex flex-column p-3">
+            <div class="mb-4 d-flex align-items-center">
+                <h1>{{ ideas.title }}</h1>
+                <span class="star idea__star idea__star--{{ ideas.id }} ms-3" id="idea-star-{{ ideas.id }}">
+                    
+                    {% if is_star %}
+                    <i class="fa-solid fa-star fa-lg"></i>
+                    {% else %}
+                    <i class="fa-regular fa-star fa-lg"></i>
+                    {% endif %}
+
+                </span>
+            </div>
+            <div>
+                <h4>1) 아이디어 관심도  </h4>
+                <h5>{{ ideas.interest }}</h5>
+            </div>
+            <div>
+                <h4 class="my-2">2) 예상 개발 툴  </h4>
+                <h5 id="tool_info">
+                    {% if tools %}
+                        <a href="{% url 'ideas:tool_detail' tools.pk %}">{{ tools.name }}</a>
+                    {% else %}
+                        <a>없음</a>
+                    {% endif %}
+                </h5>
+            </div>
+            <div>
+                <h4 class="my-2">3) 아이디어 설명 </h4>
+                <h5>{{ ideas.content }}</h5>
+            </div>
+        </div>
+
+    </div>
+    <div class="button_set text-center pb-3 mb-3">
+        <a href="{% url 'ideas:idea_delete' ideas.pk %}" class="delete_btn">삭제</a>
+        <a href="{% url 'ideas:idea_list' %}" class="list_btn">목록</a>
+        <a href="{% url 'ideas:idea_update' ideas.pk %}" class="update_btn">수정</a>
+    </div>
+
+{% endblock %}
+
+{% block extra %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/app.js' %}"></script> 
+{% endblock %}
