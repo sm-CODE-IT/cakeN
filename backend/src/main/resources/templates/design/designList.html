@@ -7,7 +7,7 @@
 
     <style>
         .container {
-            max-width: 800px;
+            max-width: 1000px;
         }
         .field-error {
             border-color: #dc3545;
@@ -19,14 +19,34 @@
 <div class="container mx-3">
     <a class="btn btn-primary" th:href="@{/design/}">디자인 등록</a>
 
+    <div class="flex-col my-4">
+        <div class="flex-row my-3">
+            <span>케이크 번호</span>
+            <span>케이크 모양</span>
+            <span>케이크 패턴</span>
+            <span>케이크 색상</span>
+            <span>케이크 색상2</span>
+            <span>레터링 문구</span>
+            <span>레터링 색상</span>
+            <span>레터링 위치</span>
+            <span>레터링 크기</span>
+            <span>작성자</span>
+
+        </div>
+    </div>
+
     <div class="flex-col my-4" th:each="design : ${designs}">
         <div class="flex-row my-3">
             <a th:href="@{'/design/detail/'+${design.designId}}"><span th:text="${design.designId}"></span></a>
             <span th:text="${design.cakeShape}"></span>
+            <span th:text="${design.cakePattern}"></span>
             <span th:text="${design.cakeColor}"></span>
+            <span th:text="${design.cakeColor2}"></span>
             <span th:text="${design.image}"></span>
             <span th:text="${design.letter}"></span>
             <span th:text="${design.letterColor}"></span>
+            <span th:text="${design.letterLocation}"></span>
+            <span th:text="${design.letterSize}"></span>
             <span th:text="${design.user.nickname}"></span>
         </div>
     </div>

@@ -20,11 +20,20 @@
     <form method="post" th:action th:object="${designRequestDto}" >
 
         <div>
-            <select id="cakeShape" th:field="*{cakeShape}">
+            <label>케이크 모양</label>
+            <label for="circle">원형</label>
+            <input type="radio" id="circle" name="cakeShape" value="CIRCLE" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
+            <label for="rectangle">사각형</label>
+            <input type="radio" id="rectangle" name="cakeShape" value="RECTANGLE" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
+            <label for="heart">하트</label>
+            <input type="radio" id="heart" name="cakeShape" value="HEART" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error" />
+            <p class="field-error" th:if="${#fields.hasErrors('cakeShape')}" th:errors="*{cakeShape}" >Incorrect data</p>
+
+            <!--<select id="cakeShape" th:field="*{cakeShape}">
                 <option value="CIRCLE">원형</option>
                 <option value="RECTANGLE">사각형</option>
                 <option value="HEART">하트</option>
-            </select>
+            </select>-->
         </div>
 
         <div>
@@ -33,7 +42,7 @@
             <p class="field-error" th:if="${#fields.hasErrors('cakePattern')}" th:errors="*{cakePattern}" >Incorrect data</p>
 -->
             <select id="cakePattern" th:field="*{cakePattern}">
-                <option value="BASIC">패턴없음</option>
+                <option value="BASIC" selected>패턴없음</option>
                 <option value="GRADATION">그라데이션</option>
                 <option value="ZIGZAG">지그재그</option>
                 <option value="HALF">하프</option>
@@ -82,7 +91,7 @@
 -->
             <select id="letterLocation" th:field="*{letterLocation}">
                 <option value="SIDE">사이드</option>
-                <option value="CENTER">중앙</option>
+                <option value="CENTER" selected>중앙</option>
             </select>
         </div>
 
@@ -93,7 +102,7 @@
 -->
             <select id="letterSize" th:field="*{letterSize}">
                 <option value="SMALL">작게</option>
-                <option value="MIDDLE">보통</option>
+                <option value="MIDDLE" selected>보통</option>
                 <option value="LARGE">크게</option>
             </select>
         </div>

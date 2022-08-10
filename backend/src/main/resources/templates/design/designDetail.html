@@ -7,7 +7,7 @@
 
     <style>
         .container {
-            max-width: 560px;
+            max-width: 1000px;
         }
         .field-error {
             border-color: #dc3545;
@@ -17,12 +17,15 @@
 </head>
 <body>
 <div class="flex-row my-3 container mx-4">
-    <span th:text="${design.id}"></span>
     <span th:text="${design.cakeShape}"></span>
+    <span th:text="${design.cakePattern}"></span>
     <span th:text="${design.cakeColor}"></span>
+    <span th:text="${design.cakeColor2}"></span>
     <span th:text="${design.image}"></span>
     <span th:text="${design.letter}"></span>
     <span th:text="${design.letterColor}"></span>
+    <span th:text="${design.letterLocation}"></span>
+    <span th:text="${design.letterSize}"></span>
     <span th:text="'작성자: ' + ${userName}"></span>
 </div>
 <a class="btn btn-success" th:href="@{'/design/update/' + ${design.id}}">수정</a>
