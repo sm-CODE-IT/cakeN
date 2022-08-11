@@ -23,8 +23,8 @@ public class NewLetterController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        model.addAttribute("newletters", newletterService.list());
+    public String list() {
+        // model.addAttribute("newletters", newletterService.list());
         return "newletter/list";
     }
 

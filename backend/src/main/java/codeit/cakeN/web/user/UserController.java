@@ -5,7 +5,6 @@ import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
-import codeit.cakeN.web.design.DesignController;
 import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
 
@@ -112,7 +111,7 @@ public class UserController {
 
         }
 
-        return "redirect:/users/login";    //TODO 리다이렉트 방식으로 변경
+        return "redirect:/users/login";
     }
 
 
