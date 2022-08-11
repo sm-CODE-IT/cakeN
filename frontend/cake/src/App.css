@@ -126,3 +126,89 @@ pre {
   color: white;
   font-weight: bold;
 }
+
+/* Design */
+.Design .sectionWrapper {
+  display: flex;
+  padding-bottom: 400px;
+}
+
+.Design .leftSection {
+  background-color: aqua;
+  float: left;
+  width: 50%;
+  height: 400px;
+  text-align: center;
+}
+
+.Design .rightSection {
+  background-color: cornsilk;
+  float: right;
+  width: 50%;
+  height: 400px;
+  text-align: center;
+}
+
+.Design .select {
+  width: 80px;
+}
+
+input {
+  display: none;
+  margin: 10px;
+}
+
+.cakestyle .designImageButton {
+  width: 80px;
+  margin: 5px;
+}
+
+label > input[type="radio"]:checked + img {
+  border: 3px solid #eaa8b4;
+  border-radius: 15px;
+  width: 75px;
+}
+
+.Design .menu {
+  width: 280px;
+}
+
+/* 
+.Design h2 {
+  display: inline-block;
+  background-color: #ffc0cb;
+  padding: 10px;
+} */
+
+.Design .menubar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Design .menubar2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Design .line {
+  width: 280px;
+}
+
+/* .Design .menubutton {
+  background-color: #ffc0cb;
+  border: 0px;
+  border-radius: 10px;
+  padding-left: 110px;
+  padding-right: 110px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bolder;
+  font-size: larger;
+} */
+
+.Design .menubutton {
+  border: 0px;
+  background: none;
+}
