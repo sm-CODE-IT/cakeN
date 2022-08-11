@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Entity
+@Builder
+@Table(name = "CONTEST")
 // @Data
 public class Contest {
 
