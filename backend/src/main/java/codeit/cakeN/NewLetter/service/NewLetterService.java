@@ -1,6 +1,5 @@
 package codeit.cakeN.NewLetter.service;
 
-import codeit.cakeN.Board.domain.Board;
 import codeit.cakeN.NewLetter.domain.NewLetter;
 import codeit.cakeN.NewLetter.repository.NewLetterRepository;
 import lombok.RequiredArgsConstructor;

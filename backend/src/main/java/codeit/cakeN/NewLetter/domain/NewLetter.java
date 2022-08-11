@@ -20,7 +20,7 @@ public class NewLetter {
 
     @Id
     @GeneratedValue
-    private long letter_id;      // 게시글의 번호
+    private int letter_id;      // 게시글의 번호
 
     // 작성자 어떻게 데리고 오지? 현재 로그인 한 사람
     // user_id

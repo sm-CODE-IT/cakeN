@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+this is contest list page
+<div class="main">
+    <a href="/contest/register" class="register">게시물 작성</a>
+    <table>
+        <thead>
+        <tr>
+            <th>도안 이미지</th>
+            <th>도안 제목</th>
+            <th>작성자</th>
+            <th>작성 일자</th>
+            <th>도안 설명</th>
+            <th>조회수</th>
+            <th>스크랩 수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="contest : ${contest}">
+            <td th:text="${contest.postImg}"></td>
+            <td><a href="@{/contest/detail/{postId}(postId=${contest.postId})}" th:text="${contest.postName}"></a></td>
+            <td th:text="${contest.userId}"></td>
+            <td th:text="${#temporals.format(contest.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${contest.postDes}"></td>
+            <td></td>   <!-- 조회수 -->
+            <td></td>   <!-- 스크랩 수 -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

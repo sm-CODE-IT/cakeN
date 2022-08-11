@@ -17,10 +17,10 @@
 <body>
 
 <div class="container">
-    <form th:action th:object="${userDeleteDto}" method="post">
+    <form th:action th:object="${userUpdatePwDto}" method="post">
+
         <p>
-            회원 탈퇴를 하면 서비스를 더 이상 이용하실 수 없습니다.<br>
-            회원 탈퇴를 진행하시겠습니까?
+            비밀번호 수정 페이지입니다.
         </p>
 
         <div th:if="${#fields.hasGlobalErrors()}">
@@ -33,11 +33,18 @@
                    th:errorclass="field-error">
             <p class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></p>
         </div>
+
         <div>
-            <label for="pwConfirm">비밀번호 재확인</label>
-            <input type="password" id="pwConfirm" name="pwConfirm" th:field="*{pwConfirm}" class="form-control"
+            <label for="newPw">새로운 비밀번호</label>
+            <input type="password" id="newPw" name="newPw" th:field="*{newPw}" class="form-control"
                    th:errorclass="field-error">
-            <p class="field-error"  th:if="${#fields.hasErrors('pwConfirm')}" th:errors="*{pwConfirm}" ></p>
+            <p class="field-error"  th:if="${#fields.hasErrors('newPw')}" th:errors="*{newPw}" ></p>
+        </div>
+        <div>
+            <label for="newPwConfirm">비밀번호 재확인</label>
+            <input type="password" id="newPwConfirm" name="newPwConfirm" th:field="*{newPwConfirm}" class="form-control"
+                   th:errorclass="field-error">
+            <p class="field-error"  th:if="${#fields.hasErrors('newPwConfirm')}" th:errors="*{newPwConfirm}" ></p>
         </div>
 
         <span th:if="${errorMsg}" class="my-2">
@@ -46,10 +53,10 @@
 
         <div class="row">
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg"  type="submit">회원탈퇴</button>
+                <button class="w-100 btn btn-primary btn-lg"  type="submit">수정</button>
             </div>
             <div class="col">
-                <button class="w-100 btn btn-secondary btn-lg" onclick="location.href='hello.html'"
+                <button class="w-100 btn btn-secondary btn-lg"
                         th:onclick="|location.href='@{/}'|"
                         type="button">취소
                 </button>

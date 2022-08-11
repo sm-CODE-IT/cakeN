@@ -36,34 +36,29 @@ public class BoardController {
 
     @GetMapping("/register")
     public String registerGet() {
-
         return "board/register";
     }
 
     @PostMapping("/register")
     public String registerPost(Board board) {
-
         boardService.register(board);
         return "redirect:/board/list";
     }
 
     @GetMapping("/update/{idx}")
     public String updateGet(@PathVariable int idx, Model model) {
-
         model.addAttribute("board", boardService.detail(idx));
         return "board/update";
     }
 
     @PostMapping("/update")
     public String updatePost(Board board) {
-
         boardService.update(board);
         return "redirect:/board/list";
     }
 
     @GetMapping("/delete/{idx}")
     public String delete(@PathVariable int idx) {
-
         boardService.delete(idx);
         return "redirect:/board/list";
     }

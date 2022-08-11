@@ -5,14 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+this is new letter update page!!
     <div class="main">
         <form method="post" th:action="@{/newletter/update}">
-            <input type="hidden" name="letter_id" id="letter_id" th:value="${/newletter/update}">
-            <label for="writer">작성자 :</label>
-            <input type="text" name="writer" id="writer">
+            <input type="hidden" name="letter_id" id="letter_id" th:value="${newletter.letter_id}">
+            <label for="tag">문구 번호(tag) :</label>
+            <input type="text" name="tag" id="tag" th:text="${newletter.tag}"> <br>
             <label for="letter">내용 :</label>
-            <textarea name="letter" id="letter"></textarea>
-            <button type="submit">등록</button>
+            <textarea name="letter" id="letter" th:text="${newletter.letter}"></textarea> <br>
+            <button type="submit">수정</button>
         </form>
     </div>
 </body>

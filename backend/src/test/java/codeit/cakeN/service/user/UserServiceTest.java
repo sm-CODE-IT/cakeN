@@ -3,23 +3,18 @@ package codeit.cakeN.service.user;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
-import codeit.cakeN.web.dto.UserRequestDto;
-import codeit.cakeN.web.dto.UserUpdateDto;
+import codeit.cakeN.web.user.dto.UserRequestDto;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -133,7 +128,7 @@ class UserServiceTest {
         
         //when
         String newPw = "1234567890!";
-        userService.updatePw(PASSWORD, newPw);
+        userService.updatePw(PASSWORD, newPw, userRequestDto.getId());
         clear();
 
         //then
@@ -159,7 +154,7 @@ class UserServiceTest {
         //when
         String updateNickname = "변경내용";
         String updateIntro = "안녕안녕";
-        userService.update(new UserUpdateDto(Optional.of(updateNickname), Optional.of(updateIntro), Optional.empty()));
+//        userService.update(new UserUpdateDto(Optional.of(updateNickname), Optional.of(updateIntro), Optional.empty()));
         clear();
 
         //then
@@ -188,7 +183,7 @@ class UserServiceTest {
         ));
 
         //when
-        userService.deleteUser(PASSWORD, userRequestDto.getEmail());
+        userService.deleteUser(PASSWORD, userRequestDto.getId());
 
         //then
         assertThat(assertThrows(Exception.class, () -> userRepository.findByEmail(userRequestDto.getEmail())
@@ -209,7 +204,7 @@ class UserServiceTest {
         ));
 
         //when, then
-        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!", userRequestDto.getEmail()))
+        assertThat(assertThrows(Exception.class, () -> userService.deleteUser(PASSWORD + "!", userRequestDto.getId()))
                 .getMessage()).isEqualTo("비밀번호가 일치하지 않습니다.");
 
     }
@@ -230,7 +225,7 @@ class UserServiceTest {
         ));
 
         //when
-        UserRequestDto myInfo = userService.getMyInfo();
+        UserRequestDto myInfo = userService.getMyInfo(userRequestDto.toEntity().getUserId());
 
         //then
         assertThat(myInfo.getEmail()).isEqualTo(userRequestDto.getEmail());

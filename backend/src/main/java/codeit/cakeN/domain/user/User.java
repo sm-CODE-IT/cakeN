@@ -1,24 +1,25 @@
 package codeit.cakeN.domain.user;
 
-import codeit.cakeN.service.user.UserService;
-import codeit.cakeN.web.dto.UserRequestDto;
+import codeit.cakeN.domain.design.Design;
+import codeit.cakeN.web.user.dto.UserRequestDto;
+import codeit.cakeN.web.user.dto.UserUpdateDto;
+
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Set;
+import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@Builder
 @Table(name = "USER")
 public class User extends Timestamped implements Serializable {
 
@@ -75,14 +76,14 @@ public class User extends Timestamped implements Serializable {
 
 
     // 유저 정보 수정 시
-    public void update(UserRequestDto requestDto) {
-        this.email = requestDto.getEmail();
-        this.pw = requestDto.getPw();
+    public void update(UserUpdateDto requestDto) {
+//        this.pw = requestDto.getPw();
         this.intro = requestDto.getIntro();
         this.image = requestDto.getImage();
         this.nickname = requestDto.getNickname();
     }
 
+    // 소셜로그인 용 업데이트
     public User update(String image, String nickname) {
         this.image = image;
         this.nickname = nickname;
@@ -96,28 +97,27 @@ public class User extends Timestamped implements Serializable {
         return this.role.getKey();
     }
 
-
-
     // 개인정보 수정
     public void updatePw(PasswordEncoder passwordEncoder, String pw) {
         this.pw = passwordEncoder.encode(pw);
     }
 
-    public void updateNickname(String nickname) {
-        this.nickname = nickname;
-    }
 
-    public void updateIntro(String intro) {
-        this.intro = intro;
-    }
-
-    public void updateImage(String image) {
-        this.image = image;
-    }
 
     // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
     public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
         return passwordEncoder.matches(checkPassword, getPw());
+    }
+
+    // 연관관계 메서드
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    private List<Design> designList = new ArrayList<>();
+
+
+    public void addDesign(Design design) {
+        // cake design의 작성자는 Design Entity에서 지정
+        designList.add(design);
     }
 
 

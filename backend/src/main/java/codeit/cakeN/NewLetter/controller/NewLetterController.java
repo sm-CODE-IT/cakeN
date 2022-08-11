@@ -24,7 +24,7 @@ public class NewLetterController {
 
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("newletter", newletterService.list());
+        model.addAttribute("newletters", newletterService.list());
         return "newletter/list";
     }
 
@@ -42,13 +42,32 @@ public class NewLetterController {
     @PostMapping("/register")
     public String registerPost(NewLetter newletter) {
         newletterService.register(newletter);
-        return "redirect:/board/list";
+        // return "redirect:/newletter/list";
+        return "redirect:/newletter/";
     }
 
     @GetMapping("/update/{letter_id}")
     public String updateGet(@PathVariable int letter_id, Model model) {
         model.addAttribute("newletter", newletterService.detail(letter_id));
         return "newletter/update";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(NewLetter newletter) {
+        newletterService.update(newletter);
+        return "redirect:/newletter/";
+    }
+
+    @GetMapping("/delete/{letter_id}")
+    public String delete(@PathVariable int letter_id) {
+        newletterService.delete(letter_id);
+        return "redirect:/newletter/";
+    }
+
+    // 실험
+    @GetMapping("/whynoletter")
+    public String letterTest() {
+        return "newletter/test";
     }
 
 }

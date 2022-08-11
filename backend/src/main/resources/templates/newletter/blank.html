@@ -15,7 +15,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="newletter : ${newletters}">
+        <tr th:each="newletter : ${newletter}">
             <!-- 1. 문구에 하이퍼링크가 없는 경우 -->
             <td th:text="${newletter.letter_id}"></td>
             <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->

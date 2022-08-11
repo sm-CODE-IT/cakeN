@@ -1,13 +1,12 @@
 package codeit.cakeN.service.user;
 
-import codeit.cakeN.config.auth.SecurityUtil;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
-import codeit.cakeN.web.dto.UserRequestDto;
-import codeit.cakeN.web.dto.UserUpdateDto;
+import codeit.cakeN.web.user.dto.UserRequestDto;
+import codeit.cakeN.web.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
 
@@ -50,12 +49,12 @@ public class UserService {
     /**
      * 회원 탈퇴
      * @param checkPw
-     * @param username
+     * @param id
      * @throws UserException
      */
     @Transactional
-    public void deleteUser(String checkPw, String username) throws UserException {
-        User user = userRepository.findByEmail(username).orElseThrow(
+    public void deleteUser(String checkPw, Long id) throws UserException {
+        User user = userRepository.findById(id).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
         
@@ -75,13 +74,11 @@ public class UserService {
      */
     @Transactional
     public void update(UserUpdateDto userUpdateDto) throws UserException {
-        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+        User user = userRepository.findById(userUpdateDto.getId()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
-        userUpdateDto.nickname().ifPresent(user::updateNickname);
-        userUpdateDto.intro().ifPresent(user::updateIntro);
-        userUpdateDto.image().ifPresent(user::updateImage);
+        user.update(userUpdateDto);
     }
 
 
@@ -103,8 +100,8 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public void updatePw(String checkPw, String newPw) throws UserException {
-        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+    public void updatePw(String checkPw, String newPw, Long id) throws UserException {
+        User user = userRepository.findById(id).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
@@ -117,11 +114,12 @@ public class UserService {
 
     /**
      * 개인정보 조회 => 마이페이지, 상단바에서 사용
+     * @param userId
      * @return
      * @throws Exception
      */
-    public UserRequestDto getMyInfo() throws UserException {
-        User user = userRepository.findByEmail(SecurityUtil.getLoginUser()).orElseThrow(
+    public UserRequestDto getMyInfo(Long userId) throws UserException {
+        User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
         return new UserRequestDto(user);

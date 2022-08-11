@@ -15,7 +15,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create   # 객체를 보고 자동으로 테이블을 생성하도록 설정
+      ddl-auto: create   # 객체를 보고 자동으로 테이블을 생성하도록 설정 -> option type: create, create-drop, update, validate, none
     properties:
       hibernate:
         show_sql: true   # Hibernate가 실행한 모든 SQL문 콘솔로 출력

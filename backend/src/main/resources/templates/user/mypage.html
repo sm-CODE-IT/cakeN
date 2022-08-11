@@ -7,7 +7,6 @@
 
 </head>
 <body>
-<body>
 <div class="user_detail container">
     <h1 class="py-3 text-center">마이페이지</h1>
 
@@ -19,21 +18,21 @@
             <span th:text="'ID : ' + ${userEmail}"></span>
         </div>
         <div class="my-2">
-            <span th:text="'PW : ' + ${userPw}"></span>
+            <span><a th:href="@{'/users/update-pw/'+${userId}}">비밀번호 변경하기</a></span>
         </div>
         <div class="my-2">
             <span th:text="'자기소개 : ' + ${userIntro}"></span>
         </div>
     </div>
 
-    <button class="btn btn-primary" type="button"
-            th:onclick="|location.href='@{/users/update}'|">
+    <a class="btn btn-primary" type="button"
+            th:href="@{'/users/update/'+ ${userId}}">
         개인정보 수정
-    </button>
-    <button class="btn btn-secondary" type="button"
-            th:onclick="|location.href='@{/users/delete}'|" >
+    </a>
+    <a class="btn btn-secondary" type="button"
+            th:href="@{'/users/delete/'+ ${userId}}" >
         회원 탈퇴
-    </button>
+    </a>
 <!--    <span th:text="'프로필 사진' + '${userImage}'"></span>-->
 </div>
 </body>

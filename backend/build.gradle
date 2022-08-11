@@ -42,12 +42,9 @@ dependencies {
 
 	implementation 'junit:junit:4.13.2'
 
-	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
-	runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
 }
 
-tasks.named('test') {
+test {
 	useJUnitPlatform()
 }
 targetCompatibility = JavaVersion.VERSION_16

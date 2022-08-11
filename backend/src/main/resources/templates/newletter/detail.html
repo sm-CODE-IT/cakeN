@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
+    <div class="main">
+        <!--
+        <label for="writer">작성자 :</label>
+        <input type="text" name="writer" id="writer" th:value="">
+        -->
+        <label for="tag">문구 번호(tag) :</label>
+        <input type="text" name="tag" id="tag" th:text="${newletter.tag}" disabled> <br>
+        <label for="letter">내용 :</label>
+        <textarea name="letter" id="letter" th:text="${newletter.letter}" disabled></textarea> <br>
 
+        <a th:href="@{/newletter/update/{letter_id}(letter_id=${newletter.letter_id})}" id="update">수정</a>
+        <a th:href="@{/newletter/delete/{letter_id}(letter_id=${newletter.letter_id})}" id="delete">삭제</a>
+
+    </div>
 </body>
 </html>
