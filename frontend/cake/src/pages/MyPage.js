@@ -1,12 +1,22 @@
 import ContentHeader from "../components/ContentHeader";
+import MyPageLeft from "../components/MyPageLeft";
+import MyCake from "./MyCake";
+import Password from "./Password";
+import ViewInfo from "./ViewInfo";
 
 const MyPage = () => {
-    const title = "마이페이지";
-    const content = "다양한 서비스를 이용할 수 있습니다."
+    const title = "내 프로필 보기";
+    const content = "내 프로필을 확인할 수 있습니다."
     return (
         <div className="MyPage">
-            <ContentHeader title={title} content={content}/>
-            {"마이페이지 소개페이지"}
+            <MyPageLeft />
+            <div className="MyPageAll">
+                <ContentHeader title={title} content={content}/>
+                <ViewInfo />
+                <Password />
+                <MyCake />
+            </div>
+            
         </div>
     );
 };

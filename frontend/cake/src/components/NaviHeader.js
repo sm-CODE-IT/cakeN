@@ -12,11 +12,17 @@ const NaviHeader = () => {
                 <a href="/letter" className="menu">레터링 선택</a>
             </div>
             <div className="right">
-                    <a href={"/login"} className="menu" >로그인</a>
-                    <a href={"/signUp"} className="menu" >회원가입</a>
-                    <a href={"/myPage"} className="menu" >마이페이지</a>
-                    <a href={"/myCake"} className="menu" >마이케이크</a>
+                <a href={"/login"} className="menu" >로그인</a>
+                <a href={"/signUp"} className="menu" >회원가입</a>
+                    
+                <a href={"/myPage"}  >                
+                    <img src={process.env.PUBLIC_URL + `images/profile_left.png`} alt="profile" width={60} title="마이페이지로"/>
+                </a>
+                <a href={"/myCake"} >
+                    <img src={process.env.PUBLIC_URL + `images/profile_right.png`} alt="cake" width={60} title="마이케이크로"/>
+                </a>
             </div>
+            
         </header>
     );
   };
