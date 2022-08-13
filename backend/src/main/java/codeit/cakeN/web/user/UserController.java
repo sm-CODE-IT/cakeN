@@ -1,6 +1,8 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
+import codeit.cakeN.domain.contest.Contest;
+import codeit.cakeN.domain.contest.ContestRepository;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
@@ -144,6 +146,8 @@ public class UserController {
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("userIntro", user.getIntro());
 
+        // 내가 자랑한 콘테스트 게시물 모아보기
+        model.addAttribute("contests", user.getContestList());
         return "user/mypage";
     }
 

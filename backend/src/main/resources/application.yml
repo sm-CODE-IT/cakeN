@@ -1,16 +1,15 @@
 spring:
   # DB 연결
   datasource:
-    url: jdbc:mysql://localhost:3306/caken?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: root
-    password: biukzozn1926
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    url: jdbc:mysql://localhost:3306/caken?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #    username: root
+    #    password: codeit
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
     # 설치된 H2 DB와 연결 url
-
-    # url: jdbc:h2:tcp://localhost/~/cakeN;MODE=MySQL;DATABASE_TO_LOWER=TRUE
-    # username: sa
-    # password:
-    # driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
+    url: jdbc:h2:tcp://localhost/~/cakeN;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
 
 
   jpa:
@@ -40,7 +39,7 @@ spring:
   servlet:
     multipart:
       enabled: true    # 파일 업로드 가능 여부 선택 (multipart에 관한 부분 활성화)
-#      location: C:/Users/SM-PC/cakeNTemp/   # 업로드된 파일의 임시 저장경로
+      #      location: C:/Users/SM-PC/cakeNTemp/   # 업로드된 파일의 임시 저장경로
       max-request-size: 30MB     # 한 번에 최대 업로드 가능 용량
       max-file-size: 10MB    # 파일 하나의 최대 크기
 

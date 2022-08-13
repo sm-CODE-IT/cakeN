@@ -26,4 +26,9 @@ public class RestApiController {
     public ResponseEntity<String> healthCheck() {
         return ResponseEntity.ok("OK");
     }
+
+    @GetMapping("/hello")
+    public String test() {
+        return "Hello, World!";
+    }
 }

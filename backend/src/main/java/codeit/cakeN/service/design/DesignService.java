@@ -24,9 +24,9 @@ public class DesignService {
      * @param requestDto
      */
     @Transactional
-    public void save(DesignRequestDto requestDto) throws DesignException {
+    public long save(DesignRequestDto requestDto) throws DesignException {
         // DB에 저장
-        designRepository.save(requestDto.toEntity());
+        return designRepository.save(requestDto.toEntity()).getDesignId();
     }
 
     /**
@@ -56,11 +56,13 @@ public class DesignService {
      * 케이크 제작 정보 수정
      * @param requestDto
      */
-    public void update(DesignUpdateDto requestDto) throws DesignException {
-        Design design = designRepository.findById(requestDto.getId()).orElseThrow(
+    public Long update(Long id, DesignUpdateDto requestDto) throws DesignException {
+        Design design = designRepository.findById(id).orElseThrow(
                 () -> new DesignException(DesignExceptionType.NOT_FOUND_DESIGN)
         );
         design.update(requestDto);
+
+        return id;
     }
 
     /**
