@@ -4,11 +4,9 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -35,4 +33,7 @@ public class NewLetter {
     private LocalDateTime updated_at;
 
     private int tag;
+
+    @OneToMany(mappedBy = "newletter")
+    private List<Heart> heartList;
 }
