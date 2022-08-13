@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-3">
+    <form method="post" th:action th:object="${designRequestDto}" >
+
+        <div>
+            <label>케이크 모양</label>
+            <label for="circle">원형</label>
+            <input type="radio" id="circle" name="cakeShape" value="CIRCLE" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
+            <label for="rectangle">사각형</label>
+            <input type="radio" id="rectangle" name="cakeShape" value="RECTANGLE" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error"/>
+            <label for="heart">하트</label>
+            <input type="radio" id="heart" name="cakeShape" value="HEART" class="form-control" th:field="*{cakeShape}" th:errorclass="field-error" />
+            <p class="field-error" th:if="${#fields.hasErrors('cakeShape')}" th:errors="*{cakeShape}" >Incorrect data</p>
+
+            <!--<select id="cakeShape" th:field="*{cakeShape}">
+                <option value="CIRCLE">원형</option>
+                <option value="RECTANGLE">사각형</option>
+                <option value="HEART">하트</option>
+            </select>-->
+        </div>
+
+        <div>
+            <label for="cakePattern">케이크 패턴</label>
+            <!--<input type="text" id="cakePattern" name="cakePattern" class="form-control" th:field="*{cakePattern}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakePattern')}" th:errors="*{cakePattern}" >Incorrect data</p>
+-->
+            <select id="cakePattern" th:field="*{cakePattern}">
+                <option value="BASIC" selected>패턴없음</option>
+                <option value="GRADATION">그라데이션</option>
+                <option value="ZIGZAG">지그재그</option>
+                <option value="HALF">하프</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="cakeColor">케이크 색상</label>
+            <input type="color" id="cakeColor" name="cakeColor" class="form-control" th:field="*{cakeColor}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakeColor')}" th:errors="*{cakeColor}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="cakeColor2">케이크 색상2</label>
+            <input type="color" id="cakeColor2" name="cakeColor2" class="form-control" th:field="*{cakeColor2}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('cakeColor2')}" th:errors="*{cakeColor2}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="image">이미지</label>
+            <input type="text" id="image" name="image" class="form-control" th:field="*{image}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('image')}" th:errors="*{image}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="letter">레터링 문구</label>
+            <input type="text" id="letter" name="letter" class="form-control" th:field="*{letter}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letter')}" th:errors="*{letter}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="letterColor">레터링 색상</label>
+            <input type="text" id="letterColor" name="letterColor" class="form-control" th:field="*{letterColor}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterColor')}" th:errors="*{letterColor}" >Incorrect data</p>
+
+        </div>
+
+        <div>
+            <label for="letterLocation">레터링 위치</label>
+            <!--<input type="text" id="letterLocation" name="letterLocation" class="form-control" th:field="*{letterLocation}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterLocation')}" th:errors="*{letterLocation}" >Incorrect data</p>
+-->
+            <select id="letterLocation" th:field="*{letterLocation}">
+                <option value="SIDE">사이드</option>
+                <option value="CENTER" selected>중앙</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="letterSize">레터링 크기</label>
+            <!--<input type="text" id="letterSize" name="letterSize" class="form-control" th:field="*{letterSize}" th:errorclass="field-error"/>
+            <p class="field-error" th:if="${#fields.hasErrors('letterSize')}" th:errors="*{letterSize}" >Incorrect data</p>
+-->
+            <select id="letterSize" th:field="*{letterSize}">
+                <option value="SMALL">작게</option>
+                <option value="MIDDLE" selected>보통</option>
+                <option value="LARGE">크게</option>
+            </select>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit">생성</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{/}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

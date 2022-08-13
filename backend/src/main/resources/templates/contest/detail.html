@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main {
+            width: 500px;
+            height: 700px;
+            margin: auto;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        input {
+            display: inline-block;
+            width: 400px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 470px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <label for="postImg">도안 이미지</label>
+        <input type="file" id="postImg" name="postImg" th:value="${contest.postImg}" disabled>
+        <label for="postName">도안 제목</label>
+        <input type="text" id="postName" name="postName" th:value="${contest.postName}" disabled>
+        <label for="userId">작성자</label>
+        <input type="text" id="userId" name="userId" th:value="${contest.userId}" disabled>
+        <label for="createdAt">등록 일자</label>
+        <input type="text" id="createdAt" name="createdAt" th:value="${contest.createdAt}" disabled>
+        <label for="updatedAt">최종 수정 일자</label>
+        <input type="text" id="updatedAt" name="updatedAt" th:value="${contest.updatedAt}" disabled>
+        <label for="usedDesign">사용한 케이크 도안</label>
+        <input type="context" id="usedDesign" name="usedDesign" th:value="${design.id}" disabled>
+        <label for="usedOrg">사용한 케이크 장식</label>
+        <input type="context" id="usedOrg" name="usedOrg" th:value="${design.cakeShape}" disabled>
+        <label for="postDes">도안 설명</label>
+        <input type="context" id="postDes" name="postDes" th:value="${contest.postDes}" disabled>
+        <!-- 조회수 -->
+        <!-- 스크랩수 -->
+
+    </div>
+</body>
+</html>
