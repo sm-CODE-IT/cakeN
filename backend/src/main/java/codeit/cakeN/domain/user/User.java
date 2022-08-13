@@ -1,6 +1,8 @@
 package codeit.cakeN.domain.user;
 
+import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
+import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.web.user.dto.UserRequestDto;
 import codeit.cakeN.web.user.dto.UserUpdateDto;
 
@@ -114,6 +116,13 @@ public class User extends Timestamped implements Serializable {
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Design> designList = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    private List<Contest> contestList = new ArrayList<>();
+
+    /*@Builder.Default
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    private List<Letter> letterList = new ArrayList<>();*/
 
     public void addDesign(Design design) {
         // cake design의 작성자는 Design Entity에서 지정
