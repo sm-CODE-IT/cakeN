@@ -75,6 +75,7 @@ const Button = ({ id, message, isToggle }) => {
   const onChangeColor = () => {
     setToggle(!toggle);
   };
+
   return (
     <pre id={id} className={like} onClick={onChangeColor}>
       {message}
@@ -83,11 +84,8 @@ const Button = ({ id, message, isToggle }) => {
 };
 
 const Lettering = () => {
-  const [data, setData] = useState(dummyList);
-
   return (
     <div className="Lettering">
-      <img className="heartimg" src={heart} />
       <br />
       <br />
       <br />
@@ -140,6 +138,7 @@ const Lettering = () => {
       <div className="box" id="parentsday">
         <h2>#어버이날</h2>
       </div>
+      <img className="heartimg" src={heart} />
     </div>
   );
 };

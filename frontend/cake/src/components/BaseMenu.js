@@ -1,9 +1,18 @@
 import { useState } from "react";
 
 const BaseMenu = () => {
+  const str = `
+    <div class="colorContainer">
+    <label for="favcolor"> favorite color:</label>
+    <input type="color" class="color" value="#FFC0CB">
+    <input type="color" class="color" value="#FFF8DC" >
+    </div>`;
+
+  const [color, setColor] = useState("#aabbcc");
   const [visible, setVisible] = useState(false);
   const [x, setX] = useState([]);
   const [y, setY] = useState([]);
+  const [z, setZ] = useState([]);
 
   const handleClickRadioButton = (e) => {
     console.log(e.target.value);
@@ -18,8 +27,6 @@ const BaseMenu = () => {
   return (
     <div className="cakestyle">
       {/* 베이스 윗줄 */}
-      {/* <img className="menu" src="https://ifh.cc/g/jqyhtd.png" /> */}
-      {/* <img className="menu" src="https://ifh.cc/g/Cy46Jj.png" /> */}
       <div className="menubar">
         <label>
           <input
@@ -98,6 +105,12 @@ const BaseMenu = () => {
         </label>
       </div>
       <img className="line" src="https://ifh.cc/g/JRg2th.png" />
+
+      <div class="colorContainer">
+        <input type="color" class="color" />
+        <input type="color" class="color" />
+        <input type="color" value="#FFF8DC" />
+      </div>
     </div>
   );
 };

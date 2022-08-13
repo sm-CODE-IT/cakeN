@@ -27,7 +27,7 @@ const Design = () => {
           <div className="cakestyle">
             <br />
             <button
-              className="menubutton"
+              className="menuButton"
               onClick={() => {
                 setVisible(!visible);
               }}
