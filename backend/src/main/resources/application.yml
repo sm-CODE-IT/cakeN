@@ -1,0 +1,67 @@
+spring:
+  # DB 연결
+  datasource:
+    #    url: jdbc:mysql://localhost:3306/caken?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    #    username: root
+    #    password: codeit
+    #    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 설치된 H2 DB와 연결 url
+    url: jdbc:h2:tcp://localhost/~/cakeN;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver  # 접속을 위한 드라이버
+
+
+  jpa:
+    hibernate:
+      ddl-auto: create   # 객체를 보고 자동으로 테이블을 생성하도록 설정 -> option type: create, create-drop, update, validate, none
+    properties:
+      hibernate:
+        show_sql: true   # Hibernate가 실행한 모든 SQL문 콘솔로 출력
+        format_sql: true   # SQL문을 가독성 있게 표현
+        globally_quoted_identifiers: true
+        use_sql_comments: true   # 디버깅 정보 출력
+
+  h2:
+    console:
+      enabled: true
+
+
+  profiles:
+    include: oauth
+
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
+
+  servlet:
+    multipart:
+      enabled: true    # 파일 업로드 가능 여부 선택 (multipart에 관한 부분 활성화)
+      #      location: C:/Users/SM-PC/cakeNTemp/   # 업로드된 파일의 임시 저장경로
+      max-request-size: 30MB     # 한 번에 최대 업로드 가능 용량
+      max-file-size: 10MB    # 파일 하나의 최대 크기
+
+codeit:
+  cakeN:
+    upload:
+      path: C:/Users/SM-PC/cakeNTemp/   # 마지막에 반드시 '/' 포함
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
+
+logging:
+  level:
+    org.hibernate.type: trace
+    org.springframework: debug
+#    org.apache.coyote.http11: debug
+#    root: debug
+
+
+jwt:
+  header: Authorization
+  #HS512 알고리즘을 사용 => 512bit(64byte) 이상의 secret key를 사용해야 한다.
+  #echo 'silvernine-tech-spring-boot-jwt-tutorial-secret-silvernine-tech-spring-boot-jwt-tutorial-secret'|base64
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  token-validity-in-seconds: 86400
