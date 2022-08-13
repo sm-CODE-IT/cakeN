@@ -3,6 +3,15 @@ import ContentHeader from "../components/ContentHeader";
 const SignUp = () => {
     const title = "회원가입";
     const content = "다양한 서비스를 이용할 수 있습니다.";
+    const pwdCheck = (e) => {
+        var pass = document.getElementById("pwText").value;
+        var passRe = document.getElementById("pwTextRe").value;
+        if (passRe==="") document.getElementById("pwCheck").innerHTML="&nbsp;";
+        else if (passRe===pass) {
+            document.getElementById("pwCheck").innerHTML="일치합니다.";
+        }
+        else document.getElementById("pwCheck").innerHTML="일치하지 않습니다.";
+    }
     return (
         <div className="SignUp">
             <ContentHeader title={title} content={content} />
@@ -28,7 +37,7 @@ const SignUp = () => {
                                 <div className="th">비밀번호*</div>
                                 <div className="td">
                                     <div className="inLine">
-                                        <input className="content"/> 
+                                        <input className="content" id="pwText"/> 
                                     </div>   
                                 </div>
                             </div>
@@ -38,11 +47,12 @@ const SignUp = () => {
                                 <div className="th">비밀번호 재확인*</div>
                                 <div className="td">
                                     <div className="inLine">
-                                        <input className="content"/>
+                                        <input className="content" id="pwTextRe" onkeyup={pwdCheck}/>
+                                        <div className="tableText" id="pwCheck">zz</div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="tableText">일치하지 않습니다.</div>
+                            
                         </div>
 
                         <div className="tr">
