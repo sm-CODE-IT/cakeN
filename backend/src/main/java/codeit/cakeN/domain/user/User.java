@@ -42,6 +42,7 @@ public class User extends Timestamped implements Serializable {
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
 
+
     @Column(length = 20, nullable = false)
     private String nickname;
 
@@ -109,6 +110,11 @@ public class User extends Timestamped implements Serializable {
     // 비밀번호 변경 (수정), 회원 탈퇴 시 비밀번호 재확인 과정에서의 일치여부 판단
     public boolean matchPw(PasswordEncoder passwordEncoder, String checkPassword) {
         return passwordEncoder.matches(checkPassword, getPw());
+    }
+
+    // 프로필 사진 Type: File -> String 으로 변환
+    public String fileToString(File file) {
+        return file.getAttachFile().getStoreFileName();
     }
 
     // 연관관계 메서드

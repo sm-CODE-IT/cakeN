@@ -1,26 +1,29 @@
 package codeit.cakeN.web;
 
 import codeit.cakeN.domain.contest.ContestStore;
-import codeit.cakeN.domain.contest.File;
-import codeit.cakeN.domain.contest.FileRepository;
-import codeit.cakeN.domain.contest.UploadContest;
+import codeit.cakeN.domain.user.*;
+import codeit.cakeN.web.design.DesignController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static codeit.cakeN.web.user.UserController.findSessionUser;
 
 @Slf4j
 @Controller
@@ -28,7 +31,9 @@ import java.util.List;
 public class FileController {
 
     private final FileRepository fileRepository;
-    private final ContestStore contestStore;
+    private final ProfileStore profileStore;
+    private final HttpSession httpSession;
+    private final UserRepository userRepository;
 
     @GetMapping("/files/new")
     public String newFile(@ModelAttribute FileForm form) {
@@ -36,16 +41,22 @@ public class FileController {
     }
 
     @PostMapping("/files/new")
-    public String saveFile(@ModelAttribute FileForm form, RedirectAttributes redirectAttributes) throws IOException {
-        UploadContest attachFile = contestStore.storeContest(form.getAttachFile());
-        List<UploadContest> storeImageFiles = contestStore.storeFiles(form.getImageFiles());
+    public String saveFile(@ModelAttribute FileForm form, RedirectAttributes redirectAttributes, @AuthenticationPrincipal User formUser) throws IOException {
+        UploadProfile attachFile = profileStore.storeProfile(form.getAttachFile());
+        List<UploadProfile> storeImageFiles = profileStore.storeFiles(form.getImageFiles());
+
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+
 
         // 데이터베이스에 저장
         File file = new File();
-        file.setItemName(form.getItemName());
         file.setAttachFile(attachFile);
         file.setImageFiles(storeImageFiles);
-        fileRepository.save(file);
+
+        user.setImage(user.fileToString(file));
+
+        fileRepository.save(user, file);
+
 
         redirectAttributes.addAttribute("fileId", file.getId());
 
@@ -63,7 +74,7 @@ public class FileController {
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
         // file:/Users/ ... .png
-        return new UrlResource("file:" + contestStore.getFullPath(filename));
+        return new UrlResource("file:" + profileStore.getFullPath(filename));
     }
 
     @GetMapping("/attach/{fileId}")
@@ -72,7 +83,7 @@ public class FileController {
         String storeFileName = file.getAttachFile().getStoreFileName();
         String uploadFileName = file.getAttachFile().getUploadFileName();
 
-        UrlResource resource = new UrlResource("file:" + contestStore.getFullPath(storeFileName));
+        UrlResource resource = new UrlResource("file:" + profileStore.getFullPath(storeFileName));
 
         log.info("uploadFileName={}", uploadFileName);
 

@@ -1,3 +1,4 @@
+/*
 package codeit.cakeN.web;
 
 import codeit.cakeN.web.user.dto.UserRequestDto;
@@ -21,11 +22,13 @@ public class StringToRequestDtoConverter extends Throwable implements Converter<
         this.objectMapper = objectMapper;
     }
 
-    /**
+    */
+/**
      * 변환된 DTO에서는 BindingResult 사용 불가 => 직접 비즈니스 로직 내에서 검증 로직을 작성해야 함
      * @param source
      * @return
-     */
+     *//*
+
     @Override
     @SneakyThrows
     public UserRequestDto convert(String source) {
@@ -34,3 +37,4 @@ public class StringToRequestDtoConverter extends Throwable implements Converter<
         return userRequestDto;
     }
 }
+*/

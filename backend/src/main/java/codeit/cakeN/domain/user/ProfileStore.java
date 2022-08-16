@@ -1,6 +1,5 @@
-package codeit.cakeN.domain.contest;
+package codeit.cakeN.domain.user;
 
-import codeit.cakeN.domain.user.UploadContest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,7 +12,7 @@ import java.util.UUID;
 
 // 파일 저장과 관련된 별도의 객체
 @Component
-public class ContestStore {
+public class ProfileStore {
 
     @Value("${codeit.cakeN.upload.path}")
     private String filePath;
@@ -22,18 +21,18 @@ public class ContestStore {
         return filePath + filename;
     }
 
-    public List<UploadContest> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
-        List<UploadContest> storeFileResult = new ArrayList<>();
+    public List<UploadProfile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
+        List<UploadProfile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (!multipartFile.isEmpty()) {
-                storeFileResult.add(storeContest(multipartFile));
+                storeFileResult.add(storeProfile(multipartFile));
             }
         }
 
         return storeFileResult;
     }
 
-    public UploadContest storeContest(MultipartFile multipartFile) throws IOException {
+    public UploadProfile storeProfile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
@@ -43,7 +42,7 @@ public class ContestStore {
         String storeFileName = createStoreFileName(originalFileName);
         multipartFile.transferTo(new File((getFullPath(storeFileName))));
 
-        return new UploadContest(originalFileName, storeFileName);
+        return new UploadProfile(originalFileName, storeFileName);
     }
 
     /**
@@ -70,6 +69,4 @@ public class ContestStore {
 
         return originalFilename.substring(pos + 1);
     }
-
-
 }

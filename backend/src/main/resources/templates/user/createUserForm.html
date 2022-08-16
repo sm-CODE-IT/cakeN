@@ -24,7 +24,7 @@
 
   <h4 class="mb-3">회원 정보 입력</h4>
 
-  <form action="" th:action th:object="${userRequestDto}" method="post">
+  <form action="" th:action th:object="${userRequestDto}" method="post" enctype="multipart/form-data">
 
     <div th:if="${#fields.hasGlobalErrors()}">
       <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
@@ -59,6 +59,12 @@
       <input type="text" id="intro" name="intro" th:field="*{intro}" class="form-control"
              th:errorclass="field-error">
       <p class="field-error"  th:if="${#fields.hasErrors('intro')}"  th:errors="*{intro}" ></p>
+    </div>
+    <div>
+      <label for="image">프로필사진</label>
+      <input type="file" id="image" name="image" th:field="*{image}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('image')}"  th:errors="*{image}" ></p>
     </div>
 
 

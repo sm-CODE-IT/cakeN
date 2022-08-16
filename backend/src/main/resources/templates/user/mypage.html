@@ -21,6 +21,9 @@
             <span><a th:href="@{'/users/update-pw/'+${userId}}">비밀번호 변경하기</a></span>
         </div>
         <div class="my-2">
+            <span><a th:href="@{'/files/new/'}">프로필 사진 변경하기</a></span>
+        </div>
+        <div class="my-2">
             <span th:text="'자기소개 : ' + ${userIntro}"></span>
         </div>
     </div>
