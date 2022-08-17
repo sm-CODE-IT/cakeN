@@ -62,7 +62,7 @@
     </div>
     <div>
       <label for="image">프로필사진</label>
-      <input type="file" id="image" name="image" th:field="*{image}" class="form-control"
+      <input type="text" id="image" name="image" th:field="*{image}" class="form-control"
              th:errorclass="field-error">
       <p class="field-error"  th:if="${#fields.hasErrors('image')}"  th:errors="*{image}" ></p>
     </div>

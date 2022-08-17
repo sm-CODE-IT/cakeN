@@ -1,11 +1,9 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
-import codeit.cakeN.domain.contest.Contest;
-import codeit.cakeN.domain.contest.ContestRepository;
-import codeit.cakeN.domain.user.File;
-import codeit.cakeN.domain.user.FileRepository;
-import codeit.cakeN.domain.user.ProfileStore;
+import codeit.cakeN.domain.user.profileImg.File;
+import codeit.cakeN.domain.user.profileImg.FileRepository;
+import codeit.cakeN.domain.user.profileImg.ProfileStore;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;

@@ -1,11 +1,14 @@
 package codeit.cakeN.web.design;
 
 import codeit.cakeN.domain.design.Design;
+import codeit.cakeN.domain.design.DesignRepository;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.service.design.DesignService;
 import codeit.cakeN.web.design.dto.DesignRequestDto;
 import codeit.cakeN.web.design.dto.DesignUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,9 +32,10 @@ import static codeit.cakeN.web.user.UserController.findSessionUser;
 public class DesignApiController {
 
     private final DesignService designService;
+    private final DesignRepository designRepository;
     private final HttpSession httpSession;
     private final UserRepository userRepository;
-
+//    private final ModelMapper modelMapper;
 
 
 /**
@@ -42,8 +46,9 @@ public class DesignApiController {
      */
 
     @PostMapping("/design")
-    public Long saveDesign(@RequestBody DesignRequestDto designRequestDto, @AuthenticationPrincipal User formUser) {
-    /*if (bindingResult.hasErrors()) {
+    public ResponseEntity<Design> saveDesign(@Valid @RequestBody DesignRequestDto designRequestDto, @AuthenticationPrincipal User formUser) {
+
+        /*if (bindingResult.hasErrors()) {
             red;
     }*/
         /*// 에러 검증 로직 (BindingResult 대체)
@@ -56,8 +61,9 @@ public class DesignApiController {
         codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
 
         designRequestDto.setUser(user);
-        return designService.save(designRequestDto);
+        designService.save(designRequestDto);
 
+        return ResponseEntity.ok(designRequestDto.toEntity());
     }
 
     private Map<String, String> checkParameterValid(DesignRequestDto requestDto) {
@@ -70,6 +76,15 @@ public class DesignApiController {
         return errorsMap;
     }
 
+    /*private Design convertToEntity(DesignRequestDto designRequestDto) {
+        Design design = modelMapper.map(designRequestDto, Design.class);
+
+        if (design.getDesignId() != null) {
+            System.out.println("Old Design Called");
+        }
+        return design;
+    }*/
+
 
 /**
      * 케이크 디자인 리스트 모아보기
@@ -79,7 +94,7 @@ public class DesignApiController {
 
     @GetMapping("/design/list")
     public List<Design> designList(Model model, @AuthenticationPrincipal User formUser) {
-        return designService.showAllDesign();
+        return this.designRepository.findAll();
     }
 
 /**
@@ -90,13 +105,14 @@ public class DesignApiController {
      */
 
     @GetMapping("/design/{id}")
-    public DesignRequestDto designDetail(@PathVariable Long id, Model model) {
+    public ResponseEntity<Design> designDetail(@PathVariable Long id, Model model) {
 
         // 작성자 닉네임 가져오기
         codeit.cakeN.domain.user.User user = userRepository.findById(designService.showInfo(id).getUser().getUserId()).get();
         model.addAttribute("userName", user.getNickname());
 
-        return designService.showInfo(id);
+        DesignRequestDto designRequestDto = designService.showInfo(id);
+        return ResponseEntity.ok(designRequestDto.toEntity());
     }
 
 /**
@@ -106,19 +122,20 @@ public class DesignApiController {
      * @return
      */
     @PutMapping("/design/{id}")
-    public Long updateDesign(@PathVariable Long id, @RequestBody DesignUpdateDto updateDto) {
-        return designService.update(id, updateDto);
+    public ResponseEntity updateDesign(@PathVariable Long id, @RequestBody DesignUpdateDto updateDto) {
+        designService.update(id, updateDto);
+        return ResponseEntity.ok().build();
     }
 
 
-/**
+    /**
      * 케이크 디자인 삭제
      * @param id
      * @return
      */
     @DeleteMapping("/design/{id}")
-    public Long delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         designService.delete(id);
-        return id;
+        return ResponseEntity.ok().build();
     }
 }

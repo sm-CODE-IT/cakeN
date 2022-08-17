@@ -1,8 +1,10 @@
 package codeit.cakeN.web;
 
-import codeit.cakeN.domain.contest.ContestStore;
 import codeit.cakeN.domain.user.*;
-import codeit.cakeN.web.design.DesignController;
+import codeit.cakeN.domain.user.profileImg.File;
+import codeit.cakeN.domain.user.profileImg.FileRepository;
+import codeit.cakeN.domain.user.profileImg.ProfileStore;
+import codeit.cakeN.domain.user.profileImg.UploadProfile;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;

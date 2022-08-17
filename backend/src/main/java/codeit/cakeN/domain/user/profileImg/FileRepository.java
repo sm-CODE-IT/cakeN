@@ -1,10 +1,10 @@
-package codeit.cakeN.domain.user;
+package codeit.cakeN.domain.user.profileImg;
 
+import codeit.cakeN.domain.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 @Repository
 public class FileRepository {

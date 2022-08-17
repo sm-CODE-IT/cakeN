@@ -1,4 +1,4 @@
-package codeit.cakeN.domain.user;
+package codeit.cakeN.domain.user.profileImg;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

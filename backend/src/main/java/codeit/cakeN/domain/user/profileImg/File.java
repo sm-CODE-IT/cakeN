@@ -1,11 +1,7 @@
-package codeit.cakeN.domain.user;
+package codeit.cakeN.domain.user.profileImg;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.List;
 
 // Contest 이미지 업로드용 테스트 Domain

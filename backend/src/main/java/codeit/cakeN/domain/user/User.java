@@ -2,7 +2,7 @@ package codeit.cakeN.domain.user;
 
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
-import codeit.cakeN.domain.letter.Letter;
+import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.web.user.dto.UserRequestDto;
 import codeit.cakeN.web.user.dto.UserUpdateDto;
 
