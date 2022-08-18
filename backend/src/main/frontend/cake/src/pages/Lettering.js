@@ -82,7 +82,6 @@ const Button = ({ id, message, isToggle }) => {
 };
 
 const Lettering = () => {
-
   return (
     <div className="Lettering">
       <br />
@@ -91,6 +90,7 @@ const Lettering = () => {
       <br />
       <br />
       <div className="lettering_type">
+        {/* 알록달록한 색깔로! */}
         <a href="#birthday">#생일</a>
         <a href="#birthday2">#생신</a>
         <a href="#parentsday">#어버이날</a>
@@ -137,7 +137,14 @@ const Lettering = () => {
       <div className="box" id="parentsday">
         <h2>#어버이날</h2>
       </div>
-      <img className="heartimg" src={process.env.PUBLIC_URL + `images/heart.png`} alt="heart"/>
+      {/* 앵커태그 제대로 달기! */}
+      <a href="/mypage">
+        <img
+          className="heartimg"
+          src={process.env.PUBLIC_URL + `images/heart.png`}
+          alt="heart"
+        />
+      </a>
     </div>
   );
 };
