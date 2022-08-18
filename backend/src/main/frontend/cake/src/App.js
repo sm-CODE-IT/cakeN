@@ -13,6 +13,7 @@ import MyPage from './pages/MyPage';
 import MyCake from './pages/MyCake';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import AppRouter from "./components/route/RouterComponent";
 
 
 function App() {
@@ -71,7 +72,9 @@ function App() {
       </BrowserRouter>
 
       {testStr}
+
     </div>
+
   );
 }
 

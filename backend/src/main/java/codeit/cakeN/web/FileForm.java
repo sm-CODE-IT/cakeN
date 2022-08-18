@@ -5,11 +5,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+// 프로필 이미지 변경 폼
 @Data
 public class FileForm {
-
+    
     private Long fileId;
-    private String itemName;
     private MultipartFile attachFile;
     private List<MultipartFile> imageFiles;
 }
