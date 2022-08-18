@@ -5,31 +5,24 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "heart")
 @Getter
 @Setter
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-@Entity
+@NoArgsConstructor
 public class Heart {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @JoinColumn(name = "letter_id")
-    @ManyToOne
-    private NewLetter newletter;
+    @Column(name = "letter_id")
+    @NonNull
+    private String letterId;
 
-    @JoinColumn(name = "user_id")   // userId??
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
-
-    @Builder
-    public Heart(NewLetter newletter, User user) {
-        this.newletter = newletter;
-        this.user = user;
-    }
-
-
-
-
 }

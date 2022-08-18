@@ -1,5 +1,6 @@
 package codeit.cakeN.domain.user;
 
+import codeit.cakeN.NewLetter.domain.Heart;
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.user.profileImg.File;
@@ -125,6 +126,17 @@ public class User extends Timestamped implements Serializable {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Contest> contestList = new ArrayList<>();
+
+    // 민영 - heart 연관 ======================
+    @Builder.Default
+    @OneToMany(
+            mappedBy = "user",
+            cascade = ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY)
+    private List<Heart> hearts;
+    // ======================================
+
 
     /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
