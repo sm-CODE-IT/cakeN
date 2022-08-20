@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 // 데이터 수정 전 User 객체를 임시 저장
-@Getter
 @NoArgsConstructor
 @Data
 public class UserRequestDto {

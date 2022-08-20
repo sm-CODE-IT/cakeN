@@ -13,7 +13,8 @@ import MyPage from './pages/MyPage';
 import MyCake from './pages/MyCake';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import AppRouter from "./components/route/RouterComponent";
+import UserListComponent from "./components/user/UserListComponent";
+import React from "@types/react";
 
 
 function App() {
@@ -54,6 +55,17 @@ function App() {
         .catch(error => console.log(error))
   }, []);
 
+  // User List API 불러오기 (Axios 방식)
+  const [users, setUsers] = useState('')
+  useEffect(() => {
+    axios({
+      url: '/api/test',
+      method: 'GET'
+    }).then(response => setUsers(response.data))
+        .catch(error => console.log(error))
+  }, []);
+
+
   return (
     <div className="App">
       <NaviHeader />
@@ -68,10 +80,12 @@ function App() {
           <Route path='/letter' element={<Lettering />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/myCake' element={<MyCake />} />
+          <Route path="/users" component={UserListComponent}/>
         </Routes>
       </BrowserRouter>
 
       {testStr}
+      {users}
 
     </div>
 

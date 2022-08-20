@@ -39,7 +39,7 @@ public class FileController {
 
     @GetMapping("/files/new")
     public String newFile(@ModelAttribute FileForm form) {
-        return "file-form";
+        return "user/file-form";
     }
 
     @PostMapping("/files/new")
