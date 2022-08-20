@@ -80,12 +80,10 @@ function App() {
           <Route path='/letter' element={<Lettering />} />
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/myCake' element={<MyCake />} />
-          <Route path="/users" component={UserListComponent}/>
         </Routes>
       </BrowserRouter>
 
       {testStr}
-      {users}
 
     </div>
 
