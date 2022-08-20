@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Pattaya&family=Rubik+Puddles&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
 /* body */
 . {
   margin: 0%;
@@ -8,7 +8,7 @@
 /* NaviHeader */
 .NaviHeader {
   overflow: hidden;
-  
+
   background-color: pink;
   padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
   transition: 0.4s; /* 패딩 줄어들 때 지연 */
@@ -22,7 +22,7 @@
   justify-content: space-around;
   align-items: center;
 }
-.NaviHeader .right{
+.NaviHeader .right {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -41,14 +41,14 @@
   color: black;
   text-decoration: none;
   padding: 12px;
-  
+  font-family: "Nanum Gothic";
+  /* font-weight: bold; */
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
 
   transition: 0.5s;
 }
-
 
 /* 링크에 hover  */
 .NaviHeader .menu:hover {
@@ -58,7 +58,6 @@
 .NaviHeader .menu.active:hover {
   background-color: cornsilk;
 }
-
 
 /* ContentHeader */
 .ContentHeader {
@@ -266,7 +265,6 @@ label > input[type="radio"]:checked + img {
 /* Login */
 .Login {
   margin-top: 100px;
-
 }
 
 /* SignUp */
@@ -280,17 +278,16 @@ label > input[type="radio"]:checked + img {
   margin-right: auto;
 }
 
-
 .SignUp .text {
   color: pink;
   font-size: 13px;
   padding: 3px;
 }
 
-.SignUp .table{
+.SignUp .table {
   font-size: 15px;
   border: 2px solid #ffc0cb;
-  
+
   padding: 6% 5% 6% 5%;
 }
 
@@ -304,7 +301,7 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
 }
 
-.SignUp .tableText{
+.SignUp .tableText {
   font-size: 13px;
   color: pink;
 }
@@ -318,9 +315,8 @@ label > input[type="radio"]:checked + img {
 }
 
 .SignUp .inLine {
- display: flex;
- align-items: center;
-
+  display: flex;
+  align-items: center;
 }
 
 .SignUp .content {
@@ -384,21 +380,21 @@ label > input[type="radio"]:checked + img {
 }
 
 .MyPageLeft .user_emil {
-  color: #FFD53F;
+  color: #ffd53f;
   font-size: 13px;
   margin-bottom: 10px;
 }
 
 .MyPageLeft img {
   padding-top: 6px;
-  padding-bottom: 3px; 
+  padding-bottom: 3px;
   padding-left: 3px;
   padding-right: 3px;
   margin: 5px;
 }
 
 .MyPageLeft .item {
-  border: 1px solid pink; 
+  border: 1px solid pink;
   border-radius: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -430,8 +426,8 @@ label > input[type="radio"]:checked + img {
   margin-left: -23px;
 }
 .MyPageLeft li:hover {
-  border: 1px solid #FFEAED;
-  background-color: #FFEAED;
+  border: 1px solid #ffeaed;
+  background-color: #ffeaed;
   color: white;
 }
 
@@ -442,7 +438,7 @@ label > input[type="radio"]:checked + img {
   border: none;
   border-radius: 5px;
   margin-top: 15px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
   color: white;
 }
 
@@ -458,9 +454,9 @@ label > input[type="radio"]:checked + img {
   margin-top: 50px;
   padding: 20px 40px 20px 40px;
 
-  border: 1px solid #FFEAED;
+  border: 1px solid #ffeaed;
   border-radius: 5px;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
 }
 
 .ViewInfoAll .tr {
@@ -477,7 +473,7 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
   align-items: center;
 }
-.ViewInfoAll .text { 
+.ViewInfoAll .text {
   padding: 5px 10px 5px 10px;
 }
 .ViewInfoAll .nickText {
@@ -525,7 +521,7 @@ label > input[type="radio"]:checked + img {
   width: 30%;
   border: none;
   border-radius: 5px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
   color: white;
   font-size: 15px;
   padding-top: 10px;
@@ -544,11 +540,11 @@ label > input[type="radio"]:checked + img {
   margin-top: 50px;
   padding: 40px 40px 40px 40px;
 
-  border: 1px solid #FFEAED;
+  border: 1px solid #ffeaed;
   border-radius: 5px;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
 }
-.Password .text { 
+.Password .text {
   width: 35%;
 }
 .Password .passText {
@@ -571,7 +567,7 @@ label > input[type="radio"]:checked + img {
 }
 .Password .td {
   display: flex;
-  align-items: flex-start;  
+  align-items: flex-start;
   justify-content: space-between;
 }
 .Password .input {
@@ -594,7 +590,7 @@ label > input[type="radio"]:checked + img {
   width: 30%;
   border: none;
   border-radius: 5px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
   color: white;
   font-size: 15px;
   padding-top: 10px;
@@ -608,15 +604,15 @@ label > input[type="radio"]:checked + img {
 /* DeCake */
 .DeCake {
   width: fit-content;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
   padding: 2% 2% 2% 2%;
   margin: 1%;
 }
-.DeCake .x_btn_div{
+.DeCake .x_btn_div {
   display: flex;
   justify-content: flex-end;
 }
-.DeCake .x_btn{
+.DeCake .x_btn {
   background: pink;
   border: none;
 }
@@ -626,7 +622,7 @@ label > input[type="radio"]:checked + img {
   align-items: center;
 }
 
-.DeCake .btn{
+.DeCake .btn {
   width: fit-content;
   font-size: 20px;
   display: block;
@@ -637,3 +633,59 @@ label > input[type="radio"]:checked + img {
 }
 /* ConCake */
 /* Plus */
+
+/* Home */
+.Home {
+  text-align: center;
+}
+
+.Home .pinkbox {
+  width: 720px;
+  height: 80px;
+}
+
+@keyframes spaceship-ani {
+  to {
+    background-position: 0 -1265px;
+  }
+}
+.Home .spaceship {
+  align-items: center;
+  margin: auto;
+  border: 6px solid #ffc0cb;
+  width: 420px;
+  height: 40px;
+  background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
+  animation: spaceship-ani 20s infinite steps(5000);
+}
+
+.Home .mark {
+  display: inline-block;
+  background: linear-gradient(to top, #ffc0cb 50%, transparent 50%);
+}
+
+.Home .cakeLogo {
+  margin: auto;
+  width: 100px;
+}
+
+.Home h2 {
+  font-family: "Nanum Gothic";
+}
+
+.Home h3 {
+  font-family: "Nanum Gothic";
+}
+
+.Home .toLetterButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+  font-size: larger;
+  width: 200px;
+  padding: 8px;
+  background-color: #69492d;
+  color: #ffc0cb;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 3px;
+}
