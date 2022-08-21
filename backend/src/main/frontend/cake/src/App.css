@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
-/* body */
+/* body
 . {
   margin: 0%;
   padding: 0%;
-}
+} */
 
 /* NaviHeader */
 .NaviHeader {
@@ -688,4 +688,19 @@ label > input[type="radio"]:checked + img {
   border: none;
   border-radius: 5px;
   box-shadow: 3px 3px 3px 3px;
+}
+
+/* Login */
+.Login {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.Login .form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Login .loginField {
 }
