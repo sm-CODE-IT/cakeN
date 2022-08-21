@@ -13,7 +13,6 @@ import MyPage from './pages/MyPage';
 import MyCake from './pages/MyCake';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import UserListComponent from "./components/user/UserListComponent";
 import React from "@types/react";
 
 

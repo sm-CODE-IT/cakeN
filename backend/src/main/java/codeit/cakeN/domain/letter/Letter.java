@@ -38,5 +38,12 @@ public class Letter {
     @Column
     private int tag;    // TODO Tag Entity 생성
 
+
+    // Letter 정보 수정 메서드
+    public void update(Letter letter) {
+        this.content = letter.getContent();
+        this.tag = letter.getTag();
+    }
+
 }
 

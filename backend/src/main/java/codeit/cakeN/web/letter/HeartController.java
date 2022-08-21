@@ -27,8 +27,8 @@ public class HeartController {
 
     @PostMapping("/heart")
     public ResponseEntity<Heart> heart(@RequestBody HeartDto heartDto, @AuthenticationPrincipal User formUser) throws Exception {
-        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
-        heartDto.setUserId(user.getUserId());
+        /*codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+        heartDto.setUserId(user.getUserId());*/
         heartService.heart(heartDto);
         return ResponseEntity.ok(heartDto.toEntity());
     }

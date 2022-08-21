@@ -129,10 +129,14 @@ public class User extends Timestamped implements Serializable {
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Contest> contestList = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    /*@Builder.Default
+    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true)
+    private List<Letter> letterList = new ArrayList<>();
+*/
+    /*@Builder.Default
+    @OneToMany(mappedBy = "heartLetter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
     private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
-
+*/
 
     /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)

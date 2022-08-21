@@ -17,57 +17,53 @@ public class LetterController {
 
     private final LetterService letterService;
 
-    @GetMapping("/")
-    public String BlankPage() {
-        return "newletter/blank";
-    }
 
-    @GetMapping("/list")
-    public String list() {
-        // model.addAttribute("newletters", newletterService.list());
-        return "newletter/list";
+    @GetMapping("/")
+    public String list(Model model) {
+        model.addAttribute("letters", letterService.list());
+        return "letter/blank";
     }
 
     @GetMapping("/detail/{letter_id}")
     public String detail(@PathVariable Long letter_id, Model model) {
-        model.addAttribute("newletter", letterService.detail(letter_id));
-        return "newletter/detail";
+        model.addAttribute("letter", letterService.detail(letter_id));
+        return "letter/detail";
     }
 
     @GetMapping("/register")
     public  String registerGet() {
-        return "newletter/register";
+        return "letter/register";
     }
 
     @PostMapping("/register")
     public String registerPost(Letter letter) {
         letterService.register(letter);
         // return "redirect:/newletter/list";
-        return "redirect:/newletter/";
+        return "redirect:/letter/";
     }
 
     @GetMapping("/update/{letter_id}")
     public String updateGet(@PathVariable Long letter_id, Model model) {
-        model.addAttribute("newletter", letterService.detail(letter_id));
-        return "newletter/update";
+        model.addAttribute("letter", letterService.detail(letter_id));
+        return "letter/update";
     }
 
     @PostMapping("/update")
     public String updatePost(Letter letter) {
         letterService.update(letter);
-        return "redirect:/newletter/";
+        return "redirect:/letter/";
     }
 
     @GetMapping("/delete/{letter_id}")
     public String delete(@PathVariable Long letter_id) {
         letterService.delete(letter_id);
-        return "redirect:/newletter/";
+        return "redirect:/letter/";
     }
 
     // 실험
     @GetMapping("/whynoletter")
     public String letterTest() {
-        return "newletter/test";
+        return "letter/test";
     }
 
 }
