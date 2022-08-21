@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .main {
+            width: 500px;
+            height: 700px;
+            margin: auto;
+        }
+
+        label {
+            display: inline-block;
+            width: 200px;
+        }
+
+        input {
+            display: inline-block;
+            width: 400px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 470px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <form method="post">
+            <label for="postImg">도안 이미지</label>
+            <input type="file" id="postImg" name="postImg">
+            <label for="postName">도안 제목</label>
+            <input type="text" id="postName" name="postName">
+            <label for="userId">작성자</label>
+            <input type="text" id="userId" name="userId">
+            <label for="usedDesign">사용한 케이크 도안</label>
+            <input type="context" id="usedDesign" name="usedDesign" th:value="${design.id}" disabled>
+            <label for="usedOrg">사용한 케이크 장식</label>
+            <input type="context" id="usedOrg" name="usedOrg" th:value="${design.cakeShape}" disabled>
+            <label for="postDes">도안 설명</label>
+            <input type="context" id="postDes" name="postDes" th:value="${contest.postDes}" disabled>
+
+        </form>
+    </div>
+</body>
+</html>
