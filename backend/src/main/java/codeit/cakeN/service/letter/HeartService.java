@@ -22,7 +22,6 @@ public class HeartService {
     private final HeartRepository heartRepository;
     private final UserRepository userRepository;
     private final LetterRepository letterRepository;
-    private User user;
 
     public void heart(HeartDto heartDto) throws Exception {
 
@@ -31,11 +30,7 @@ public class HeartService {
             throw new LetterException(LetterExceptionType.ALREADY_HEART_LETTER);
         }
 
-        Heart heart = Heart.builder()
-                .letter(letterRepository.findById(heartDto.getLetterId()).get())
-                .user(userRepository.findById(heartDto.getUserId()).get())
-                .build();
-
+        Heart heart = heartDto.toEntity();
         heartRepository.save(heart);
 
         updateHeartCount(heartDto.getLetterId(), 1);
@@ -51,11 +46,11 @@ public class HeartService {
 
         heartRepository.delete(heartOpt.get());
 
-        updateHeartCount(heartDto.getUserId(), -1);
+        updateHeartCount(heartDto.getLetterId(), -1);
     }
 
     public Optional<Heart> findHeartWithUserAndLetter(HeartDto heartDto) {
-        return heartRepository.findHeartByUserAndLetter(user, letterRepository.findById(heartDto.getLetterId()).get());
+        return heartRepository.findHeartByUserAndLetter(userRepository.findById(heartDto.getUserId()).get(), letterRepository.findById(heartDto.getLetterId()).get());
     }
 
     public void updateHeartCount(Long letterId, Integer plusOrMinus) throws Exception {
@@ -67,6 +62,5 @@ public class HeartService {
         Integer heartCount = letterOpt.get().getHearts();
         heartCount += plusOrMinus;
         letterOpt.get().setHearts(heartCount);
-
     }
 }

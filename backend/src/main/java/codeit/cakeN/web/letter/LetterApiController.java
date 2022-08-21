@@ -2,6 +2,7 @@ package codeit.cakeN.web.letter;
 
 import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.domain.letter.LetterRepository;
+import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.letter.LetterException;
 import codeit.cakeN.exception.letter.LetterExceptionType;
 import codeit.cakeN.exception.user.UserException;
@@ -11,10 +12,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.nio.charset.Charset;
 import java.util.List;
+
+import static codeit.cakeN.web.user.UserController.findSessionUser;
 
 @RestController
 @RequestMapping("/api")
@@ -23,6 +29,8 @@ public class LetterApiController {
 
     private final LetterService letterService;
     private final LetterRepository letterRepository;
+    private final HttpSession httpSession;
+    private final UserRepository userRepository;
 
     /**
      * Letter 등록
@@ -30,8 +38,14 @@ public class LetterApiController {
      * @return
      */
     @PostMapping("/letter")
-    public ResponseEntity<Letter> registerLetter(Letter letter) {
+    public ResponseEntity<Letter> registerLetter(Letter letter, @AuthenticationPrincipal User formUser) {
         letterService.register(letter);
+
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+
+        /* if (user != null) {
+            user.getLetterList().add(letter);
+        }*/
 
         return ResponseEntity.ok(letter);
     }

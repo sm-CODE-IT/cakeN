@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const USER_API_BASE_URL = "http://localhost:8080/api/users";
-const LETTER_API_BASE_URL = "https://localhost:8080/api/letter";
+const LETTER_API_BASE_URL = "http://localhost:8080/api/letter";
 
 class ApiService {
 
+    // User API URL
     fetchUsers() {
         return axios.get(USER_API_BASE_URL);
     }
@@ -23,6 +24,15 @@ class ApiService {
 
     updateUser(user) {
         return axios.put(USER_API_BASE_URL + '/' + user.userId, user);
+    }
+
+    // 레터링 API URL
+    deleteLetter(letterId) {
+        return axios.delete(LETTER_API_BASE_URL + '/' + letterId);
+    }
+
+    updateLetter(letter) {
+        return axios.put(LETTER_API_BASE_URL + '/' + letter.letter_id, letter);
     }
 }
 

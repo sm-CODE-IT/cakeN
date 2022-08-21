@@ -27,7 +27,7 @@ public class LetterService {
     }
 
     public void update(Letter letter) {
-        letterRepository.save(letter);
+        letter.update(letter);
     }
 
     public void delete(Long letterId) {
