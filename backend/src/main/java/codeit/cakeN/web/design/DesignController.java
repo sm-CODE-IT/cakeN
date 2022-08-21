@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -52,7 +53,7 @@ public class DesignController {
      * @return
      */
     @PostMapping("/")
-    public String saveDesign(@Valid DesignRequestDto designRequestDto, @AuthenticationPrincipal User formUser, BindingResult bindingResult, Model model) {
+    public String saveDesign(@Valid DesignRequestDto designRequestDto, @AuthenticationPrincipal User formUser, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             return "design/createDesignForm";
@@ -62,6 +63,9 @@ public class DesignController {
 
         designRequestDto.setUser(user);
         designService.save(designRequestDto);
+
+//        redirectAttributes.addAttribute("designId", designRequestDto.getId());
+
 
         return "redirect:/design/list";
     }

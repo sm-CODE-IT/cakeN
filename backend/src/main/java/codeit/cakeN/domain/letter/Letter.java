@@ -1,40 +1,48 @@
 package codeit.cakeN.domain.letter;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Builder
 @Table(name = "LETTER")
 public class Letter {
 
     @Id
-    @GeneratedValue
-    @Column(name = "letter_id", unique = true, nullable = false)
-    private Long letter_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long letterId;      // 게시글의 번호
 
-    @Column(length = 100, nullable = false)
-    private String letter;
+    // 작성자 어떻게 데리고 오지? 현재 로그인 한 사람
+    // user_id
 
-    @CreatedDate
+    @Column
+    private String content;      // 레터의 내용
+
+    @Column
+    private Integer hearts = 0;   // 좋아요 수
+
+    @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime created_at;
 
-    @LastModifiedDate
+    @UpdateTimestamp
     private LocalDateTime updated_at;
 
-    @Builder
-    public Letter(Long letter_id, String letter) {
-        this.letter_id = letter_id;
-        this.letter = letter;
+    @Column
+    private int tag;    // TODO Tag Entity 생성
+
+
+    // Letter 정보 수정 메서드
+    public void update(Letter letter) {
+        this.content = letter.getContent();
+        this.tag = letter.getTag();
     }
 
 }
