@@ -2,8 +2,6 @@ package codeit.cakeN.service.contest;
 
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.contest.ContestRepository;
-import codeit.cakeN.domain.contest.ContestScrap;
-import codeit.cakeN.domain.contest.ContestScrapRepository;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +17,6 @@ import java.util.Optional;
 public class ContestService {
 
     private final ContestRepository contestRepository;
-    private final ContestScrapRepository contestScrapRepository;
     private final UserRepository userRepository;
 
     public void register(Contest contest) {

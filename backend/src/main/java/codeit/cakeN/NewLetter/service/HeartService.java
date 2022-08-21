@@ -17,6 +17,7 @@ import java.util.Optional;
 @Service
 public class HeartService {
 
+    /*
     private final HeartRepository heartRepository;
     private final UserRepository userRepository;
 
@@ -81,4 +82,5 @@ public class HeartService {
         heartRepository.unLikes(letter_id, user);   // ? 가능?
     }
      */
+
 }
