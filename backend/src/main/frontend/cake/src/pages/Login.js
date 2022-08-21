@@ -16,11 +16,11 @@ const Login = () => {
             <div>
               <input type="password" placeholder="비밀번호" required />
             </div>
-          </div>
 
-          <button className="loginButton" type="submit">
-            {"로그인"}
-          </button>
+            <button className="loginButton" type="submit">
+              {"로그인"}
+            </button>
+          </div>
         </form>
       </div>
 

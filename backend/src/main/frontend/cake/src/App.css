@@ -702,5 +702,21 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
 }
 
+.Login .loginButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+
+  width: 175px;
+  margin-top: 2px;
+  padding: 2px;
+  background-color: #ffc0cb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
 .Login .loginField {
+  padding: 10px;
+  background-color: cornsilk;
+  border-radius: 3px;
 }
