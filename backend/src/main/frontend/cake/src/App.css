@@ -700,23 +700,33 @@ label > input[type="radio"]:checked + img {
 .Login .form {
   display: flex;
   flex-wrap: wrap;
-}
-
-.Login .loginButton {
-  font-family: "Nanum Gothic";
-  font-weight: bold;
-
-  width: 175px;
-  margin-top: 2px;
-  padding: 2px;
-  background-color: #ffc0cb;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  text-align: center;
+  justify-content: center;
 }
 
 .Login .loginField {
   padding: 10px;
   background-color: cornsilk;
   border-radius: 3px;
+  border: 4px outset white;
+}
+
+.Login input {
+  text-align: center;
+  border: none;
+  margin: 5px;
+  padding: 3px;
+}
+
+.Login .loginButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+  margin: 5px;
+
+  width: 175px;
+  padding: 3px;
+  background-color: #ffc0cb;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
