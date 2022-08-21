@@ -705,17 +705,23 @@ label > input[type="radio"]:checked + img {
 }
 
 .Login .loginField {
-  padding: 10px;
-  background-color: cornsilk;
+  padding: 6px;
+  background-color: white;
   border-radius: 3px;
-  border: 4px outset white;
+  /* border: 4px outset white; */
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
 }
 
 .Login input {
+  font-family: "Nanum Gothic";
   text-align: center;
   border: none;
+  background-color: cornsilk;
+  background: linear-gradient(to top, cornsilk, white);
   margin: 5px;
-  padding: 3px;
+  width: 175px;
+  padding: 2px;
+
 }
 
 .Login .loginButton {
@@ -724,9 +730,10 @@ label > input[type="radio"]:checked + img {
   margin: 5px;
 
   width: 175px;
-  padding: 3px;
-  background-color: #ffc0cb;
-  color: white;
+  background-color: #ff8080;
+  color: black;
   border: none;
   border-radius: 5px;
+  /* border: 2px solid #ff8080; */
+  background: linear-gradient(to bottom, white, #ff8080);
 }
