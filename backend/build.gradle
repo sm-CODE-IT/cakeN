@@ -45,6 +45,14 @@ dependencies {
 	// 이미지 썸네일 관련 라이브러리
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.11'
 
+	// DTO <-> Entity 간 변환을 위한 Converter
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+
+	// spring rest docs
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
 }
 
 test {
