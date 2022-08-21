@@ -1,7 +1,7 @@
-package codeit.cakeN.NewLetter.controller;
+package codeit.cakeN.web.letter;
 
-import codeit.cakeN.NewLetter.domain.NewLetter;
-import codeit.cakeN.NewLetter.service.NewLetterService;
+import codeit.cakeN.domain.letter.Letter;
+import codeit.cakeN.service.letter.LetterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/newletter")
+@RequestMapping("/letter")
 @RequiredArgsConstructor
-public class NewLetterController {
+public class LetterController {
 
-    private final NewLetterService newletterService;
+    private final LetterService letterService;
 
     @GetMapping("/")
     public String BlankPage() {
@@ -29,8 +29,8 @@ public class NewLetterController {
     }
 
     @GetMapping("/detail/{letter_id}")
-    public String detail(@PathVariable int letter_id, Model model) {
-        model.addAttribute("newletter", newletterService.detail(letter_id));
+    public String detail(@PathVariable Long letter_id, Model model) {
+        model.addAttribute("newletter", letterService.detail(letter_id));
         return "newletter/detail";
     }
 
@@ -40,27 +40,27 @@ public class NewLetterController {
     }
 
     @PostMapping("/register")
-    public String registerPost(NewLetter newletter) {
-        newletterService.register(newletter);
+    public String registerPost(Letter letter) {
+        letterService.register(letter);
         // return "redirect:/newletter/list";
         return "redirect:/newletter/";
     }
 
     @GetMapping("/update/{letter_id}")
-    public String updateGet(@PathVariable int letter_id, Model model) {
-        model.addAttribute("newletter", newletterService.detail(letter_id));
+    public String updateGet(@PathVariable Long letter_id, Model model) {
+        model.addAttribute("newletter", letterService.detail(letter_id));
         return "newletter/update";
     }
 
     @PostMapping("/update")
-    public String updatePost(NewLetter newletter) {
-        newletterService.update(newletter);
+    public String updatePost(Letter letter) {
+        letterService.update(letter);
         return "redirect:/newletter/";
     }
 
     @GetMapping("/delete/{letter_id}")
-    public String delete(@PathVariable int letter_id) {
-        newletterService.delete(letter_id);
+    public String delete(@PathVariable Long letter_id) {
+        letterService.delete(letter_id);
         return "redirect:/newletter/";
     }
 

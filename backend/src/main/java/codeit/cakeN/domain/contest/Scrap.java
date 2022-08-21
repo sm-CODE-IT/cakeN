@@ -1,15 +1,18 @@
 package codeit.cakeN.domain.contest;
 
 import codeit.cakeN.domain.user.User;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name="contest_scrap")
-public class ContestScrap {
-
+@Builder
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "scrap")
+public class Scrap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scrapId;
@@ -22,8 +25,8 @@ public class ContestScrap {
     @JoinColumn(name = "contest_id")
     private Contest contest;
 
-    public static ContestScrap toContestScrap(User user, Contest contest) {
-        ContestScrap contestScrap = new ContestScrap();
+    public static Scrap toContestScrap(User user, Contest contest) {
+        Scrap contestScrap = new Scrap();
         contestScrap.setUser(user);
         contestScrap.setContest(contest);
 

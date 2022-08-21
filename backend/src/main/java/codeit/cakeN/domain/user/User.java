@@ -1,8 +1,10 @@
 package codeit.cakeN.domain.user;
 
+import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.letter.Letter;
+import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.web.user.dto.UserRequestDto;
 import codeit.cakeN.web.user.dto.UserUpdateDto;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor
@@ -41,6 +44,7 @@ public class User extends Timestamped implements Serializable {
 
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
+
 
     @Column(length = 20, nullable = false)
     private String nickname;
@@ -111,6 +115,11 @@ public class User extends Timestamped implements Serializable {
         return passwordEncoder.matches(checkPassword, getPw());
     }
 
+    // 프로필 사진 Type: File -> String 으로 변환
+    public String fileToString(File file) {
+        return file.getAttachFile().getStoreFileName();
+    }
+
     // 연관관계 메서드
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
@@ -119,6 +128,11 @@ public class User extends Timestamped implements Serializable {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Contest> contestList = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
+
 
     /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
