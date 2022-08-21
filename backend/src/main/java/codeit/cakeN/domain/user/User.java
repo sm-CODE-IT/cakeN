@@ -1,6 +1,8 @@
 package codeit.cakeN.domain.user;
 
 import codeit.cakeN.NewLetter.domain.Heart;
+import codeit.cakeN.NewLetter.domain.NewLetter;
+
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.user.profileImg.File;
@@ -19,10 +21,9 @@ import java.util.List;
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
-@Builder
 @Table(name = "USER")
 public class User extends Timestamped implements Serializable {
 
@@ -127,6 +128,7 @@ public class User extends Timestamped implements Serializable {
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Contest> contestList = new ArrayList<>();
 
+    /*
     // 민영 - heart 연관 ======================
     @Builder.Default
     @OneToMany(
@@ -137,6 +139,17 @@ public class User extends Timestamped implements Serializable {
     private List<Heart> hearts;
     // ======================================
 
+     */
+
+
+    /*@Builder.Default
+    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true)
+    private List<Letter> letterList = new ArrayList<>();
+*/
+    /*@Builder.Default
+    @OneToMany(mappedBy = "heartLetter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
+*/
 
     /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)

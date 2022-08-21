@@ -283,39 +283,4 @@ public class UserController {
                 .body(resource);
     }
 
-
-    /*
-     * rest API
-     */
-
-    /*// Create
-    //*public User createUser(@RequestBody UserRequestDto requestDto) {
-        User user = new User(requestDto);
-        return userRepository.save(user);
-    }*//*
-
-    // Read (전체)
-    @GetMapping("/api/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    // Read (개별)
-    @GetMapping("/api/users/{userId}")
-    public Optional<User> getUser(@PathVariable Long userId) {
-        return Optional.of(userRepository.findById(userId));
-    }
-
-    // Update -> Patch / Put
-    @PutMapping("/api/users/{userId}")
-    public Long updateUser(@PathVariable Long userId, @RequestBody UserRequestDto requestDto) {
-        return userService.update(userId, requestDto);
-    }
-
-    // Delete
-    @DeleteMapping("/api/users/{userId}")
-    public Long deleteUser(@PathVariable Long userId) {
-        userRepository.deleteById(userId);
-        return userId;
-    }*/
 }

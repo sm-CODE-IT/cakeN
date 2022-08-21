@@ -19,6 +19,11 @@ this is new letter update page!!
             <input type="text" name="tag" id="tag" th:value="${newletter.tag}"> <br>
             <label for="letter">내용 :</label>
             <textarea name="letter" id="letter" th:text="${newletter.letter}"></textarea> <br>
+            <input type="hidden" name="letter_id" id="letter_id" th:value="${letter.letterId}">
+            <label for="tag">문구 번호(tag) :</label>
+            <input type="text" name="tag" id="tag" th:text="${letter.tag}"> <br>
+            <label for="content">내용 :</label>
+            <textarea name="content" id="content" th:text="${letter.content}"></textarea> <br>
             <button type="submit">수정</button>
         </form>
     </div>

@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
@@ -46,6 +45,7 @@ public class NewLetter {
 
     private Integer heartCount;
 
+    @Builder.Default
     private Boolean isHeart = false;
 
 
