@@ -1,19 +1,19 @@
 import ContentHeader from "../components/ContentHeader";
 import MyPageLeft from "../components/MyPageLeft";
-import ViewInfo from "./ViewInfo";
+import Password from "./Password";
 
-const MyPage = () => {
-  const title = "내 프로필 보기";
-  const content = "내 프로필을 확인할 수 있습니다.";
+const MyPassword = () => {
+  const title = "비밀번호 변경";
+  const content = "내 비밀번호를 변경할 수 있습니다.";
   return (
     <div className="MyPage">
       <MyPageLeft />
-      <div className="MyPageAll">
+      <div>
         <ContentHeader title={title} content={content} />
-        <ViewInfo />
+        <Password />
       </div>
     </div>
   );
 };
 
-export default MyPage;
+export default MyPassword;
