@@ -695,6 +695,7 @@ label > input[type="radio"]:checked + img {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .Login .form {
@@ -702,31 +703,128 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
   text-align: center;
   justify-content: center;
+  align-items: center;
 }
 
 .Login .loginField {
-  padding: 10px;
-  background-color: cornsilk;
+  padding: 6px;
+  /* background-color: rgb(255, 251, 234); */
+  background-color: white;
   border-radius: 3px;
-  border: 4px outset white;
+  /* border: 4px outset white; */
+  /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
+  box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
+  /* box-shadow: 5px 5px 10px #666; */
 }
 
 .Login input {
+  font-family: "Nanum Gothic";
   text-align: center;
   border: none;
-  margin: 5px;
-  padding: 3px;
+  background-color: cornsilk;
+  /* background: linear-gradient(to top, cornsilk, white); */
+  margin: 3px;
+  width: 180px;
+  padding: 2px;
 }
 
 .Login .loginButton {
   font-family: "Nanum Gothic";
   font-weight: bold;
   margin: 5px;
+  width: 180px;
 
-  width: 175px;
-  padding: 3px;
-  background-color: #ffc0cb;
-  color: white;
+  background-color: #ff8080;
+  color: black;
   border: none;
   border-radius: 5px;
+  /* border: 2px solid #ff8080; */
+  background: linear-gradient(to bottom, white, #ff8080);
+}
+
+.Login .cake {
+  width: 205px;
+}
+
+.Login .cakeWrapper {
+  text-align: center;
+}
+
+.Login .socialWrapper {
+  position: relative;
+  z-index: -9;
+  text-align: center;
+  display: inline-block;
+  padding: 10px;
+  padding-top: 15px;
+  border: 4px dashed #ffc0cb;
+}
+
+.Login .socialButton {
+  margin: 2px;
+  border: none;
+  /* width: 200px; */
+}
+
+.Login .naverButton {
+  background-color: #01c73c00;
+}
+
+.Login .naverImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .googleButton {
+  background-color: #fd706300;
+}
+
+.Login .googleImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .kakaoButton {
+  background-color: #fee50000;
+}
+
+.Login .kakaoImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .dish {
+  position: absolute;
+  top: 320px;
+  width: 310px;
+  height: 100px;
+  z-index: -9;
+}
+
+.Login .divNaver {
+  display: inline;
+}
+.Login .divGoogle {
+  display: inline;
+}
+.Login .divKakao {
+  display: inline;
+}
+
+.Login .socialTitle {
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  text-align: center;
+  /* top: 440px;
+  left: 460px; */
+  left: 65px;
+  top: -33px;
+  font-family: "Nanum Gothic";
+  color: #ffc0cb;
+  background-color: white;
+  display: inline-block;
 }
