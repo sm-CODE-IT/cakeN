@@ -99,13 +99,20 @@
   width: 100%;
   text-align: center;
 }
+
+.Lettering a {
+  font-family: "Nanum Gothic";
+}
+
 .Lettering h2 {
   text-align: center;
+  font-family: "Nanum Gothic";
 }
+
 .Lettering pre {
   display: inline-block;
   font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Nanum Gothic";
   color: black;
   background: #fff;
   border-radius: 5px;
@@ -394,6 +401,65 @@ label > input[type="radio"]:checked + img {
   color: white;
 }
 
+/* Accordion */
+.accordion {
+  margin: 30px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accordion__item {
+  padding: 3px 10px;
+  border: 1px solid pink;
+  border-radius: 5px;
+  color: pink;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.accordion__header {
+  display: flex;
+  align-items: center;
+}
+
+.accordion__header h4 {
+  margin: 0%;
+  transition: 0.2s ease-in-out;
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.accordion__header i {
+  transition: 0.2s ease-in-out;
+  transform-origin: center;
+  margin-bottom: 3px;
+}
+
+.accordion__header:hover h4 {
+  color: #ffeaed !important;
+}
+.accordion__content {
+  border: 1px solid pink;
+  width: 200px;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px 0px 5px 10px;
+  margin: 3px 5px 5px 10px;
+  text-decoration-line: none;
+  color: pink;
+  display: block;
+}
+.accordion__content:hover {
+  border: 1px solid #ffeaed;
+  background-color: #ffeaed;
+  color: white;
+}
+
 /* ViewInfo */
 .ViewInfo {
   display: flex;
@@ -550,6 +616,7 @@ label > input[type="radio"]:checked + img {
   padding-bottom: 10px;
   margin-top: 25px;
 }
+
 /* MyCake */
 .MyCake {
   margin-top: 100px;
@@ -604,6 +671,12 @@ label > input[type="radio"]:checked + img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
+  border: 6px solid #ffc0cb;
+  width: 420px;
+  height: 40px;
+  background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
+  animation: spaceship-ani 25s infinite steps(5000);
 }
 
 .accordion__item {
@@ -616,17 +689,31 @@ label > input[type="radio"]:checked + img {
   margin-bottom: 5px;
 }
 
-.accordion__header {
+/* Login */
+.Login {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.Login .form {
   display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
   align-items: center;
 }
 
-.accordion__header h4 {
-  transition: 0.2s ease-in-out;
-  font-size: 20px;
-  font-weight: 400;
-  margin-left: 15px;
-  margin-bottom: 5px;
+.Login .loginField {
+  padding: 6px;
+  /* background-color: rgb(255, 251, 234); */
+  background-color: white;
+  border-radius: 3px;
+  /* border: 4px outset white; */
+  /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
+  box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
+  /* box-shadow: 5px 5px 10px #666; */
 }
 
 .Login input {
@@ -634,11 +721,10 @@ label > input[type="radio"]:checked + img {
   text-align: center;
   border: none;
   background-color: cornsilk;
-  background: linear-gradient(to top, cornsilk, white);
-  margin: 5px;
-  width: 175px;
+  /* background: linear-gradient(to top, cornsilk, white); */
+  margin: 3px;
+  width: 180px;
   padding: 2px;
-
 }
 
 .accordion__header:hover h4 {
@@ -648,21 +734,99 @@ label > input[type="radio"]:checked + img {
   border: 1px solid pink;
   width: 200px;
   margin: 5px;
-
-  width: 175px;
+  width: 180px;
 
   background-color: #ff8080;
   color: black;
   border: none;
   border-radius: 5px;
-  padding: 5px 0px 5px 10px;
-  margin: 3px 5px 5px 10px;
-  text-decoration-line: none;
-  color: pink;
-  display: block;
+  /* border: 2px solid #ff8080; */
+  background: linear-gradient(to bottom, white, #ff8080);
 }
-.accordion__content:hover {
-  border: 1px solid #FFEAED;
-  background-color: #FFEAED;
-  color: white;
+
+.Login .cake {
+  width: 205px;
+}
+
+.Login .cakeWrapper {
+  text-align: center;
+}
+
+.Login .socialWrapper {
+  position: relative;
+  z-index: -9;
+  text-align: center;
+  display: inline-block;
+  padding: 10px;
+  padding-top: 15px;
+  border: 4px dashed #ffc0cb;
+}
+
+.Login .socialButton {
+  margin: 2px;
+  border: none;
+  /* width: 200px; */
+}
+
+.Login .naverButton {
+  background-color: #01c73c00;
+}
+
+.Login .naverImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .googleButton {
+  background-color: #fd706300;
+}
+
+.Login .googleImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .kakaoButton {
+  background-color: #fee50000;
+}
+
+.Login .kakaoImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .dish {
+  position: absolute;
+  top: 320px;
+  width: 310px;
+  height: 100px;
+  z-index: -9;
+}
+
+.Login .divNaver {
+  display: inline;
+}
+.Login .divGoogle {
+  display: inline;
+}
+.Login .divKakao {
+  display: inline;
+}
+
+.Login .socialTitle {
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  text-align: center;
+  /* top: 440px;
+  left: 460px; */
+  left: 65px;
+  top: -33px;
+  font-family: "Nanum Gothic";
+  color: #ffc0cb;
+  background-color: white;
+  display: inline-block;
 }
