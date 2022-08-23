@@ -105,6 +105,40 @@
 
 .Lettering a {
   font-family: "Nanum Gothic";
+  text-decoration-line: none;
+  margin: 3px;
+}
+
+.Lettering a:hover {
+  /* color: red; */
+  text-decoration: underline;
+}
+
+.Lettering .birthday {
+  color: #ff00b8;
+  font-weight: bold;
+}
+
+.Lettering .birthday2 {
+  color: #fc62ff;
+  font-weight: bold;
+}
+
+.Lettering .parentsday {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.Lettering #birthday {
+  color: #ff00b8;
+}
+
+.Lettering #birthday2 {
+  color: #fc62ff;
+}
+
+.Lettering #parentsday {
+  color: #ff0000;
 }
 
 .Lettering h2 {
