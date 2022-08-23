@@ -24,7 +24,7 @@
 
   <h4 class="mb-3">회원 정보 입력</h4>
 
-  <form action="" th:action="@{'/users/update/'+${userRequestDto.id}}" method="post">
+  <form action="" th:action="@{'/users/update/'+${userRequestDto.id}}" method="post" enctype="multipart/form-data">
 
 
 
@@ -46,7 +46,7 @@
     </div>
     <div>
       <label for="image">프로필 사진</label>
-      <input type="text" id="image" name="image"  th:value="${userRequestDto.image}" class="form-control">
+      <input type="file" id="image" name="image"  th:value="${userRequestDto.image}" class="form-control">
     </div>
 
 

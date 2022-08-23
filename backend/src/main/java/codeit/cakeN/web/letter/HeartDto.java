@@ -24,8 +24,8 @@ public class HeartDto {
 
     public Heart toEntity() {
         return Heart.builder()
-                .user(userRepository.findById(userId).get())
-                .letter(letterRepository.findById(letterId).get())
+                .user(userRepository.findById(userId).orElseThrow(null))
+                .letter(letterRepository.findById(letterId).orElseThrow(null))
                 .build();
     }
 

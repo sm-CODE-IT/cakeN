@@ -20,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpSession;
@@ -112,8 +113,8 @@ public class UserApiController {
      * @return
      */
     @PutMapping("/users/{id}")
-    public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto) {
-        userService.update(userUpdateDto);
+    public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto, @RequestParam("image") MultipartFile multipartFile) {
+        userService.update(userUpdateDto, multipartFile);
         return ResponseEntity.ok().build();
     }
     

@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
@@ -64,7 +65,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/new")
-    public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "user/createUserForm";
         }
@@ -206,12 +207,12 @@ public class UserController {
      * @return
      */
     @PostMapping("/update/{id}")
-    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult) {
+    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile) {
         if(bindingResult.hasErrors()) {
             return "user/updateUserForm.html";
         }
 
-        userService.update(userRequestDto);
+        userService.update(userRequestDto, multipartFile);
 
         return "redirect:/users/mypage";
     }

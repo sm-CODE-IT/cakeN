@@ -10,9 +10,17 @@ import codeit.cakeN.web.user.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 @RequiredArgsConstructor
@@ -67,16 +75,36 @@ public class UserService {
     }
 
 
+    @Value("${codeit.cakeN.upload.path}")
+    private String filePath;
+
     /**
      * 회원정보 수정
      * @param userUpdateDto
      * @throws Exception
      */
     @Transactional
-    public void update(UserUpdateDto userUpdateDto) throws UserException {
+    public void update(UserUpdateDto userUpdateDto, MultipartFile multipartFile) throws UserException {
         User user = userRepository.findById(userUpdateDto.getId()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
+
+        String imageFileName = user.getUserId() + "_" + multipartFile.getOriginalFilename();
+        Path imageFilePath = Paths.get(filePath + imageFileName);
+
+        // 파일이 없로드 되었는지 확인
+        if (multipartFile.getSize() != 0) {
+            try {
+                if (user.getImage() != null) {
+                    File file = new File(filePath + user.getImage());
+                    file.delete();  // 이미 프로필 사진이 존재하는 경우, 기존 파일은 삭제
+                }
+                Files.write(imageFilePath, multipartFile.getBytes());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            user.setImage(imageFileName);
+        }
 
         user.update(userUpdateDto);
     }

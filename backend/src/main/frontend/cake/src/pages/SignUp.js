@@ -1,5 +1,6 @@
 import ContentHeader from "../components/ContentHeader";
 
+
 const SignUp = () => {
     const title = "회원가입";
     const content = "다양한 서비스를 이용할 수 있습니다.";

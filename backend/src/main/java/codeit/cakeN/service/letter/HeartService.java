@@ -23,7 +23,7 @@ public class HeartService {
     private final UserRepository userRepository;
     private final LetterRepository letterRepository;
 
-    public void heart(HeartDto heartDto) throws Exception {
+    public Heart heart(HeartDto heartDto) throws Exception {
 
         // 이미 좋아요한 레터링은 예외로 처리
         if (findHeartWithUserAndLetter(heartDto).isPresent()) {
@@ -35,6 +35,7 @@ public class HeartService {
 
         updateHeartCount(heartDto.getLetterId(), 1);
 
+        return heart;
     }
 
     public void unheart(HeartDto heartDto) throws Exception {

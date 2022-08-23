@@ -26,16 +26,18 @@ public class HeartController {
     private final UserRepository userRepository;
 
     @PostMapping("/heart")
-    public ResponseEntity<Heart> heart(@RequestBody HeartDto heartDto, @AuthenticationPrincipal User formUser) throws Exception {
+    @ResponseStatus(HttpStatus.OK)
+    public HeartDto heart(@RequestBody HeartDto heartDto, @AuthenticationPrincipal User formUser) throws Exception {
         /*codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
         heartDto.setUserId(user.getUserId());*/
-        heartService.heart(heartDto);
-        return ResponseEntity.ok(heartDto.toEntity());
+        Heart heart = heartService.heart(heartDto);
+        return new HeartDto(heart);
     }
 
     @DeleteMapping("/heart")
-    public ResponseEntity<Heart> unHeart(@RequestBody HeartDto heartDto) throws Exception {
+    @ResponseStatus(HttpStatus.OK)
+    public HeartDto unHeart(@RequestBody HeartDto heartDto) throws Exception {
         heartService.unheart(heartDto);
-        return ResponseEntity.ok(heartDto.toEntity());
+        return heartDto;
     }
 }
