@@ -49,11 +49,26 @@ public class UserApiController {
      * @return
      */
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@Valid UserRequestDto userRequestDto) {
+    public Object createUser(@Valid UserRequestDto userRequestDto) {
+        /*if (bindingResult.hasErrors()) {
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            String errorMessage = allErrors.get(0).getDefaultMessage();
+
+            return new CreateError().error(errorMessage);
+        }
+
+        if (!(userRequestDto.getPw().equals(userRequestDto.getPwConfirm()))) {
+            return new CreateError().error("패스워드가 일치하지 않습니다.");
+        }
+        if (userService.emailCheck(userRequestDto.getEmail())) {
+            return new CreateError().error("이미 존재하는 회원입니다.");
+        }*/
+
+
         userRequestDto.setImage(userRequestDto.getImage());
         userService.save(userRequestDto);
 
-        return ResponseEntity.ok(userRequestDto.toEntity());
+        return userRequestDto.toEntity();
     }
 
     /**
@@ -113,11 +128,17 @@ public class UserApiController {
      * @return
      */
     @PutMapping("/users/{id}")
-    public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto, @RequestParam("image") MultipartFile multipartFile) {
-        userService.update(userUpdateDto, multipartFile);
+    public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto) {
+        userService.update(userUpdateDto);
         return ResponseEntity.ok().build();
     }
-    
+
+    /**
+     * 개인정보 수정 - 비밀번호 변경
+     * @param userUpdatePwDto
+     * @param id
+     * @return
+     */
     @PutMapping("/users/password/{id}")
     public ResponseEntity updatePw(@Valid UserUpdatePwDto userUpdatePwDto, @PathVariable("id") Long id) {
         userService.updatePw(userUpdatePwDto.getPw(), userUpdatePwDto.getNewPwConfirm(), id);

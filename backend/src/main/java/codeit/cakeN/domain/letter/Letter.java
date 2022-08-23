@@ -17,6 +17,7 @@ public class Letter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "letter_id", unique = true, nullable = true)
     private Long letterId;      // 게시글의 번호
 
     // 작성자 어떻게 데리고 오지? 현재 로그인 한 사람
@@ -36,7 +37,8 @@ public class Letter {
     private LocalDateTime updated_at;
 
     @Column
-    private int tag;    // TODO Tag Entity 생성
+    @Enumerated(EnumType.STRING)
+    private Tag tag;    // TODO Tag Entity 생성
 
 
     // Letter 정보 수정 메서드

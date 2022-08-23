@@ -207,12 +207,12 @@ public class UserController {
      * @return
      */
     @PostMapping("/update/{id}")
-    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult, @RequestParam("image") MultipartFile multipartFile) {
+    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "user/updateUserForm.html";
         }
 
-        userService.update(userRequestDto, multipartFile);
+        userService.update(userRequestDto);
 
         return "redirect:/users/mypage";
     }

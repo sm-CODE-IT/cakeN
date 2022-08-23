@@ -1,6 +1,9 @@
 import ContentHeader from "../components/ContentHeader";
 
 const Login = () => {
+
+
+
     const title = "로그인";
     const content = "다양한 서비스를 이용할 수 있습니다.";
 
@@ -8,9 +11,9 @@ const Login = () => {
         <div className="Login">
             <ContentHeader title={title} content={content} />
             <div>
-                <form>
-                    <div><input type = "email" placeholder="이메일" required/></div>
-                    <div><input  type = "password" placeholder="비밀번호" required /></div>
+                <form action='/users/login' method='post'>
+                    <div><input type = "email" name="username" placeholder="이메일" required/></div>
+                    <div><input  type = "password" name="password" placeholder="비밀번호" required /></div>
                     <div><button type = "submit">{"로그인"}</button></div>
                 </form>
             </div>

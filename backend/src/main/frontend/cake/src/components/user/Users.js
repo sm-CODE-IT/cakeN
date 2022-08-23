@@ -1,34 +1,53 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import useAsync from "../useAsync";
-import User from "./User";
 
-async function getUsers() {
-    const response = await axios.get("http://localhost:8080/api/test");
-    return response.data;
-}
 
 function Users() {
+    const [users, setUsers] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const [state, refetch] = useAsync(getUsers, [], true);
-    const [userId, setUserId] = useState(null);    // 마이페이지 정보를 불러오기 위한 useState
-    
-    const { loading, error, data: users } = state;   // data 값이 users로 들어감
+    const fetchUsers = async () => {
+        try {
+            // 요청을 시작하면 error와 users 초기화
+            setError(null);
+            setUsers(null);
+            setLoading(true);    // loading 상태: false -> true
+
+            const response = await axios.get(
+                '/api/test'
+            );
+
+            setUsers(response.data);
+        } catch (e) {
+            setError(e);
+        }
+
+        setLoading(false);   // 요청이 끝났으므로 false로 다시 셋팅
+    };
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
     if (loading) return <div>로딩중..</div>
-    if (error) return <div>에러 발생</div>
-    if (!users) return <button onClick={refetch}>불러오기</button>;   // users 값이 유효하지 않는 경우
+    if (error) return <div>에러가 발생했습니다.</div>
+
+    if (!users) return null;   // users 데이터가 없다면 아무것도 표시 X
 
     return (
         <>
             <ul>
-                {users.map(user=><li key={user.userId} onClick={() => setUserId(user.userId)}>
-                    {user.nickname} ({user.email})
-                </li>)}
+                {users.map(user => {
+                    <li key={user.userId}>
+                        {user.nickname} ({user.email})
+                    </li>
+                })}
+                <button onClick={fetchUsers}>다시 불러오기</button>
             </ul>
-            <button onClick={refetch}>다시 불러오기</button>
-            {userId && <User id={userId} />}
         </>
     )
 }
+
 
 export default Users;

@@ -16,6 +16,7 @@ const ViewInfo = () => {
             method: 'GET'
         }).then(response => getUser(response.data))
             .catch(err => console.log(err))
+
     }, []);
 
 
@@ -23,21 +24,21 @@ const ViewInfo = () => {
         <div className="ViewInfo">
             <div className="ViewInfoAll">
                 <div className="tr">
+                    <div className="td">
+                        <div className="text">이메일</div>
+                        <div className="input">
+                            <input value={user.email} />
+                        </div>
+                    </div>
+                    <div>
                         <div className="td">
-                            <div className="text">이메일</div>
+                            <div className="text">닉네임</div>
                             <div className="input">
-                                <input value={user.email} />
+                                <input value={user.nickname} />
                             </div>
                         </div>
-                        <div>
-                            <div className="td">
-                                <div className="text">닉네임</div>
-                                <div className="input">
-                                    <input value={user.nickname} />
-                                </div>
-                            </div>  
-                            <div className="nickText">이미 존재하는 닉네임입니다.</div>  
-                        </div>
+                        <div className="nickText">이미 존재하는 닉네임입니다.</div>
+                    </div>
                 </div>   
                 <div className="tr">
                         <div className="text">자기소개</div>

@@ -84,12 +84,12 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public void update(UserUpdateDto userUpdateDto, MultipartFile multipartFile) throws UserException {
+    public void update(UserUpdateDto userUpdateDto) throws UserException {
         User user = userRepository.findById(userUpdateDto.getId()).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
-        String imageFileName = user.getUserId() + "_" + multipartFile.getOriginalFilename();
+        /*String imageFileName = user.getUserId() + "_" + multipartFile.getOriginalFilename();
         Path imageFilePath = Paths.get(filePath + imageFileName);
 
         // 파일이 없로드 되었는지 확인
@@ -105,7 +105,7 @@ public class UserService {
             }
             user.setImage(imageFileName);
         }
-
+*/
         user.update(userUpdateDto);
     }
 
