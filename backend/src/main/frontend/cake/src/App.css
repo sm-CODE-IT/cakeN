@@ -1,9 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
-/* body
-. {
-  margin: 0%;
-  padding: 0%;
-} */
+@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Pattaya&family=Rubik+Puddles&display=swap");
+/* body */
+
 
 /* NaviHeader */
 .NaviHeader {
@@ -394,11 +391,9 @@ label > input[type="radio"]:checked + img {
   display: flex;
   margin-top: 100px;
 }
-
 .MyPageAll {
   width: 100%;
 }
-
 .MyPageLeft {
   width: 280px;
   color: pink;
@@ -585,15 +580,16 @@ label > input[type="radio"]:checked + img {
   padding-bottom: 10px;
   margin-top: 25px;
 }
+
 /* Password */
 .Password {
+  width: 150%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .Password .PasswordAll {
   font-size: 15px;
-  width: 80%;
   margin-top: 50px;
   padding: 40px 40px 40px 40px;
 
@@ -692,22 +688,22 @@ label > input[type="radio"]:checked + img {
 /* ConCake */
 /* Plus */
 
-/* Home */
-.Home {
-  text-align: center;
-}
+/* Intro */
+/* .main {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 20px;
+} */
 
-.Home .pinkbox {
-  width: 720px;
-  height: 80px;
-}
 
-@keyframes spaceship-ani {
-  to {
-    background-position: 0 -1265px;
-  }
-}
-.Home .spaceship {
+.accordion {
+  margin: 30px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   margin: auto;
   border: 6px solid #ffc0cb;
@@ -717,35 +713,14 @@ label > input[type="radio"]:checked + img {
   animation: spaceship-ani 25s infinite steps(5000);
 }
 
-.Home .mark {
-  display: inline-block;
-  background: linear-gradient(to top, #ffc0cb 50%, transparent 50%);
-}
-
-.Home .cakeLogo {
-  margin: auto;
-  width: 100px;
-}
-
-.Home h2 {
-  font-family: "Nanum Gothic";
-}
-
-.Home h3 {
-  font-family: "Nanum Gothic";
-}
-
-.Home .toLetterButton {
-  font-family: "Nanum Gothic";
-  font-weight: bold;
-  font-size: larger;
-  width: 200px;
-  padding: 8px;
-  background-color: #69492d;
-  color: #ffc0cb;
-  border: none;
+.accordion__item {
+  padding: 3px 10px;
+  border: 1px solid pink ;
   border-radius: 5px;
-  box-shadow: 3px 3px 3px 3px;
+  color: pink;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
 
 /* Login */
@@ -786,9 +761,12 @@ label > input[type="radio"]:checked + img {
   padding: 2px;
 }
 
-.Login .loginButton {
-  font-family: "Nanum Gothic";
-  font-weight: bold;
+.accordion__header:hover h4 {
+  color: #FFEAED!important;
+}
+.accordion__content {
+  border: 1px solid pink;
+  width: 200px;
   margin: 5px;
   width: 180px;
 
