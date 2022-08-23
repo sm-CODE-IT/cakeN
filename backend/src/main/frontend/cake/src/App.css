@@ -632,10 +632,16 @@ label > input[type="radio"]:checked + img {
   margin-bottom: 5px;
 }
 
-.accordion__header i {
-  transition: 0.2s ease-in-out;
-  transform-origin: center;
-  margin-bottom: 3px;
+.Login input {
+  font-family: "Nanum Gothic";
+  text-align: center;
+  border: none;
+  background-color: cornsilk;
+  background: linear-gradient(to top, cornsilk, white);
+  margin: 5px;
+  width: 175px;
+  padding: 2px;
+
 }
 
 .accordion__header:hover h4 {
@@ -645,6 +651,12 @@ label > input[type="radio"]:checked + img {
   border: 1px solid pink;
   width: 200px;
   margin: 5px;
+
+  width: 175px;
+
+  background-color: #ff8080;
+  color: black;
+  border: none;
   border-radius: 5px;
   padding: 5px 0px 5px 10px;
   margin: 3px 5px 5px 10px;
