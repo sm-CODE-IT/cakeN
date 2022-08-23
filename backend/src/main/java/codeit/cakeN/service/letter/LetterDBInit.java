@@ -13,7 +13,7 @@ import java.util.List;
 // DB Test를 위한 초기 실행 지정
 @RequiredArgsConstructor
 @Service
-public class DBInit implements CommandLineRunner {
+public class LetterDBInit implements CommandLineRunner {
 
     private final LetterRepository letterRepository;
 
