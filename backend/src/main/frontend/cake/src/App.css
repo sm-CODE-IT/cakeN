@@ -810,7 +810,6 @@ label > input[type="radio"]:checked + img {
 
 .Login .socialWrapper {
   position: relative;
-  z-index: -9;
   text-align: center;
   display: inline-block;
   padding: 10px;
@@ -856,7 +855,7 @@ label > input[type="radio"]:checked + img {
 
 .Login .dish {
   position: absolute;
-  top: 320px;
+  top: 270px;
   width: 310px;
   height: 100px;
   z-index: -9;

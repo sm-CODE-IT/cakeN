@@ -10,6 +10,7 @@ import codeit.cakeN.web.user.dto.UserUpdateDto;
 
 import lombok.*;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -130,19 +131,21 @@ public class User extends Timestamped implements Serializable {
     private List<Contest> contestList = new ArrayList<>();
 
     /*@Builder.Default
-    @OneToMany(mappedBy = "heart", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
 */
     /*@Builder.Default
-    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Heart> heartLetterList = new ArrayList<>();
+
 */
     public void addDesign(Design design) {
         // cake design의 작성자는 Design Entity에서 지정
         designList.add(design);
     }
 
-    /* public void addHeartLetter(Heart heart) {
+    /*public void addHeartLetter(Heart heart) {
         heartLetterList.add(heart);
     }*/
 

@@ -12,7 +12,7 @@ const ViewInfo = () => {
 
     useEffect(() => {
         axios({
-            url: '/api/users/1',
+            url: '/api/users/' + user.userId,
             method: 'GET'
         }).then(response => getUser(response.data))
             .catch(err => console.log(err))

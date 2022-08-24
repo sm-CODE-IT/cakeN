@@ -75,9 +75,9 @@ const Button = ({ id, message, isToggle }) => {
     setToggle(!toggle);
   };
   return (
-    <pre id={id} className={like} onClick={onChangeColor}>
-      {message}
-    </pre>
+      <pre id={id} className={like} onClick={onChangeColor}>
+        {message}
+      </pre>
   );
 };
 
