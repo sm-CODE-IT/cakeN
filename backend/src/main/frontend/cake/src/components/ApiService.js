@@ -41,6 +41,7 @@ export function call(api, method, request) {
     headers: new Headers({
       "Content-type": "application/json",
     }),
+<<<<<<< HEAD
     url: USER_API_BASE_URL,
     method: method,
   };
@@ -70,3 +71,24 @@ export function signin(userDTO) {
 }
 
 export default new ApiService();
+=======
+    url: USER_API_BASE_URL + api,
+    method: method,
+  };
+
+  if (request) {
+    // GET method
+    options.body = JSON.stringify(request);
+  }
+  return fetch(option.url, option).
+}
+
+export function signin(userDTO) {
+  return call("/api/users/login", "POST", userDTO).then((response) => {
+    console.log("response : ", response);
+    alert("로그인 토큰: " + response.token);
+  });
+}
+
+export default new ApiService();
+>>>>>>> newJeans
