@@ -45,7 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         
         // http 시큐리티 빌더
         http
-                .cors().disable()   // cors 비활성화
+                .cors()    // cors 비활성화
+                .and()
                 .csrf().disable()   // csrf 비활성화
 //                .httpBasic().disable()   // token을 사용하므로 basic 인증 비활성화
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)    // session 기반이 아님을 선언
