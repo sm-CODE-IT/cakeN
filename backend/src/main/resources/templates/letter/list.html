@@ -13,6 +13,7 @@
             <th>문구 목록</th>
             <th>내용</th> <!-- 임시로 테스트 하기 위함 -->
             <th>태그</th> <!-- 임시로 테스트 하기 위함 -->
+            <th>좋아요 여부</th>
         </tr>
         </thead>
         <tbody>
@@ -22,6 +23,16 @@
             <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->
             <td th:text="${letter.content}"></td>
             <td th:text="${letter.tag}"></td>
+
+            <!-- 좋아요 개수 세기 -->
+            <td th:each="heart : ${hearts}">
+                <td th:if="${heart.letter} == ${letter.letterId} and ${heart.user} == ${userId}">좋아요 체크</td>
+                <td th:unless="${heart.letter} == ${letter.letterId} and ${heart.user} == ${userId}">좋아요 미체크</td>
+            </td>
+            <!--
+            <td th:if="${letter.hearts} == 0">좋아요 미체크</td>
+            <td th:unless="${letter.hearts} == 0">좋아요 체크</td>
+            -->
         </tr>
         </tbody>
     </table>

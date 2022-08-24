@@ -1,13 +1,23 @@
 package codeit.cakeN.web.letter;
 
 import codeit.cakeN.domain.letter.Letter;
+import codeit.cakeN.domain.user.UserRepository;
+import codeit.cakeN.service.letter.HeartService;
 import codeit.cakeN.service.letter.LetterService;
+import codeit.cakeN.service.user.UserService;
+import codeit.cakeN.web.letter.dto.HeartDto;
 import codeit.cakeN.web.letter.dto.LetterRequestDto;
 import codeit.cakeN.web.letter.dto.LetterUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+
+import static codeit.cakeN.web.user.UserController.findSessionUser;
 
 @Controller
 @RequestMapping("/letter")
@@ -15,7 +25,10 @@ import org.springframework.web.bind.annotation.*;
 public class LetterController {
 
     private final LetterService letterService;
-
+    private final HeartService heartService;
+    private final UserService userService;
+    private final HttpSession httpSession;
+    private final UserRepository userRepository;
 
     /**
      * 레터링 목록 페이지
@@ -23,8 +36,16 @@ public class LetterController {
      * @return
      */
     @GetMapping("/")
-    public String list(Model model) {
+    public String list(Model model, @AuthenticationPrincipal User formUser) {
+
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+
         model.addAttribute("letters", letterService.list());
+        // model.addAttribute("hearts", heartService.findHeartWithUserAndLetter(heartDto));
+        model.addAttribute("hearts", heartService.list());
+        model.addAttribute("userId", user.getUserId());
+
+
         return "letter/list";
     }
 

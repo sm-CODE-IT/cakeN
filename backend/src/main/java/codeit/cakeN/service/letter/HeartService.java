@@ -10,6 +10,8 @@ import codeit.cakeN.exception.letter.LetterException;
 import codeit.cakeN.exception.letter.LetterExceptionType;
 import codeit.cakeN.web.letter.dto.HeartDto;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.TypeCache;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -23,6 +25,11 @@ public class HeartService {
     private final HeartRepository heartRepository;
     private final UserRepository userRepository;
     private final LetterRepository letterRepository;
+
+    // 수정 부분
+    public List<Heart> list() {
+        return heartRepository.findAll(Sort.by("heartId"));
+    }
 
     public Heart heart(HeartDto heartDto) throws Exception {
 
