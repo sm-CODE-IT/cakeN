@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login2 from "./components/Login2";
 import "./App.css";
 
 import NaviHeader from "./components/NaviHeader";
@@ -59,6 +60,7 @@ function App() {
   return (
     <div className="App">
       <NaviHeader />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

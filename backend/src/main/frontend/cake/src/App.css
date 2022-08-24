@@ -8,7 +8,6 @@
 /* NaviHeader */
 .NaviHeader {
   overflow: hidden;
-
   background-color: pink;
   padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
   transition: 0.4s; /* 패딩 줄어들 때 지연 */
@@ -22,6 +21,7 @@
   justify-content: space-around;
   align-items: center;
 }
+
 .NaviHeader .right {
   display: flex;
   flex-wrap: wrap;
@@ -238,7 +238,7 @@ label > input[type="radio"]:checked + img {
   width: 280px;
 }
 
-/*
+/* 
 .Design h2 {
   display: inline-block;
   background-color: #ffc0cb;
@@ -301,11 +301,6 @@ label > input[type="radio"]:checked + img {
 
 .color::-moz-color-swatch {
   border-radius: 50%;
-}
-
-/* Login */
-.Login {
-  margin-top: 100px;
 }
 
 /* SignUp */
@@ -754,6 +749,20 @@ label > input[type="radio"]:checked + img {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  margin-top: 100px;
+}
+
+.Login .loginButton {
+  cursor: pointer;
+}
+
+.Login .naverImg {
+  z-index: 100;
+  cursor: pointer;
+}
+
+.Login img {
+  cursor: pointer;
 }
 
 .Login .form {

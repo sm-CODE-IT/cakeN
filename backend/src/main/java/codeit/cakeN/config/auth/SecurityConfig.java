@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);   // 서버 실행 시 사용자 인증 과정 생략
-        
+
         // http 시큐리티 빌더
         http
                 .cors()    // cors 비활성화
@@ -103,7 +103,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO 예외처리 핸들링 (404 페이지)
 
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
