@@ -21,6 +21,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -153,4 +154,20 @@ public class UserService {
         return new UserRequestDto(user);
     }
 
+    /**
+     * 로그인
+     * @param loginId
+     * @param password
+     * @return
+     */
+    public User getByCredentials(final String loginId, final String password) {
+
+        Optional<User> findUser = userRepository.findByEmail(loginId);
+        User user = findUser.get();   // Optional로 감싼 형태에서 꺼내기
+        if (passwordEncoder.matches(password, user.getPw())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
 }

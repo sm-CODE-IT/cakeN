@@ -9,10 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.web.filter.CorsFilter;
 
 
 @Configuration
@@ -23,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Override
     public void configure(WebSecurity web) {
@@ -38,9 +42,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 //        super.configure(http);   // 서버 실행 시 사용자 인증 과정 생략
+        
+        // http 시큐리티 빌더
         http
+                .cors()   // cors 비활성화
+
+                .and()
                 .csrf().disable()   // csrf 비활성화
-                .cors().disable()   // cors 비활성화
+                .httpBasic().disable()   // token을 사용하므로 basic 인증 비활성화
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)    // session 기반이 아님을 선언
+
+                .and()
                 .formLogin().disable()   // 기본 로그인 페이지 생략
                 .headers().frameOptions().disable()
 
@@ -72,7 +84,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
 
-//        http.addFilterAfter(jwtAuthenticationFilter, LogoutFilter.class);
+        // filter 등록 - 매 요청마다 CorsFilter 실행한 후에 jwtAuthenticatonFilter를 실행한다.
+        http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
 
 
 

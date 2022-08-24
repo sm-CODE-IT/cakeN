@@ -29,7 +29,7 @@ public class Letter {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Tag tag;    // TODO Tag Entity 생성
+    private Tag tag;
 
     @Column
     private Integer hearts = 0;   // 좋아요 수

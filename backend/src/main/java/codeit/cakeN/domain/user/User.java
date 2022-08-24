@@ -53,6 +53,7 @@ public class User extends Timestamped implements Serializable {
     private Role role;
 
 
+
     // Spring Security 사용자 인증 필드
     // TODO 이메일 인증, 계정 잠김 여부 (일정 기간 이후)
     private boolean emailVerified;    // 이메일 인증 여부
@@ -129,22 +130,21 @@ public class User extends Timestamped implements Serializable {
     private List<Contest> contestList = new ArrayList<>();
 
     /*@Builder.Default
-    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true)
-    private List<Letter> letterList = new ArrayList<>();
-*/
-    /*@Builder.Default
-    @OneToMany(mappedBy = "heartLetter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    @OneToMany(mappedBy = "heart", cascade = ALL, orphanRemoval = true, fetch = LAZY)
     private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
 */
-
     /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-    private List<Letter> letterList = new ArrayList<>();*/
-
+    private List<Heart> heartLetterList = new ArrayList<>();
+*/
     public void addDesign(Design design) {
         // cake design의 작성자는 Design Entity에서 지정
         designList.add(design);
     }
+
+    /* public void addHeartLetter(Heart heart) {
+        heartLetterList.add(heart);
+    }*/
 
 
 }

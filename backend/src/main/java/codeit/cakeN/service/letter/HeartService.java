@@ -25,19 +25,17 @@ public class HeartService {
 
     public Heart heart(HeartDto heartDto) throws Exception {
 
-        // 이미 좋아요한 레터링은 예외로 처리
+        /*// 이미 좋아요한 레터링은 예외로 처리
         if (findHeartWithUserAndLetter(heartDto).isPresent()) {
             throw new LetterException(LetterExceptionType.ALREADY_HEART_LETTER);
-        }
+        }*/
 
         User user = userRepository.findById(heartDto.getUserId()).get();
         Letter letter = letterRepository.findById(heartDto.getLetterId()).get();
 
         Heart heart = Heart.toLetterHeart(user, letter);
-        System.out.println(heart);
-        System.out.println(heart.getHeartId());
-        System.out.println(heart.getLetter());
-        System.out.println(heart.getUser());
+        /*user.addHeartLetter(heart);
+        System.out.println(user.getHeartLetterList());*/
 
         heartRepository.save(heart);
 
@@ -73,21 +71,4 @@ public class HeartService {
         letterOpt.get().setHearts(heartCount);
     }
 
-    // 저장된 HeartDto가 있는지 찾는 함수
-    public Heart saveHeart(Long userId, Long letterId) {
-        Optional<Heart> findHeart = heartRepository.findByUser_UserIdAndLetter_LetterId(userId, letterId);
-
-        System.out.println(findHeart.isEmpty());
-
-        if (findHeart.isEmpty()) {
-            User user = userRepository.findById(userId).get();
-            Letter letter = letterRepository.findById(letterId).get();
-
-            Heart heart = Heart.toLetterHeart(user, letter);
-            heartRepository.save(heart);
-
-            return heart;
-        }
-        return null;
-    }
 }
