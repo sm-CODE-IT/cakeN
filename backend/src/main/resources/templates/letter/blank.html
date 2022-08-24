@@ -11,7 +11,8 @@
         <thead>
         <tr>
             <th>문구 목록</th>
-            <th>작성자</th> <!-- 임시로 테스트 하기 위함 -->
+            <th>내용</th> <!-- 임시로 테스트 하기 위함 -->
+            <th>태그</th> <!-- 임시로 테스트 하기 위함 -->
         </tr>
         </thead>
         <tbody>
@@ -19,7 +20,8 @@
             <!-- 1. 문구에 하이퍼링크가 없는 경우 -->
             <td th:text="${letter.letterId}"></td>
             <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->
-            <td th:text="${letter.letterId}"></td>
+            <td th:text="${letter.content}"></td>
+            <td th:text="${letter.tag}"></td>
         </tr>
         </tbody>
     </table>

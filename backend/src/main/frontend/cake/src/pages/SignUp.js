@@ -1,7 +1,7 @@
 import ContentHeader from "../components/ContentHeader";
 import axios from 'axios';
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -32,7 +32,7 @@ const SignUp = () => {
         setNickname(event.currentTarget.value)
     }
     const onPasswordHandler = (e) => {
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,12}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
         if ((!e.target.value || (passwordRegex.test(e.target.value)))) setPasswordError(false);
         else setPasswordError(true);
 
@@ -63,52 +63,53 @@ const SignUp = () => {
     }
 
     //회원가입 API
+    const navigate = useNavigate();
+    const valiButton = () => {
+        if (!validation()) {
+            window.alert("폼 제대로 입력하세요.");
+            return;
+        }
+    }
     const onSubmit = (e) => {
         e.preventDefault();
-        if(!validation()) {
-            window.alert("폼 제대로 입력하세요.");
-            // return;
-        };
-
-        axios.post("/api/users", {
+        const data = {
             email: email,
             pw: pw,
             pwConfirm: pwConfirm,
             nickname: nickname,
             intro: intro,
-        }, {
-            withCredentials: true
-        }).then(function (response) {
-            if(response.data.code === 0){
-                Navigate("/login");
+        }
+        axios.post("/api/users", data).then(function (response) {
+            if(response.data.code == 400){
+                navigate('/login')
             }
-            return response;
-        }).catch(function (error) {
+        }).catch((error) => {
             console.log(error);
         });
-    }
-    //const onSubmit = useCallback(
+    };
+
+    // const onSubmit = useCallback(
     //     async (e) => {
-    //       e.preventDefault()
-    //       try {
-    //         await axios
-    //           .post(REGISTER_USERS_URL, {
-    //             username: nickname,
-    //             password: password,
-    //             email: email,
-    //           })
-    //           .then((res) => {
-    //             console.log('response:', res)
-    //             if (res.status === 200) {
-    //               router.push('/login')
-    //             }
-    //           })
-    //       } catch (err) {
-    //         console.error(err)
-    //       }
-    //     },
-    //     [email, nickname, password, router]
-    //   )
+    //        e.preventDefault()
+    //        try {
+    //          await axios
+    //            .post(REGISTER_USERS_URL, {
+    //              username: nickname,
+    //              password: password,
+    //              email: email,
+    //            })
+    //            .then((res) => {
+    //              console.log('response:', res)
+    //              if (res.status === 200) {
+    //                router.push('/login')
+    //              }
+    //            })
+    //        } catch (err) {
+    //          console.error(err)
+    //        }
+    //      },
+    //  [email, nickname, password, router]
+    //    )
 
     return (
         <div className="SignUp">
@@ -122,7 +123,7 @@ const SignUp = () => {
                                 <div className="th">이메일<span>*</span></div>
                                 <div className="td">
                                     <div className="inLine">
-                                        <input className="content" type="email" value={email} onChange={onEmailHandler} />
+                                        <input className="content" type="email" id="email" name="email" value={email}onChange={onEmailHandler} />
                                         <button type="button" className="okButton">중복확인</button>
                                     </div>
                                 </div>
@@ -141,7 +142,7 @@ const SignUp = () => {
                                 </div>
                             </div>
                             {passwordError?
-                                <div class="tableText">영어와 숫자를 조합한 8~12자의 비밀번호를 입력하세요.</div>
+                                <div class="tableText">영어,숫자와 특수문자를 조합한 8~12자의 비밀번호를 입력하세요.</div>
                                 :<div class="tableText">조합 가능한 비밀번호입니다.</div>}
 
                             <div className="tableData">
@@ -162,7 +163,7 @@ const SignUp = () => {
                                 <div className="th">닉네임<span>*</span></div>
                                 <div className="td">
                                     <div className="inLine">
-                                        <input className="content" value={nickname} onChange={onNicknameHandler} />
+                                        <input className="content" value={nickname} onChange={onNicknameHandler} required />
                                         <button type="button" className="okButton">중복확인</button>
                                     </div>
                                 </div>
@@ -193,7 +194,7 @@ const SignUp = () => {
                         </div>
 
                         <div className="tr">
-                            <button  className="signButton" type="submit">가입하기</button>
+                            <button  className="signButton" type="submit" onClick={valiButton} >가입하기</button>
                         </div>
                     </form>
                 </div>

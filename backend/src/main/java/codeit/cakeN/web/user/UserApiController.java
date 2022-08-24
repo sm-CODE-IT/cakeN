@@ -1,6 +1,7 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.TokenProvider;
+import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.HeartRepository;
 import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.domain.user.Role;
@@ -9,6 +10,8 @@ import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.domain.user.profileImg.FileRepository;
 import codeit.cakeN.domain.user.profileImg.ProfileStore;
+import codeit.cakeN.exception.letter.LetterException;
+import codeit.cakeN.exception.letter.LetterExceptionType;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
@@ -32,6 +35,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static codeit.cakeN.web.user.UserController.findSessionUser;
 
@@ -54,7 +58,7 @@ public class UserApiController {
      * @return
      */
     @PostMapping("/users")
-    public Object createUser(@Valid UserRequestDto userRequestDto) {
+    public Object createUser(UserRequestDto userRequestDto) {
         /*if (bindingResult.hasErrors()) {
             List<ObjectError> allErrors = bindingResult.getAllErrors();
             String errorMessage = allErrors.get(0).getDefaultMessage();
@@ -70,7 +74,7 @@ public class UserApiController {
         }*/
 
 
-        userRequestDto.setImage(userRequestDto.getImage());
+//        userRequestDto.setImage(userRequestDto.getImage());
         userService.save(userRequestDto);
 
         return userRequestDto.toEntity();
@@ -156,18 +160,30 @@ public class UserApiController {
      * @return
      */
     @GetMapping("/users/{id}/heartletter")
-    public List<Letter> getHeartLetter(@PathVariable("id") Long id) {
+    public List<Heart> getHeartLetter(@PathVariable("id") Long id) {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 
-        List<Letter> heartLetterList = new ArrayList<>();
-        heartLetterList.add(heartRepository.findByUser(user).get().getLetter());
+        List<Heart> heartLetterList = heartRepository.findByUser(user).orElseThrow(
+                () -> new LetterException(LetterExceptionType.NOT_FOUND_HEART)
+        );
+        System.out.println(heartLetterList);
 
-        System.out.println(heartRepository.findByUser(user).get().getLetter());
+        /*List<Letter> letterList = new ArrayList<>();
+        for (Heart heart : heartLetterList) {
+            letterList.add(heart.getLetter());
+        }*/
+
+        System.out.println(heartRepository.findByUser(user));
         System.out.println(heartLetterList);
 
         return heartLetterList;
+    }
+
+    @GetMapping("/users/heartletter")
+    public List<Heart> getAllHeart() {
+        return this.heartRepository.findAll();
     }
 
     @PostMapping("/users/login")

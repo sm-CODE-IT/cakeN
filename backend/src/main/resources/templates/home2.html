@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <style>
+    .Home {
+      text-align: center;
+    }
+
+    .Home .pinkbox {
+      width: 720px;
+      height: 80px;
+    }
+
+    @keyframes spaceship-ani {
+      to {
+        background-position: 0 -1265px;
+      }
+    }
+    .Home .spaceship {
+      align-items: center;
+      margin: auto;
+      border: 6px solid #ffc0cb;
+      width: 420px;
+      height: 40px;
+      background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
+      animation: spaceship-ani 25s infinite steps(5000);
+    }
+
+    .Home .mark {
+      display: inline-block;
+      background: linear-gradient(to top, #ffc0cb 50%, transparent 50%);
+    }
+
+    .Home .cakeLogo {
+      margin: auto;
+      width: 100px;
+    }
+
+    .Home h2 {
+      font-family: "Nanum Gothic";
+    }
+
+    .Home h3 {
+      font-family: "Nanum Gothic";
+    }
+
+    .Home .toLetterButton {
+      font-family: "Nanum Gothic";
+      font-weight: bold;
+      font-size: larger;
+      width: 200px;
+      padding: 8px;
+      background-color: #69492d;
+      color: #ffc0cb;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 3px 3px 3px 3px;
+    }
+
+    .Home .happy {
+      display: flex;
+      border: 6px solid #ffc0cb;
+      align-items: center;
+      width: 40%;
+      padding: 10px 15px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+</head>
+<body>
+<div class="Home">
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <img class="cakeLogo" src="https://ifh.cc/g/ODK4d0.png" />
+  <br />
+  <h2 class="mark">당신의 케이크에는 어떤 의미가 담겨 있나요?</h2>
+
+  <div class="happy">
+    <div class="spaceship"></div>
+    <div><img src="https://ifh.cc/g/1qR4DW.png" width={40}/></div>
+  </div>
+  <h3>
+    케이크를 처음 만들어 봐서 어떻게 해야 하는지 모르겠다면
+    <br />
+    레터링에 쓸 만한 적당한 문구가 떠오르지 않는다면 <br />
+    참신한 아이디어가 필요하다면
+    <br />
+    <br />
+    저희 케이크엔이 도와드리겠습니다!
+  </h3>
+  <a href="/letter">
+    <button class="toLetterButton">레터링 구경하러 가기</button>
+  </a>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+</body>
+</html>
