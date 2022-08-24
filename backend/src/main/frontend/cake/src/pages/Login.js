@@ -45,19 +45,37 @@ const Login = () => {
         <h4 className="socialTitle">간편 로그인</h4>
 
         <div className="divNaver">
-          <button className="socialButton naverButton">
+          {/* <button className="socialButton naverButton"> */}
+          <a
+            href="http:/localhost:3000/login/oauth2/authorization/naver"
+            class="btn btn-secondary active"
+            role="button"
+          >
             <img className="naverImg" src="https://ifh.cc/g/jfgfkw.png" />
-          </button>
+          </a>
+          {/* </button> */}
         </div>
         <div className="divGoogle">
-          <button className="socialButton googleButton">
+          {/* <button className="socialButton googleButton"> */}
+          <a
+            href="/oauth2/authorization/google"
+            class="btn btn-success active"
+            role="button"
+          >
             <img className="googleImg" src="https://ifh.cc/g/HaRDS7.jpg" />
-          </button>
+          </a>
+          {/* </button> */}
         </div>
         <div className="divKakao">
-          <button className="socialButton kakaoButton">
+          <a
+            href="/oauth2/authorization/kakao"
+            class="btn btn-warning active"
+            role="button"
+          >
+            {/* <button className="socialButton kakaoButton"> */}
             <img className="kakaoImg" src="https://ifh.cc/g/vG8GLK.png" />
-          </button>
+            {/* </button> */}
+          </a>
         </div>
       </div>
       <br />

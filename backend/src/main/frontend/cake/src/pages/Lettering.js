@@ -87,17 +87,17 @@ const Lettering = () => {
   // axios 방식을 이용한 Back 데이터 가져오기
 
   // 요청 받은 정보를 담아줄 변수 선언
-  const [letters, setLetters] = useState("");
-  const [letters2, setLetters2] = useState("");
-  const [letters3, setLetters3] = useState("");
+  const [letter, setLetter] = useState("");
+  const [letter2, setLetter2] = useState("");
+  const [letter3, setLetter3] = useState("");
 
   // 변수 초기화
   function getLetter(str) {
-    setLetters(str);
+    setLetter(str);
   }
 
   function getLetter2(str) {
-    setLetters(str);
+    setLetter(str);
   }
 
   // 첫 번째 렌더링을 마친 후 실행
@@ -136,7 +136,7 @@ const Lettering = () => {
       <div className="box" id="birthday">
         <h2>#생일</h2>
         <br />
-        {letters.map((it) => (
+        {dummyList.map((it) => (
           <Button
             key={it.letterId}
             {...it}
