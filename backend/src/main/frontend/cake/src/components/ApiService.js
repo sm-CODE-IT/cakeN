@@ -41,6 +41,37 @@ export function call(api, method, request) {
     headers: new Headers({
       "Content-type": "application/json",
     }),
+<<<<<<< HEAD
+    url: USER_API_BASE_URL,
+    method: method,
+  };
+  if (request) {
+    //GET method
+    options.body = JSON.stringify(request);
+  }
+  return fetch(options.url, options).then((response) =>
+    response.json().then((json) => {
+      if (!response.ok) {
+        //response.ok가 true면 정상적인 응답을 받은 것이고 아니면 에러 응답을 받은 것임
+        return Promise.reject(json);
+      }
+      return json;
+    })
+  );
+}
+
+export function signin(userDTO) {
+  // return call("/api/hello", "GET", userDTO).then((response) => {
+  console.log("test");
+  return call("/api/hello", "GET").then((response) => {
+    console.log("tewt");
+    console.log("response : ", response);
+    //alert("로그인 토큰: " + response.token);
+  });
+}
+
+export default new ApiService();
+=======
     url: USER_API_BASE_URL + api,
     method: method,
   };
@@ -60,3 +91,4 @@ export function signin(userDTO) {
 }
 
 export default new ApiService();
+>>>>>>> newJeans

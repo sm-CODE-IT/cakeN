@@ -1,12 +1,20 @@
+<<<<<<< HEAD
+@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+/* body
+. {
+  margin: 0%;
+  padding: 0%;
+} */
+=======
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Pattaya&family=Rubik+Puddles&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
 /* body */
 
+>>>>>>> newJeans
 
 /* NaviHeader */
 .NaviHeader {
   overflow: hidden;
-  
   background-color: pink;
   padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
   transition: 0.4s; /* 패딩 줄어들 때 지연 */
@@ -20,7 +28,8 @@
   justify-content: space-around;
   align-items: center;
 }
-.NaviHeader .right{
+
+.NaviHeader .right {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -40,14 +49,14 @@
   color: black;
   text-decoration: none;
   padding: 12px;
-  
+  font-family: "Nanum Gothic";
+  /* font-weight: bold; */
   font-size: 18px;
   line-height: 25px;
   border-radius: 4px;
 
   transition: 0.5s;
 }
-
 
 /* 링크에 hover  */
 .NaviHeader .menu:hover {
@@ -57,7 +66,6 @@
 .NaviHeader .menu.active:hover {
   background-color: cornsilk;
 }
-
 
 /* ContentHeader */
 .ContentHeader {
@@ -102,19 +110,60 @@
   width: 100%;
   text-align: center;
 }
+<<<<<<< HEAD
+
 .Lettering a {
   font-family: "Nanum Gothic";
+  text-decoration-line: none;
+  margin: 3px;
+}
+
+.Lettering a:hover {
+  /* color: red; */
+  text-decoration: underline;
+}
+
+.Lettering .birthday {
+  color: #ff00b8;
+  font-weight: bold;
+}
+
+.Lettering .birthday2 {
+  color: #fc62ff;
+  font-weight: bold;
+}
+
+.Lettering .parentsday {
+  color: #ff0000;
+  font-weight: bold;
+}
+
+.Lettering #birthday {
+  color: #ff00b8;
+}
+
+.Lettering #birthday2 {
+  color: #fc62ff;
+}
+
+.Lettering #parentsday {
+  color: #ff0000;
+=======
+.Lettering a {
+  font-family: "Nanum Gothic";
+>>>>>>> newJeans
 }
 
 .Lettering h2 {
   text-align: center;
   font-family: "Nanum Gothic";
 }
+
 .Lettering pre {
   font-family: "Nanum Gothic";
   display: inline-block;
   font-size: 15px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Nanum Gothic";
   color: black;
   background: #fff;
   border-radius: 5px;
@@ -268,12 +317,6 @@ label > input[type="radio"]:checked + img {
   border-radius: 50%;
 }
 
-/* Login */
-.Login {
-  margin-top: 100px;
-
-}
-
 /* SignUp */
 .SignUp {
   margin-top: 100px;
@@ -283,15 +326,24 @@ label > input[type="radio"]:checked + img {
   margin-left: auto;
   margin-right: auto;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> newJeans
 .SignUp .text {
   color: pink;
   font-size: 13px;
   padding: 3px;
 }
+<<<<<<< HEAD
+
+.SignUp .table {
+=======
 .SignUp .table{
+>>>>>>> newJeans
   font-size: 15px;
   border: 2px solid #ffc0cb;
-  
+
   padding: 6% 5% 6% 5%;
 }
 .SignUp span{
@@ -307,7 +359,7 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
 }
 
-.SignUp .tableText{
+.SignUp .tableText {
   font-size: 13px;
   color: pink;
   margin-left: 35%;
@@ -323,9 +375,8 @@ label > input[type="radio"]:checked + img {
 }
 
 .SignUp .inLine {
- display: flex;
- align-items: center;
-
+  display: flex;
+  align-items: center;
 }
 
 .SignUp .content {
@@ -362,6 +413,7 @@ label > input[type="radio"]:checked + img {
   display: flex;
   margin-top: 100px;
 }
+
 .MyPageAll {
   width: 100%;
 }
@@ -391,7 +443,7 @@ label > input[type="radio"]:checked + img {
 }
 
 .MyPageLeft .user_emil {
-  color: #FFD53F;
+  color: #ffd53f;
   font-size: 13px;
   margin-bottom: -20px;
 }
@@ -403,7 +455,66 @@ label > input[type="radio"]:checked + img {
   border: none;
   border-radius: 5px;
   margin-top: 15px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
+  color: white;
+}
+
+/* Accordion */
+.accordion {
+  margin: 30px;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.accordion__item {
+  padding: 3px 10px;
+  border: 1px solid pink;
+  border-radius: 5px;
+  color: pink;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.accordion__header {
+  display: flex;
+  align-items: center;
+}
+
+.accordion__header h4 {
+  margin: 0%;
+  transition: 0.2s ease-in-out;
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.accordion__header i {
+  transition: 0.2s ease-in-out;
+  transform-origin: center;
+  margin-bottom: 3px;
+}
+
+.accordion__header:hover h4 {
+  color: #ffeaed !important;
+}
+.accordion__content {
+  border: 1px solid pink;
+  width: 200px;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 5px 0px 5px 10px;
+  margin: 3px 5px 5px 10px;
+  text-decoration-line: none;
+  color: pink;
+  display: block;
+}
+.accordion__content:hover {
+  border: 1px solid #ffeaed;
+  background-color: #ffeaed;
   color: white;
 }
 
@@ -418,10 +529,15 @@ label > input[type="radio"]:checked + img {
   width: 80%;
   margin-top: 50px;
   padding: 20px 40px 20px 40px;
+<<<<<<< HEAD
+
+  border: 1px solid #ffeaed;
+=======
   margin-left: 8%;
   border: 1px solid #FFEAED;
+>>>>>>> newJeans
   border-radius: 5px;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
 }
 
 .ViewInfoAll .tr {
@@ -438,7 +554,7 @@ label > input[type="radio"]:checked + img {
   flex-wrap: wrap;
   align-items: center;
 }
-.ViewInfoAll .text { 
+.ViewInfoAll .text {
   padding: 5px 10px 5px 10px;
 }
 .ViewInfoAll .nickText {
@@ -486,31 +602,44 @@ label > input[type="radio"]:checked + img {
   width: 30%;
   border: none;
   border-radius: 5px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
   color: white;
   font-size: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: 25px;
 }
-
 /* Password */
 .Password {
+<<<<<<< HEAD
+=======
   margin-left: 8%;
+>>>>>>> newJeans
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .Password .PasswordAll {
   font-size: 15px;
+  width: 80%;
   margin-top: 50px;
   padding: 40px 40px 40px 40px;
+<<<<<<< HEAD
+
+  border: 1px solid #ffeaed;
+=======
   border: 1px solid #FFEAED;
+>>>>>>> newJeans
   border-radius: 5px;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
 }
+<<<<<<< HEAD
+.Password .text {
+  width: 35%;
+=======
 .Password .text { 
   width: 80%;
+>>>>>>> newJeans
 }
 .Password .passText {
   color: pink;
@@ -532,7 +661,7 @@ label > input[type="radio"]:checked + img {
 }
 .Password .td {
   display: flex;
-  align-items: flex-start;  
+  align-items: flex-start;
   justify-content: space-between;
 }
 .Password .input {
@@ -555,7 +684,7 @@ label > input[type="radio"]:checked + img {
   width: 30%;
   border: none;
   border-radius: 5px;
-  background-color: #FFD53F;
+  background-color: #ffd53f;
   color: white;
   font-size: 15px;
   padding-top: 10px;
@@ -575,15 +704,15 @@ label > input[type="radio"]:checked + img {
 /* DeCake */
 .DeCake {
   width: fit-content;
-  background-color: #FFEAED;
+  background-color: #ffeaed;
   padding: 2% 2% 2% 2%;
   margin: 1%;
 }
-.DeCake .x_btn_div{
+.DeCake .x_btn_div {
   display: flex;
   justify-content: flex-end;
 }
-.DeCake .x_btn{
+.DeCake .x_btn {
   background: pink;
   border: none;
 }
@@ -593,7 +722,7 @@ label > input[type="radio"]:checked + img {
   align-items: center;
 }
 
-.DeCake .btn{
+.DeCake .btn {
   width: fit-content;
   font-size: 20px;
   display: block;
@@ -605,41 +734,108 @@ label > input[type="radio"]:checked + img {
 /* ConCake */
 /* Plus */
 
-/* Intro */
-/* .main {
-  display: flex;
-  height: 100vh;
-  width: 100%;
-  align-items: center;
-  flex-direction: column;
-  row-gap: 20px;
-} */
-
-
-.accordion {
-  margin: 30px;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Home */
+.Home {
+  text-align: center;
 }
 
-.accordion__item {
-  padding: 3px 10px;
-  border: 1px solid pink ;
+.Home .pinkbox {
+  width: 720px;
+  height: 80px;
+}
+
+@keyframes spaceship-ani {
+  to {
+    background-position: 0 -1265px;
+  }
+}
+.Home .spaceship {
+  align-items: center;
+  margin: auto;
+  border: 6px solid #ffc0cb;
+  width: 420px;
+  height: 40px;
+  background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
+  animation: spaceship-ani 25s infinite steps(5000);
+}
+
+.Home .mark {
+  display: inline-block;
+  background: linear-gradient(to top, #ffc0cb 50%, transparent 50%);
+}
+
+.Home .cakeLogo {
+  margin: auto;
+  width: 100px;
+}
+
+.Home h2 {
+  font-family: "Nanum Gothic";
+}
+
+.Home h3 {
+  font-family: "Nanum Gothic";
+}
+
+.Home .toLetterButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+  font-size: larger;
+  width: 200px;
+  padding: 8px;
+  background-color: #69492d;
+  color: #ffc0cb;
+  border: none;
   border-radius: 5px;
-  color: pink;
-  overflow: hidden;
-  cursor: pointer;
-  margin-bottom: 5px;
+  box-shadow: 3px 3px 3px 3px;
 }
 
+/* Login */
+.Login {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.Login .loginButton {
+  cursor: pointer;
+}
+
+<<<<<<< HEAD
+.Login .naverImg {
+  z-index: 100;
+  cursor: pointer;
+}
+
+.Login img {
+  cursor: pointer;
+}
+
+.Login .form {
+=======
 .accordion__header {
   
+>>>>>>> newJeans
   display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
   align-items: center;
 }
 
+<<<<<<< HEAD
+.Login .loginField {
+  padding: 6px;
+  /* background-color: rgb(255, 251, 234); */
+  background-color: white;
+  border-radius: 3px;
+  /* border: 4px outset white; */
+  /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
+  box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
+  /* box-shadow: 5px 5px 10px #666; */
+=======
 .accordion__header h4 {
   margin: 0%;
   transition: 0.2s ease-in-out;
@@ -647,28 +843,121 @@ label > input[type="radio"]:checked + img {
   font-weight: 400;
   margin-left: 15px;
   margin-bottom: 5px;
+>>>>>>> newJeans
 }
 
-.accordion__header i {
-  transition: 0.2s ease-in-out;
-  transform-origin: center;
-  margin-bottom: 3px;
+.Login input {
+  font-family: "Nanum Gothic";
+  text-align: center;
+  border: none;
+  background-color: cornsilk;
+  /* background: linear-gradient(to top, cornsilk, white); */
+  margin: 3px;
+  width: 180px;
+  padding: 2px;
 }
 
-.accordion__header:hover h4 {
-  color: #FFEAED!important;
-}
-.accordion__content {
-  border: 1px solid pink;
-  width: 200px;
+.Login .loginButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
   margin: 5px;
+  width: 180px;
+
+  background-color: #ff8080;
+  color: black;
+  border: none;
   border-radius: 5px;
-  padding: 5px 0px 5px 10px;
-  margin: 3px 5px 5px 10px;
-  text-decoration-line: none;
-  color: pink;
-  display: block;
+  /* border: 2px solid #ff8080; */
+  background: linear-gradient(to bottom, white, #ff8080);
 }
+
+.Login .cake {
+  width: 205px;
+}
+
+.Login .cakeWrapper {
+  text-align: center;
+}
+
+.Login .socialWrapper {
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  padding: 10px;
+  padding-top: 15px;
+  border: 4px dashed #ffc0cb;
+}
+
+.Login .btn {
+  margin: 5px;
+  border: none;
+  /* width: 200px; */
+}
+
+.Login .naverButton {
+  background-color: #01c73c00;
+}
+
+.Login .naverImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .googleButton {
+  background-color: #fd706300;
+}
+
+.Login .googleImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .kakaoButton {
+  background-color: #fee50000;
+}
+
+.Login .kakaoImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .dish {
+  position: absolute;
+  top: 270px;
+  width: 310px;
+  height: 100px;
+  z-index: -9;
+}
+
+.Login .divNaver {
+  display: inline;
+}
+.Login .divGoogle {
+  display: inline;
+}
+.Login .divKakao {
+  display: inline;
+}
+
+.Login .socialTitle {
+  padding-left: 6px;
+  padding-right: 6px;
+  position: absolute;
+  text-align: center;
+  /* top: 440px;
+  left: 460px; */
+  left: 54px;
+  top: -33px;
+  font-family: "Nanum Gothic";
+  color: #ffc0cb;
+  background-color: white;
+  display: inline-block;
+}
+<<<<<<< HEAD
+=======
 .accordion__content:hover {
   border: 1px solid #FFEAED;
   background-color: #FFEAED;
@@ -877,3 +1166,4 @@ label > input[type="radio"]:checked + img {
   background-color: white;
   display: inline-block;
 }
+>>>>>>> newJeans

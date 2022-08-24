@@ -93,11 +93,15 @@
   <div className="signUpAll">
     <div class="text">*은 필수 입력사항입니다.</div>
 
+<<<<<<< HEAD
+  <form action="" th:action th:object="${userRequestDto}" method="post" enctype="multipart/form-data">
+=======
       <form action="" th:action th:object="${userRequestDto}" method="post">
         <div class="table">
         <div th:if="${#fields.hasGlobalErrors()}">
           <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         </div>
+>>>>>>> newJeans
 
         <div class="tr">
           <div class="th">
@@ -110,6 +114,44 @@
           </div> <!-- td -->
         </div> <!-- tr -->
 
+<<<<<<< HEAD
+    <div>
+      <label for="email">로그인 ID</label>
+      <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Incorrect data</p>
+    </div>
+    <div>
+      <label for="pw">비밀번호</label>
+      <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></p>
+    </div>
+    <div>
+      <label for="pw">비밀번호 재확인</label>
+      <input type="password" id="pwConfirm" name="pwConfirm" th:field="*{pwConfirm}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('pwConfirm')}" th:errors="*{pwConfirm}" ></p>
+    </div>
+    <div>
+      <label for="nickname">닉네임</label>
+      <input type="text" id="nickname" name="nickname" th:field="*{nickname}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" ></p>
+    </div>
+    <div>
+      <label for="intro">자기소개</label>
+      <input type="text" id="intro" name="intro" th:field="*{intro}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('intro')}"  th:errors="*{intro}" ></p>
+    </div>
+    <div>
+      <label for="image">프로필사진</label>
+      <input type="text" id="image" name="image" th:field="*{image}" class="form-control"
+             th:errorclass="field-error">
+      <p class="field-error"  th:if="${#fields.hasErrors('image')}"  th:errors="*{image}" ></p>
+    </div>
+=======
         <div class="tr">
           <div class="th">
             <label for="pw">비밀번호<span>*</span></label>
@@ -120,6 +162,7 @@
             <div class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></div>
           </div> <!-- td -->
         </div> <!-- tr -->
+>>>>>>> newJeans
 
         <div class="tr" style="margin-top:-4%;">
           <div class="th">

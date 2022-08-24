@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+import Login2 from "../components/Login2";
+
+const Login = () => {
+  return <Login2 />;
+=======
 import { Link } from "react-router-dom";
 import ContentHeader from "../components/ContentHeader";
 
@@ -65,6 +71,7 @@ const Login = () => {
         <br />
       </div>  
     );
+>>>>>>> newJeans
 };
 
 export default Login;

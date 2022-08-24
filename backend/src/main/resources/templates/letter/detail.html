@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="main">
+        <!--
+        <label for="writer">작성자 :</label>
+        <input type="text" name="writer" id="writer" th:value="">
+        -->
+        <label for="tag">문구 번호(tag) :</label>
+        <input type="text" name="tag" id="tag" th:text="${letter.tag}" disabled> <br>
+        <label for="letter">내용 :</label>
+        <textarea name="letter" id="letter" th:text="${letter.content}" disabled></textarea> <br>
+
+        <a th:href="@{/letter/update/{letter_id}(letter_id=${letter.letterId})}" id="update">수정</a>
+        <a th:href="@{/letter/delete/{letter_id}(letter_id=${letter.letterId})}" id="delete">삭제</a>
+
+    </div>
+</body>
+</html>

@@ -9,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 // 데이터 수정 전 User 객체를 임시 저장
-@Getter
 @NoArgsConstructor
 @Data
 public class UserRequestDto {
@@ -33,13 +32,14 @@ public class UserRequestDto {
 
     private Role role;
 
+
     @Builder
     public UserRequestDto(User user) {
         this.id = user.getUserId();
         this.email = user.getEmail();
         this.pw = user.getPw();
         this.intro = user.getIntro();
-        this.image = user.getImage();
+        this.image = null;
         this.nickname = user.getNickname();
         this.role = user.getRole();
     }
@@ -50,7 +50,7 @@ public class UserRequestDto {
                 .email(email)
                 .pw(pw)
                 .intro(intro)
-                .image(image)
+                .image(null)
                 .nickname(nickname)
                 .role(Role.USER)   // 회원가입 시 USER로 권한 부여
                 .build();

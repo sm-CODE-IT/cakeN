@@ -2,24 +2,20 @@ package codeit.cakeN.service.contest;
 
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.contest.ContestRepository;
-import codeit.cakeN.domain.contest.ContestScrap;
-import codeit.cakeN.domain.contest.ContestScrapRepository;
-import codeit.cakeN.domain.user.User;
+import codeit.cakeN.domain.contest.ScrapRepository;
 import codeit.cakeN.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ContestService {
 
     private final ContestRepository contestRepository;
-    private final ContestScrapRepository contestScrapRepository;
+    private final ScrapRepository scrapRepository;
     private final UserRepository userRepository;
 
     public void register(Contest contest) {
@@ -49,7 +45,6 @@ public class ContestService {
         return contestScrapRepository.existsByContest_IdAndUser_Id(contestId, userId);
     }*/
 
-//    @Transactional
     /*public boolean saveScrapContest(Long contestId, Long userId) {
 
         boolean findScrap = contestScrapRepository.existsByContest_IdAndUser_Id(contestId, userId);
