@@ -8,7 +8,6 @@
 /* NaviHeader */
 .NaviHeader {
   overflow: hidden;
-
   background-color: pink;
   padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
   transition: 0.4s; /* 패딩 줄어들 때 지연 */
@@ -22,6 +21,7 @@
   justify-content: space-around;
   align-items: center;
 }
+
 .NaviHeader .right {
   display: flex;
   flex-wrap: wrap;
