@@ -45,7 +45,6 @@ public class User extends Timestamped implements Serializable {
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
 
-
     @Column(length = 20, nullable = false)
     private String nickname;
 

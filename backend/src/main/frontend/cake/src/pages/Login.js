@@ -4,7 +4,7 @@ const Login = () => {
 
   return (
     <div className="Login">
-      <ContentHeader title={title} content={content} />
+      {/*<ContentHeader title={title} content={content} />*/}
       <br />
       <div className="cakeWrapper">
         <br />
@@ -15,7 +15,7 @@ const Login = () => {
         <form>
           <div className="loginField">
             <div>
-                <form action='/users/login' method='post'>
+                <form method='post'>
                     <div><input type = "email" name="username" placeholder="이메일" required/></div>
                     <div><input  type = "password" name="password" placeholder="비밀번호" required /></div>
                     <div><button type = "submit">{"로그인"}</button></div>

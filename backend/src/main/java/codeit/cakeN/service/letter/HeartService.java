@@ -8,11 +8,10 @@ import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.letter.LetterException;
 import codeit.cakeN.exception.letter.LetterExceptionType;
-import codeit.cakeN.web.letter.HeartDto;
+import codeit.cakeN.web.letter.dto.HeartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -63,5 +62,23 @@ public class HeartService {
         Integer heartCount = letterOpt.get().getHearts();
         heartCount += plusOrMinus;
         letterOpt.get().setHearts(heartCount);
+    }
+
+    // 저장된 HeartDto가 있는지 찾는 함수
+    public Heart saveHeart(Long userId, Long letterId) {
+        Optional<Heart> findHeart = heartRepository.findByUser_UserIdAndLetter_LetterId(userId, letterId);
+
+        System.out.println(findHeart.isEmpty());
+
+        if (findHeart.isEmpty()) {
+            User user = userRepository.findById(userId).get();
+            Letter letter = letterRepository.findById(letterId).get();
+
+            Heart heart = Heart.toLetterHeart(user, letter);
+            heartRepository.save(heart);
+
+            return heart;
+        }
+        return null;
     }
 }

@@ -16,7 +16,6 @@ const ViewInfo = () => {
             method: 'GET'
         }).then(response => getUser(response.data))
             .catch(err => console.log(err))
-
     }, []);
 
 

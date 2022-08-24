@@ -2,6 +2,8 @@ package codeit.cakeN.web.letter;
 
 import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.service.letter.LetterService;
+import codeit.cakeN.web.letter.dto.LetterRequestDto;
+import codeit.cakeN.web.letter.dto.LetterUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,7 @@ public class LetterController {
     }
 
     @PostMapping("/register")
-    public String registerPost(Letter letter) {
+    public String registerPost(LetterRequestDto letter) {
         letterService.register(letter);
         // return "redirect:/newletter/list";
         return "redirect:/letter/";
@@ -49,8 +51,8 @@ public class LetterController {
     }
 
     @PostMapping("/update")
-    public String updatePost(Letter letter) {
-        letterService.update(letter);
+    public String updatePost(LetterUpdateDto letter) {
+        letterService.update(letter.getId(), letter);
         return "redirect:/letter/";
     }
 

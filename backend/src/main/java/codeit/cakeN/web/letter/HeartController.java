@@ -2,19 +2,15 @@ package codeit.cakeN.web.letter;
 
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.user.UserRepository;
-import codeit.cakeN.exception.letter.LetterException;
 import codeit.cakeN.service.letter.HeartService;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import codeit.cakeN.web.letter.dto.HeartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-
-import static codeit.cakeN.web.user.UserController.findSessionUser;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,7 +26,7 @@ public class HeartController {
     public HeartDto heart(@RequestBody HeartDto heartDto, @AuthenticationPrincipal User formUser) throws Exception {
         /*codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
         heartDto.setUserId(user.getUserId());*/
-        Heart heart = heartService.heart(heartDto);
+        Heart heart = heartService.saveHeart(heartDto.getUserId(), heartDto.getLetterId());
         return new HeartDto(heart);
     }
 

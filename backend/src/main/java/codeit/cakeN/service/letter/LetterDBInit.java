@@ -1,3 +1,4 @@
+/*
 package codeit.cakeN.service.letter;
 
 import codeit.cakeN.domain.letter.Letter;
@@ -15,7 +16,6 @@ import java.util.List;
 @Service
 public class LetterDBInit implements CommandLineRunner {
 
-    private final LetterRepository letterRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -33,3 +33,4 @@ public class LetterDBInit implements CommandLineRunner {
         System.out.println(this.letterRepository.findAll());
     }
 }
+*/

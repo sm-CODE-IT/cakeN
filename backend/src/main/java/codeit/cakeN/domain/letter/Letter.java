@@ -1,5 +1,6 @@
 package codeit.cakeN.domain.letter;
 
+import codeit.cakeN.web.letter.dto.LetterUpdateDto;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,6 +27,10 @@ public class Letter {
     @Column
     private String content;      // 레터의 내용
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Tag tag;    // TODO Tag Entity 생성
+
     @Column
     private Integer hearts = 0;   // 좋아요 수
 
@@ -36,10 +41,6 @@ public class Letter {
     @UpdateTimestamp
     private LocalDateTime updated_at;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Tag tag;    // TODO Tag Entity 생성
-
 
     @Builder
     public Letter(String content, Tag tag) {
@@ -48,7 +49,7 @@ public class Letter {
     }
 
     // Letter 정보 수정 메서드
-    public void update(Letter letter) {
+    public void update(LetterUpdateDto letter) {
         this.content = letter.getContent();
         this.tag = letter.getTag();
     }

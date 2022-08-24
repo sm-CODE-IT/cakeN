@@ -1,4 +1,4 @@
-package codeit.cakeN.web.letter;
+package codeit.cakeN.web.letter.dto;
 
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.Letter;
