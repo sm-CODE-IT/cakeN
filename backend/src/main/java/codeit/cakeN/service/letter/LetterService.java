@@ -23,7 +23,7 @@ public class LetterService {
     }
 
     public List<Letter> list() {
-        return letterRepository.findAll(Sort.by(Sort.Direction.DESC, "letter_id"));
+        return letterRepository.findAll(Sort.by(Sort.Direction.DESC, "letterId"));
     }
 
     public Letter detail(Long letterId) {

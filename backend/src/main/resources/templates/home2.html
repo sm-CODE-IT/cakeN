@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<html
-        lang="ko"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <style>
@@ -74,7 +70,7 @@
   </style>
 
 </head>
-<div layout:fragment="content">
+<body>
 <div class="Home">
   <br />
   <br />
@@ -111,5 +107,5 @@
   <br />
 </div>
 
-</div>
+</body>
 </html>
