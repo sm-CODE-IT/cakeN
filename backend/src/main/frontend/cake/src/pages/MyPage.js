@@ -1,6 +1,7 @@
 import ContentHeader from "../components/ContentHeader";
 import MyPageLeft from "../components/MyPageLeft";
 import ViewInfo from "./ViewInfo";
+import Users from "../components/user/Users";
 
 const MyPage = () => {
   const title = "내 프로필 보기";

@@ -1,8 +1,10 @@
 package codeit.cakeN.domain.user;
 
+import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.contest.Contest;
 import codeit.cakeN.domain.design.Design;
 import codeit.cakeN.domain.letter.Letter;
+import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.web.user.dto.UserRequestDto;
 import codeit.cakeN.web.user.dto.UserUpdateDto;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @NoArgsConstructor
@@ -48,6 +51,7 @@ public class User extends Timestamped implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
 
 
     // Spring Security 사용자 인증 필드
@@ -111,6 +115,11 @@ public class User extends Timestamped implements Serializable {
         return passwordEncoder.matches(checkPassword, getPw());
     }
 
+    // 프로필 사진 Type: File -> String 으로 변환
+    public String fileToString(File file) {
+        return file.getAttachFile().getStoreFileName();
+    }
+
     // 연관관계 메서드
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
@@ -121,13 +130,21 @@ public class User extends Timestamped implements Serializable {
     private List<Contest> contestList = new ArrayList<>();
 
     /*@Builder.Default
+    @OneToMany(mappedBy = "heart", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
+*/
+    /*@Builder.Default
     @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-    private List<Letter> letterList = new ArrayList<>();*/
-
+    private List<Heart> heartLetterList = new ArrayList<>();
+*/
     public void addDesign(Design design) {
         // cake design의 작성자는 Design Entity에서 지정
         designList.add(design);
     }
+
+    /* public void addHeartLetter(Heart heart) {
+        heartLetterList.add(heart);
+    }*/
 
 
 }

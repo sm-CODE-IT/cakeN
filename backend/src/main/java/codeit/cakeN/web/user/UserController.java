@@ -1,8 +1,9 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
-import codeit.cakeN.domain.contest.Contest;
-import codeit.cakeN.domain.contest.ContestRepository;
+import codeit.cakeN.domain.user.profileImg.File;
+import codeit.cakeN.domain.user.profileImg.FileRepository;
+import codeit.cakeN.domain.user.profileImg.ProfileStore;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
@@ -11,18 +12,29 @@ import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
 
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriUtils;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 
 
 //@RestController
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -31,6 +43,8 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
     private final HttpSession httpSession;
+    private final ProfileStore profileStore;
+    private final FileRepository fileRepository;
 
     /**
      * 회원가입 페이지
@@ -56,6 +70,7 @@ public class UserController {
             return "user/createUserForm";
         }
 
+        userRequestDto.setImage(userRequestDto.getImage());
 
         try {
             if (!(userRequestDto.getPw().equals(userRequestDto.getPwConfirm()))) {
@@ -67,6 +82,7 @@ public class UserController {
                 return "user/createUserForm";
             }
             userService.save(userRequestDto);
+
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "user/createUserForm";
@@ -243,39 +259,29 @@ public class UserController {
         return "redirect:/users/mypage";
     }
 
-
-    /*
-     * rest API
-     */
-
-    /*// Create
-    //*public User createUser(@RequestBody UserRequestDto requestDto) {
-        User user = new User(requestDto);
-        return userRepository.save(user);
-    }*//*
-
-    // Read (전체)
-    @GetMapping("/api/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    @ResponseBody
+    @GetMapping("/mypage/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        return new UrlResource("file:" + profileStore.getFullPath(filename));
     }
 
-    // Read (개별)
-    @GetMapping("/api/users/{userId}")
-    public Optional<User> getUser(@PathVariable Long userId) {
-        return Optional.of(userRepository.findById(userId));
+    @GetMapping("/attach/{fileId}")
+    public ResponseEntity<Resource> downloadAttach(@PathVariable Long fileId) throws MalformedURLException {
+        File file = fileRepository.findById(fileId);
+        String storeFileName = file.getAttachFile().getStoreFileName();
+        String uploadFileName = file.getAttachFile().getUploadFileName();
+
+        UrlResource resource = new UrlResource("file:" + profileStore.getFullPath(storeFileName));
+
+        log.info("uploadFileName={}", uploadFileName);
+
+        // 파일명을 인코딩하여 전달 for 한글 파일명
+        String encodedUploadFileName = UriUtils.encode(uploadFileName, StandardCharsets.UTF_8);
+        String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                .body(resource);
     }
 
-    // Update -> Patch / Put
-    @PutMapping("/api/users/{userId}")
-    public Long updateUser(@PathVariable Long userId, @RequestBody UserRequestDto requestDto) {
-        return userService.update(userId, requestDto);
-    }
-
-    // Delete
-    @DeleteMapping("/api/users/{userId}")
-    public Long deleteUser(@PathVariable Long userId) {
-        userRepository.deleteById(userId);
-        return userId;
-    }*/
 }

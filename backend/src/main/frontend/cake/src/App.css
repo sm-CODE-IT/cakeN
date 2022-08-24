@@ -238,7 +238,7 @@ label > input[type="radio"]:checked + img {
   width: 280px;
 }
 
-/* 
+/*
 .Design h2 {
   display: inline-block;
   background-color: #ffc0cb;
@@ -818,8 +818,8 @@ label > input[type="radio"]:checked + img {
   border: 4px dashed #ffc0cb;
 }
 
-.Login .socialButton {
-  margin: 2px;
+.Login .btn {
+  margin: 5px;
   border: none;
   /* width: 200px; */
 }
@@ -873,13 +873,13 @@ label > input[type="radio"]:checked + img {
 }
 
 .Login .socialTitle {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 6px;
+  padding-right: 6px;
   position: absolute;
   text-align: center;
   /* top: 440px;
   left: 460px; */
-  left: 65px;
+  left: 54px;
   top: -33px;
   font-family: "Nanum Gothic";
   color: #ffc0cb;
