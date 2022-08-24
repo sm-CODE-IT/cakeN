@@ -5,8 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<!-- controller에서 넘겨주지 못하고 있음 -->
-
-리스트 페이지
+<div class="main">
+    <a href="/letter/register" class="register">문구 등록</a>
+    <table>
+        <thead>
+        <tr>
+            <th>문구 목록</th>
+            <th>내용</th> <!-- 임시로 테스트 하기 위함 -->
+            <th>태그</th> <!-- 임시로 테스트 하기 위함 -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="letter : ${letters}">
+            <!-- 1. 문구에 하이퍼링크가 없는 경우 -->
+            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>
+            <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->
+            <td th:text="${letter.content}"></td>
+            <td th:text="${letter.tag}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

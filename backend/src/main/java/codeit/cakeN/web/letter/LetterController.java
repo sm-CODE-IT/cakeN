@@ -25,7 +25,7 @@ public class LetterController {
     @GetMapping("/")
     public String list(Model model) {
         model.addAttribute("letters", letterService.list());
-        return "letter/blank";
+        return "letter/list";
     }
 
     /**
@@ -78,9 +78,9 @@ public class LetterController {
      * @param letter
      * @return
      */
-    @PostMapping("/update")
-    public String updatePost(LetterUpdateDto letter) {
-        letterService.update(letter.getId(), letter);
+    @PostMapping("/update/{id}")
+    public String updatePost(@PathVariable("id") Long id, LetterUpdateDto letter) {
+        letterService.update(id, letter);
         return "redirect:/letter/";
     }
 
