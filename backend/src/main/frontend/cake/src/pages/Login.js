@@ -1,7 +1,6 @@
 import ContentHeader from "../components/ContentHeader";
 
 const Login = () => {
-
   return (
     <div className="Login">
       {/*<ContentHeader title={title} content={content} />*/}
@@ -15,16 +14,30 @@ const Login = () => {
         <form>
           <div className="loginField">
             <div>
-                <form method='post'>
-                    <div><input type = "email" name="username" placeholder="이메일" required/></div>
-                    <div><input  type = "password" name="password" placeholder="비밀번호" required /></div>
-                    <div><button type = "submit">{"로그인"}</button></div>
-                </form>
+              <form method="post">
+                <div>
+                  <input
+                    type="email"
+                    name="username"
+                    placeholder="이메일"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="비밀번호"
+                    required
+                  />
+                </div>
+                <div>{/* <button type="submit">{"로그인"}</button> */}</div>
+              </form>
             </div>
 
             <div>
-                <div><button>네이버로 로그인</button></div>
-                <div><button>구글로 로그인</button></div>
+              {/* <div><button>네이버로 로그인</button></div>
+                <div><button>구글로 로그인</button></div> */}
             </div>
 
             <button className="loginButton" type="submit">
@@ -36,7 +49,11 @@ const Login = () => {
         <br />
         <br />
         <img className="dish" src="https://ifh.cc/g/gdt06p.jpg" />
+        <br />
+        <br />
+        <br />
       </div>
+      <br />
       <br />
       <br />
       <br />
@@ -47,7 +64,7 @@ const Login = () => {
         <div className="divNaver">
           {/* <button className="socialButton naverButton"> */}
           <a
-            href="http:/localhost:3000/login/oauth2/authorization/naver"
+            href="http://localhost:3000/login/oauth2/authorization/naver"
             class="btn btn-secondary active"
             role="button"
           >

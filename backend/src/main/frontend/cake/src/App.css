@@ -238,7 +238,7 @@ label > input[type="radio"]:checked + img {
   width: 280px;
 }
 
-/*
+/* 
 .Design h2 {
   display: inline-block;
   background-color: #ffc0cb;
@@ -301,11 +301,6 @@ label > input[type="radio"]:checked + img {
 
 .color::-moz-color-swatch {
   border-radius: 50%;
-}
-
-/* Login */
-.Login {
-  margin-top: 100px;
 }
 
 /* SignUp */
@@ -754,6 +749,20 @@ label > input[type="radio"]:checked + img {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  margin-top: 100px;
+}
+
+.Login .loginButton {
+  cursor: pointer;
+}
+
+.Login .naverImg {
+  z-index: 100;
+  cursor: pointer;
+}
+
+.Login img {
+  cursor: pointer;
 }
 
 .Login .form {
@@ -810,7 +819,6 @@ label > input[type="radio"]:checked + img {
 
 .Login .socialWrapper {
   position: relative;
-  z-index: -9;
   text-align: center;
   display: inline-block;
   padding: 10px;
@@ -856,7 +864,7 @@ label > input[type="radio"]:checked + img {
 
 .Login .dish {
   position: absolute;
-  top: 320px;
+  top: 270px;
   width: 310px;
   height: 100px;
   z-index: -9;
