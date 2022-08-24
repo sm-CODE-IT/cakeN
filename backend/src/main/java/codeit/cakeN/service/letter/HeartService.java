@@ -11,6 +11,7 @@ import codeit.cakeN.exception.letter.LetterExceptionType;
 import codeit.cakeN.web.letter.dto.HeartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Optional;
 
@@ -29,7 +30,15 @@ public class HeartService {
             throw new LetterException(LetterExceptionType.ALREADY_HEART_LETTER);
         }
 
-        Heart heart = heartDto.toEntity();
+        User user = userRepository.findById(heartDto.getUserId()).get();
+        Letter letter = letterRepository.findById(heartDto.getLetterId()).get();
+
+        Heart heart = Heart.toLetterHeart(user, letter);
+        System.out.println(heart);
+        System.out.println(heart.getHeartId());
+        System.out.println(heart.getLetter());
+        System.out.println(heart.getUser());
+
         heartRepository.save(heart);
 
         updateHeartCount(heartDto.getLetterId(), 1);

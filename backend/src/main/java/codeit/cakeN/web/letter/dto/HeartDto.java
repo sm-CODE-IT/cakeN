@@ -13,20 +13,10 @@ public class HeartDto {
     private Long userId;
     private Long letterId;
 
-    private UserRepository userRepository;
-    private LetterRepository letterRepository;
-
     @Builder
     public HeartDto(Heart heart) {
         this.userId = heart.getUser().getUserId();
         this.letterId = heart.getLetter().getLetterId();
-    }
-
-    public Heart toEntity() {
-        return Heart.builder()
-                .user(userRepository.findById(userId).orElseThrow(null))
-                .letter(letterRepository.findById(letterId).orElseThrow(null))
-                .build();
     }
 
 }
