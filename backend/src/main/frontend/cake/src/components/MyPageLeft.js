@@ -91,7 +91,7 @@ const MyPageLeft = () => {
                         </animated.i>
                         <h4>{"My Cage"}</h4>                
                     </div>
-                    <Link to="/myPage" className="accordion__content" >{"내가 만든 케이크"}</Link>
+                    <Link to="/myCake" className="accordion__content" >{"내가 만든 케이크"}</Link>
                     <Link to="/password" className="accordion__content">{"좋아요한 레터링"}</Link>            
                 </animated.div>
        

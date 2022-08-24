@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+import {useEffect, useState} from "react";
 
+import './App.css';
 import NaviHeader from './components/NaviHeader';
 import Home from './pages/Home';
 import Intro from './pages/Intro';
@@ -12,8 +13,10 @@ import Lettering from './pages/Lettering';
 import MyPage from './pages/MyPage';
 import MyPassword from './pages/MyPassword';
 import MyCake from './pages/MyCake';
-import {useEffect, useState} from "react";
+import MyLettering from './pages/MyLettering';
+
 import axios from "axios";
+
 
 
 function App() {
@@ -69,6 +72,7 @@ function App() {
           <Route path='/myPage' element={<MyPage />} />
           <Route path='/password' element={<MyPassword />} />
           <Route path='/myCake' element={<MyCake />} />
+          <Route path='/myLetter' element={<MyLettering />} />
         </Routes>
       </BrowserRouter>
 

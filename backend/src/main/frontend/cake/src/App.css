@@ -1,9 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Pattaya&family=Rubik+Puddles&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
 /* body */
-* {
-  margin: 0%;
-  padding: 0%;
-}
+
 
 /* NaviHeader */
 .NaviHeader {
@@ -38,6 +36,7 @@
 }
 /* Navbar 링크 속성 지정 */
 .NaviHeader .menu {
+  font-family: "Nanum Gothic";
   color: black;
   text-decoration: none;
   padding: 12px;
@@ -103,10 +102,16 @@
   width: 100%;
   text-align: center;
 }
+.Lettering a {
+  font-family: "Nanum Gothic";
+}
+
 .Lettering h2 {
   text-align: center;
+  font-family: "Nanum Gothic";
 }
 .Lettering pre {
+  font-family: "Nanum Gothic";
   display: inline-block;
   font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
@@ -273,27 +278,25 @@ label > input[type="radio"]:checked + img {
 .SignUp {
   margin-top: 100px;
 }
-
 .SignUp .SignUpAll {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
-
-
 .SignUp .text {
   color: pink;
   font-size: 13px;
   padding: 3px;
 }
-
 .SignUp .table{
   font-size: 15px;
   border: 2px solid #ffc0cb;
   
   padding: 6% 5% 6% 5%;
 }
-
+.SignUp span{
+  color:pink;
+}
 .SignUp .tr {
   margin-top: 25px;
 }
@@ -307,6 +310,8 @@ label > input[type="radio"]:checked + img {
 .SignUp .tableText{
   font-size: 13px;
   color: pink;
+  margin-left: 35%;
+  margin-bottom: 5px;
 }
 
 .SignUp .th {
@@ -360,6 +365,7 @@ label > input[type="radio"]:checked + img {
 .MyPageAll {
   width: 100%;
 }
+
 .MyPageLeft {
   width: 280px;
   color: pink;
@@ -412,7 +418,7 @@ label > input[type="radio"]:checked + img {
   width: 80%;
   margin-top: 50px;
   padding: 20px 40px 20px 40px;
-
+  margin-left: 8%;
   border: 1px solid #FFEAED;
   border-radius: 5px;
   background-color: #FFEAED;
@@ -490,7 +496,7 @@ label > input[type="radio"]:checked + img {
 
 /* Password */
 .Password {
-  width: 150%;
+  margin-left: 8%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -499,13 +505,12 @@ label > input[type="radio"]:checked + img {
   font-size: 15px;
   margin-top: 50px;
   padding: 40px 40px 40px 40px;
-
   border: 1px solid #FFEAED;
   border-radius: 5px;
   background-color: #FFEAED;
 }
 .Password .text { 
-  width: 35%;
+  width: 80%;
 }
 .Password .passText {
   color: pink;
@@ -533,7 +538,7 @@ label > input[type="radio"]:checked + img {
 .Password .input {
   padding-left: 15px;
   padding-right: 15px;
-  width: 300px;
+  width: 600px;
 }
 .Password input {
   font-size: 15px;
@@ -557,10 +562,16 @@ label > input[type="radio"]:checked + img {
   padding-bottom: 10px;
   margin-top: 25px;
 }
+
 /* MyCake */
 .MyCake {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
   margin-top: 100px;
 }
+
 /* DeCake */
 .DeCake {
   width: fit-content;
@@ -624,11 +635,13 @@ label > input[type="radio"]:checked + img {
 }
 
 .accordion__header {
+  
   display: flex;
   align-items: center;
 }
 
 .accordion__header h4 {
+  margin: 0%;
   transition: 0.2s ease-in-out;
   font-size: 20px;
   font-weight: 400;
@@ -660,4 +673,207 @@ label > input[type="radio"]:checked + img {
   border: 1px solid #FFEAED;
   background-color: #FFEAED;
   color: white;
+}
+
+/* Home */
+.Home {
+  text-align: center;
+}
+
+.Home .pinkbox {
+  width: 720px;
+  height: 80px;
+}
+
+@keyframes spaceship-ani {
+  to {
+    background-position: 0 -1265px;
+  }
+}
+.Home .spaceship {
+  align-items: center;
+  margin: auto;
+  /* border: 6px solid #ffc0cb; */
+  width: 420px;
+  height: 40px;
+  background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
+  animation: spaceship-ani 25s infinite steps(5000);
+}
+.Home .happy {
+  display: flex;
+  border: 6px solid #ffc0cb;
+  align-items: center;
+  width: 40%;
+  padding: 10px 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Home .mark {
+  display: inline-block;
+  background: linear-gradient(to top, #ffc0cb 50%, transparent 50%);
+}
+
+.Home .cakeLogo {
+  margin: auto;
+  width: 100px;
+}
+
+.Home h2 {
+  font-family: "Nanum Gothic";
+}
+
+.Home h3 {
+  font-family: "Nanum Gothic";
+}
+
+.Home .toLetterButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+  font-size: larger;
+  width: 200px;
+  padding: 8px;
+  background-color: #69492d;
+  color: #ffc0cb;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 3px;
+}
+
+/* Login */
+.Login {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.Login .form {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login .loginField {
+  padding: 6px;
+  /* background-color: rgb(255, 251, 234); */
+  background-color: white;
+  border-radius: 3px;
+  /* border: 4px outset white; */
+  /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
+  box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
+  /* box-shadow: 5px 5px 10px #666; */
+}
+
+.Login input {
+  font-family: "Nanum Gothic";
+  text-align: center;
+  border: none;
+  background-color: cornsilk;
+  /* background: linear-gradient(to top, cornsilk, white); */
+  margin: 3px;
+  width: 180px;
+  padding: 2px;
+}
+
+.Login .loginButton {
+  font-family: "Nanum Gothic";
+  font-weight: bold;
+  margin: 5px;
+  width: 180px;
+
+  background-color: #ff8080;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  /* border: 2px solid #ff8080; */
+  background: linear-gradient(to bottom, white, #ff8080);
+}
+
+.Login .cake {
+  width: 205px;
+}
+
+.Login .cakeWrapper {
+  text-align: center;
+}
+
+.Login .socialWrapper {
+  position: relative;
+  z-index: -9;
+  text-align: center;
+  display: inline-block;
+  padding: 10px;
+  padding-top: 15px;
+  border: 4px dashed #ffc0cb;
+}
+
+.Login .socialButton {
+  margin: 2px;
+  border: none;
+  /* width: 200px; */
+}
+
+.Login .naverButton {
+  background-color: #01c73c00;
+}
+
+.Login .naverImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .googleButton {
+  background-color: #fd706300;
+}
+
+.Login .googleImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .kakaoButton {
+  background-color: #fee50000;
+}
+
+.Login .kakaoImg {
+  width: 50px;
+  border-radius: 70%;
+  box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.Login .dish {
+  position: absolute;
+  top: 320px;
+  width: 310px;
+  height: 100px;
+  z-index: -9;
+}
+
+.Login .divNaver {
+  display: inline;
+}
+.Login .divGoogle {
+  display: inline;
+}
+.Login .divKakao {
+  display: inline;
+}
+
+.Login .socialTitle {
+  padding-left: 5px;
+  padding-right: 5px;
+  position: absolute;
+  text-align: center;
+  /* top: 440px;
+  left: 460px; */
+  left: 65px;
+  top: -33px;
+  font-family: "Nanum Gothic";
+  color: #ffc0cb;
+  background-color: white;
+  display: inline-block;
 }

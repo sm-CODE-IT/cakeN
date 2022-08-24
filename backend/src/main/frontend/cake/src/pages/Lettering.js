@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 //백에서 넘어올 때 dummyList처럼 객체 배열로 넘어온다고 생각
 //dummyList에는 생일 태그가, dummyList2에는 생신 태그가 모아져 있다고 가정(변경 가능)
@@ -137,7 +138,7 @@ const Lettering = () => {
       <div className="box" id="parentsday">
         <h2>#어버이날</h2>
       </div>
-      <img className="heartimg" src={process.env.PUBLIC_URL + `images/heart.png`} alt="heart"/>
+      <Link to="/myLetter"><img className="heartimg" src={process.env.PUBLIC_URL + `images/heart.png`} alt="heart"/></Link>
     </div>
   );
 };

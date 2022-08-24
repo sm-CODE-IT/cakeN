@@ -1,121 +1,44 @@
-import ContentHeader from "../components/ContentHeader";
-import { React, useState } from "react";
-import { useSpring, animated } from "react-spring";
-import { Link } from "react-router-dom";
-
-
 const Intro = () => {
-  const title = "로그인";
-  const content = "다양한 서비스를 이용할 수 있습니다."
-
-  const [open1, setOpen1] = useState(false);
-  const toggleHandler1 = (e) => {
-    //switch state
-    setOpen1(!open1);
-  };
-  const [open2, setOpen2] = useState(false);
-  const toggleHandler2 = (e) => {
-    //switch state
-    setOpen2(!open2);
-  };
-  const [open3, setOpen3] = useState(false);
-  const toggleHandler3 = (e) => {
-    //switch state
-    setOpen3(!open3);
-  };
-  const openAnimation1 = useSpring({
-    from: { opacity: "0", maxHeight: "30px" },
-    to: { opacity: "1", maxHeight: open1 ? "150px" : "30px" },
-    config: { duration: "300" }
-  });
-  const openAnimation2 = useSpring({
-    from: { opacity: "0", maxHeight: "30px" },
-    to: { opacity: "1", maxHeight: open2 ? "150px" : "30px" },
-    config: { duration: "300" }
-  });
-  const openAnimation3 = useSpring({
-    from: { opacity: "0", maxHeight: "30px" },
-    to: { opacity: "1", maxHeight: open3 ? "150px" : "30px" },
-    config: { duration: "300" }
-  });
-
-  const iconAnimation1 = useSpring({
-    from: {
-    transform: "rotate(0deg)"
-    },
-    to: {
-    transform: open1 ? "rotate(180deg)" : "rotate(0deg)"
-    },
-    config: { duration: "120" }
-  });
-  const iconAnimation2 = useSpring({
-    from: {
-    transform: "rotate(0deg)"
-    },
-    to: {
-    transform: open2 ? "rotate(180deg)" : "rotate(0deg)"
-    },
-    config: { duration: "120" }
-  });
-  const iconAnimation3 = useSpring({
-    from: {
-    transform: "rotate(0deg)"
-    },
-    to: {
-    transform: open3 ? "rotate(180deg)" : "rotate(0deg)"
-    },
-    config: { duration: "120" }
-  });
+  // 사이트 소개랑 홈 똑같으니까 사이트 소개 탭은 Nav에서도 js파일도 삭제하자! 라고 유민이에게 전달하기..
+  // 생각해보니까 디자인페이지도 삭제해야함 하 하 하 하 하
 
   return (
-    <div className="Intro">
-      <ContentHeader title={title} content={content}/>
-      <div className="main">
-      <br /><br /><br /><br />
-
-
-      <div className="accordion">
-        <animated.div className="accordion__item" style={openAnimation1}>
-              <div className="accordion__header" onClick={toggleHandler1}>
-                  <animated.i style={iconAnimation1}>
-                      <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                  </animated.i>
-                  <h4>{"My Page"}</h4>                
-              </div>
-              <Link to="/myPage" className="accordion__content" >{"내 정보 수정/변경"}</Link>
-              <Link to="/password" className="accordion__content">{"비밀번호 변경"}</Link>            
-        </animated.div>
+    <div className="Home">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       
-        <br />
-        <animated.div className="accordion__item" style={openAnimation2}>
-              <div className="accordion__header" onClick={toggleHandler2}>
-                  <animated.i style={iconAnimation2}>
-                      <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                  </animated.i>
-                  <h4>{"My Cage"}</h4>                
-              </div>
-              <Link to="/myPage" className="accordion__content" >{"내가 만든 케이크"}</Link>
-              <Link to="/password" className="accordion__content">{"좋아요한 레터링"}</Link>            
-        </animated.div>
-       
-        <br />
-        <animated.div className="accordion__item" style={openAnimation3}>
-              <div className="accordion__header" onClick={toggleHandler3}>
-                  <animated.i style={iconAnimation3}>
-                      <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                  </animated.i>
-                  <h4>{"Etc"}</h4>                
-              </div>
-              <Link to="/myPage" className="accordion__content" >{"약관 동의"}</Link>
-              <Link to="/password" className="accordion__content">{"회원 탈퇴"}</Link>            
-        </animated.div>
-        
+      <img className="cakeLogo" src="https://ifh.cc/g/ODK4d0.png" />
+      <br />
+      <h2 className="mark">당신의 케이크에는 어떤 의미가 담겨 있나요?</h2>
+
+      <div className="happy"> 
+        <div className="spaceship"></div>
+        <div><img src={process.env.PUBLIC_URL + `images/under.png`} width={40}/></div>
       </div>
-      </div>
+      <h3>
+        케이크를 처음 만들어 봐서 어떻게 해야 하는지 모르겠다면
+        <br />
+        레터링에 쓸 만한 적당한 문구가 떠오르지 않는다면 <br />
+        참신한 아이디어가 필요하다면
+        <br />
+        <br />
+        저희 케이크엔이 도와드리겠습니다!
+      </h3>
+      <a href="/letter">
+        <button className="toLetterButton">레터링 구경하러 가기</button>
+      </a>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };
 
 export default Intro;
-
-
