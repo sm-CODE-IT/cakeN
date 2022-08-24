@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+    </style>
 </head>
 <body>
+
+<header class="NaviHeader" id="navbar">
+    <div class="left">
+        <a href={"/"} id="logo">cakeN</a>
+    </div>
+    <div class="center">
+        <a href="/intro" class="menu">사이트 소개</a>
+        <a href="/design" class="menu">케이크 제작</a>
+        <a href="/contest" class="menu">케이크 자랑</a>
+        <a href="/letter" class="menu">레터링 선택</a>
+    </div>
+    <div class="right">
+        <a href={"/login"} class="menu" >로그인</a>
+        <a href={"/signUp"} class="menu" >회원가입</a>
+
+        <a href={"/myPage"}  >
+            <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+        </a>
+        <a href={"/myCake"} >
+            <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+        </a>
+    </div>
+
+</header>
 <div class="main">
+
     <a href="/letter/register" class="register">문구 등록</a>
     <table>
         <thead>
@@ -25,6 +53,75 @@
         </tr>
         </tbody>
     </table>
+
+    <div class ="Lettering">
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class ="lettering_type">
+            <a class ="birthday" href="#birthday">
+                #생일
+            </a>
+            <a class ="birthday2" href="#birthday2">
+                #생신
+            </a>
+            <a class ="parentsday" href="#parentsday">
+                #어버이날
+            </a>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class ="box" id="birthday">
+            <h2>#생일</h2>
+            <br />
+            {dummyList.map((it) => (
+            <Button
+                    key={it.letterId}
+                    {...it}
+                    id={it.letterId}
+                    name={it.content}
+                    isToggle={it.isToggle}
+            />
+            ))}
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+        <div class ="box" id="birthday2">
+            <h2>#생신</h2>
+            <br />
+<!--            {dummyList2.map((it) => (-->
+<!--            <Button-->
+<!--                    key={it.id}-->
+<!--                    {...it}-->
+<!--                    id={it.id}-->
+<!--                    name={it.message}-->
+<!--                    isToggle={it.isToggle}-->
+<!--            />-->
+<!--            ))}-->
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <div class="box" id="parentsday">
+            <h2>#어버이날</h2>
+        </div>
+        <a href="/mypage">
+            <img
+                    class="heartimg"
+                    src="https://ifh.cc/g/CkdOB3.png"
+            alt="heart"
+            />
+        </a>
+    </div>
+
 </div>
 </body>
 </html>
