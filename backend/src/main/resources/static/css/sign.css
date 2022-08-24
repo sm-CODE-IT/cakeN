@@ -1,0 +1,12 @@
+    .header {
+      display: flex;
+      <!--justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;-->
+    }
+
+     <!-- 바디   -->
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
