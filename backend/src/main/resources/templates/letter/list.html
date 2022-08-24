@@ -4,26 +4,222 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+          @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
 
+        .NaviHeader {
+          overflow: hidden;
+          background-color: pink;
+          padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+          transition: 0.4s; /* 패딩 줄어들 때 지연 */
+          position: fixed; /* sticky/fixed */
+          width: 100%;
+          top: 0; /* At the top */
+          z-index: 99;
+          margin-left:-15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        .NaviHeader .right {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        #logo {
+          color: black;
+          font-size: 45px;
+          font-weight: bold;
+          text-decoration: none;
+          font-family: "Arima Madurai", cursive; /*update*/
+        }
+
+
+        .NaviHeader .menu {
+              color: black;
+              text-decoration: none;
+              padding: 12px;
+              font-family: "Nanum Gothic";
+              /* font-weight: bold; */
+              font-size: 18px;
+              line-height: 25px;
+              border-radius: 4px;
+              transition: 0.5s;
+            }
+
+            /* 링크에 hover  */
+            .NaviHeader .menu:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .menu.active:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .mypageimg{
+            width:60px;
+            }
+
+            .NaviHeader .mycakeimg{
+            width:60px;
+            }
+
+            .Lettering .lettering_type {
+              display: flex;
+              justify-content: center;
+            }
+            .Lettering #birthday {
+              overflow-x: hidden;
+              overflow-y: hidden;
+            }
+            .Lettering h3 {
+              font-size: 15px;
+              padding: 3px;
+              margin: 3px;
+              border-style: outset;
+              border-radius: 3px;
+            }
+            .Lettering .box {
+              position: relative;
+              width: 90%;
+              text-align: center;
+              padding-left:5%;
+
+            }
+
+            .Lettering a {
+              font-family: "Nanum Gothic";
+              text-decoration-line: none;
+              margin: 3px;
+            }
+
+            .Lettering a:hover {
+              /* color: red; */
+              text-decoration: underline;
+            }
+
+            .Lettering .birthday {
+              color: #ff00b8;
+              font-weight: bold;
+            }
+
+            .Lettering .birthday2 {
+              color: #fc62ff;
+              font-weight: bold;
+            }
+
+            .Lettering .parentsday {
+              color: #ff0000;
+              font-weight: bold;
+            }
+
+            .Lettering #birthday {
+              color: #ff00b8;
+            }
+
+            .Lettering #birthday2 {
+              color: #fc62ff;
+            }
+
+            .Lettering #parentsday {
+              color: #ff0000;
+            }
+
+            .Lettering h2 {
+              text-align: center;
+              font-family: "Nanum Gothic";
+            }
+
+            .Lettering .letterDiv{
+            display:inline-block;
+            }
+
+            .Lettering pre {
+              display: inline-block;
+              font-size: 15px;
+              font-family: "Nanum Gothic";
+              color: black;
+              background: #fff;
+              border-radius: 5px;
+              padding: 9px 17px;
+              margin: 0 6px 8px 6px;
+              vertical-align: middle;
+              box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+              -webkit-transition: width 1s, height 3s;
+              transition: width 1s, height 3s;
+              cursor: pointer; /*update*/
+            }
+
+            /* .Lettering pre:hover {
+              color: pink;
+              transition: 0.15s ease-in-out;
+              background: rgba(255, 255, 255);
+              box-shadow: 0 0 8px #ddd;
+              transform: scale(1.5);
+            }  */
+
+            pre {
+              cursor: pointer;
+              transition: 0.15s ease-in-out;
+            }
+            /* 찜목록 버튼 */
+            .Lettering .heartimg {
+              position: fixed;
+              right: 50px;
+              bottom: 50px;
+              border: none;
+              outline: none;
+              width: 50px;
+              cursor: pointer;
+            }
+
+            /* like 문구 스타일 변경 */
+            .Lettering .liked {
+              background-color: pink;
+              color: white;
+              font-weight: bold;
+            }
     </style>
 </head>
 <body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
 
 <header class="NaviHeader" id="navbar">
     <div class="left">
-        <a href={"/"} id="logo">cakeN</a>
+        <a th:href="@{'/'}" id="logo">cakeN</a>
     </div>
     <div class="center">
-        <a href="/intro" class="menu">사이트 소개</a>
+        <a th:href="@{'/'}" class="menu">사이트 소개</a>
         <a href="/design" class="menu">케이크 제작</a>
         <a href="/contest" class="menu">케이크 자랑</a>
-        <a href="/letter" class="menu">레터링 선택</a>
+        <a href="/letter/" class="menu">레터링 선택</a>
     </div>
     <div class="right">
-        <a href={"/login"} class="menu" >로그인</a>
-        <a href={"/signUp"} class="menu" >회원가입</a>
+        <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+        <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
 
-        <a href={"/myPage"}  >
+        <a href="/myPage" >
             <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
         </a>
         <a href={"/myCake"} >
@@ -33,8 +229,14 @@
 
 </header>
 <div class="main">
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <a href="/letter/register" class="register">문구 등록</a>
+
     <table>
         <thead>
         <tr>
@@ -75,26 +277,30 @@
         <br />
         <br />
         <br />
+
         <div class ="box" id="birthday">
             <h2>#생일</h2>
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('BIRTHDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
             <br />
-            {dummyList.map((it) => (
-            <Button
-                    key={it.letterId}
-                    {...it}
-                    id={it.letterId}
-                    name={it.content}
-                    isToggle={it.isToggle}
-            />
-            ))}
             <br />
             <br />
             <br />
             <br />
         </div>
+
         <div class ="box" id="birthday2">
-            <h2>#생신</h2>
-            <br />
+        <h2>#생신</h2>
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('BIRTHDAY2')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
 <!--            {dummyList2.map((it) => (-->
 <!--            <Button-->
 <!--                    key={it.id}-->
@@ -112,6 +318,7 @@
 
         <div class="box" id="parentsday">
             <h2>#어버이날</h2>
+
         </div>
         <a href="/mypage">
             <img
@@ -125,3 +332,4 @@
 </div>
 </body>
 </html>
+

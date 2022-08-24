@@ -2,6 +2,7 @@ package codeit.cakeN.domain.letter;
 
 public enum Tag {
     BIRTHDAY("생일"),
+    BIRTHDAY2("생신"),
     PARENTSDAY("어버이날"),
     ANNIVERSARY("기념일"),
     EMPLOYMENT("취뽀축하"),
