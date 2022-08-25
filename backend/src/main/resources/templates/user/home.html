@@ -3,6 +3,68 @@
 <head>
     <meta charset="utf-8">
     <style>
+    @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+
+        .NaviHeader {
+          overflow: hidden;
+          background-color: pink;
+          padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+          transition: 0.4s; /* 패딩 줄어들 때 지연 */
+          position: fixed; /* sticky/fixed */
+          width: 100%;
+          top: 0; /* At the top */
+          z-index: 99;
+          margin-left:-15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        .NaviHeader .right {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        #logo {
+          color: black;
+          font-size: 45px;
+          font-weight: bold;
+          text-decoration: none;
+          font-family: "Arima Madurai", cursive; /*update*/
+        }
+
+
+        .NaviHeader .menu {
+              color: black;
+              text-decoration: none;
+              padding: 12px;
+              font-family: "Nanum Gothic";
+              /* font-weight: bold; */
+              font-size: 18px;
+              line-height: 25px;
+              border-radius: 4px;
+              transition: 0.5s;
+            }
+
+            /* 링크에 hover  */
+            .NaviHeader .menu:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .menu.active:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .mypageimg{
+            width:60px;
+            }
+
+            .NaviHeader .mycakeimg{
+            width:60px;
+            }
+
         .Home {
           text-align: center;
         }
@@ -20,7 +82,6 @@
         .Home .spaceship {
           align-items: center;
           margin: auto;
-          border: 6px solid #ffc0cb;
           width: 420px;
           height: 40px;
           background: url("https://ifh.cc/g/v39Pxk.png") no-repeat 0 0 / auto 720px;
@@ -71,6 +132,50 @@
 
 </head>
 <body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+
+<header class="NaviHeader" id="navbar">
+    <div class="left">
+        <a th:href="@{'/'}" id="logo">cakeN</a>
+    </div>
+    <div class="center">
+        <a th:href="@{'/'}" class="menu">사이트 소개</a>
+        <a href="/design" class="menu">케이크 제작</a>
+        <a href="/contest" class="menu">케이크 자랑</a>
+        <a href="/letter/" class="menu">레터링 선택</a>
+    </div>
+    <div class="right">
+        <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+        <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+
+        <a href={"/myPage"}  >
+            <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+        </a>
+        <a href={"/myCake"} >
+            <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+        </a>
+    </div>
+</header>
+
 <div class="Home">
     <br />
     <br />
@@ -96,7 +201,7 @@
         <br />
         저희 케이크엔이 도와드리겠습니다!
     </h3>
-    <a href="/letter">
+    <a href="/letter/">
         <button class="toLetterButton">레터링 구경하러 가기</button>
     </a>
     <br />
