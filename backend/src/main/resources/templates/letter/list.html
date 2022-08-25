@@ -36,7 +36,6 @@
           font-family: "Arima Madurai", cursive; /*update*/
         }
 
-
         .NaviHeader .menu {
               color: black;
               text-decoration: none;
@@ -83,16 +82,15 @@
             }
             .Lettering .box {
               position: relative;
-              width: 90%;
+              width: 100%;
               text-align: center;
-              padding-left:5%;
-
             }
 
             .Lettering a {
               font-family: "Nanum Gothic";
+              font-size:20px;
               text-decoration-line: none;
-              margin: 3px;
+              margin: 5px;
             }
 
             .Lettering a:hover {
@@ -115,6 +113,34 @@
               font-weight: bold;
             }
 
+            .Lettering .teachersday {
+              color: #00BF9D;
+              font-weight: bold;
+            }
+
+            .Lettering .christmas {
+              color: #1C7148;
+              font-weight: bold;
+            }
+            .Lettering .anniversary {
+              color: #FF9CC6;
+              font-weight: bold;
+            }
+
+            .Lettering .employment {
+              color: #0038FF;
+              font-weight: bold;
+            }
+            .Lettering .leave {
+              color: #00C2FF;
+              font-weight: bold;
+            }
+
+            .Lettering .friendship {
+              color: #715DEC;
+              font-weight: bold;
+            }
+
             .Lettering #birthday {
               color: #ff00b8;
             }
@@ -127,13 +153,32 @@
               color: #ff0000;
             }
 
+            .Lettering #teachersday {
+              color: #00BF9D;
+            }
+
+            .Lettering #christmas {
+              color: #1C7148;
+            }
+            .Lettering #anniversary {
+              color: #FF9CC6;
+            }
+
+            .Lettering #employment {
+              color: #0038FF;
+            }
+            .Lettering #leave {
+              color: #00C2FF;
+            }
+
+            .Lettering #friendship {
+              color: #715DEC;
+            }
+
+
             .Lettering h2 {
               text-align: center;
               font-family: "Nanum Gothic";
-            }
-
-            .Lettering .letterDiv{
-            display:inline-block;
             }
 
             .Lettering pre {
@@ -150,6 +195,18 @@
               -webkit-transition: width 1s, height 3s;
               transition: width 1s, height 3s;
               cursor: pointer; /*update*/
+            }
+
+            .letterDiv{
+            display:inline-block;
+            }
+
+            .box {
+                display: flex;
+                text-alignment: center;
+                flex-wrap: wrap;
+                justify-content: center;
+
             }
 
             /* .Lettering pre:hover {
@@ -234,34 +291,29 @@
     <br />
     <br />
     <br />
-    <br />
-    <a href="/letter/register" class="register">문구 등록</a>
 
-    <table>
-        <thead>
-        <tr>
-            <th>문구 목록</th>
-            <th>내용</th> <!-- 임시로 테스트 하기 위함 -->
-            <th>태그</th> <!-- 임시로 테스트 하기 위함 -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="letter : ${letters}">
-            <!-- 1. 문구에 하이퍼링크가 없는 경우 -->
-            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>
-            <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->
-            <td th:text="${letter.content}"></td>
-            <td th:text="${letter.tag}"></td>
-        </tr>
-        </tbody>
-    </table>
+<!--    <a href="/letter/register" class="register">문구 등록</a>-->
+
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>문구 목록</th>-->
+<!--            <th>내용</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
+<!--            <th>태그</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="letter : ${letters}">-->
+<!--            &lt;!&ndash; 1. 문구에 하이퍼링크가 없는 경우 &ndash;&gt;-->
+<!--            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>-->
+<!--            &lt;!&ndash; 2. 문구에 하이퍼링크가 있는 경우(보류) &ndash;&gt;-->
+<!--            <td th:text="${letter.content}"></td>-->
+<!--            <td th:text="${letter.tag}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
 
     <div class ="Lettering">
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <div class ="lettering_type">
             <a class ="birthday" href="#birthday">
                 #생일
@@ -272,17 +324,37 @@
             <a class ="parentsday" href="#parentsday">
                 #어버이날
             </a>
+            <a class ="anniversary" href="#anniversary">
+                #기념일
+            </a>
+            <a class ="teachersday" href="#teachersday">
+                #스승의날
+            </a>
+        </div>
+        <div class ="lettering_type">
+            <a class ="christmas" href="#christmas">
+                #크리스마스
+            </a>
+            <a class ="employment" href="#employment">
+                #취뽀축하
+            </a>
+            <a class ="leave" href="#leave">
+                #퇴사축하
+            </a>
+            <a class ="friendship" href="#friendship">
+                #우정
+            </a>
+
         </div>
         <br />
         <br />
-        <br />
-        <br />
+        <br/>
 
-        <div class ="box" id="birthday">
-            <h2>#생일</h2>
+        <h2 id="birthday">#생일</h2>
+        <div class ="box" >
             <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('BIRTHDAY')}">
+            <div th:each="letter : ${letters}">
+                <div class="letterDiv" th:if="${letter.getTag().toString().equals('BIRTHDAY')}">
                     <pre th:text="${letter.content}"></pre>
                 </div>
             </div>
@@ -293,33 +365,126 @@
             <br />
         </div>
 
-        <div class ="box" id="birthday2">
-        <h2>#생신</h2>
+        <h2 id="birthday2">#생신</h2>
+        <div class ="box" >
+
             <br/>
             <div class="letterDiv" th:each="letter : ${letters}">
                 <div th:if="${letter.getTag().toString().equals('BIRTHDAY2')}">
                     <pre th:text="${letter.content}"></pre>
                 </div>
             </div>
-<!--            {dummyList2.map((it) => (-->
-<!--            <Button-->
-<!--                    key={it.id}-->
-<!--                    {...it}-->
-<!--                    id={it.id}-->
-<!--                    name={it.message}-->
-<!--                    isToggle={it.isToggle}-->
-<!--            />-->
-<!--            ))}-->
             <br />
             <br />
             <br />
             <br />
         </div>
 
-        <div class="box" id="parentsday">
-            <h2>#어버이날</h2>
-
+        <h2 id="parentsday">#어버이날</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('PARENTSDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
+
+        <h2 id="anniversary">#기념일</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('ANNIVERSARY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="teachersday">#스승의날</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('TEACHERSDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="christmas">#크리스마스</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('CHRISTMAS')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+        <h2 id="employment">#취뽀축하</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('EMPLOYMENT')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="leave">#퇴사축하</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('LEAVE')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="friendship">#우정</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('FRIENDSHIP')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+
+
+
         <a href="/mypage">
             <img
                     class="heartimg"

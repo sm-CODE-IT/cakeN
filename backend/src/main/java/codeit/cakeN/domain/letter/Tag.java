@@ -11,7 +11,8 @@ public enum Tag {
     GRADUATION("졸업축하"),
     FRIENDSHIP("우정"),
     LOVE("커플"),
-    TEACHERSDAY("스승의날");
+    TEACHERSDAY("스승의날"),
+    CHRISTMAS("크리스마스");
 
 
     private String value;
