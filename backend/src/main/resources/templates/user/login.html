@@ -16,7 +16,7 @@
           width: 100%;
           top: 0; /* At the top */
           z-index: 99;
-
+          margin-left:-15px;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
@@ -67,40 +67,11 @@
             width:60px;
             }
 
-        header {
-            width: 100;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        header > h2 {
-            margin-left:20px;
-        }
-
-        header > nav {
-            width:600px;
-            height:100%;
-        }
-
-        header ul {
-            width:100%;
-            height: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        header ul > li {
-            font-size:20px;
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
 
         .container {
             max-width: 300px;
         }
+
         .field-error {
             border-color: #dc3545;
             color: #dc3545;
@@ -110,7 +81,7 @@
           margin-left: auto;
           margin-right: auto;
           text-align: center;
-          margin-top: 100px;
+          margin-top: -10px;
         }
 
         .Login .loginButton {
@@ -249,37 +220,84 @@
           background-color: white;
           display: inline-block;
         }
-
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin: 40px;
+    }
+     .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 15px;
+      color: gray;
+      margin-left: 10px;
+    }
     </style>
 </head>
 <body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
 <header class="NaviHeader" id="navbar">
     <div class="left">
-        <a href={"/"} id="logo">cakeN</a>
+        <a th:href="@{'/'}" id="logo">cakeN</a>
     </div>
     <div class="center">
-        <a href="/intro" class="menu">사이트 소개</a>
-        <a href="/design" class="menu">케이크 제작</a>
-        <a href="/contest" class="menu">케이크 자랑</a>
-        <a href="/letter" class="menu">레터링 선택</a>
+        <a th:href="@{'/'}" class="menu">사이트 소개</a>
+        <a href="/design/" class="menu">케이크 제작</a>
+        <a href="/contest/" class="menu">케이크 자랑</a>
+        <a href="/letter/" class="menu">레터링 선택</a>
     </div>
     <div class="right">
-        <a href={"/login"} class="menu" >로그인</a>
-        <a href={"/signUp"} class="menu" >회원가입</a>
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+            <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <span th:text="${userName}"></span>
+            <a href={"/users/myPage"}  >
+                <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+            </a>
+            <a href={"/users/myPage"} >
+                <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+            </a>
+        </div>
 
-        <a href={"/myPage"}  >
-            <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
-        </a>
-        <a href={"/myCake"} >
-            <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
-        </a>
+
     </div>
-
 </header>
-<div class="Login">
-    <div class="py-5 text-center">
-        <h2>로그인</h2>
+<div class="header">
+    <br/><br/><br/><br/><br/>
+
+
+    <div class="title">
+        로그인
     </div>
+    <div class="content">다양한 서비스를 이용할 수 있습니다.</div>
+</div>
+<div class="Login">
+
 
 <!--    <div class="container" style="border: 1px solid black;" th:object="${userName}">-->
 <!--        <p th:text="'현재 접속: ' + ${userName} + ${#authentication.name}"></p>-->
@@ -287,11 +305,11 @@
 
 
     <div class="cakeWrapper">
-        <br />
+
         <img class="cake" width=205px src="https://ifh.cc/g/fOMQxW.png" />
     </div>
     <div class="form">
-        <br />
+
         <div class="loginField">
         <form action="" th:action="@{/users/login}" th:object="${userLoginRequestDto}" method="post">
 
@@ -350,7 +368,8 @@
             <a href="/oauth2/authorization/naver" class="socialButton googleButton btn btn-secondary active" role="button"><img class="naverImg" src="https://ifh.cc/g/jfgfkw.png" /></a>
             <a href="/oauth2/authorization/kakao" class="socialButton kakaoButton btn btn-warning active" role="button"><img class="kakaoImg" src="https://ifh.cc/g/vG8GLK.png" /></a>
         </div>
-
+        <br/>
+        <br/><br/><br/><br/>
     </div>
 
 </div> <!-- /container -->

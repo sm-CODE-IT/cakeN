@@ -138,7 +138,7 @@ public class UserApiController {
      */
     @PutMapping("/users/{id}")
     public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto) {
-        userService.update(userUpdateDto);
+        userService.update(id, userUpdateDto);
         return ResponseEntity.ok().build();
     }
 
@@ -201,7 +201,7 @@ public class UserApiController {
                     .username(user.getEmail())
                     .password(user.getPw())
                     .role(Role.USER)
-                    .token(token)
+//                    .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUser);
         } else {

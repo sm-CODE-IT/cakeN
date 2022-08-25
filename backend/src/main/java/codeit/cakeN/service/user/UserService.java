@@ -85,8 +85,8 @@ public class UserService {
      * @throws Exception
      */
     @Transactional
-    public void update(UserUpdateDto userUpdateDto) throws UserException {
-        User user = userRepository.findById(userUpdateDto.getId()).orElseThrow(
+    public void update(Long id, UserUpdateDto userUpdateDto) throws UserException {
+        User user = userRepository.findById(id).orElseThrow(
                 () -> new UserException(UserExceptionType.NOT_FOUND_USER)
         );
 

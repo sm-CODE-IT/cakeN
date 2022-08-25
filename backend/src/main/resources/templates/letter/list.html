@@ -3,28 +3,553 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+          @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+
+        .NaviHeader {
+          overflow: hidden;
+          background-color: pink;
+          padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+          transition: 0.4s; /* 패딩 줄어들 때 지연 */
+          position: fixed; /* sticky/fixed */
+          width: 100%;
+          top: 0; /* At the top */
+          z-index: 99;
+          margin-left:-15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        .NaviHeader .right {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        #logo {
+          color: black;
+          font-size: 45px;
+          font-weight: bold;
+          text-decoration: none;
+          font-family: "Arima Madurai", cursive; /*update*/
+        }
+
+        .NaviHeader .menu {
+              color: black;
+              text-decoration: none;
+              padding: 12px;
+              font-family: "Nanum Gothic";
+              /* font-weight: bold; */
+              font-size: 18px;
+              line-height: 25px;
+              border-radius: 4px;
+              transition: 0.5s;
+            }
+
+            /* 링크에 hover  */
+            .NaviHeader .menu:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .menu.active:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .mypageimg{
+            width:60px;
+            }
+
+            .NaviHeader .mycakeimg{
+            width:60px;
+            }
+
+            .Lettering .lettering_type {
+              display: flex;
+              justify-content: center;
+            }
+            .Lettering #birthday {
+              overflow-x: hidden;
+              overflow-y: hidden;
+            }
+            .Lettering h3 {
+              font-size: 15px;
+              padding: 3px;
+              margin: 3px;
+              border-style: outset;
+              border-radius: 3px;
+            }
+            .Lettering .box {
+              position: relative;
+              width: 100%;
+              text-align: center;
+            }
+
+            .Lettering a {
+              font-family: "Nanum Gothic";
+              font-size:20px;
+              text-decoration-line: none;
+              margin: 5px;
+            }
+
+            .Lettering a:hover {
+              /* color: red; */
+              text-decoration: underline;
+            }
+
+            .Lettering .birthday {
+              color: #ff00b8;
+              font-weight: bold;
+            }
+
+            .Lettering .birthday2 {
+              color: #fc62ff;
+              font-weight: bold;
+            }
+
+            .Lettering .parentsday {
+              color: #ff0000;
+              font-weight: bold;
+            }
+
+            .Lettering .teachersday {
+              color: #00BF9D;
+              font-weight: bold;
+            }
+
+            .Lettering .christmas {
+              color: #1C7148;
+              font-weight: bold;
+            }
+            .Lettering .anniversary {
+              color: #FF9CC6;
+              font-weight: bold;
+            }
+
+            .Lettering .employment {
+              color: #0038FF;
+              font-weight: bold;
+            }
+            .Lettering .leave {
+              color: #00C2FF;
+              font-weight: bold;
+            }
+
+            .Lettering .friendship {
+              color: #715DEC;
+              font-weight: bold;
+            }
+
+            .Lettering #birthday {
+              color: #ff00b8;
+            }
+
+            .Lettering #birthday2 {
+              color: #fc62ff;
+            }
+
+            .Lettering #parentsday {
+              color: #ff0000;
+            }
+
+            .Lettering #teachersday {
+              color: #00BF9D;
+            }
+
+            .Lettering #christmas {
+              color: #1C7148;
+            }
+            .Lettering #anniversary {
+              color: #FF9CC6;
+            }
+
+            .Lettering #employment {
+              color: #0038FF;
+            }
+            .Lettering #leave {
+              color: #00C2FF;
+            }
+
+            .Lettering #friendship {
+              color: #715DEC;
+            }
+
+
+            .Lettering h2 {
+              text-align: center;
+              font-family: "Nanum Gothic";
+            }
+
+            .Lettering pre {
+              display: inline-block;
+              font-size: 15px;
+              font-family: "Nanum Gothic";
+              color: black;
+              background: #fff;
+              border-radius: 5px;
+              padding: 9px 17px;
+              margin: 0 6px 8px 6px;
+              vertical-align: middle;
+              box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+              -webkit-transition: width 1s, height 3s;
+              transition: width 1s, height 3s;
+              cursor: pointer; /*update*/
+            }
+
+            .letterDiv{
+            display:inline-block;
+            }
+
+            .box {
+                display: flex;
+                text-alignment: center;
+                flex-wrap: wrap;
+                justify-content: center;
+
+            }
+
+            button {
+              border: none;
+              background: none;
+            }
+            button:focus,
+            button:active {
+              outline: none;
+              box-shadow: none;
+            }
+            .heartBtn {
+              width: 30px;
+            }
+
+            /* .Lettering pre:hover {
+              color: pink;
+              transition: 0.15s ease-in-out;
+              background: rgba(255, 255, 255);
+              box-shadow: 0 0 8px #ddd;
+              transform: scale(1.5);
+            }  */
+
+            pre {
+              cursor: pointer;
+              transition: 0.15s ease-in-out;
+            }
+            /* 찜목록 버튼 */
+            .Lettering .heartimg {
+              position: fixed;
+              right: 50px;
+              bottom: 50px;
+              border: none;
+              outline: none;
+              width: 50px;
+              cursor: pointer;
+            }
+
+            /* like 문구 스타일 변경 */
+            .Lettering .liked {
+              background-color: pink;
+              color: white;
+              font-weight: bold;
+            }
+    </style>
 </head>
 <body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+
+<header class="NaviHeader" id="navbar">
+    <div class="left">
+        <a th:href="@{'/'}" id="logo">cakeN</a>
+    </div>
+    <div class="center">
+        <a th:href="@{'/'}" class="menu">사이트 소개</a>
+        <a href="/design" class="menu">케이크 제작</a>
+        <a href="/contest" class="menu">케이크 자랑</a>
+        <a href="/letter/" class="menu">레터링 선택</a>
+    </div>
+    <div class="right">
+        <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+        <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+
+        <a href="/myPage" >
+            <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+        </a>
+        <a href={"/myCake"} >
+            <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+        </a>
+    </div>
+
+</header>
 <div class="main">
-    <a href="/letter/register" class="register">문구 등록</a>
-    <table>
-        <thead>
-        <tr>
-            <th>문구 목록</th>
-            <th>내용</th> <!-- 임시로 테스트 하기 위함 -->
-            <th>태그</th> <!-- 임시로 테스트 하기 위함 -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="letter : ${letters}">
-            <!-- 1. 문구에 하이퍼링크가 없는 경우 -->
-            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>
-            <!-- 2. 문구에 하이퍼링크가 있는 경우(보류) -->
-            <td th:text="${letter.content}"></td>
-            <td th:text="${letter.tag}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+<!--    <a href="/letter/register" class="register">문구 등록</a>-->
+
+<!--    <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>문구 목록</th>-->
+<!--            <th>내용</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
+<!--            <th>태그</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="letter : ${letters}">-->
+<!--            &lt;!&ndash; 1. 문구에 하이퍼링크가 없는 경우 &ndash;&gt;-->
+<!--            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>-->
+<!--            &lt;!&ndash; 2. 문구에 하이퍼링크가 있는 경우(보류) &ndash;&gt;-->
+<!--            <td th:text="${letter.content}"></td>-->
+<!--            <td th:text="${letter.tag}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+
+    <div class ="Lettering">
+        <div class ="lettering_type">
+            <a class ="birthday" href="#birthday">
+                #생일
+            </a>
+            <a class ="birthday2" href="#birthday2">
+                #생신
+            </a>
+            <a class ="parentsday" href="#parentsday">
+                #어버이날
+            </a>
+            <a class ="anniversary" href="#anniversary">
+                #기념일
+            </a>
+            <a class ="teachersday" href="#teachersday">
+                #스승의날
+            </a>
+        </div>
+        <div class ="lettering_type">
+            <a class ="christmas" href="#christmas">
+                #크리스마스
+            </a>
+            <a class ="employment" href="#employment">
+                #취뽀축하
+            </a>
+            <a class ="leave" href="#leave">
+                #퇴사축하
+            </a>
+            <a class ="friendship" href="#friendship">
+                #우정
+            </a>
+
+        </div>
+        <br />
+        <br />
+        <br/>
+
+        <h2 id="birthday">#생일</h2>
+        <div class ="box" >
+            <br/>
+            <div th:each="letter : ${letters}">
+                <div class="letterDiv" th:if="${letter.getTag().toString().equals('BIRTHDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="birthday2">#생신</h2>
+        <div class ="box" >
+
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('BIRTHDAY2')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="parentsday">#어버이날</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('PARENTSDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="anniversary">#기념일</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('ANNIVERSARY')}">
+                    <pre th:text="${letter.content}">
+                        <div th:each="heart : ${hearts}">
+                            <button th:if="${heart.letter.content} == ${letter.content}" th:onclick="onClickHeart([[${letter.letterId}]])">
+                                <svg class="heartBtn" width="61" height="56" viewBox="0 0 61 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.75 3C9.15725 3 3 9.21302 3 16.8784C3 23.0661 5.40625 37.752 29.092 52.5976C29.5163 52.8608 30.0034 53 30.5 53C30.9966 53 31.4837 52.8608 31.908 52.5976C55.5938 37.752 58 23.0661 58 16.8784C58 9.21302 51.8428 3 44.25 3C36.6573 3 30.5 11.4111 30.5 11.4111C30.5 11.4111 24.3427 3 16.75 3Z" fill="#FFC0CB" stroke="#FFC0CB" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+
+                            </button>
+                            <button th:if="${heart.letter.content} != ${letter.content} and ${letter.content}" th:onclick="onClickUnheart([[${letter.letterId}]])">
+                                <svg class="heartBtn" width="61" height="56" viewBox="0 0 61 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.75 3C9.15725 3 3 9.21302 3 16.8784C3 23.0661 5.40625 37.752 29.092 52.5976C29.5163 52.8608 30.0034 53 30.5 53C30.9966 53 31.4837 52.8608 31.908 52.5976C55.5938 37.752 58 23.0661 58 16.8784C58 9.21302 51.8428 3 44.25 3C36.6573 3 30.5 11.4111 30.5 11.4111C30.5 11.4111 24.3427 3 16.75 3Z" stroke="#FFC0CB" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="teachersday">#스승의날</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('TEACHERSDAY')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="christmas">#크리스마스</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('CHRISTMAS')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+        <h2 id="employment">#취뽀축하</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('EMPLOYMENT')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="leave">#퇴사축하</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('LEAVE')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+        <h2 id="friendship">#우정</h2>
+        <div class="box" >
+            <br/>
+            <div class="letterDiv" th:each="letter : ${letters}">
+                <div th:if="${letter.getTag().toString().equals('FRIENDSHIP')}">
+                    <pre th:text="${letter.content}"></pre>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+
+
+
+
+
+
+        <a href="/mypage">
+            <img
+                    class="heartimg"
+                    src="https://ifh.cc/g/CkdOB3.png"
+            alt="heart"
+            />
+        </a>
+    </div>
+
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+    function onClickHeart(letterId) {
+        var url = '*[[@{/api/heart}]]';
+        var headers = {"Content-Type": "application/json", "X-HTTP-Method-Override": "POST"};
+        var params = {"letterId": letterId, "userId": user.userId};
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            headers: headers,
+            datatype: "json",
+            data: JSON.stringify(params),
+            success: function(response) {
+                if (response.result == false) {
+                    console.log("error");
+                    return false;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log("error");
+                return false;
+            }
+        });
+    }
+</script>
+
 </body>
 </html>
+
