@@ -159,9 +159,9 @@
   </div>
   <div class="center">
     <a th:href="@{'/'}" class="menu">사이트 소개</a>
-    <a href="/design" class="menu">케이크 제작</a>
-    <a href="/contest" class="menu">케이크 자랑</a>
-    <a href="/letter" class="menu">레터링 선택</a>
+    <a href="/design/" class="menu">케이크 제작</a>
+    <a href="/contest/" class="menu">케이크 자랑</a>
+    <a href="/letter/" class="menu">레터링 선택</a>
   </div>
   <div class="right">
     <div sec:authorize="!isAuthenticated()">
@@ -170,10 +170,10 @@
     </div>
     <div sec:authorize="isAuthenticated()">
       <span th:text="${userName}"></span>
-      <a href={"/myPage"}  >
+      <a href={"/users/myPage"}  >
         <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
       </a>
-      <a href={"/myCake"} >
+      <a href={"/users/myPage"} >
         <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
       </a>
     </div>
