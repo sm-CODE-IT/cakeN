@@ -3,57 +3,196 @@
 <head>
     <meta charset="utf-8">
     <style>
+    /*헤더*/
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin: 40px;
+    }
+     .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 15px;
+      color: gray;
+      margin-left: 10px;
+    }
+    /* 왼쪽+오른쪽 */
+    .all {
+        display: flex;}
+    /* 마이페이지 왼쪽 */
+    .left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
+      border-right: 2px solid pink;
+      margin-bottom: 20px;
+    }
+    .sec1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px;
+    }
+    .user_nick {
+      font-size: 22px;
+      font-weight: bold;
+      color: pink;
+      margin-top: 15px;
+    }
+    .user_emil {
+      color: #FFD53F;
+      font-size: 16px;
+      margin-bottom: -20px;
+    }
+    button {
+      width: fit-content;
+      padding: 3px 10px 3px 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      background-color: #FFD53F;
+      color: white;
+    }
+    /* 마이페이지 오른쪽 */
+    .right {
+        flex:1;
+    }
+    .my-2 {
+      color: #FFC0CB;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .my-3 {
+        align-items: flex-start;
+    }
+    .all2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .info {
+      font-size: 18px;
+      width: 70%;
+      margin-top: 50px;
+      padding: 20px 40px 20px 40px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid #FFEAED;
+      border-radius: 5px;
+      background-color: #FFEAED;
+    }
+    .text {
+        width: 80px;
+        text-align: end;
+    }
+    .input {
+      width: 220px;
+      margin-left: 30px;
+      border: none;
+      background-color: #FEF7F8;
+      padding: 1px 4px 1px 4px;
+    }
+    .input2 {
+        width: 585px;
+    }
+    .row {
+        display:flex;
+        justify-content: space-between
+    }
+    .modiB {
+        text-decoration-line: none;
+        border: none;
+        border-radius: 5px;
+        background-color: #FFD53F;
+        color: white;
+        font-size: 15px;
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        margin-top: 25px;
+    }
     </style>
 
 </head>
 <body>
-<div class="">
-    <h1 class="">마이페이지</h1>
-
-    <div class="">
-        <div class="my-2">
-            <div>닉네임</div>
-            <div th:text="${userNickname}"></div>
-        </div>
-        <div class="my-2">
-            <div>Email</div>
-            <div th:text="${userEmail}"></div>
-        </div>
-<!--        <div class="my-2">-->
-<!--            <span><a th:href="@{'/users/update-pw/'+${userId}}">비밀번호 변경하기</a></span>-->
-<!--        </div>-->
-        <div class="my-2">
-<<<<<<< HEAD
-            <span><a th:href="@{'/files/new/'}">프로필 사진 변경하기</a></span>
-        </div>
-        <div class="my-2">
-            <span th:text="'자기소개 : ' + ${userIntro}"></span>
-=======
-            <div>자기소개</div>
-            <div th:text="${userIntro}"></div>
->>>>>>> newJeans
-        </div>
-    </div>
-
-
-    </div>
-    <div>
-        <div class="flex-column" th:each="heart : ${hearts}">
-            <div class="flex-row my-3">
-                <span th:text="${heart.user.nickname}"></span>
-                <span th:text="${heart.letter.letterId}"></span>
-                <span th:text="${heart.letter.content}"></span>
-                <span th:text="${heart.letter.tag}"></span>
+    <div class="all">
+        <div class="left">
+            <div class="sec1">
+                <img src="https://ifh.cc/g/kS15P0.png" alt="profile" width="180px" />
+                <div class="user_nick" th:text="${userNickname}"></div>
+                <div class="user_emil" th:text="${userEmail}"></div>
             </div>
-        </div>
-    </div>
 
-    <a class="btn btn-primary" type="button"
-            th:href="@{'/users/update/'+ ${userId}}">
-        개인정보 수정
-    </a>
-    <a class="btn btn-secondary" type="button"
+            <div class="sec2">아코디언 메뉴</div>
+
+            <div class="sec3">
+                <form class="form-inline my-2" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                <button type="submit" >로그아웃</button>
+                </form>
+            </div>
+        </div> <!-- /left -->
+
+        <div class="right">
+            <div class="header">
+                <div class="title">내 프로필 보기</div>
+                <div class="content">내 프로필을 확인할 수 있습니다.</div>
+            </div>
+            <div class="all2">
+                <div class="info">
+                    <div class="row">
+                        <div class="my-2">
+                            <div class="text">닉네임</div>
+                            <div th:text="${userNickname}" class="input"></div>
+                        </div>
+
+                        <div class="my-2">
+                            <div class="text">이메일<div>
+                            <div th:text="${userEmail}" class="input"></div>
+                        </div>
+                    </div> <!-- row -->
+
+            <!--        <div class="my-2">-->
+            <!--            <span><a th:href="@{'/users/update-pw/'+${userId}}">비밀번호 변경하기</a></span>-->
+            <!--        </div>-->
+
+                    <div class="my-2 my-3">
+                        <div class="text">자기소개</div>
+                        <div th:text="${userIntro}" class="input input2"></div>
+                    </div>
+                </div> <!-- /info -->
+
+                    <a class="modiB"
+                       th:href="@{'/users/update/'+ ${userId}}">
+                        개인정보 수정
+                    </a>
+            </div> <!-- /all2 -->
+        </div> <!-- /right -->
+    </div> <!-- /all -->
+
+<!--    <div class="flex-column" th:each="heart : ${hearts}">-->
+<!--        <div class="flex-row my-3">-->
+<!--            <span th:text="${heart.user.nickname}"></span>-->
+<!--            <span th:text="${heart.letter.letterId}"></span>-->
+<!--            <span th:text="${heart.letter.content}"></span>-->
+<!--            <span th:text="${heart.letter.tag}"></span>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+    <a class="btn" type="button"
             th:href="@{'/users/delete/'+ ${userId}}" >
         회원 탈퇴
     </a>

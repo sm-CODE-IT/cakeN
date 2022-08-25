@@ -2,8 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
   <style>
+   @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+  /* 상단바 */
+  .NaviHeader {
+          overflow: hidden;
+          background-color: pink;
+          padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+          transition: 0.4s; /* 패딩 줄어들 때 지연 */
+          position: fixed; /* sticky/fixed */
+          width: 100%;
+          top: 0; /* At the top */
+          z-index: 99;
+          margin-left:-15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        .NaviHeader .right {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+
+        #logo {
+          color: black;
+          font-size: 45px;
+          font-weight: bold;
+          text-decoration: none;
+          font-family: "Arima Madurai", cursive; /*update*/
+        }
+
+
+        .NaviHeader .menu {
+              color: black;
+              text-decoration: none;
+              padding: 12px;
+              font-family: "Nanum Gothic";
+              /* font-weight: bold; */
+              font-size: 18px;
+              line-height: 25px;
+              border-radius: 4px;
+              transition: 0.5s;
+            }
+
+            /* 링크에 hover  */
+            .NaviHeader .menu:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .menu.active:hover {
+              background-color: cornsilk;
+            }
+
+            .NaviHeader .mypageimg{
+            width:60px;
+            }
+
+            .NaviHeader .mycakeimg{
+            width:60px;
+            }
+
+
   /*헤더*/
     .header {
       display: flex;
@@ -32,7 +94,7 @@
     }
     span { color: pink; }
     input {font-size: 15px;}
-    textarea {font-size: 15px; resize: none;;}
+    textarea {font-size: 15px; resize: none;}
     .field-error {
       font-size: 14px;
       color: #FFD53F;
@@ -54,6 +116,7 @@
     }
     .tr {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       padding-left: 5%;
       padding-right: 7%;
@@ -81,9 +144,52 @@
   </style>
 </head>
 <body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+<header class="NaviHeader" id="navbar">
+  <div class="left">
+    <a th:href="@{'/'}" id="logo">cakeN</a>
+  </div>
+  <div class="center">
+    <a th:href="@{'/'}" class="menu">사이트 소개</a>
+    <a href="/design" class="menu">케이크 제작</a>
+    <a href="/contest" class="menu">케이크 자랑</a>
+    <a href="/letter" class="menu">레터링 선택</a>
+  </div>
+  <div class="right">
+    <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+    <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+
+    <a href={"/myPage"}  >
+      <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+    </a>
+    <a href={"/myCake"} >
+      <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+    </a>
+  </div>
+</header>
 
 <div class="container">
   <div class="header">
+    <br /><br /><br /><br /><br />
     <div class="title">
       회원가입
     </div>
@@ -93,15 +199,11 @@
   <div className="signUpAll">
     <div class="text">*은 필수 입력사항입니다.</div>
 
-<<<<<<< HEAD
-  <form action="" th:action th:object="${userRequestDto}" method="post" enctype="multipart/form-data">
-=======
-      <form action="" th:action th:object="${userRequestDto}" method="post">
+      <form action="" th:action th:object="${userRequestDto}" method="post" enctype="multipart/form-data">
         <div class="table">
         <div th:if="${#fields.hasGlobalErrors()}">
           <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
         </div>
->>>>>>> newJeans
 
         <div class="tr">
           <div class="th">
@@ -114,44 +216,6 @@
           </div> <!-- td -->
         </div> <!-- tr -->
 
-<<<<<<< HEAD
-    <div>
-      <label for="email">로그인 ID</label>
-      <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" >Incorrect data</p>
-    </div>
-    <div>
-      <label for="pw">비밀번호</label>
-      <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></p>
-    </div>
-    <div>
-      <label for="pw">비밀번호 재확인</label>
-      <input type="password" id="pwConfirm" name="pwConfirm" th:field="*{pwConfirm}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error"  th:if="${#fields.hasErrors('pwConfirm')}" th:errors="*{pwConfirm}" ></p>
-    </div>
-    <div>
-      <label for="nickname">닉네임</label>
-      <input type="text" id="nickname" name="nickname" th:field="*{nickname}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error"  th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" ></p>
-    </div>
-    <div>
-      <label for="intro">자기소개</label>
-      <input type="text" id="intro" name="intro" th:field="*{intro}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error"  th:if="${#fields.hasErrors('intro')}"  th:errors="*{intro}" ></p>
-    </div>
-    <div>
-      <label for="image">프로필사진</label>
-      <input type="text" id="image" name="image" th:field="*{image}" class="form-control"
-             th:errorclass="field-error">
-      <p class="field-error"  th:if="${#fields.hasErrors('image')}"  th:errors="*{image}" ></p>
-    </div>
-=======
         <div class="tr">
           <div class="th">
             <label for="pw">비밀번호<span>*</span></label>
@@ -162,7 +226,6 @@
             <div class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></div>
           </div> <!-- td -->
         </div> <!-- tr -->
->>>>>>> newJeans
 
         <div class="tr" style="margin-top:-4%;">
           <div class="th">
