@@ -214,12 +214,12 @@ public class UserController {
      * @return
      */
     @PostMapping("/update/{id}")
-    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult) {
+    public String updateInfo(@PathVariable("id") Long id, UserUpdateDto userRequestDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "user/updateUserForm.html";
         }
 
-        userService.update(userRequestDto);
+        userService.update(id, userRequestDto);
 
         return "redirect:/users/mypage";
     }

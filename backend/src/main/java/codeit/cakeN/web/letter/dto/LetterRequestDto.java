@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @NoArgsConstructor
 @Data
@@ -14,6 +16,7 @@ public class LetterRequestDto {
 
     private Long id;
 
+    @NotBlank
     private String content;
 
     private Tag tag;

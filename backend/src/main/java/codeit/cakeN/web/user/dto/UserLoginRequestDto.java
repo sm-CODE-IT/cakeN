@@ -26,6 +26,5 @@ public class UserLoginRequestDto {
 
     private Role role = Role.USER;
 
-    private String token;
-
+//    private String token;
 }
