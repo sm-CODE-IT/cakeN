@@ -42,6 +42,8 @@ dependencies {
 
 	implementation 'junit:junit:4.13.2'
 
+	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
 	// 이미지 썸네일 관련 라이브러리
 	implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.11'
 
@@ -52,13 +54,22 @@ dependencies {
 
 	// spring rest docs
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
 
+	implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+	implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
 }
 
 test {
 	useJUnitPlatform()
 }
 targetCompatibility = JavaVersion.VERSION_16
+
+/*// 스프링 실행 시 리액트 서버 자동 실행
+task runReactServer(type: NpmTask) {
+	workingDir = file("cake");
+	args = ["run", "start"]
+}*/
 
 // React -> SpringBoot Project Build : React 결과물을 SpringBoot build 결과물에 포함시킨다.
 /*

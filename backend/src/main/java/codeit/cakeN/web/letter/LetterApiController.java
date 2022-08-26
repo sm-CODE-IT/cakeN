@@ -4,9 +4,10 @@ import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.domain.letter.LetterRepository;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.letter.LetterException;
-import codeit.cakeN.exception.letter.LetterExceptionType;
-import codeit.cakeN.exception.user.UserException;
+
 import codeit.cakeN.service.letter.LetterService;
+import codeit.cakeN.web.letter.dto.LetterRequestDto;
+import codeit.cakeN.web.letter.dto.LetterUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,12 +35,12 @@ public class LetterApiController {
 
     /**
      * Letter 등록
-     * @param letter
+     * @param letterRequestDto
      * @return
      */
     @PostMapping("/letter")
-    public ResponseEntity<Letter> registerLetter(Letter letter, @AuthenticationPrincipal User formUser) {
-        letterService.register(letter);
+    public ResponseEntity<Letter> registerLetter(LetterRequestDto letterRequestDto, @AuthenticationPrincipal User formUser) {
+        letterService.register(letterRequestDto);
 
         codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
 
@@ -47,7 +48,7 @@ public class LetterApiController {
             user.getLetterList().add(letter);
         }*/
 
-        return ResponseEntity.ok(letter);
+        return ResponseEntity.ok(letterRequestDto.toEntity());
     }
 
     /**
@@ -74,17 +75,15 @@ public class LetterApiController {
         return new ResponseEntity(letter, header, HttpStatus.OK);
     }
 
+
     /**
      * Letter 정보 수정
      * @param id
      * @return
      */
     @PutMapping("/letter/{id}")
-    public ResponseEntity<Letter> updateLetter(@PathVariable("id") Long id) throws LetterException {
-        Letter letter = letterRepository.findById(id).orElseThrow(
-                () -> new LetterException(LetterExceptionType.NOT_FOUND_LETTER)
-        );
-        letterService.update(letter);
+    public ResponseEntity<Letter> updateLetter(@PathVariable("id") Long id, @RequestBody LetterUpdateDto letterUpdateDto) throws LetterException {
+        letterService.update(id, letterUpdateDto);
 
         return ResponseEntity.ok().build();
     }

@@ -7,10 +7,22 @@
 <body>
 this is new letter update page!!
     <div class="main">
-        <form method="post" th:action="@{/letter/update}">
+        <form method="post" th:action th:object="${letter}">
             <input type="hidden" name="letter_id" id="letter_id" th:value="${letter.letterId}">
-            <label for="tag">문구 번호(tag) :</label>
-            <input type="text" name="tag" id="tag" th:text="${letter.tag}"> <br>
+
+            <label for="tag" th:text="${letter.tag}"></label>
+            <select id="tag" name="tag" th:field="*{tag}">
+                <option value="BIRTHDAY" selected>생일</option>
+                <option value="PARENTSDAY">어버이날</option>
+                <option value="ANNIVERSARY">기념일</option>
+                <option value="EMPLOYMENT">취뽀축하</option>
+                <option value="LEAVE">퇴사축하</option>
+                <option value="ADMISSION">입학축하</option>
+                <option value="GRADUATION">졸업축하</option>
+                <option value="FRIENDSHIP">우정</option>
+                <option value="LOVE">커플</option>
+                <option value="TEACHERSDAY">스승의날</option>
+            </select>
             <label for="content">내용 :</label>
             <textarea name="content" id="content" th:text="${letter.content}"></textarea> <br>
             <button type="submit">수정</button>

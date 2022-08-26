@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BaseMenu = () => {
+const BaseMenu = ({text}) => {
   const str = `
     <div class="colorContainer">
     <label for="favcolor"> favorite color:</label>
@@ -26,6 +26,7 @@ const BaseMenu = () => {
 
   return (
     <div className="cakestyle">
+      <div>{text}</div>
       {/* 베이스 윗줄 */}
       <div className="menubar">
         <label>

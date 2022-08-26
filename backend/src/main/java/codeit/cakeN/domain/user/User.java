@@ -10,6 +10,7 @@ import codeit.cakeN.web.user.dto.UserUpdateDto;
 
 import lombok.*;
 
+import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -45,13 +46,13 @@ public class User extends Timestamped implements Serializable {
     @Column(nullable = true)
     private String image;  // 2개의 기본 이미지 중 택1
 
-
     @Column(length = 20, nullable = false)
     private String nickname;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
 
 
     // Spring Security 사용자 인증 필드
@@ -130,22 +131,23 @@ public class User extends Timestamped implements Serializable {
     private List<Contest> contestList = new ArrayList<>();
 
     /*@Builder.Default
-    @OneToMany(mappedBy = "letter", cascade = ALL, orphanRemoval = true)
-    private List<Letter> letterList = new ArrayList<>();
-*/
-    /*@Builder.Default
-    @OneToMany(mappedBy = "heartLetter", cascade = ALL, orphanRemoval = true, fetch = LAZY)
+    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
     private List<Heart> heartLetterList = new ArrayList<>();   // 좋아요한 레터링 리스트 가져오기
 */
-
     /*@Builder.Default
-    @OneToMany(mappedBy = "user", cascade = ALL, orphanRemoval = true)
-    private List<Letter> letterList = new ArrayList<>();*/
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Heart> heartLetterList = new ArrayList<>();
 
+*/
     public void addDesign(Design design) {
         // cake design의 작성자는 Design Entity에서 지정
         designList.add(design);
     }
+
+    /*public void addHeartLetter(Heart heart) {
+        heartLetterList.add(heart);
+    }*/
 
 
 }
