@@ -102,8 +102,10 @@ public class UserController {
      * @return
      */
     @GetMapping("/delete/{id}")
-    public String delete(Model model) {
+    public String delete(Model model, @PathVariable("id") Long id) {
         model.addAttribute("userDeleteDto", new UserDeleteDto());
+        model.addAttribute("userNickname", userRepository.findById(id).get().getNickname());
+        model.addAttribute("userEmail", userRepository.findById(id).get().getEmail());
         return "user/deleteForm";
     }
 
@@ -193,6 +195,21 @@ public class UserController {
         return user;
     }
 
+    @GetMapping("/mypage/heart-letter")
+    public String heartLetter(@AuthenticationPrincipal User formUser, Model model) {
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+
+        model.addAttribute("userNickname", user.getNickname());
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("userId", user.getUserId());
+
+        List<Heart> heart = heartRepository.findByUser(user).get();
+        model.addAttribute("hearts", heart);
+
+
+        return "user/letterHeart";
+    }
+
 
     /**
      * 개인정보 수정 페이지
@@ -232,8 +249,13 @@ public class UserController {
      * @return
      */
     @GetMapping("/update-pw/{id}")
-    public String updatePw(Model model) {
+    public String updatePw(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal User formUser) {
+        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
+        model.addAttribute("userNickname", user.getNickname());
+        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("userId", user.getUserId());
         model.addAttribute("userUpdatePwDto", new UserUpdatePwDto());
+
         return "user/updatePwForm";
     }
 

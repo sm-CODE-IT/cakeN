@@ -1,10 +1,22 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="utf-8">
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+    .pencil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
 
+      background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+      transform: translate(2%, -35%);
+      transition: 0.5s linear;
+    }
+    /* 상단바 */
     .NaviHeader {
       overflow: hidden;
       background-color: pink;
@@ -47,7 +59,8 @@
       border-radius: 4px;
       transition: 0.5s;
     }
-
+    a {text-decoration-line: none;}
+    img {margin:3px}
     /* 링크에 hover  */
     .NaviHeader .menu:hover {
       background-color: cornsilk;
@@ -73,6 +86,7 @@
       width: 720px;
       height: 80px;
     }
+    .yes {display:flex; align-items: center;}
 
     @keyframes spaceship-ani {
       to {
@@ -113,10 +127,10 @@
       width: 200px;
       padding: 8px;
       background-color: #69492d;
-      color: #ffc0cb;
+      color: #FFFFFF;
       border: none;
       border-radius: 5px;
-      box-shadow: 3px 3px 3px 3px;
+      box-shadow: 3px 3px 3px 3px #ffc0cb;
     }
 
     .Home .happy {
@@ -159,21 +173,22 @@
   </div>
   <div class="center">
     <a th:href="@{'/'}" class="menu">사이트 소개</a>
-    <a href="/design/" class="menu">케이크 제작</a>
-    <a href="/contest/" class="menu">케이크 자랑</a>
-    <a href="/letter/" class="menu">레터링 선택</a>
+    <a th:href="@{/design/}" class="menu">케이크 제작</a>
+    <a th:href="@{/contest/}" class="menu">케이크 자랑</a>
+    <a th:href="@{/letter/}" class="menu">레터링 선택</a>
   </div>
   <div class="right">
     <div sec:authorize="!isAuthenticated()">
       <a th:href="@{'/users/login'}" class="menu" >로그인</a>
       <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
     </div>
-    <div sec:authorize="isAuthenticated()">
-      <span th:text="${userName}"></span>
-      <a href="@{'/users/mypage'}"  >
-        <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로"/>
+
+    <div sec:authorize="isAuthenticated()" class="yes">
+      <div><span th:text="${userName}"></span>님, 어서오세요!&nbsp;</div>
+      <a th:href="@{'/users/mypage'}" >
+        <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로" />
       </a>
-      <a href="@{'/users/mypage'}" >
+      <a th:href="@{'/users/mypage'}" >
         <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
       </a>
     </div>
@@ -207,7 +222,7 @@
     <br />
     저희 케이크엔이 도와드리겠습니다!
   </h3>
-  <a href="/letter">
+  <a th:href="@{/letter/}">
     <button class="toLetterButton">레터링 구경하러 가기</button>
   </a>
   <br />
@@ -217,6 +232,35 @@
   <br />
   <br />
 </div>
+<div class="pencil"></div>
+<script>
+  const pencil = document.querySelector(".pencil");
 
+  document.addEventListener("mousemove", (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    pencil.style.left = mouseX + "px";
+    pencil.style.top = mouseY + "px";
+  });
+
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
 </body>
 </html>

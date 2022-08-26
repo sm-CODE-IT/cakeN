@@ -2,10 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <style>
+        .pencil {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+
+            background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+            transform: translate(2%, -35%);
+            transition: 0.5s linear;
+        }
+    </style>
 </head>
 <footer th:fragment="footerFragment">
-    <div>
-        <h2>Footer</h2>
-    </div>
+<div class="pencil"></div>
+<script>
+    const pencil = document.querySelector(".pencil");
+
+    document.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        pencil.style.left = mouseX + "px";
+        pencil.style.top = mouseY + "px";
+    });
+
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+        ) {
+            //document.getElementById("navbar").style.padding = "0";
+            //document.getElementById("logo").style.fontSize = "25px";
+            document.getElementById("navbar").style.top = "-200px";
+        } else {
+            //document.getElementById("navbar").style.padding = "10px 10px";
+            //document.getElementById("logo").style.fontSize = "35px";
+            document.getElementById("navbar").style.top = "0";
+        }
+    }
+</script>
 </footer>
 </html>

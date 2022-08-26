@@ -8,29 +8,31 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
-@RequestMapping("/letter")
-public class HeartController {
+@RequestMapping("/api")
+public class HeartApiController {
 
     private final HeartService heartService;
+    private final HttpSession httpSession;
+    private final UserRepository userRepository;
 
-    @GetMapping("/heart")
-    public String heart(HeartDto heartDto) throws Exception {
+    @PostMapping("/heart")
+    @ResponseStatus(HttpStatus.OK)
+    public Heart heart(HeartDto heartDto, @AuthenticationPrincipal User formUser) throws Exception {
         /*codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
         heartDto.setUserId(user.getUserId());*/
-        heartService.heart(heartDto);
-        return "redirect:/letter/";
+        return heartService.heart(heartDto);
     }
 
-    @GetMapping("/unheart")
-    public String unHeart(HeartDto heartDto) throws Exception {
+    @DeleteMapping("/heart")
+    @ResponseStatus(HttpStatus.OK)
+    public HeartDto unHeart(HeartDto heartDto) throws Exception {
         heartService.unheart(heartDto);
-        return "redirect:/letter/";
+        return heartDto;
     }
 }
