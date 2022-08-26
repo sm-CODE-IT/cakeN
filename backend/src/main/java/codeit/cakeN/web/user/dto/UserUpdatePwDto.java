@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Data
 public class UserUpdatePwDto {
-
     @NotBlank(message = "비밀번호를 입력하세요.")
     private String pw;
 

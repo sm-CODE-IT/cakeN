@@ -7,6 +7,7 @@ import codeit.cakeN.service.design.DesignService;
 import codeit.cakeN.web.design.dto.DesignRequestDto;
 import codeit.cakeN.web.design.dto.DesignUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -37,7 +37,6 @@ const Design = () => {
               <img className="menu" src="https://ifh.cc/g/KMqHRw.png" />
             </button>
             {visible && <BaseMenu />}
-            
           </div>
           <div className="cakestyle">
             <br />

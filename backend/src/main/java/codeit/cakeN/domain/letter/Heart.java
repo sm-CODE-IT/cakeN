@@ -29,12 +29,7 @@ public class Heart {
         Heart letterHeart = new Heart();
         letterHeart.setUser(user);
         letterHeart.setLetter(letter);
-//        user.getHeartLetterList().add(letterHeart);
+
         return letterHeart;
     }
-
-    /*public void heartUser(User user) {
-        this.user = user;
-        user.addHeartLetter(this);
-    }*/
 }

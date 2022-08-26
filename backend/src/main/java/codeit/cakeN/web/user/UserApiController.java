@@ -1,21 +1,16 @@
 package codeit.cakeN.web.user;
 
-import codeit.cakeN.config.auth.TokenProvider;
-import codeit.cakeN.domain.letter.Heart;
-import codeit.cakeN.domain.letter.HeartRepository;
-import codeit.cakeN.domain.letter.Letter;
-import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.domain.user.profileImg.FileRepository;
 import codeit.cakeN.domain.user.profileImg.ProfileStore;
-import codeit.cakeN.exception.letter.LetterException;
-import codeit.cakeN.exception.letter.LetterExceptionType;
 import codeit.cakeN.exception.user.UserException;
-import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
-import codeit.cakeN.web.user.dto.*;
+import codeit.cakeN.web.user.dto.UserDeleteDto;
+import codeit.cakeN.web.user.dto.UserRequestDto;
+import codeit.cakeN.web.user.dto.UserUpdateDto;
+import codeit.cakeN.web.user.dto.UserUpdatePwDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -33,9 +28,6 @@ import javax.validation.Valid;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static codeit.cakeN.web.user.UserController.findSessionUser;
 
@@ -49,8 +41,6 @@ public class UserApiController {
     private final HttpSession httpSession;
     private final ProfileStore profileStore;
     private final FileRepository fileRepository;
-    private final HeartRepository heartRepository;
-    private final TokenProvider tokenProvider;
 
     /**
      * 회원가입
@@ -58,26 +48,11 @@ public class UserApiController {
      * @return
      */
     @PostMapping("/users")
-    public Object createUser(UserRequestDto userRequestDto) {
-        /*if (bindingResult.hasErrors()) {
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            String errorMessage = allErrors.get(0).getDefaultMessage();
-
-            return new CreateError().error(errorMessage);
-        }
-
-        if (!(userRequestDto.getPw().equals(userRequestDto.getPwConfirm()))) {
-            return new CreateError().error("패스워드가 일치하지 않습니다.");
-        }
-        if (userService.emailCheck(userRequestDto.getEmail())) {
-            return new CreateError().error("이미 존재하는 회원입니다.");
-        }*/
-
-
-//        userRequestDto.setImage(userRequestDto.getImage());
+    public ResponseEntity<User> createUser(@Valid UserRequestDto userRequestDto) {
+        userRequestDto.setImage(userRequestDto.getImage());
         userService.save(userRequestDto);
 
-        return userRequestDto.toEntity();
+        return ResponseEntity.ok(userRequestDto.toEntity());
     }
 
     /**
@@ -138,75 +113,14 @@ public class UserApiController {
      */
     @PutMapping("/users/{id}")
     public ResponseEntity updateInfo(@PathVariable("id") Long id, UserUpdateDto userUpdateDto) {
-        userService.update(id, userUpdateDto);
+        userService.update(userUpdateDto);
         return ResponseEntity.ok().build();
     }
-
-    /**
-     * 개인정보 수정 - 비밀번호 변경
-     * @param userUpdatePwDto
-     * @param id
-     * @return
-     */
+    
     @PutMapping("/users/password/{id}")
     public ResponseEntity updatePw(@Valid UserUpdatePwDto userUpdatePwDto, @PathVariable("id") Long id) {
         userService.updatePw(userUpdatePwDto.getPw(), userUpdatePwDto.getNewPwConfirm(), id);
         return ResponseEntity.ok().build();
-    }
-
-    /**
-     * 좋아요 한 레터링 리스트 가져오기
-     * @param id
-     * @return
-     */
-    @GetMapping("/users/{id}/heartletter")
-    public List<Heart> getHeartLetter(@PathVariable("id") Long id) {
-        User user = userRepository.findById(id).orElseThrow(
-                () -> new UserException(UserExceptionType.NOT_FOUND_USER)
-        );
-
-        List<Heart> heartLetterList = heartRepository.findByUser(user).orElseThrow(
-                () -> new LetterException(LetterExceptionType.NOT_FOUND_HEART)
-        );
-        System.out.println(heartLetterList);
-
-        /*List<Letter> letterList = new ArrayList<>();
-        for (Heart heart : heartLetterList) {
-            letterList.add(heart.getLetter());
-        }*/
-
-        System.out.println(heartRepository.findByUser(user));
-        System.out.println(heartLetterList);
-
-        return heartLetterList;
-    }
-
-    @GetMapping("/users/heartletter")
-    public List<Heart> getAllHeart() {
-        return this.heartRepository.findAll();
-    }
-
-    @PostMapping("/users/login")
-    public ResponseEntity<?> login(UserLoginRequestDto loginRequestDto) {
-        User user = userService.getByCredentials(
-                loginRequestDto.getUsername(),
-                loginRequestDto.getPassword()
-        );
-
-        if (user != null) {
-            // 토큰 생성
-            final String token = tokenProvider.create(user);
-
-            UserLoginRequestDto responseUser = UserLoginRequestDto.builder()
-                    .username(user.getEmail())
-                    .password(user.getPw())
-                    .role(Role.USER)
-//                    .token(token)
-                    .build();
-            return ResponseEntity.ok().body(responseUser);
-        } else {
-            return ResponseEntity.badRequest().build();
-        }
     }
 
     @ResponseBody

@@ -1,10 +1,7 @@
 package codeit.cakeN.web.user.dto;
 
 import codeit.cakeN.domain.user.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,9 +9,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserLoginRequestDto {
 
     @NotEmpty(message = "아이디는 필수 입력값입니다.")
@@ -26,5 +20,4 @@ public class UserLoginRequestDto {
 
     private Role role = Role.USER;
 
-//    private String token;
 }

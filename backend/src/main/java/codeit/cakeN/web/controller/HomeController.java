@@ -45,6 +45,7 @@ public class HomeController {
         /**
          * Form Login으로 접근한 유저
          */
+
         if (formUser != null) {
             System.out.println(formUser);
             codeit.cakeN.domain.user.User findUser = userRepository.findByEmail(formUser.getUsername()).get();
@@ -53,7 +54,7 @@ public class HomeController {
         }
 
 
-        return "home2";
+        return "home";
     }
 
 }

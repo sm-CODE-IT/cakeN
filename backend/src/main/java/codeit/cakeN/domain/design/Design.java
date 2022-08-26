@@ -73,7 +73,6 @@ public class Design extends BaseTimeEntity {
     }
 
 
-
     @Builder
     public Design(User user, String file, CakeShape cakeShape, CakePattern cakePattern, String cakeColor, String cakeColor2, String image, String letter, String letterColor, LetterLocation letterLocation, LetterSize letterSize, String scrapLetter) {
         this.user = user;

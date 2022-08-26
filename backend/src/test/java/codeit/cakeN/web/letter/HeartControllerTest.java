@@ -2,7 +2,6 @@ package codeit.cakeN.web.letter;
 
 import codeit.cakeN.domain.letter.Letter;
 import codeit.cakeN.domain.letter.LetterRepository;
-import codeit.cakeN.domain.letter.Tag;
 import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
@@ -62,7 +61,7 @@ class HeartControllerTest {
 
         Letter letter = Letter.builder()
                 .content("뇽안")
-                .tag(Tag.BIRTHDAY)
+                .tag(1)
                 .build();
         letterRepository.save(letter);
 

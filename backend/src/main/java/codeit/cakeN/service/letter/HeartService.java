@@ -8,12 +8,11 @@ import codeit.cakeN.domain.user.User;
 import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.letter.LetterException;
 import codeit.cakeN.exception.letter.LetterExceptionType;
-import codeit.cakeN.web.letter.dto.HeartDto;
+import codeit.cakeN.web.letter.HeartDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
+import java.io.IOException;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,27 +23,18 @@ public class HeartService {
     private final UserRepository userRepository;
     private final LetterRepository letterRepository;
 
-    public Heart heart(HeartDto heartDto) throws Exception {
+    public void heart(HeartDto heartDto) throws Exception {
 
         // 이미 좋아요한 레터링은 예외로 처리
         if (findHeartWithUserAndLetter(heartDto).isPresent()) {
             throw new LetterException(LetterExceptionType.ALREADY_HEART_LETTER);
         }
 
-        User user = userRepository.findById(heartDto.getUserId()).get();
-        Letter letter = letterRepository.findById(heartDto.getLetterId()).get();
-
-        Heart heart = Heart.toLetterHeart(user, letter);
-        /*user.addHeartLetter(heart);
-        System.out.println(user.getHeartLetterList());*/
-
+        Heart heart = heartDto.toEntity();
         heartRepository.save(heart);
-        Optional<List<Heart>> letterList = heartRepository.findByUser(user);
-        System.out.println(letterList);
 
         updateHeartCount(heartDto.getLetterId(), 1);
 
-        return heart;
     }
 
     public void unheart(HeartDto heartDto) throws Exception {
@@ -60,7 +50,7 @@ public class HeartService {
     }
 
     public Optional<Heart> findHeartWithUserAndLetter(HeartDto heartDto) {
-        return heartRepository.findByUser_UserIdAndLetter_LetterId(heartDto.getUserId(), heartDto.getLetterId());
+        return heartRepository.findHeartByUserAndLetter(userRepository.findById(heartDto.getUserId()).get(), letterRepository.findById(heartDto.getLetterId()).get());
     }
 
     public void updateHeartCount(Long letterId, Integer plusOrMinus) throws Exception {
@@ -73,5 +63,4 @@ public class HeartService {
         heartCount += plusOrMinus;
         letterOpt.get().setHearts(heartCount);
     }
-
 }

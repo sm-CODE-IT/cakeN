@@ -1,8 +1,6 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.dto.SecurityUser;
-import codeit.cakeN.domain.letter.Heart;
-import codeit.cakeN.domain.letter.HeartRepository;
 import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.domain.user.profileImg.FileRepository;
 import codeit.cakeN.domain.user.profileImg.ProfileStore;
@@ -10,7 +8,6 @@ import codeit.cakeN.domain.user.UserRepository;
 import codeit.cakeN.exception.user.UserException;
 import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
-import codeit.cakeN.web.letter.dto.HeartDto;
 import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +23,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
@@ -34,7 +30,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
 
 //@RestController
@@ -49,7 +44,6 @@ public class UserController {
     private final HttpSession httpSession;
     private final ProfileStore profileStore;
     private final FileRepository fileRepository;
-    private final HeartRepository heartRepository;
 
     /**
      * 회원가입 페이지
@@ -70,7 +64,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/new")
-    public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model) {
+    public String createUser(@Valid UserRequestDto userRequestDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             return "user/createUserForm";
         }
@@ -102,10 +96,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/delete/{id}")
-    public String delete(Model model, @PathVariable("id") Long id) {
+    public String delete(Model model) {
         model.addAttribute("userDeleteDto", new UserDeleteDto());
-        model.addAttribute("userNickname", userRepository.findById(id).get().getNickname());
-        model.addAttribute("userEmail", userRepository.findById(id).get().getEmail());
         return "user/deleteForm";
     }
 
@@ -168,8 +160,6 @@ public class UserController {
         model.addAttribute("userNickname", user.getNickname());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("userIntro", user.getIntro());
-        List<Heart> heart = heartRepository.findByUser(user).get();
-        model.addAttribute("hearts", heart);
 
         // 내가 자랑한 콘테스트 게시물 모아보기
         model.addAttribute("contests", user.getContestList());
@@ -195,21 +185,6 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/mypage/heart-letter")
-    public String heartLetter(@AuthenticationPrincipal User formUser, Model model) {
-        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
-
-        model.addAttribute("userNickname", user.getNickname());
-        model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("userId", user.getUserId());
-
-        List<Heart> heart = heartRepository.findByUser(user).get();
-        model.addAttribute("hearts", heart);
-
-
-        return "user/letterHeart";
-    }
-
 
     /**
      * 개인정보 수정 페이지
@@ -231,12 +206,12 @@ public class UserController {
      * @return
      */
     @PostMapping("/update/{id}")
-    public String updateInfo(@PathVariable("id") Long id, UserUpdateDto userRequestDto, BindingResult bindingResult) {
+    public String updateInfo(UserUpdateDto userRequestDto, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return "user/updateUserForm.html";
         }
 
-        userService.update(id, userRequestDto);
+        userService.update(userRequestDto);
 
         return "redirect:/users/mypage";
     }
@@ -249,13 +224,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/update-pw/{id}")
-    public String updatePw(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal User formUser) {
-        codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
-        model.addAttribute("userNickname", user.getNickname());
-        model.addAttribute("userEmail", user.getEmail());
-        model.addAttribute("userId", user.getUserId());
+    public String updatePw(Model model) {
         model.addAttribute("userUpdatePwDto", new UserUpdatePwDto());
-
         return "user/updatePwForm";
     }
 
@@ -282,6 +252,7 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             return "user/updatePwForm";
+
         }
 
         return "redirect:/users/mypage";
