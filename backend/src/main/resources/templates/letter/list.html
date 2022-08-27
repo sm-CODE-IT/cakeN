@@ -434,15 +434,13 @@
         <div id="box" class ="box" >
             <br/>
             <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:each="heart : ${hearts}">
-                    <div  th:if="${letter.getTag().toString().equals('BIRTHDAY')}" >
+                <div  th:if="${letter.getTag().toString().equals('BIRTHDAY')}" >
+
+                    <div th:each="heart : ${hearts}">
 <!--                        <pre class="letterBox" onclick="onClickUnheart(this)" th:text="${letter.content}"></pre>-->
-                        <div th:if="${letter.content} == ${heart.letter.content}">
-                            <a  class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/unheart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: pink;"></a>
-                        </div>
-                        <div th:unless="${letter.content} == ${heart.letter.content}">
-                            <a  class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/heart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: white;"></a>
-                        </div>
+                        <a  th:if="${heart.letter.content} == ${letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/unheart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: pink;"></a>
+
+                        <a  th:if="${heart.letter.content} != ${letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/heart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: white;"></a>
                     </div>
                 </div>
             </div>

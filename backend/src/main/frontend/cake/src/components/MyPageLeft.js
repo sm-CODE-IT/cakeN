@@ -63,7 +63,6 @@ const MyPageLeft = () => {
     config: { duration: "120" },
   });
 
-<<<<<<< HEAD
   return (
     <div className="MyPageLeft">
       <div className="profile">
@@ -74,45 +73,7 @@ const MyPageLeft = () => {
         />
         <div className="user_nick">개발새발자</div>
         <div className="user_emil">dogfootbirdfoot</div>
-=======
-            <div className="accordion">
-                <animated.div className="accordion__item" style={openAnimation1}>
-                    <div className="accordion__header" onClick={toggleHandler1}>
-                        <animated.i style={iconAnimation1}>
-                        <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                        </animated.i>
-                        <h4>{"My Page"}</h4>                
-                    </div>
-                    <Link to="/myPage" className="accordion__content" >{"내 정보 수정/변경"}</Link>
-                    <Link to="/password" className="accordion__content">{"비밀번호 변경"}</Link>            
-                </animated.div>
-      
-                <animated.div className="accordion__item" style={openAnimation2}>
-                    <div className="accordion__header" onClick={toggleHandler2}>
-                        <animated.i style={iconAnimation2}>
-                        <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                        </animated.i>
-                        <h4>{"My Cage"}</h4>                
-                    </div>
-                    <Link to="/myCake" className="accordion__content" >{"내가 만든 케이크"}</Link>
-                    <Link to="/password" className="accordion__content">{"좋아요한 레터링"}</Link>            
-                </animated.div>
-       
-                <animated.div className="accordion__item" style={openAnimation3}>
-                    <div className="accordion__header" onClick={toggleHandler3}>
-                        <animated.i style={iconAnimation3}>
-                        <img src={process.env.PUBLIC_URL + `images/under.png`} alt="arrow" width={20} />
-                        </animated.i>
-                        <h4>{"Etc"}</h4>                
-                    </div>
-                    <Link to="/myPage" className="accordion__content" >{"약관 동의"}</Link>
-                    <Link to="/password" className="accordion__content">{"회원 탈퇴"}</Link>            
-                </animated.div>
-            </div>
-            <div>
-                <button>로그아웃</button>
-            </div>
->>>>>>> newJeans
+
       </div>
 
       <div className="accordion">

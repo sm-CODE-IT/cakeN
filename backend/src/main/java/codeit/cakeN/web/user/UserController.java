@@ -1,8 +1,10 @@
 package codeit.cakeN.web.user;
 
+import codeit.cakeN.config.auth.TokenProvider;
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.HeartRepository;
+import codeit.cakeN.domain.user.Role;
 import codeit.cakeN.domain.user.profileImg.File;
 import codeit.cakeN.domain.user.profileImg.FileRepository;
 import codeit.cakeN.domain.user.profileImg.ProfileStore;
@@ -50,6 +52,7 @@ public class UserController {
     private final ProfileStore profileStore;
     private final FileRepository fileRepository;
     private final HeartRepository heartRepository;
+    private final TokenProvider tokenProvider;
 
     /**
      * 회원가입 페이지
@@ -93,7 +96,7 @@ public class UserController {
             return "user/createUserForm";
         }
 
-        return "redirect:/";
+        return "redirect:/users/login";    // 회원가입 성공 시 로그인 페이지로 리다이렉트
     }
 
 
@@ -148,11 +151,34 @@ public class UserController {
     @GetMapping("/login")
     public String loginForm(@RequestParam(value = "error", required = false)String error, @RequestParam(value = "exception", required = false)String exception, Model model) {
         model.addAttribute("userLoginRequestDto", new UserLoginRequestDto());
-        
+
         // 로그인 실패 시 에러 메시지 출력
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
         return "user/login";
+    }
+
+    @PostMapping("/login")
+    public String login(UserLoginRequestDto loginRequestDto) {
+        codeit.cakeN.domain.user.User user = userService.getByCredentials(
+                loginRequestDto.getUsername(),
+                loginRequestDto.getPassword()
+        );
+
+        if (user != null) {
+            // 토큰 발급
+            final String token = tokenProvider.create(user);
+
+            UserLoginRequestDto responseUser = UserLoginRequestDto.builder()
+                    .username(user.getEmail())
+                    .password(user.getPw())
+                    .role(Role.USER)
+                    .token(token)
+                    .build();
+            return "redirect:/";
+        } else {
+            return "redirect:/users/login";
+        }
     }
 
 

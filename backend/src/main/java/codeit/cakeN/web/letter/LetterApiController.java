@@ -39,7 +39,7 @@ public class LetterApiController {
      * @return
      */
     @PostMapping("/letter")
-    public ResponseEntity<Letter> registerLetter(LetterRequestDto letterRequestDto, @AuthenticationPrincipal User formUser) {
+    public ResponseEntity<Letter> registerLetter(@RequestBody LetterRequestDto letterRequestDto, @AuthenticationPrincipal User formUser) {
         letterService.register(letterRequestDto);
 
         codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);

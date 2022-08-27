@@ -1,6 +1,7 @@
 package codeit.cakeN.web.user;
 
 import codeit.cakeN.config.auth.TokenProvider;
+import codeit.cakeN.config.auth.dto.ResponseDto;
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.HeartRepository;
 import codeit.cakeN.domain.letter.Letter;
@@ -17,6 +18,7 @@ import codeit.cakeN.exception.user.UserExceptionType;
 import codeit.cakeN.service.user.UserService;
 import codeit.cakeN.web.user.dto.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -39,6 +41,7 @@ import java.util.Optional;
 
 import static codeit.cakeN.web.user.UserController.findSessionUser;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -201,11 +204,14 @@ public class UserApiController {
                     .username(user.getEmail())
                     .password(user.getPw())
                     .role(Role.USER)
-//                    .token(token)
+                    .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUser);
         } else {
-            return ResponseEntity.badRequest().build();
+            ResponseDto responseDto = ResponseDto.builder()
+                    .error("Login failed")
+                    .build();
+            return ResponseEntity.badRequest().body(responseDto);
         }
     }
 

@@ -33,6 +33,7 @@ public class UserRequestDto {
     private Role role;
 
 
+
     @Builder
     public UserRequestDto(User user) {
         this.id = user.getUserId();

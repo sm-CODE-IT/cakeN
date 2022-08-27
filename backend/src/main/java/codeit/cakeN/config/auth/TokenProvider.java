@@ -61,16 +61,15 @@ public class TokenProvider {
 
     /**
      * 토큰 디코딩 및 파싱 -> 토큰의 위조여부 확인
+     *
+     * parseClaimsJws 메서드가 Base64로 디코딩 및 파싱
+     * 헤더와 페이로드를 setSigningKey로 넘어온 시크릿을 이용해 서명한 후, token의 서명과 비교
+     * 위조되지 않았다면 페이로드(Claims) 리턴, 위조라면 예외를 날림
+     * 그 중 우리는 userId가 필요하머로, getBody를 부른다.
      * @param token
      * @return
      */
     public String validateAndGetUserId(String token) {
-        /*
-        parseClaimsJws 메서드가 Base64로 디코딩 및 파싱
-        헤더와 페이로드를 setSigningKey로 넘어온 시크릿을 이용해 서명한 후, token의 서명과 비교
-        위조되지 않았다면 페이로드(Claims) 리턴, 위조라면 예외를 날림
-        그 중 우리는 userId가 필요하머로, getBody를 부른다.
-        */
 
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)

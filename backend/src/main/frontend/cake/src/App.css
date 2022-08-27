@@ -1,16 +1,7 @@
-<<<<<<< HEAD
-@import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
-/* body
-. {
-  margin: 0%;
-  padding: 0%;
-} */
-=======
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Pattaya&family=Rubik+Puddles&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
 /* body */
 
->>>>>>> newJeans
 
 /* NaviHeader */
 .NaviHeader {
@@ -110,7 +101,6 @@
   width: 100%;
   text-align: center;
 }
-<<<<<<< HEAD
 
 .Lettering a {
   font-family: "Nanum Gothic";
@@ -148,10 +138,7 @@
 
 .Lettering #parentsday {
   color: #ff0000;
-=======
-.Lettering a {
-  font-family: "Nanum Gothic";
->>>>>>> newJeans
+
 }
 
 .Lettering h2 {
@@ -326,21 +313,13 @@ label > input[type="radio"]:checked + img {
   margin-left: auto;
   margin-right: auto;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> newJeans
 .SignUp .text {
   color: pink;
   font-size: 13px;
   padding: 3px;
 }
-<<<<<<< HEAD
 
-.SignUp .table {
-=======
 .SignUp .table{
->>>>>>> newJeans
   font-size: 15px;
   border: 2px solid #ffc0cb;
 
@@ -529,13 +508,9 @@ label > input[type="radio"]:checked + img {
   width: 80%;
   margin-top: 50px;
   padding: 20px 40px 20px 40px;
-<<<<<<< HEAD
 
-  border: 1px solid #ffeaed;
-=======
   margin-left: 8%;
   border: 1px solid #FFEAED;
->>>>>>> newJeans
   border-radius: 5px;
   background-color: #ffeaed;
 }
@@ -611,10 +586,8 @@ label > input[type="radio"]:checked + img {
 }
 /* Password */
 .Password {
-<<<<<<< HEAD
-=======
+
   margin-left: 8%;
->>>>>>> newJeans
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -624,22 +597,13 @@ label > input[type="radio"]:checked + img {
   width: 80%;
   margin-top: 50px;
   padding: 40px 40px 40px 40px;
-<<<<<<< HEAD
-
-  border: 1px solid #ffeaed;
-=======
   border: 1px solid #FFEAED;
->>>>>>> newJeans
   border-radius: 5px;
   background-color: #ffeaed;
 }
-<<<<<<< HEAD
-.Password .text {
-  width: 35%;
-=======
+
 .Password .text { 
   width: 80%;
->>>>>>> newJeans
 }
 .Password .passText {
   color: pink;
@@ -803,7 +767,7 @@ label > input[type="radio"]:checked + img {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
+
 .Login .naverImg {
   z-index: 100;
   cursor: pointer;
@@ -814,10 +778,7 @@ label > input[type="radio"]:checked + img {
 }
 
 .Login .form {
-=======
-.accordion__header {
   
->>>>>>> newJeans
   display: flex;
   flex-wrap: wrap;
   text-align: center;
@@ -825,7 +786,6 @@ label > input[type="radio"]:checked + img {
   align-items: center;
 }
 
-<<<<<<< HEAD
 .Login .loginField {
   padding: 6px;
   /* background-color: rgb(255, 251, 234); */
@@ -835,7 +795,8 @@ label > input[type="radio"]:checked + img {
   /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
   box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
   /* box-shadow: 5px 5px 10px #666; */
-=======
+}
+
 .accordion__header h4 {
   margin: 0%;
   transition: 0.2s ease-in-out;
@@ -843,7 +804,6 @@ label > input[type="radio"]:checked + img {
   font-weight: 400;
   margin-left: 15px;
   margin-bottom: 5px;
->>>>>>> newJeans
 }
 
 .Login input {
@@ -956,8 +916,7 @@ label > input[type="radio"]:checked + img {
   background-color: white;
   display: inline-block;
 }
-<<<<<<< HEAD
-=======
+
 .accordion__content:hover {
   border: 1px solid #FFEAED;
   background-color: #FFEAED;
@@ -1166,4 +1125,3 @@ label > input[type="radio"]:checked + img {
   background-color: white;
   display: inline-block;
 }
->>>>>>> newJeans

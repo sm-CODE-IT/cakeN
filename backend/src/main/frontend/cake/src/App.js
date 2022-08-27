@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login2 from "./components/Login2";
-import "./App.css";
-
-import NaviHeader from "./components/NaviHeader";
-import Home from "./pages/Home";
-import Intro from "./pages/Intro";
-import Design from "./pages/Design";
-import Contest from "./pages/Contest";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
-import Lettering from "./pages/Lettering";
-import MyPage from "./pages/MyPage";
-import MyPassword from "./pages/MyPassword";
-import MyCake from "./pages/MyCake";
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-=======
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {useEffect, useState} from "react";
 
@@ -39,7 +19,6 @@ import axios from "axios";
 
 
 
->>>>>>> newJeans
 function App() {
   window.onscroll = function () {
     scrollFunction();
@@ -81,24 +60,34 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
+
+  /*componentDidMount() {
+    const requestOptions = {
+      method: 'GET',
+      headers: { "Content-Type":  "application/json"},
+    };
+
+    fetch("http://localhost:8080/users/login", requestOptions)
+        .then((response) => {
+          this.setState({
+            items: response.data,
+          });
+        },
+            (error) => {
+          this.setState({
+            error,
+          });
+        }
+      );
+  }*/
+
   return (
     <div className="App">
       <NaviHeader />
 
       <BrowserRouter>
         <Routes>
-<<<<<<< HEAD
-          <Route path="/" element={<Home />} />
-          <Route path="/intro" element={<Intro />} />
-          <Route path="/design" element={<Design />} />
-          <Route path="/contest" element={<Contest />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/letter" element={<Lettering />} />
-          <Route path="/myPage" element={<MyPage />} />
-          <Route path="/password" element={<MyPassword />} />
-          <Route path="/myCake" element={<MyCake />} />
-=======
+
           <Route path='/' element={<Home />} />
           <Route path='/intro' element={<Intro />} />
           <Route path='/design' element={<Design />} />
@@ -110,7 +99,6 @@ function App() {
           <Route path='/password' element={<MyPassword />} />
           <Route path='/myCake' element={<MyCake />} />
           <Route path='/myLetter' element={<MyLettering />} />
->>>>>>> newJeans
         </Routes>
       </BrowserRouter>
 

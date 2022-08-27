@@ -164,7 +164,7 @@ public class UserService {
 
         Optional<User> findUser = userRepository.findByEmail(loginId);
         User user = findUser.get();   // Optional로 감싼 형태에서 꺼내기
-        if (passwordEncoder.matches(password, user.getPw())) {
+        if (passwordEncoder.matches(password, user.getPw())) {    // matches 메서드를 이용해 패스워드의 일치 여부 확인
             return user;
         } else {
             return null;
