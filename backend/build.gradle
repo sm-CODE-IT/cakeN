@@ -40,7 +40,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-	implementation 'junit:junit:4.13.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+	testCompileOnly 'junit:junit:4.13.2'
+	testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.9.0'
 
 	implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 
