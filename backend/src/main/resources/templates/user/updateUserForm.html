@@ -1,0 +1,489 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+
+    .pencil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+
+      background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+      transform: translate(2%, -35%);
+      transition: 0.5s linear;
+    }
+    /* 상단바 */
+    .NaviHeader {
+      overflow: hidden;
+      background-color: pink;
+      padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+      transition: 0.4s; /* 패딩 줄어들 때 지연 */
+      position: fixed; /* sticky/fixed */
+      width: 100%;
+      top: 0; /* At the top */
+      z-index: 99;
+      margin-left:-15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .NaviHeader .rightN {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #logo {
+      color: black;
+      font-size: 45px;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: "Arima Madurai", cursive; /*update*/
+    }
+    .NaviHeader .menu {
+      color: black;
+      text-decoration: none;
+      padding: 12px;
+      font-family: "Nanum Gothic";
+      /* font-weight: bold; */
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 4px;
+      transition: 0.5s;
+    }
+    a {text-decoration-line: none; color: pink;}
+    a:hover {color:#ffffff;}
+    img {margin:3px}
+    /* 링크에 hover  */
+    .NaviHeader .menu:hover {
+      background-color: cornsilk;
+    }
+    .NaviHeader .menu.active:hover {
+      background-color: cornsilk;
+    }
+    .NaviHeader .mypageimg{
+      width:60px;
+    }
+    .NaviHeader .mycakeimg{
+      width:60px;
+    }
+    .yes {display:flex; align-items: center;}
+    /*헤더*/
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin: 40px;
+    }
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 15px;
+      color: gray;
+      margin-left: 10px;
+    }
+
+    /* 왼쪽+오른쪽 */
+    .all {display: flex;}
+    /* 마이페이지 왼쪽 */
+    .left {
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      border-right: 2px solid pink;
+      margin-bottom: 20px;
+    }
+    .sec1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 30px;
+    }
+    .user_nick {
+      font-size: 22px;
+      font-weight: bold;
+      color: pink;
+      margin-top: 15px;
+    }
+    .user_emil {
+      color: #FFD53F;
+      font-size: 16px;
+      margin-bottom: -20px;
+    }
+    button {
+      width: fit-content;
+      padding: 3px 10px 3px 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      background-color: #FFD53F;
+      color: white;
+    }
+    /* 마이페이지 오른쪽 */
+    .right {
+      flex:1;
+    }
+    .my-2 {
+      color: #FFC0CB;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .my-3 {
+      align-items: flex-start;
+    }
+    .all2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .info {
+      font-size: 18px;
+      width: 80%;
+      margin-top: 50px;
+      padding: 20px 40px 20px 40px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid #FFEAED;
+      border-radius: 5px;
+      background-color: #FFEAED;
+    }
+    .text {
+      width: 80px;
+      text-align: end;
+    }
+    .input {
+      width: 220px;
+      margin-left: 30px;
+      border: none;
+      background-color: #FEF7F8;
+      padding: 1px 4px 1px 4px;
+    }
+    input { color: pink; font-size:18px; padding: 3px 3px 2px 3px; }
+    input:focus {outline: 1px solid pink;}
+    textarea {
+      border: none;
+      resize: none;
+      color: pink;
+      font-size:18px;
+      background-color: #FEF7F8;
+      font-weight: 600;
+    }
+    textarea:focus {outline: 1px solid pink;}
+    .input2 {
+      width: 585px;
+    }
+    .ban:hover {
+      cursor:not-allowed;
+    }
+    .row {
+      display:flex;
+      justify-content: space-between
+    }
+    .btn {
+      text-decoration-line: none;
+      border: none;
+      border-radius: 5px;
+      background-color: #FFD53F;
+      color: white;
+      font-size: 15px;
+      padding-top: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      margin-top: 25px;
+    }
+    /* 아코디언 */
+    .go {text-decoration-line: none;color: pink;}
+    .sec2 {margin-top: 30px; width: 90%;}
+    .acc {border: 1px solid pink; border-radius: 5px;
+      margin: 4% 3% 2% 1%; padding-bottom: 5px;}
+    .item {
+      border: 1px solid pink; border-radius: 5px;
+      font-size: 20px; color:pink;
+      padding: 3px 10px; width: 80%;
+      margin-left: auto;margin-right: auto;
+      margin-bottom: 5px;
+    }
+    .item:hover {
+      border: 1px solid #FFEAED;
+      background-color: #FFEAED;
+      color: white;
+    }
+    .accordion {
+      background-color: white;
+      color: pink;
+      cursor: pointer;
+      padding: 8px 5px 0px 5px;
+      width: 90%;
+      margin-left:5%;
+      outline: none;
+      text-align: left;
+      font-size: 20px;
+    }
+    .accordion:after {
+      content: '\002B';
+
+      float: right;
+      margin-left: 5px;
+    }
+
+    .active:after {
+      content: "\2212";
+    }
+
+    /* 마이페이지 오른쪽 */
+    .right {
+      flex: 1;
+    }
+    .my-2 {
+      color: #FFC0CB;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .my-3 {
+      align-items: flex-start;
+    }
+    .all2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .info {
+      font-size: 18px;
+      width: 80%;
+      margin-top: 50px;
+      padding: 20px 40px 20px 40px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid #FFEAED;
+      border-radius: 5px;
+      background-color: #FFEAED;
+    }
+    .text {
+      width: 80px;
+      text-align: end;
+    }
+    .input {
+      width: 220px;
+      margin-left: 30px;
+      border: none;
+      background-color: #FEF7F8;
+      padding: 1px 4px 1px 4px;
+    }
+    .input2 {
+      width: 628px;
+    }
+    .row {
+      display:flex;
+      justify-content: space-between
+    }
+    .btn {
+      text-decoration-line: none;
+      border: none;
+      border-radius: 5px;
+      background-color: #FFD53F;
+      color: white;
+      font-size: 15px;
+      padding-top: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      margin-top: 25px;
+    }
+
+    .panel {
+      margin-top: -7px;
+      background-color: #ffffff;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+    }
+  </style>
+</head>
+<header class="NaviHeader" id="navbar">
+  <div class="leftN">
+    <a th:href="@{'/'}" id="logo">cakeN</a>
+  </div>
+  <div class="center">
+    <a th:href="@{'/'}" class="menu">사이트 소개</a>
+    <a th:href="@{/design/}" class="menu">케이크 제작</a>
+    <a th:href="@{/contest/}" class="menu">케이크 자랑</a>
+    <a th:href="@{/letter/}" class="menu">레터링 선택</a>
+  </div>
+  <div class="rightN">
+    <div sec:authorize="!isAuthenticated()">
+      <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+      <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+    </div>
+    <div sec:authorize="isAuthenticated()" class="yes">
+      <div><span th:text="${userRequestDto.nickname}"></span>님, 어서오세요!&nbsp;</div>
+      <a th:href="@{'/users/mypage'}" >
+        <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로" /></a>
+      <a th:href="@{'/users/mypage'}" >
+        <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+      </a>
+    </div>
+  </div>
+</header>
+<br /><br /><br /><br />
+<body>
+<div class="all">
+  <div class="left">
+    <div class="sec1">
+      <img src="https://ifh.cc/g/kS15P0.png" alt="profile" width="180px" />
+      <div class="user_nick" th:text="${userRequestDto.nickname}"></div>
+      <div class="user_emil" th:text="${userRequestDto.email}"></div>
+    </div>
+
+    <div class="sec2">
+      <div class="acc">
+        <button class="accordion">My Page</button>
+        <div class="panel">
+          <div class="item"><a th:href="@{'/users/mypage'}">내 프로필 보기</a></div>
+          <div class="item"><a th:href="@{'/users/update/'+ ${userRequestDto.id}}">내 프로필 수정</a></div>
+          <div class="item"><a th:href="@{'/users/update-pw/'+ ${userRequestDto.id}}">비밀번호 변경</a></div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <button class="accordion">My Cake</button>
+        <div class="panel">
+          <div class="item"><a th:href="@{'/users/mypage'}">내가 만든 케이크</a></div>
+          <div class="item"><a th:href="@{'/users/mypage'}">내가 좋아요한 레터링</a></div>
+        </div>
+      </div>
+
+      <div class="acc">
+        <button class="accordion">Etc</button>
+        <div class="panel">
+          <div class="item"><a th:href="@{'/users/mypage'}">이용 약관</a></div>
+          <div class="item"><a th:href="@{'/users/delete/'+ ${userRequestDto.id}}">회원 탈퇴</a></div>
+        </div>
+      </div>
+      <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+          });
+        }
+      </script>
+    </div>
+
+    <div class="sec3">
+      <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+        <button class="btn" type="submit" >로그아웃</button>
+      </form>
+    </div>
+  </div> <!-- /left -->
+
+  <div class="right">
+    <div class="header">
+      <div class="title">내 프로필 수정</div>
+      <div class="content">내 프로필을 변경할 수 있습니다.</div>
+    </div>
+
+    <form action="" th:action="@{'/users/update/'+${userRequestDto.id}}" method="post" enctype="multipart/form-data">
+      <div class="all2">
+        <div class="info">
+          <div class="row">
+            <div class="my-2">
+              <div class="text">닉네임</div>
+              <input type="text"
+                     style="padding: 5px 3px 2px 3px; font-size:17px; font-weight:normal" id="nickname" name="nickname"
+                     th:value="${userRequestDto.nickname}" class="input">
+
+            </div> <!-- my-2 -->
+
+            <div class="my-2">
+              <div class="text"><label for="intro">이메일</label></div>
+              <div id="email" name="email" th:text="${userRequestDto.email}"
+                   style="color: #e2a3ad; background-color: #e1c1c7; " class="input ban"></div>
+
+            </div> <!-- my-2 -->
+          </div> <!-- row -->
+
+          <div class="my-2 my-3">
+            <div class="text"><label for="intro">자기소개</label></div>
+
+            <textarea  id="intro" name="intro"  th:value="${userRequestDto.intro}"
+                       cols="66" rows="2" th:text="${userRequestDto.intro}" ></textarea>
+          </div>
+        </div> <!-- info -->
+
+
+        <div class="col">
+          <button class="btn" type="submit">완료</button>
+        </div>
+      </div> <!-- /all2 -->
+    </form>
+  </div> <!-- /right -->
+
+</div> <!-- /all -->
+<div class="pencil"></div>
+<script>
+  const pencil = document.querySelector(".pencil");
+
+  document.addEventListener("mousemove", (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    pencil.style.left = mouseX + "px";
+    pencil.style.top = mouseY + "px";
+  });
+
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+<!--    <div class="flex-column" th:each="heart : ${hearts}">-->
+<!--        <div class="flex-row my-3">-->
+<!--            <span th:text="${heart.user.nickname}"></span>-->
+<!--            <span th:text="${heart.letter.letterId}"></span>-->
+<!--            <span th:text="${heart.letter.content}"></span>-->
+<!--            <span th:text="${heart.letter.tag}"></span>-->
+<!--        </div>-->
+<!--    </div>-->
+</body>
+</html>

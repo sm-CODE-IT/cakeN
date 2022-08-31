@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+
+    .pencil {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 150px;
+
+      background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+      transform: translate(2%, -35%);
+      transition: 0.5s linear;
+    }
+    /* 상단바 */
+    .NaviHeader {
+      overflow: hidden;
+      background-color: pink;
+      padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+      transition: 0.4s; /* 패딩 줄어들 때 지연 */
+      position: fixed; /* sticky/fixed */
+      width: 100%;
+      top: 0; /* At the top */
+      z-index: 99;
+      margin-left:-15px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .NaviHeader .right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #logo {
+      color: black;
+      font-size: 45px;
+      font-weight: bold;
+      text-decoration: none;
+      font-family: "Arima Madurai", cursive; /*update*/
+    }
+    .NaviHeader .menu {
+      color: black;
+      text-decoration: none;
+      padding: 12px;
+      font-family: "Nanum Gothic";
+      /* font-weight: bold; */
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 4px;
+      transition: 0.5s;
+    }
+
+    /* 링크에 hover  */
+    .NaviHeader .menu:hover {
+      background-color: cornsilk;
+    }
+
+    .NaviHeader .menu.active:hover {
+      background-color: cornsilk;
+    }
+
+    .NaviHeader .mypageimg{
+      width:60px;
+    }
+
+    .NaviHeader .mycakeimg{
+      width:60px;
+    }
+    .yes {display:flex; align-items: center;}
+    a {text-decoration-line: none;}
+    img {margin:3px}
+
+
+    /*헤더*/
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin: 40px;
+    }
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 15px;
+      color: gray;
+      margin-left: 10px;
+    }
+
+    /*바디*/
+    .text {
+      margin-left: 10%;
+      margin-top: 3%;
+      color: pink;
+      font-size: 13px;
+      padding: 3px;
+    }
+    span { color: pink; }
+    input {font-size: 15px;}
+    textarea {font-size: 15px; resize: none;}
+    .field-error {
+      font-size: 14px;
+      color: #FFD53F;
+    }
+    .field-error2 {
+      color: pink;
+      border: 1px solid pink;
+      border-radius: 3px;
+      padding: 3px 3px 2px 3px;
+    }
+    /* 테이블 */
+    .table{
+      width: 70%;
+      margin-left:auto;
+      margin-right:auto;
+      font-size: 15px;
+      border: 2px solid pink;
+      padding: 6% 5% 6% 5%;
+    }
+    .tr {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding-left: 5%;
+      padding-right: 7%;
+      padding-top: 4%;
+      padding-bottom: 1%;
+    }
+    /* 아래 버튼 */
+    .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .col {
+      margin: 2% 1% 0% 1%;
+    }
+    button {
+      font-size: 20px;
+      border-radius: 5px;
+      padding: 5%;
+      width: 150px;
+    }
+    .btn-primary {color: white; background-color: pink; border: 1px solid pink;}
+    .btn-secondary {color: pink; background-color: white; border: 1px solid pink;}
+  </style>
+</head>
+<body>
+<script>
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+<header class="NaviHeader" id="navbar">
+  <div class="left">
+    <a th:href="@{'/'}" id="logo">cakeN</a>
+  </div>
+  <div class="center">
+    <a th:href="@{'/'}" class="menu">사이트 소개</a>
+    <a th:href="@{/design/}" class="menu">케이크 제작</a>
+    <a th:href="@{/contest/}" class="menu">케이크 자랑</a>
+    <a th:href="@{/letter/}" class="menu">레터링 선택</a>
+  </div>
+  <div class="right">
+    <div sec:authorize="!isAuthenticated()">
+      <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+      <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+    </div>
+    <div sec:authorize="isAuthenticated()" class="yes">
+      <div><span th:text="${userName}"></span>님, 어서오세요!&nbsp;</div>
+      <a th:href="@{'/users/mypage'}"  >
+        <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로" /></a>
+      <a th:href="@{'/users/mypage'}" >
+        <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="header">
+    <br /><br /><br /><br /><br />
+    <div class="title">
+      회원가입
+    </div>
+    <div class="content">이제 다양한 서비스를 이용할 수 있습니다.</div>
+  </div>
+
+  <div className="signUpAll">
+    <div class="text">*은 필수 입력사항입니다.</div>
+
+    <form action="" th:action th:object="${userRequestDto}" method="post" enctype="multipart/form-data">
+      <div class="table">
+        <div th:if="${#fields.hasGlobalErrors()}">
+          <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">전체 오류 메시지</p>
+        </div>
+
+        <div class="tr">
+          <div class="th">
+            <label for="email">이메일<span>*</span></label>
+          </div> <!-- th -->
+          <div class="td">
+            <input type="text" id="email" name="email" th:field="*{email}" class="form-control"
+                   th:errorclass="field-error2" size=50 >
+            <div class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></div>
+          </div> <!-- td -->
+        </div> <!-- tr -->
+
+        <div class="tr">
+          <div class="th">
+            <label for="pw">비밀번호<span>*</span></label>
+          </div> <!-- th -->
+          <div class="td">
+            <input type="password" id="pw" name="pw" th:field="*{pw}" class="form-control"
+                   th:errorclass="field-error2" size=50>
+            <div class="field-error"  th:if="${#fields.hasErrors('pw')}" th:errors="*{pw}" ></div>
+          </div> <!-- td -->
+        </div> <!-- tr -->
+
+        <div class="tr" style="margin-top:-4%;">
+          <div class="th">
+            <label for="pw">비밀번호 재확인<span>*</span></label>
+          </div> <!-- th -->
+          <div class="td">
+            <input type="password" id="pwConfirm" name="pwConfirm" th:field="*{pwConfirm}" class="form-control"
+                   th:errorclass="field-error2" size=50>
+            <div class="field-error"  th:if="${#fields.hasErrors('pwConfirm')}" th:errors="*{pwConfirm}" ></div>
+          </div> <!-- td -->
+        </div> <!-- tr -->
+
+        <div class="tr">
+          <div class="th">
+            <label for="nickname">닉네임<span>*</span></label>
+          </div> <!-- th -->
+          <div class="td">
+            <input type="text" id="nickname" name="nickname" th:field="*{nickname}" class="form-control"
+                   th:errorclass="field-error2" size="50">
+            <div class="field-error"  th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" ></div>
+          </div> <!-- td -->
+        </div> <!-- tr -->
+
+        <div class="tr">
+          <div class="th">
+            <label for="intro">자기소개</label>
+          </div> <!-- th -->
+          <div class="td">
+            <textarea id="intro" name="intro" th:field="*{intro}" class="form-control"
+                      th:errorclass="field-error" cols="49" rows="3" />
+            <div class="field-error"  th:if="${#fields.hasErrors('intro')}"  th:errors="*{intro}" ></div>
+          </div> <!-- td -->
+        </div> <!-- tr -->
+      </div> <!-- /table  -->
+
+      <div class="row">
+        <div class="col">
+          <button class="btn-primary" type="submit" >회원가입</button>
+        </div> <!-- col -->
+        <div class="col">
+          <button class="btn-secondary"
+                  th:onclick="|location.href='@{/}'|"
+                  type="button">취소</button>
+        </div> <!-- col -->
+      </div> <!-- row -->
+
+    </form>
+
+  </div> <!-- /signUpAll -->
+</div> <!-- /container -->
+<div class="pencil"></div>
+<script>
+  const pencil = document.querySelector(".pencil");
+
+  document.addEventListener("mousemove", (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    pencil.style.left = mouseX + "px";
+    pencil.style.top = mouseY + "px";
+  });
+
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+</body>
+</html>

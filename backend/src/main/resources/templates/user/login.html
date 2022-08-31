@@ -1,0 +1,433 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+<!--    <link th:href="@{/css/bootstrap.min.css}"-->
+<!--          href="../css/bootstrap.min.css" rel="stylesheet">-->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@900&family=Calistoga&family=Nanum+Gothic:wght@400;700&family=Pattaya&family=Rubik+Puddles&display=swap");
+
+      .pencil {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 150px;
+          height: 150px;
+
+          background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+          transform: translate(2%, -35%);
+          transition: 0.5s linear;
+      }
+      /* 상단바 */
+      .NaviHeader {
+          overflow: hidden;
+          background-color: pink;
+          padding: 10px 10px; /* 줄어들기 전의 navbar 크기 */
+          transition: 0.4s; /* 패딩 줄어들 때 지연 */
+          position: fixed; /* sticky/fixed */
+          width: 100%;
+          top: 0; /* At the top */
+          z-index: 99;
+          margin-left:-15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          align-items: center;
+      }
+
+      .NaviHeader .rightN {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+      }
+
+      #logo {
+          color: black;
+          font-size: 45px;
+          font-weight: bold;
+          text-decoration: none;
+          font-family: "Arima Madurai", cursive; /*update*/
+      }
+
+
+      .NaviHeader .menu {
+          color: black;
+          text-decoration: none;
+          padding: 12px;
+          font-family: "Nanum Gothic";
+          /* font-weight: bold; */
+          font-size: 18px;
+          line-height: 25px;
+          border-radius: 4px;
+          transition: 0.5s;
+      }
+      a {text-decoration-line: none;}
+      a:hover {color:#ffffff;}
+      img {margin:3px}
+      /* 링크에 hover  */
+      .NaviHeader .menu:hover {
+          background-color: cornsilk;
+      }
+
+      .NaviHeader .menu.active:hover {
+          background-color: cornsilk;
+      }
+
+      .NaviHeader .mypageimg{
+          width:60px;
+      }
+
+      .NaviHeader .mycakeimg{
+          width:60px;
+      }
+
+
+        .container {
+            max-width: 300px;
+        }
+
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        .Login {
+          width: 80%;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+          margin-top: -10px;
+        }
+
+        .Login .loginButton {
+          cursor: pointer;
+        }
+
+        .Login .naverImg {
+          z-index: 100;
+          cursor: pointer;
+        }
+
+        .Login .form {
+          display: flex;
+          flex-wrap: wrap;
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .Login .loginField {
+          padding: 6px;
+          /* background-color: rgb(255, 251, 234); */
+          background-color: white;
+          border-radius: 3px;
+          /* border: 4px outset white; */
+          /* box-shadow: 0 0 4px rgb(0 0 0 / 15%); */
+          box-shadow: 0 3px 4px rgb(0 0 0 / 15%);
+          /* box-shadow: 5px 5px 10px #666; */
+        }
+
+        .Login input {
+          font-family: "Nanum Gothic";
+          text-align: center;
+          border: none;
+          background-color: cornsilk;
+          /* background: linear-gradient(to top, cornsilk, white); */
+          margin: 3px;
+          width: 180px;
+          padding: 2px;
+        }
+
+        .Login .loginButton {
+          font-family: "Nanum Gothic";
+          font-weight: bold;
+          margin: 5px;
+          width: 180px;
+
+          background-color: #ff8080;
+          color: black;
+          border: none;
+          border-radius: 5px;
+          /* border: 2px solid #ff8080; */
+          background: linear-gradient(to bottom, white, #ff8080);
+        }
+
+
+
+        .Login .cakeWrapper {
+          text-align: center;
+        }
+
+        .Login .socialWrapper {
+          position: relative;
+          text-align: center;
+          display: inline-block;
+          padding: 10px;
+          padding-top: 15px;
+          border: 4px dashed #ffc0cb;
+        }
+
+        .Login .btn {
+          margin: 5px;
+          border: none;
+          /* width: 200px; */
+        }
+
+        .Login .naverButton {
+          background-color: #01c73c00;
+        }
+
+        .Login .naverImg {
+          width: 50px;
+          border-radius: 70%;
+          box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+        }
+
+        .Login .googleButton {
+          background-color: #fd706300;
+        }
+
+        .Login .googleImg {
+          width: 50px;
+          border-radius: 70%;
+          box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+        }
+
+        .Login .kakaoButton {
+          background-color: #fee50000;
+        }
+
+        .Login .kakaoImg {
+          width: 50px;
+          border-radius: 70%;
+          box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+        }
+
+        .Login .dish {
+          position: absolute;
+          top: 310px;
+          width: 310px;
+          height: 100px;
+          z-index: -9;
+        }
+
+        .Login .divNaver {
+          display: inline;
+        }
+        .Login .divGoogle {
+          display: inline;
+        }
+        .Login .divKakao {
+          display: inline;
+        }
+
+        .Login .socialTitle {
+          padding-left: 6px;
+          padding-right: 6px;
+          position: absolute;
+          text-align: center;
+          /* top: 440px;
+          left: 460px; */
+          left: 54px;
+          top: -33px;
+          font-family: "Nanum Gothic";
+          color: #ffc0cb;
+          background-color: white;
+          display: inline-block;
+        }
+
+    .header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin: 40px;
+    }
+     .title {
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .content {
+      font-size: 15px;
+      color: gray;
+      margin-left: 10px;
+    }
+
+      .pencil {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 150px;
+          height: 150px;
+
+          background: url("https://ifh.cc/g/DbBc57.png") no-repeat 0 0 / auto 50px;
+          transform: translate(2%, -35%);
+          transition: 0.5s linear;
+      }
+
+    </style>
+</head>
+<body>
+<script>
+  window.onscroll = function () {
+       scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 80 ||
+      document.documentElement.scrollTop > 80
+    ) {
+      //document.getElementById("navbar").style.padding = "0";
+      //document.getElementById("logo").style.fontSize = "25px";
+      document.getElementById("navbar").style.top = "-200px";
+    } else {
+      //document.getElementById("navbar").style.padding = "10px 10px";
+      //document.getElementById("logo").style.fontSize = "35px";
+      document.getElementById("navbar").style.top = "0";
+    }
+  }
+</script>
+<header class="NaviHeader" id="navbar">
+    <div class="leftN">
+        <a th:href="@{'/'}" id="logo">cakeN</a>
+    </div>
+    <div class="center">
+        <a th:href="@{'/'}" class="menu">사이트 소개</a>
+        <a th:href="@{/design/}" class="menu">케이크 제작</a>
+        <a th:href="@{/contest/}" class="menu">케이크 자랑</a>
+        <a th:href="@{/letter/}" class="menu">레터링 선택</a>
+    </div>
+    <div class="rightN">
+        <div sec:authorize="!isAuthenticated()">
+            <a th:href="@{'/users/login'}" class="menu" >로그인</a>
+            <a th:href="@{'/users/new'}" class="menu" >회원가입</a>
+        </div>
+        <div sec:authorize="isAuthenticated()" class="yes">
+            <div><span th:text="${userNickname}"></span>님, 어서오세요!&nbsp;</div>
+            <a th:href="@{'/users/mypage'}"  >
+                <img class="mypageimg" src="https://ifh.cc/g/5sw6aF.png" alt="profile" width={60} title="마이페이지로" /></a>
+            <a th:href="@{'/users/mypage'}" >
+                <img class="mycakeimg" src="https://ifh.cc/g/qkoyxq.pnghttps://ifh.cc/g/qkoyxq.png" alt="cake" width={60} title="마이케이크로"/>
+            </a>
+        </div>
+    </div>
+</header>
+<div class="header">
+    <br/><br/><br/><br/><br/>
+
+
+    <div class="title">
+        로그인
+    </div>
+    <div class="content">다양한 서비스를 이용할 수 있습니다.</div>
+</div>
+<div class="Login">
+
+
+<!--    <div class="container" style="border: 1px solid black;" th:object="${userName}">-->
+<!--        <p th:text="'현재 접속: ' + ${userName} + ${#authentication.name}"></p>-->
+<!--    </div>-->
+
+
+    <div class="cakeWrapper">
+
+        <img class="cake" width=205px src="https://ifh.cc/g/fOMQxW.png" />
+    </div>
+    <div class="form">
+
+        <div class="loginField">
+        <form action="" th:action="@{/users/login}" th:object="${userLoginRequestDto}" method="post">
+
+
+            <div>
+                <input type="email" id="username" name="username" th:field="*{username}" class="form-control"
+                       autofocus="autofocus" placeholder="이메일 ID" th:errorclass="field-error">
+                <div class="field-error" th:errors="*{username}" ></div>
+            </div>
+            <div>
+                <input type="password" id="password" th:field="*{password}" class="form-control"
+                       placeholder="비밀번호" th:errorclass="field-error" >
+                <div class="field-error" th:errors="*{password}" ></div>
+
+            </div>
+            <button class="loginButton" type="submit">로그인</button>
+
+            <span th:if="${error != null}" class="mt-3 mb-2">
+                <p class="alert alert-danger" th:text="${exception}"></p>
+            </span>
+
+
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+    <!--                <button class="w-100 btn btn-secondary btn-lg"-->
+    <!--                        th:onclick="|location.href='@{/}'|"-->
+    <!--                        type="button">취소</button>-->
+                </div>
+            </div>
+        </div>
+    </form>
+        <br />
+        <br />
+        <br />
+        <img class="dish" src="https://ifh.cc/g/gdt06p.jpg" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!--소셜 로그인 영역-->
+    <div class="col-md-12">
+        <div class="socialWrapper">
+            <h4 class="socialTitle">간편 로그인</h4>
+            <a href="/oauth2/authorization/google" class="socialButton naverButton btn btn-success active" role="button"><img class="googleImg" src="https://ifh.cc/g/HaRDS7.jpg" /></a>
+            <a href="/oauth2/authorization/naver" class="socialButton googleButton btn btn-secondary active" role="button"><img class="naverImg" src="https://ifh.cc/g/jfgfkw.png" /></a>
+            <a href="/oauth2/authorization/kakao" class="socialButton kakaoButton btn btn-warning active" role="button"><img class="kakaoImg" src="https://ifh.cc/g/vG8GLK.png" /></a>
+        </div>
+        <br/>
+        <br/><br/><br/><br/>
+    </div>
+
+</div> <!-- /container -->
+
+<div class="pencil"></div>
+<script>
+    const pencil = document.querySelector(".pencil");
+
+    document.addEventListener("mousemove", (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        pencil.style.left = mouseX + "px";
+        pencil.style.top = mouseY + "px";
+    });
+
+    window.onscroll = function () {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (
+            document.body.scrollTop > 80 ||
+            document.documentElement.scrollTop > 80
+        ) {
+            //document.getElementById("navbar").style.padding = "0";
+            //document.getElementById("logo").style.fontSize = "25px";
+            document.getElementById("navbar").style.top = "-200px";
+        } else {
+            //document.getElementById("navbar").style.padding = "10px 10px";
+            //document.getElementById("logo").style.fontSize = "35px";
+            document.getElementById("navbar").style.top = "0";
+        }
+    }
+</script>
+</body>
+</html>
