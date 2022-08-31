@@ -7,6 +7,7 @@ spring:
             client-id: 158232764987-1uqo4unkhiht00ehp96d8jv3e50rlvt7.apps.googleusercontent.com
             client-secret: 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
             scope: profile,email
+            callback-url: http://localhost:8080/login/oauth2/code/google
 
           naver:
             # registration

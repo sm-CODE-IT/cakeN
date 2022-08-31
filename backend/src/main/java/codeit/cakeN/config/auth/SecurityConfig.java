@@ -26,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     private final CustomOAuth2UserService customOAuth2UserService;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+//    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Override
     public void configure(WebSecurity web) {
@@ -48,16 +48,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()    // cors 비활성화
                 .and()
                 .csrf().disable()   // csrf 비활성화
-                .httpBasic().disable()   // token을 사용하므로 basic 인증 비활성화
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)    // session 기반이 아님을 선언
+//                .httpBasic().disable()   // token을 사용하므로 basic 인증 비활성화
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)    // session 기반이 아님을 선언
 
-                .and()
+//                .and()
                 .formLogin().disable()   // 기본 로그인 페이지 생략
                 .headers().frameOptions().disable()
 
                 .and()    // 페이지 권한 설정
                 .authorizeRequests()  // url 별 권한 관리 설정 by antMatcher()
-                .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/users/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
+                .antMatchers("/", "/users/**", "/css/**", "/images/**", "/js/**", "/h2-console/**", "/api/**").permitAll()   // 해당 경로는 모든 유저에 접근 권한 부여
                 .antMatchers("/admin/**").hasRole(Role.ADMIN.name())
                 .antMatchers("/users/mypage/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())   // 해당 주소는 USER 권한을 가진 사람만 열람 가능
                 .anyRequest().authenticated()   // 설정된 값들 외의 URL 들은 모두 인증된 사용자(=로그인 O)들에게만 허용
@@ -84,7 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userService(customOAuth2UserService);
 
         //filter 등록 - 매 요청마다 CorsFilter 실행한 후에 jwtAuthenticatonFilter를 실행한다.
-        http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
+//        http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
 
 
 

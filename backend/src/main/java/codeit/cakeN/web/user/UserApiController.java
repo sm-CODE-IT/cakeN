@@ -1,7 +1,9 @@
 package codeit.cakeN.web.user;
 
-import codeit.cakeN.config.auth.TokenProvider;
+import codeit.cakeN.config.auth.CustomOAuth2UserService;
+//import codeit.cakeN.config.auth.TokenProvider;
 import codeit.cakeN.config.auth.dto.ResponseDto;
+import codeit.cakeN.config.auth.dto.SocialLoginType;
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.HeartRepository;
 import codeit.cakeN.domain.letter.Letter;
@@ -32,6 +34,7 @@ import org.springframework.web.util.UriUtils;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -53,7 +56,8 @@ public class UserApiController {
     private final ProfileStore profileStore;
     private final FileRepository fileRepository;
     private final HeartRepository heartRepository;
-    private final TokenProvider tokenProvider;
+//    private final TokenProvider tokenProvider;
+    private final CustomOAuth2UserService oauthService;
 
     /**
      * 회원가입
@@ -189,6 +193,11 @@ public class UserApiController {
         return this.heartRepository.findAll();
     }
 
+    /**
+     * Form Login API
+     * @param loginRequestDto
+     * @return
+     */
     @PostMapping("/users/login")
     public ResponseEntity<?> login(UserLoginRequestDto loginRequestDto) {
         User user = userService.getByCredentials(
@@ -198,13 +207,13 @@ public class UserApiController {
 
         if (user != null) {
             // 토큰 생성
-            final String token = tokenProvider.create(user);
+//            final String token = tokenProvider.create(user);
 
             UserLoginRequestDto responseUser = UserLoginRequestDto.builder()
                     .username(user.getEmail())
                     .password(user.getPw())
                     .role(Role.USER)
-                    .token(token)
+//                    .token(token)
                     .build();
             return ResponseEntity.ok().body(responseUser);
         } else {
@@ -215,6 +224,17 @@ public class UserApiController {
         }
     }
 
+    /**
+     * Social Login Page Redirect API
+     * @param SocialLoginPath
+     * @throws IOException
+     */
+    /*@GetMapping("/users/{socialLoginType}")
+    public void socialLoginRedirect(@PathVariable(name="socialLoginType") String SocialLoginPath) throws IOException {
+        SocialLoginType socialLoginType = SocialLoginType.valueOf(SocialLoginPath.toUpperCase());
+        oauthService.request(socialLoginType);
+    }
+*/
     @ResponseBody
     @GetMapping("/mypage/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {

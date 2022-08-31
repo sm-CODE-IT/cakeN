@@ -292,29 +292,29 @@
             }
         }
 
-/*
-        function onClickHeart(it) {
+        /*
+                function onClickHeart(it) {
 
 
-            $.ajax({
-                type: 'POST',
-                url: '/api/heart',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                data: {
-                    letterId: letterId,
-                    userId: userId
-                }
-            }).done(function (data) {
-                var test = data.data;
-                alert(test);
-                it.style.background = "white";
-            }).fail(function (error) {
-                console.log(userId);
-                console.log(letterId);
-                console.log(JSON.stringify(error));
-            })
-        }*/
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/heart',
+                        dataType: 'json',
+                        contentType: 'application/json; charset=utf-8',
+                        data: {
+                            letterId: letterId,
+                            userId: userId
+                        }
+                    }).done(function (data) {
+                        var test = data.data;
+                        alert(test);
+                        it.style.background = "white";
+                    }).fail(function (error) {
+                        console.log(userId);
+                        console.log(letterId);
+                        console.log(JSON.stringify(error));
+                    })
+                }*/
 
         /*function onClickUnheart(it) {
             $.ajax({
@@ -364,36 +364,9 @@
     </div>
 </header>
 
-
 <div class="main">
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <!--    <a href="/letter/register" class="register">문구 등록</a>-->
-
-    <!--    <table>-->
-    <!--        <thead>-->
-    <!--        <tr>-->
-    <!--            <th>문구 목록</th>-->
-    <!--            <th>내용</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
-    <!--            <th>태그</th> &lt;!&ndash; 임시로 테스트 하기 위함 &ndash;&gt;-->
-    <!--        </tr>-->
-    <!--        </thead>-->
-    <!--        <tbody>-->
-    <!--        <tr th:each="letter : ${letters}">-->
-    <!--            &lt;!&ndash; 1. 문구에 하이퍼링크가 없는 경우 &ndash;&gt;-->
-    <!--            <a th:href="@{'/letter/detail/' + ${letter.letterId}}"><td th:text="${letter.letterId}"></td></a>-->
-    <!--            &lt;!&ndash; 2. 문구에 하이퍼링크가 있는 경우(보류) &ndash;&gt;-->
-    <!--            <td th:text="${letter.content}"></td>-->
-    <!--            <td th:text="${letter.tag}"></td>-->
-    <!--        </tr>-->
-    <!--        </tbody>-->
-    <!--    </table>-->
-
-    <div class ="Lettering">
+    <br/> <br/> <br/> <br/> <br/>
+    <div class="Lettering">
         <div class ="lettering_type">
             <a class ="birthday" href="#birthday">
                 #생일
@@ -426,191 +399,77 @@
             </a>
 
         </div>
-        <br />
-        <br />
-        <br/>
 
-        <h2 id="birthday">#생일</h2>
-        <div id="box" class ="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div  th:if="${letter.getTag().toString().equals('BIRTHDAY')}" >
+        <br/> <br/> <br/>
 
-<!--                    <div th:each="heart : ${hearts}">-->
-                    <pre class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                    <!--<a  th:if="${letter.content} == ${heart.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/unheart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: pink;"></a>
+        <div th:each="letter : ${letters}">
+            <h2 id="birthday">#생일</h2>
 
-                        <a  th:if="${letter.content} != ${heart.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/heart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: white;"></a>
---><!--                    </div>-->
+            <div th:each="heart : ${hearts}">
+                <div th:if="${letter.getTag().toString().equals('BIRTHDAY')}">
+                    <a  th:if="${letter.content} == ${heart.letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/unheart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: pink;"></a>
+
+                    <a  th:if="${letter.content} != ${heart.letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/heart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: white;"></a>
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
+                <br/> <br/> <br/> <br/> <br/>
 
-        <h2 id="birthday2">#생신</h2>
-        <div class ="box" >
-
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
+                <h2 id="birthday2">#생신</h2>
+            <div th:each="heart : ${hearts}">
                 <div th:if="${letter.getTag().toString().equals('BIRTHDAY2')}">
-                    <pre class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
+                    <a  th:if="${letter.content} == ${heart.letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/unheart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: pink;"></a>
+
+                    <a  th:if="${letter.content} != ${heart.letter.content}" class="letterBox" onclick="onClickHeart(this)" th:href="@{'/letter/heart?letterId=' + ${letter.letterId} + '&userId=' + ${user.userId}}" th:text="${letter.content}" style="background-color: white;"></a>
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
+
         </div>
 
-        <h2 id="parentsday">#어버이날</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('PARENTSDAY')}">
-                    <pre onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <h2 id="anniversary">#기념일</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('ANNIVERSARY')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}" ></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <h2 id="teachersday">#스승의날</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('TEACHERSDAY')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <h2 id="christmas">#크리스마스</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('CHRISTMAS')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-
-
-        <h2 id="employment">#취뽀축하</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('EMPLOYMENT')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <h2 id="leave">#퇴사축하</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('LEAVE')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <h2 id="friendship">#우정</h2>
-        <div class="box" >
-            <br/>
-            <div class="letterDiv" th:each="letter : ${letters}">
-                <div th:if="${letter.getTag().toString().equals('FRIENDSHIP')}">
-                    <pre  class="letterBox" onclick="onClickHeart(this)" th:text="${letter.content}"></pre>
-                </div>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-        </div>
-
-        <div class="pencil"></div>
-        <script>
-            const pencil = document.querySelector(".pencil");
-
-            document.addEventListener("mousemove", (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                pencil.style.left = mouseX + "px";
-                pencil.style.top = mouseY + "px";
-            });
-
-            window.onscroll = function () {
-                scrollFunction();
-            };
-
-            function scrollFunction() {
-                if (
-                    document.body.scrollTop > 80 ||
-                    document.documentElement.scrollTop > 80
-                ) {
-                    //document.getElementById("navbar").style.padding = "0";
-                    //document.getElementById("logo").style.fontSize = "25px";
-                    document.getElementById("navbar").style.top = "-200px";
-                } else {
-                    //document.getElementById("navbar").style.padding = "10px 10px";
-                    //document.getElementById("logo").style.fontSize = "35px";
-                    document.getElementById("navbar").style.top = "0";
-                }
-            }
-        </script>
-
-
-
-
-
-        <a href="/users/mypage/heart-letter">
-            <img
-                    class="heartimg"
-                    src="https://ifh.cc/g/CkdOB3.png"
-                    alt="heart"
-            />
-        </a>
     </div>
 
-</div>
+    <div class="pencil"></div>
+    <script>
+        const pencil = document.querySelector(".pencil");
 
+        document.addEventListener("mousemove", (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            pencil.style.left = mouseX + "px";
+            pencil.style.top = mouseY + "px";
+        });
+
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 80 ||
+                document.documentElement.scrollTop > 80
+            ) {
+                //document.getElementById("navbar").style.padding = "0";
+                //document.getElementById("logo").style.fontSize = "25px";
+                document.getElementById("navbar").style.top = "-200px";
+            } else {
+                //document.getElementById("navbar").style.padding = "10px 10px";
+                //document.getElementById("logo").style.fontSize = "35px";
+                document.getElementById("navbar").style.top = "0";
+            }
+        }
+    </script>
+
+
+
+
+
+    <a href="/users/mypage/heart-letter">
+        <img
+                class="heartimg"
+                src="https://ifh.cc/g/CkdOB3.png"
+                alt="heart"
+        />
+    </a>
+
+</div>
 </body>
 </html>

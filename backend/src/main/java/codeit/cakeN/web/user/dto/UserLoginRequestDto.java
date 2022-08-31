@@ -26,6 +26,6 @@ public class UserLoginRequestDto {
 
     private Role role = Role.USER;
 
-    private String token;   // 최초 로그인 시 발급되는 JWT Token
+//    private String token;   // 최초 로그인 시 발급되는 JWT Token
 
 }

@@ -1,6 +1,6 @@
 package codeit.cakeN.web.user;
 
-import codeit.cakeN.config.auth.TokenProvider;
+//import codeit.cakeN.config.auth.TokenProvider;
 import codeit.cakeN.config.auth.dto.SecurityUser;
 import codeit.cakeN.domain.letter.Heart;
 import codeit.cakeN.domain.letter.HeartRepository;
@@ -52,7 +52,7 @@ public class UserController {
     private final ProfileStore profileStore;
     private final FileRepository fileRepository;
     private final HeartRepository heartRepository;
-    private final TokenProvider tokenProvider;
+//    private final TokenProvider tokenProvider;
 
     /**
      * 회원가입 페이지
@@ -167,13 +167,13 @@ public class UserController {
 
         if (user != null) {
             // 토큰 발급
-            final String token = tokenProvider.create(user);
+//            final String token = tokenProvider.create(user);
 
             UserLoginRequestDto responseUser = UserLoginRequestDto.builder()
                     .username(user.getEmail())
                     .password(user.getPw())
                     .role(Role.USER)
-                    .token(token)
+//                    .token(token)
                     .build();
             return "redirect:/";
         } else {

@@ -41,6 +41,11 @@ public class LetterController {
     public String list(Model model, @AuthenticationPrincipal User formUser) {
         codeit.cakeN.domain.user.User user = findSessionUser(formUser, httpSession, userRepository);
         List<Heart> heartList = heartRepository.findByUser(user).get();
+        List<Letter> birthday = new ArrayList<>();
+        for (Heart h : heartList) {
+            if (h.getLetter().getTag() == Tag.BIRTHDAY)
+                birthday.add(h.getLetter());
+        }
 
         model.addAttribute("user", user);
         model.addAttribute("letters", letterService.list());

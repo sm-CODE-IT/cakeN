@@ -1,3 +1,4 @@
+/*
 package codeit.cakeN.config.auth;
 
 import codeit.cakeN.domain.user.User;
@@ -18,11 +19,13 @@ public class TokenProvider {
 
     private static final String SECRET_KEY = "NMA8JPctFuna59f5";
 
-    /**
+    */
+/**
      * JWT 라이브러리를 이용해 JWT 토큰을 생성
      * @param user
      * @return
-     */
+     *//*
+
     public String create(User user) {
         // 기한은 지금부터 1일로 설정
         Date expiryDate = Date.from(
@@ -30,7 +33,8 @@ public class TokenProvider {
                         .plus(1, ChronoUnit.DAYS)
         );
 
-        /*
+        */
+/*
         JWT Token 형식
         { // Header
             "typ": "JWT",    // 토큰의 타입
@@ -45,7 +49,8 @@ public class TokenProvider {
         { // Signature - SECRET_KEY를 이용해 서명한 부분
             NDJDSDsadjaslkdjasldjlkasjdlka
         }
-        */
+        *//*
+
 
         // JWT Token 생성
         return Jwts.builder()
@@ -59,7 +64,8 @@ public class TokenProvider {
                 .compact();
     }
 
-    /**
+    */
+/**
      * 토큰 디코딩 및 파싱 -> 토큰의 위조여부 확인
      *
      * parseClaimsJws 메서드가 Base64로 디코딩 및 파싱
@@ -68,7 +74,8 @@ public class TokenProvider {
      * 그 중 우리는 userId가 필요하머로, getBody를 부른다.
      * @param token
      * @return
-     */
+     *//*
+
     public String validateAndGetUserId(String token) {
 
         Claims claims = Jwts.parser()
@@ -79,3 +86,4 @@ public class TokenProvider {
         return claims.getSubject();
     }
 }
+*/
