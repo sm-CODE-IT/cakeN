@@ -1,5 +1,5 @@
 # CakeN
-![img.png](img.png)
+![backend/img.png](backend/img.png)
 주문제작 케이크 디자인 플랫폼
 
 # 기획의도
@@ -9,9 +9,9 @@
 ## 브레인스토밍
 
 ![backend/img_1.png](backend/img_1.png)
-![img_2.png](img_2.png)
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
+![backend/img_2.png](backend/img_2.png)
+![backend/img_3.png](backend/img_3.png)
+![backend/img_4.png](backend/img_4.png)
 
 👥 “난 창의력이 부족해 .. 직접 만들지 않고 다른 사람들의 디자인을 참고하고 싶어! 완벽한 내 디자인을 많은 사람들에게 자랑하고 싶어!”
 
@@ -28,14 +28,14 @@
 </aside>
 
 ## 앱 구조도(IA)
-![img_5.png](img_5.png)
+![backend/img_5.png](backend/img_5.png)
 
 ## 와이어프레임
-![img_6.png](img_6.png)
+![backend/img_6.png](backend/img_6.png)
 
 ## 데이터베이스 ERD
 [ERD 링크](https://www.erdcloud.com/d/GxgKY5jcHiAKEBohh)
-![img_7.png](img_7.png)
+![backend/img_7.png](backend/img_7.png)
 
 # Tools
 
